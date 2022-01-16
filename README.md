@@ -15,6 +15,10 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 5. Api en puerto 3001, Client en puerto 3000
 6. Todo listo para programar!
 
+## Entity Relationship Diagram 📊
+
+https://lucid.app/lucidchart/11d74553-2f74-489b-bbc3-806387795f25/edit?invitationId=inv_a86a2cfa-56f7-41ed-bcdd-16bb5de574e2
+
 ## Construido con 🛠️
 
 1. React-Redux
