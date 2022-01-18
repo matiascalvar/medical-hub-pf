@@ -12,12 +12,12 @@ export const sequelize = new Sequelize({
 	username: config.dbUser,
 	storage: ':memory:',
 	models: [__dirname + '/models'],
+	logging: false,
 });
 
 
-const { MedicalStaff, Specialities, MedicalStaff_Specialities} = sequelize.models;
+const { MedicalStaff, Specialitie} = sequelize.models;
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
-MedicalStaff.belongsToMany(Specialities, { through: MedicalStaff_Specialities });
-Specialities.belongsToMany(MedicalStaff, { through: MedicalStaff_Specialities });
+
+MedicalStaff.belongsToMany(Specialitie, { through: "MedicalStaff_Specialities" });
+Specialitie.belongsToMany(MedicalStaff, { through: "MedicalStaff_Specialities" });

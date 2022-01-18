@@ -1,13 +1,9 @@
-import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+import {Model, Column,Default, Table, CreatedAt,DataType,  UpdatedAt} from 'sequelize-typescript';
 // testeo de var enum  sin valores asignados
-enum E1 {
-    X,
-    Y,
-    Z,
-  }
+
 
 @Table
-export class MedicalStaff extends Model<MedicalStaff> {
+export class MedicalStaff extends Model {
 	
     
     @Column
@@ -16,8 +12,10 @@ export class MedicalStaff extends Model<MedicalStaff> {
     @Column
 	idNumber!: number;
 
-    @Column
-	availability!: E1 ;
+	@Default('enable')
+	@Column(DataType.ENUM('enable', 'not available'))
+    availability!: "enable"| "not available";
+
 
     @Column
 	avbFrom!: Date ;
