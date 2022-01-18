@@ -1,17 +1,8 @@
 import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
 @Table
-export class User extends Model<User> {
+export class UserType extends Model<UserType> {
     @Column
-	email!: string;
-
-	@Column
-	hashedPass!: string;
-
-	@Column
-	active!: boolean;
-
-	@Column
-	isStaff!: boolean;
+	typeName!: string;
 
 	@CreatedAt
 	@Column

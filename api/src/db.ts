@@ -9,3 +9,10 @@ export const sequelize = new Sequelize({
 	storage: ':memory:',
 	models: [__dirname + '/models'],
 });
+
+const { User, UserType } = sequelize.models;
+
+User.belongsToMany(UserType, { through: 'Users_UserTypes' })
+UserType.belongsToMany(User, { through: 'Users_UserTypes' })
+
+//console.log(User)

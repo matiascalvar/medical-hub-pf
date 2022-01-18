@@ -1,9 +1,17 @@
 import {Response, Request, Router} from 'express';
 const router = Router();
 
-// Creamos las rutas. Si queremos separar las rutas en archivos
+// Creamos las rutas. Si qeremos separar las rutas en archivos
 // creamos los mismos, los importamos en este index (import otherRoutes from './other';)
 // y luego desde app se importa todo junto mediante este entry point
+import login from './login'
+import users from './users'
+import register from  './register'
+
+router.use('/login', login)
+router.use('/users', users)
+router.use('/register', users)
+
 router.get('/', (req: Request, res: Response) => {
 	res.send('soy la ruta home get! Probá /test');
 });
