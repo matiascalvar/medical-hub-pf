@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
+// import dotenv from 'dotenv';
+// No encuenta el dotenv 
+// dotenv.config();
 
 const config = {
 	dbUser: process.env.DB_USER || 'postgres',
