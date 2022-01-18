@@ -8,6 +8,7 @@ export const sequelize = new Sequelize({
 	username: config.dbUser,
 	storage: ':memory:',
 	models: [__dirname + '/models'],
+	logging: false
 });
 
 const { User, UserType, Patient, Plan } = sequelize.models;
