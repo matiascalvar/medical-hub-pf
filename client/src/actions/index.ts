@@ -15,3 +15,15 @@ export const fetchUsers = () => {
 		});
 	};
 };
+
+// export const fetchUsers = () => async(dispatch:Dispatch<S>) => {
+// 	try{
+// 		const response = (await axios.get<User[]>(url)).data;
+// 		dispatch({
+// 			type: ActionTypes.fetchUsers,
+// 			payload: response
+// 		})
+// 	}catch(error){
+// 		console.log(error, "function fetchUsers");
+// 	}
+// }
