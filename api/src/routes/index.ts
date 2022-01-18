@@ -10,7 +10,7 @@ import register from  './register'
 
 router.use('/login', login)
 router.use('/users', users)
-router.use('/register', users)
+router.use('/register', register)
 
 router.get('/', (req: Request, res: Response) => {
 	res.send('soy la ruta home get! Probá /test');
