@@ -10,11 +10,14 @@ export const sequelize = new Sequelize({
 	models: [__dirname + '/models'],
 });
 
-const { User, UserType, Patient } = sequelize.models;
+const { User, UserType, Patient, Plan } = sequelize.models;
+
 
 User.belongsToMany(UserType, { through: 'Users_UserTypes' })
 UserType.belongsToMany(User, { through: 'Users_UserTypes' })
 
 Patient.belongsTo(User)
+
+Plan.hasOne(Patient)
 
 //console.log(User)
