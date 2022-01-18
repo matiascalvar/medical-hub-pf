@@ -1,5 +1,5 @@
 import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
-// testo de var enum  sin valores asignados
+// testeo de var enum  sin valores asignados
 enum E1 {
     X,
     Y,
