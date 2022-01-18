@@ -1,6 +1,6 @@
 import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
 @Table
-export class Patient extends Model<Patient> {
+export class Patient extends Model {//<Patient>
     @Column
 	firstName!: string;
 
