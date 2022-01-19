@@ -11,7 +11,7 @@ export const sequelize = new Sequelize({
 	logging: false
 });
 
-const { User, UserType, Patient, Plan, Appointment, AppointmentDetail } = sequelize.models;
+const { User, UserType, Patient, Plan, Appointment, AppointmentDetail, MedicalStaff, Specialitie, Studie, StudyType} = sequelize.models;
 
 
 User.belongsToMany(UserType, { through: 'Users_UserTypes' })
@@ -25,4 +25,20 @@ Appointment.belongsTo(Patient)
 
 Appointment.hasOne(AppointmentDetail)
 
+
+MedicalStaff.belongsToMany(Specialitie, { through: "MedicalStaff_Specialities" });
+Specialitie.belongsToMany(MedicalStaff, { through: "MedicalStaff_Specialities" });
+
+
+MedicalStaff.belongsTo(User);
+
+
+
+
+// Studies retaltions 
+StudyType.hasOne(Studie);
+Studie.belongsTo(MedicalStaff);
+
 //console.log(User)
+Studie.belongsTo(Appointment);
+Studie.belongsTo(Patient)
