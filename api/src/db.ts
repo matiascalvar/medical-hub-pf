@@ -16,8 +16,16 @@ export const sequelize = new Sequelize({
 });
 
 
-const { MedicalStaff, Specialitie} = sequelize.models;
+const { MedicalStaff, Specialitie,User , Studie, studyType} = sequelize.models;
 
 
 MedicalStaff.belongsToMany(Specialitie, { through: "MedicalStaff_Specialities" });
 Specialitie.belongsToMany(MedicalStaff, { through: "MedicalStaff_Specialities" });
+
+
+MedicalStaff.belongsTo(User);
+
+
+// Stduies retaltions 
+studyType.hasOne(Studie);
+studyType.belongsTo(MedicalStaff);
