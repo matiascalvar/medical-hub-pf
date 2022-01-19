@@ -4,12 +4,11 @@ import {Model, Column,Default, Table, CreatedAt,DataType,  UpdatedAt} from 'sequ
 
 @Table
 export class StudyType extends Model {
-
    
     @Column
-	name !: string;
-
-    @Column(DataType.TEXT)
+	name!: string;
+	
+	@Column(DataType.TEXT)
 	neededPreparation!: string;
 
     @CreatedAt
