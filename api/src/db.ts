@@ -8,4 +8,23 @@ export const sequelize = new Sequelize({
 	username: config.dbUser,
 	storage: ':memory:',
 	models: [__dirname + '/models'],
+	logging: false
 });
+
+const { User, UserType, Patient, Plan, Appointment, AppointmentDetail, Administrator } = sequelize.models;
+
+
+User.belongsToMany(UserType, { through: 'Users_UserTypes' })
+UserType.belongsToMany(User, { through: 'Users_UserTypes' })
+
+User.hasOne(Administrator)
+
+Patient.belongsTo(User)
+
+Plan.hasOne(Patient)
+
+Appointment.belongsTo(Patient)
+
+Appointment.belongsTo(Administrator)
+
+Appointment.hasOne(AppointmentDetail)

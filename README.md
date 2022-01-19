@@ -37,5 +37,4 @@ https://lucid.app/lucidchart/11d74553-2f74-489b-bbc3-806387795f25/edit?invitatio
 7. Jose Pardo
 
 ## Agregado en la nueva branch.
-
-## Agregado en la nueva branch por Luis.
+## testeo branch
