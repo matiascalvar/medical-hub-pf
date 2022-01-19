@@ -1,0 +1,47 @@
+
+.userLogo{
+    width: 4rem;
+}
+
+.userName{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+    font-size: 1.2rem;
+    padding: 1rem 0 0 0;
+}
+
+.userNameText{
+    font-weight: 600;
+}
+
+.mainContainer{
+    height: 100vh;
+    background-color: #939eb0;
+    width: 100%;
+
+}
+
+.title{
+    display: block;
+    text-align: start;
+    margin-left: 3rem;
+}
+
+.shiftCard{
+
+    width: 45rem;
+    height: 32rem;
+    background-color:#f4f8ff;
+    border-radius: .7rem;
+
+    
+}
+
+.cardsContainer{
+
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 0 2rem;
+}
