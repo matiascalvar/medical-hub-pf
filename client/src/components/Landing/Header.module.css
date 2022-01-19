@@ -1,0 +1,93 @@
+.container {
+  width: 100vw;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  padding-top: 1rem;
+}
+
+nav {
+  display: inline;
+  color: #939eb0;
+  font-weight: 700;
+  padding-right: 5rem;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none; /* Top, right, bottom, left */
+}
+
+ul li {
+  padding-left: 1rem;
+}
+
+ul li:hover {
+  cursor: pointer;
+  color: #00d9ff;
+}
+
+.container img {
+  max-width: 20rem;
+  padding-left: 2rem;
+  width: 11%;
+}
+
+.buttons {
+  display: flex;
+  font-size: 1rem;
+  margin-right: 2rem;
+  margin-top: 0.5rem;
+}
+
+.btnSignIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4cb9f2;
+  font-weight: 700;
+  background-color: transparent;
+  max-width: 15rem;
+  height: 3rem;
+  border-radius: 2.2rem;
+  border: 2px solid #dff2fd;
+  padding: 0 1.5rem;
+  text-align: center;
+  margin: auto;
+  margin-right: 1rem;
+}
+
+.btnSignIn:hover {
+  cursor: pointer;
+  background-color: #def2fe;
+  color: #4cb9f2;
+}
+
+.btnRegister {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4cb9f2;
+  font-weight: 700;
+  border: none;
+  border-radius: 2.2rem;
+  height: 3rem;
+  max-width: 10rem;
+  padding: 0 2rem;
+  background-color: #def2fe;
+  margin-left: 1rem;
+  border: 2px solid #f4f8ff;
+}
+
+.btnRegister:hover {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  cursor: pointer;
+  background-color: transparent;
+  border-color: #dff2fd;
+}

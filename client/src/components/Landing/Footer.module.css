@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #dfe3e8;
+  width: 100%;
+  min-height: 15vh;
+  padding-top: 2rem;
+}
+
+.container ul li {
+  font-size: 1rem;
+}
+
+.container p {
+  width: 40%;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #000000;
+}
+
+.container img {
+  width: 10%;
+  padding-left: 4rem;
+  padding-bottom: 1rem;
+}
+
+.container img:hover {
+  cursor: pointer;
+}

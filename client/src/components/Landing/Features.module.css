@@ -1,0 +1,152 @@
+.cotainer {
+  min-width: 100vw;
+}
+
+.text {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+  margin-top: 4rem;
+  min-height: 230vh;
+}
+
+.text h2 {
+  font-size: 2rem;
+}
+
+.colLeft p {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: #000000;
+  font-weight: 500;
+  font-size: 1rem;
+  width: 80%;
+}
+
+.colLeft {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.icons {
+  font-size: 3rem;
+  max-width: 5rem;
+  text-align: center;
+  display: flex;
+  color: #ffffff;
+  justify-content: center;
+  margin: auto;
+  background-color: #00d9ff;
+  border-radius: 99rem;
+  padding: 1.5rem 0.5rem;
+}
+
+.icons:hover {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.colImg {
+  border: 0.6rem solid #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 1rem;
+}
+
+.colImg img:hover {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.colText {
+  padding-top: 4rem;
+  width: 100%;
+}
+
+.textInside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.colText ul {
+  display: flex;
+  flex-direction: column;
+  padding-right: 2em;
+}
+
+.colText ul li {
+  padding-bottom: 0.2em;
+}
+.colText ul li::before {
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  font-size: 2rem;
+  font-weight: 900;
+  color: #00d9ff; /* Change the color */
+  padding-right: 0.2em;
+  padding-top: 0.5em;
+}
+
+.colRight p {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: #000000;
+  font-weight: 500;
+  font-size: 1rem;
+  width: 80%;
+}
+
+.colRight {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+/* CSS ANIMATIONS */
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes pulse {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
