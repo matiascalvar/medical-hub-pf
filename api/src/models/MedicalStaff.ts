@@ -7,7 +7,10 @@ export class MedicalStaff extends Model {
 	
     
     @Column
-	name!: string;
+	firstName!: string;
+
+	@Column
+	lastName!: string;
 
     @Column
 	idNumber!: number;
