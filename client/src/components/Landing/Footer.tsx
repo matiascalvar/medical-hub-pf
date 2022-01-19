@@ -6,7 +6,7 @@ import { animateScroll as scroll } from "react-scroll";
 const Footer: FunctionComponent = () => {
   return (
     <div className={style.container}>
-      <img src={Logo} alt="Medical HUB" />
+      <img onClick={() => scroll.scrollToTop()} src={Logo} alt="Medical HUB" />
       <ul>
         <li>
           <a>Terms of service</a>

@@ -13,7 +13,7 @@ nav {
   display: inline;
   color: #939eb0;
   font-weight: 700;
-  padding-right: 10rem;
+  padding-right: 5rem;
 }
 
 ul {
@@ -31,14 +31,10 @@ ul li:hover {
   color: #00d9ff;
 }
 
-.logoContainer {
-  width: 33%;
-}
-
 .container img {
   max-width: 20rem;
   padding-left: 2rem;
-  width: 20%;
+  width: 11%;
 }
 
 .buttons {
