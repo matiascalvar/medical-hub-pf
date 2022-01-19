@@ -1,8 +1,11 @@
 import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
 @Table
-export class UserType extends Model {//<UserType>
+export class Plan extends Model {//<Plan>
     @Column
-	typeName!: string;
+	name!: string;
+
+	@Column
+	coveragePercentage!: number;
 
 	@CreatedAt
 	@Column

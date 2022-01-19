@@ -1,8 +1,20 @@
 import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
 @Table
-export class UserType extends Model {//<UserType>
+export class Patient extends Model {//<Patient>
     @Column
-	typeName!: string;
+	firstName!: string;
+
+	@Column
+	lastName!: string;
+
+	@Column
+	email!: string;
+
+	@Column
+	phone!: number;
+
+	@Column
+	dni!: number;
 
 	@CreatedAt
 	@Column
