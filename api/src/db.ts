@@ -12,7 +12,7 @@ export const sequelize = new Sequelize({
 });
 
 
-const { User, UserType, Patient, Plan, Appointment, AppointmentDetail, MedicalStaff, Specialitie, Studie, StudyType} = sequelize.models;
+const { User, Patient, Plan, Appointment, AppointmentDetail, MedicalStaff, Specialitie, Studie, StudyType} = sequelize.models;
 
 
 Patient.belongsTo(User)
