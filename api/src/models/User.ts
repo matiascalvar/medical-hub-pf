@@ -15,6 +15,10 @@ export class User extends Model {//<User>
 	@Column
 	isStaff!: boolean;
 
+	@Default(false)
+	@Column
+	isAdmin!: boolean;
+
 	@CreatedAt
 	@Column
 	createdAt!: Date;
