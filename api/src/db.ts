@@ -12,20 +12,14 @@ export const sequelize = new Sequelize({
 });
 
 
-const { User, UserType, Patient, Plan, Appointment, AppointmentDetail, Administrator, MedicalStaff, Specialitie, Studie, StudyType} = sequelize.models;
+const { User, Patient, Plan, Appointment, AppointmentDetail, MedicalStaff, Specialitie, Studie, StudyType} = sequelize.models;
 
-User.belongsToMany(UserType, { through: 'Users_UserTypes' })
-UserType.belongsToMany(User, { through: 'Users_UserTypes' })
-
-User.hasOne(Administrator)
 
 Patient.belongsTo(User)
 
 Plan.hasOne(Patient)
 
 Appointment.belongsTo(Patient)
-
-Appointment.belongsTo(Administrator)
 
 MedicalStaff.belongsToMany(Specialitie, { through: "MedicalStaff_Specialities" });
 Specialitie.belongsToMany(MedicalStaff, { through: "MedicalStaff_Specialities" });
@@ -36,7 +30,6 @@ MedicalStaff.belongsTo(User);
 StudyType.hasOne(Studie);
 Studie.belongsTo(MedicalStaff);
 
-//console.log(User)
 Studie.belongsTo(Appointment);
 Studie.belongsTo(Patient)
 
