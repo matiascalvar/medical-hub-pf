@@ -17,7 +17,6 @@ router.post('/', async (req, res) => {
             active: true,
             isStaff: false,
         }
-        
         const response = await User.create(user)
         return res.status(201).send(response)
     } catch(e) {
