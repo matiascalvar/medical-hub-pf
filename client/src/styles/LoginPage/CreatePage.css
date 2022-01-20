@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+.containerCreate{
+  height: 100vh;
+  background: white;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+
+}
+
+.containerCreate__img{
+  object-fit: fill;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.containerCreate__register{
+  position:absolute;
+
+}
