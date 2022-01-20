@@ -22,7 +22,8 @@ router.post('/', async (req, res) => {
                 const accessToken = generateAccessToken(user)
                 const refreshToken = generateRefreshToken(user)
                 const response = await RefreshToken.create({token: refreshToken})
-                return res.send({ accessToken: accessToken, refreshToken: refreshToken })
+                res.cookie('token', refreshToken, { httpOnly: true})
+                return res.send({ accessToken: accessToken })
             } else {
                 return res.status(401).send({"Error": "Contrasenia incorrecta."})
             }
@@ -36,7 +37,7 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/token', async (req, res) => {
-    const refreshToken = req.body.token
+    const refreshToken = req.cookies.token
     if (!refreshToken) return res.sendStatus(401)
     try {
         let response = await RefreshToken.findOne({where: {token: refreshToken}}) 
@@ -53,8 +54,10 @@ router.post('/token', async (req, res) => {
 })
 
 router.delete('/remove', async  (req, res) => {
+    const refreshToken = req.cookies.token
+    if (!refreshToken) return res.sendStatus(401)
     try {
-        let response = await RefreshToken.destroy({where: {token: req.body.token}})
+        let response = await RefreshToken.destroy({where: {token: req.cookies.token}})
         if (!response) return res.sendStatus(404)
         return res.sendStatus(200)
     } catch(error) {
