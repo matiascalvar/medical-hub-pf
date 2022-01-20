@@ -22,3 +22,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+api/src/routes/index.ts
+api/src/routes/studie.ts
+api/src/routes/studyType.ts
