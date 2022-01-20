@@ -55,9 +55,9 @@ router.post('/', async (req, res) => {
         {
         let estudie = 
         {
-            state: req.body.state,
-            diagnosis: req.body.diagnosis,
-            studyPDF: req.body.studyPDF,
+             state: req.body.state,
+             diagnosis: req.body.diagnosis,
+             studyPDF: req.body.studyPDF,
              pacientId: TriggerStudyType.id ,
              medicalStaffId:TriggerMedicalStaff.id,
              studyTypeId:TriggerStudyType.id,
@@ -77,18 +77,28 @@ router.post('/', async (req, res) => {
 });
 
 //Get all detail about one studie
-router.get('/', async (req, res) => {
-    //get the req for the body
+router.get('/:name', async (req, res) => {
+    //get the req for the body name patient
 
-    // verificate the data 
+    const  findID = await Patient.findOne({where: {name: req.params.name }})
 
+    if(findID === null)    
+        return res.status(403).send({"Error:": "Paciente no existe en la database."})
+  
     try 
     {
+        
         //find de module 
-
+        const AllStudie  = await  Studie.findAll(
+            { where:
+                {
+                    id : findID.id
+                }
+            }           
+        )
 
         // send data, not shall nothing in the req.
-
+        return res.status(201).send(AllStudie)
     }
     catch(e) {
         console.log(e)
@@ -100,6 +110,15 @@ router.get('/', async (req, res) => {
 //Change info about Studie
 router.put('/', async (req, res) => {
     
+    // Check all data.
+    // Example info  body
+    //     state: "ACTIVE",
+    //     diagnosis: "normal",
+    //     studyPDF: "https/rute",
+    //     StudyTypeName:"escaner",
+    //     MedicalStaffName:"Gustavo" ,
+    //     AppointmentDate:"05/06/2021",
+    //     Patientdni:"Laura",
 
 
 })
