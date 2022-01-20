@@ -7,10 +7,12 @@ const router = Router();
 import login from './login'
 import users from './users'
 import register from  './register'
+import studie from  './studie'
 
 router.use('/login', login)
 router.use('/users', users)
 router.use('/register', register)
+router.use('/studie', studie)
 
 router.get('/', (req: Request, res: Response) => {
 	res.send('soy la ruta home get! Probá /test');
