@@ -14,6 +14,11 @@ nav {
   color: #939eb0;
   font-weight: 700;
   padding-right: 5rem;
+  text-decoration: none;
+}
+
+nav a {
+  text-decoration: none;
 }
 
 ul {
@@ -29,6 +34,10 @@ ul li {
 ul li:hover {
   cursor: pointer;
   color: #00d9ff;
+}
+
+.LinkRouter {
+  text-decoration: none;
 }
 
 .container img {
