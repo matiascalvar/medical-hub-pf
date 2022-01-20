@@ -31,7 +31,8 @@ Patient.hasMany(Appointment, {
 MedicalStaff.belongsToMany(Specialitie, { through: "MedicalStaff_Specialities" });
 Specialitie.belongsToMany(MedicalStaff, { through: "MedicalStaff_Specialities" });
 
-MedicalStaff.belongsTo(User);
+MedicalStaff.belongsTo(User, { targetKey: "id" });
+User.hasOne(MedicalStaff, { sourceKey: "id" });
 
 // Studies retaltions 
 StudyType.hasOne(Studie);
