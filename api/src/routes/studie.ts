@@ -7,7 +7,7 @@ import  { Appointment } from '../models/Appointment'
 import  { Patient } from '../models/Patient'
 const {Op} = require(`sequelize`)
 
-// const bcrypt = require('bcrypt')
+
 const router = Router();
 
 
@@ -97,9 +97,7 @@ router.get('/:id', async (req, res) => {
         return res.status(403).send({"Error:": "Paciente no existe en la database."})
     
     try 
-    {
-       
-        
+    {       
         //find de module 
         const AllStudie  = await  Studie.findAll(
             { where:
@@ -122,6 +120,73 @@ router.get('/:id', async (req, res) => {
 //Change info about Studie
 router.put('/', async (req, res) => {
 
+    const TriggerStudyType = await StudyType.findOne(  
+        {
+            where: {
+                name: {
+                         [Op.iLike]: "%"+req.body.StudyTypeName+"%"
+                      } 
+                    }
+        }
+           )
+        //MedicalStaff
+        const TriggerMedicalStaff = await MedicalStaff.findOne(
+            {       where: {
+                        name:{
+                        [Op.iLike]: "%"+ req.body.MedicalStaffName+"%"
+                             }
+                            }
+            }
+                                                                )    
+            //Appointment
+            const  TriggerAppointment = await Appointment.findOne(
+                {where:
+                     {
+                    date: req.body.AppointmentDate
+                     }
+                }       
+                                                                )
+            //Patient
+            const TriggerPatient = await Patient.findOne(
+                {
+                    where:
+                     {
+                         dni: req.body.PatientDni
+                    }
+                }
+                                                        )
+
+//
+        
+                  if (
+                    TriggerStudyType === null
+                    ||TriggerMedicalStaff === null
+                    ||TriggerAppointment === null
+                    ||TriggerPatient === null 
+                    )
+                    {
+                            return res.status(403).send({"Error:": "falta valor en la request"})
+                        }      
+// Change 
+try 
+    { 
+ const response = await Studie.update(
+    {   state:           req.body.state,
+        diagnosis:       req.body.diagnosis,
+        studyPDF:        req.body.studyPDF,       
+        MedicalStaffId:  TriggerMedicalStaff.id,
+        StudyTypeId:     TriggerStudyType.id,
+        AppointmentId:   TriggerAppointment.id
+     },
+    { where: { id: req.body.id } }
+
+    )
+    return res.status(201).send(response)
+}
+catch(e) {
+    console.log(e)
+    return res.status(500).send(e)
+};
 
 })
 
