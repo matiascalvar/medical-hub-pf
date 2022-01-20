@@ -42,6 +42,11 @@ Specialitie.hasMany(MedicalStaff, {
 MedicalStaff.belongsTo(User, { targetKey: "id" });
 User.hasOne(MedicalStaff, { sourceKey: "id" });
 
+MedicalStaff.hasMany(Appointment, {
+	sourceKey: "id",
+  	foreignKey: "MedicalStaffId"
+})
+
 // Studies retaltions 
 StudyType.hasOne(Studie);
 Studie.belongsTo(MedicalStaff);
@@ -50,4 +55,5 @@ Studie.belongsTo(Appointment);
 Studie.belongsTo(Patient)
 
 Appointment.hasOne(AppointmentDetail)
+
 
