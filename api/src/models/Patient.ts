@@ -8,9 +8,6 @@ export class Patient extends Model {//<Patient>
 	lastName!: string;
 
 	@Column
-	email!: string;
-
-	@Column
 	phone!: number;
 
 	@Column
