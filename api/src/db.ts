@@ -15,9 +15,11 @@ export const sequelize = new Sequelize({
 const { User, Patient, Plan, Appointment, AppointmentDetail, MedicalStaff, Specialitie, Studie, StudyType} = sequelize.models;
 
 
-Patient.belongsTo(User)
+Patient.belongsTo(User, { targetKey: "id" } )
+User.hasOne(Patient, { sourceKey: "id" })
 
-Plan.hasOne(Patient)
+Plan.hasOne(Patient, { sourceKey: "id" })
+Patient.belongsTo(Plan, { targetKey: "id" })
 
 Appointment.belongsTo(Patient)
 
