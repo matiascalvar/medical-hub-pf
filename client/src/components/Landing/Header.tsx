@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import style from "./Header.module.css";
 import Logo from "../../assets/img/logo.svg";
 import { Link } from "react-scroll";
+import { Link as LinkRouter } from "react-router-dom";
 
 const Header: FunctionComponent = () => {
   return (
@@ -22,8 +23,12 @@ const Header: FunctionComponent = () => {
         </ul>
       </nav>
       <div className={style.buttons}>
-        <button className={style.btnSignIn}>Sign in</button>
-        <button className={style.btnRegister}>Register</button>
+        <LinkRouter className={style.LinkRouter} to="/login">
+          <button className={style.btnSignIn}>Sign in</button>
+        </LinkRouter>
+        <LinkRouter className={style.LinkRouter} to="/register">
+          <button className={style.btnRegister}>Register</button>
+        </LinkRouter>
       </div>
     </div>
   );

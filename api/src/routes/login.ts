@@ -1,10 +1,9 @@
 import { Response, Request, Router } from 'express';
 import  { User } from '../models/User'
+import  { RefreshToken } from '../models/RefreshToken'
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const router = Router();
-
-let refreshTokens: any = []
 
 function generateAccessToken(user: any) {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '10m'})
@@ -22,8 +21,9 @@ router.post('/', async (req, res) => {
                 const user = { email: req.body.email }
                 const accessToken = generateAccessToken(user)
                 const refreshToken = generateRefreshToken(user)
-                refreshTokens.push(refreshToken)
-                return res.send({ accessToken: accessToken, refreshToken: refreshToken })
+                const response = await RefreshToken.create({token: refreshToken})
+                res.cookie('token', refreshToken, { httpOnly: true})
+                return res.send({ accessToken: accessToken })
             } else {
                 return res.status(401).send({"Error": "Contrasenia incorrecta."})
             }
@@ -36,20 +36,34 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.post('/token', (req, res) => {
-    const refreshToken = req.body.token
+router.post('/token', async (req, res) => {
+    const refreshToken = req.cookies.token
     if (!refreshToken) return res.sendStatus(401)
-    if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err: any, user: any) => {
-        if (err) return res.sendStatus(403)
-        const accessToken = generateAccessToken({ email: user.email })
-        res.json({ accessToken: accessToken })
-    })
+    try {
+        let response = await RefreshToken.findOne({where: {token: refreshToken}}) 
+        if (!response) return res.sendStatus(403)
+        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err: any, user: any) => {
+            if (err) return res.sendStatus(403)
+            const accessToken = generateAccessToken({ email: user.email })
+            res.json({ accessToken: accessToken })
+        })
+    } catch(error) {
+        console.log(error)
+        return res.sendStatus(500)
+    }
 })
 
-router.delete('/remove', (req, res) => {
-    refreshTokens = refreshTokens.filter((token: any) => token !== req.body.token)
-    return res.sendStatus(200)
+router.delete('/remove', async  (req, res) => {
+    const refreshToken = req.cookies.token
+    if (!refreshToken) return res.sendStatus(401)
+    try {
+        let response = await RefreshToken.destroy({where: {token: req.cookies.token}})
+        if (!response) return res.sendStatus(404)
+        return res.sendStatus(200)
+    } catch(error) {
+        console.log(error)
+        return res.sendStatus(500)
+    }
 }) 
 
-export default router;
+export default router
