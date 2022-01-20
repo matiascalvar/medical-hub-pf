@@ -51,15 +51,15 @@ router.post('/', async (req, res) => {
                     }
                                                             )
             
-                if (
+                     if (
                         TriggerStudyType === null
                         ||TriggerMedicalStaff === null
                         ||TriggerAppointment === null
                         ||TriggerPatient === null 
                         )
-                        {
+                             {
                                 return res.status(403).send({"Error:": "falta valor en la request"})
-                            }                   
+                             }                   
                     try 
                     {
 
@@ -140,10 +140,10 @@ router.put('/', async (req, res) => {
                                                                 )    
             //Appointment
             const  TriggerAppointment = await Appointment.findOne(
-                {where:
-                     {
-                    date: req.body.AppointmentDate
-                     }
+                {       where:
+                            {
+                            date: req.body.AppointmentDate
+                            }
                 }       
                                                                 )
             //Patient
@@ -156,10 +156,10 @@ router.put('/', async (req, res) => {
                 }
                                                         )
 
-//
+//   ---------//  -------------- // ---------------- // -----------------
         
                   if (
-                    TriggerStudyType === null
+                      TriggerStudyType === null
                     ||TriggerMedicalStaff === null
                     ||TriggerAppointment === null
                     ||TriggerPatient === null 
@@ -167,7 +167,7 @@ router.put('/', async (req, res) => {
                     {
                             return res.status(403).send({"Error:": "falta valor en la request"})
                         }      
-// Change 
+
 try 
     { 
  const response = await Studie.update(
