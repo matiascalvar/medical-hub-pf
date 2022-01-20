@@ -28,8 +28,16 @@ Patient.hasMany(Appointment, {
 
 // Appointment.belongsTo(Patient)
 
-MedicalStaff.belongsToMany(Specialitie, { through: "MedicalStaff_Specialities" });
-Specialitie.belongsToMany(MedicalStaff, { through: "MedicalStaff_Specialities" });
+Specialitie.hasMany(MedicalStaff, {
+	sourceKey: "id",
+  	foreignKey: "SpecialitieId"
+})
+
+// MedicalStaff.belongsTo(Specialitie, { targetKey: "id" });
+// Specialitie.hasMany(MedicalStaff, { sourceKey: "id" });
+
+// MedicalStaff.belongsToMany(Specialitie, { through: "MedicalStaff_Specialities" });
+// Specialitie.belongsToMany(MedicalStaff, { through: "MedicalStaff_Specialities" });
 
 MedicalStaff.belongsTo(User, { targetKey: "id" });
 User.hasOne(MedicalStaff, { sourceKey: "id" });
