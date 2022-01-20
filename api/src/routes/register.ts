@@ -1,4 +1,6 @@
 import { Response, Request, Router } from 'express';
+import { Patient } from '../models/Patient';
+import { Plan } from '../models/Plan';
 import  { User } from '../models/User'
 const bcrypt = require('bcrypt')
 const router = Router();
@@ -11,12 +13,25 @@ router.post('/', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
     
-        const user = {
+        const newUser = {
             email: req.body.email,
-            hashedPass: hashedPassword,
+            hashedPass: hashedPassword
         }
-        const response = await User.create(user)
-        return res.status(201).send(response)
+
+        const user = await User.create(newUser)
+
+        const newPatient = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phone: req.body.phone,
+            dni: req.body.dni,
+            UserId: user.id,
+            PlanId: req.body.planId
+        }
+
+        const patient = await Patient.create(newPatient)
+
+        return res.status(201).send({message: 'Usuario creado con éxito'}) 
     } catch(e) {
         console.log(e)
         return res.status(500).send(e)
