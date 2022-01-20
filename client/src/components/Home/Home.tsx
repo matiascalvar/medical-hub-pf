@@ -1,6 +1,5 @@
 import Nav from "./Nav/Nav";
 import s from "./Home.module.css";
-
 import UserHome from "./UserHome/UserHome";
 
 export default function Home() : JSX.Element{
@@ -10,7 +9,9 @@ export default function Home() : JSX.Element{
             <div className={s.nav}>
                 <Nav/>
             </div>
-            <UserHome/> 
+            <div className={s.main}>
+              <UserHome/> 
+            </div>
         </div>
     )
 
