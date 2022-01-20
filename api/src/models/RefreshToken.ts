@@ -1,20 +1,8 @@
 import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
 @Table
-export class Patient extends Model {//<Patient>
+export class RefreshToken extends Model {
     @Column
-	firstName!: string;
-
-	@Column
-	lastName!: string;
-
-	@Column
-	email!: string;
-
-	@Column
-	phone!: number;
-
-	@Column
-	dni!: number;
+	token!: string;
 
 	@CreatedAt
 	@Column

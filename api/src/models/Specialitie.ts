@@ -1,8 +1,10 @@
 import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+
 @Table
-export class UserType extends Model<UserType> {
-    @Column
-	typeName!: string;
+export class Specialitie extends Model {
+
+	@Column
+	name!: string;     
 
 	@CreatedAt
 	@Column
@@ -11,4 +13,5 @@ export class UserType extends Model<UserType> {
 	@UpdatedAt
 	@Column
 	updatedAt!: Date;
+
 }
