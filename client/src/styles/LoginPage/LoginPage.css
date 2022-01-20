@@ -1,0 +1,415 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+:root {
+  --color-title: #0eaaff,
+  --color-background: #f4f8ff,
+  --color-subtitles: #939eb0,
+  --color-parrafos: #000,
+  --color-icons: #00d9ff,
+  --color-extra: #bbf3ff
+}
+
+.loginContainer{
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 2fr 1fr;
+}
+
+.imgFondo{
+  object-fit: fill;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.loginContainer__container{
+  display: grid;
+  grid-template-rows: 1fr;
+  margin: 0;
+  height: 99%;
+  border: 0.15rem solid hsla(0, 0%, 0%, 0.179);
+  border-radius: .5rem;
+  background: #f4f8ff;
+}
+
+.container__form{
+  display: grid;
+  grid-template-rows: 35% 16% 16% 18% 15%;
+  padding: 5rem 3rem;
+}
+
+.container__form > *{
+  margin: 0;
+  padding: 0;
+}
+
+.form__logo{
+  width: 100%;
+  display: grid;
+  grid-template-rows: 60% 40%;
+  align-items: center;
+  justify-items: center;
+  overflow: hidden;
+}
+
+.logo__img{
+  padding-left: 2rem;
+  width: 20rem;
+}
+
+.login__text{
+  font-family: 'Montserrat';
+  font-size: 1rem;
+  text-align: center;
+  margin: 0 2rem;
+  font-weight: 400;
+  letter-spacing: .2rem;
+  color: #939eb0;
+  height: 100%;
+  width: 100%;
+}
+
+.form__user,
+.form__password{
+  display: grid;
+  margin-top: .3rem;
+}
+
+.user__title,
+.password__title{
+  height: 100%;
+  font-size: 1.2rem;
+  display: grid;
+  align-items: center;
+  padding-left: 2rem;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  color: #0eaaff;
+}
+
+.user__input,
+.password__input{
+  display: grid;
+}
+
+.loginInput__item{  
+  position: relative;
+  margin: 0 2rem 0 2rem;
+  padding-left: 2.4rem;
+  outline: none;
+  border: none;
+  border-bottom: .2rem solid #00d9ff;
+  font-size: 1.1rem;
+  font-family: 'Montserrat';
+  letter-spacing: .1rem;
+  background: #f4f8ff;
+}
+
+.loginInput__icons{
+  position: absolute;
+  margin: 0 2rem;
+  padding: .4rem;
+  font-size: 1.4rem;
+  color: #00d9ff;
+}
+
+.form__register{
+  display: grid;
+}
+
+.btn__register{
+  padding-left: 1.9rem;
+  display: grid;
+  align-items: end;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #939eb0;
+}
+
+.register__isMedic{
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 12% auto;
+  padding-left: 1.3rem;
+}
+
+
+.isMedic__check{
+  margin: .8rem;
+}
+
+.isMedic__title{
+  font-size: 1rem;
+  font-size: 'Montserrat';
+  display: grid;
+  align-items: center;
+  color: #939eb0;
+  font-weight: 500;
+  letter-spacing: .1rem;
+}
+
+.form__btn{
+  margin: .5rem 2rem;
+  cursor: pointer;
+  border: none;
+  background: #00d9ff;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  font-family: 'Montserrat';
+  color: #f4f8ff;
+  font-weight: 600;
+  letter-spacing: .3rem;
+  transition: .4s;
+}
+
+.form__btn:hover{
+  background:#0eaaff;
+}
+
+/* 
+.container__form{
+  background-color: #f4f8ff;
+  width: 30rem;
+}
+
+.form{
+  display: grid;
+  height: 100%;
+  grid-template-rows: 28% 18% 18% 10% 26%;
+}
+
+.form > *{
+  margin: 0;
+}
+
+.formTitle__item{
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4.9rem;
+  letter-spacing: .1rem;
+  color: #0eaaff;
+  margin: 0;
+  display: grid;
+  align-items: center;
+}
+
+.formLogo__item{
+  display: none;
+}
+
+.form__user,
+.form__password{
+  display: grid;
+}
+
+.form__user > *,
+.form__password > *{
+  margin: 0 4rem 0 3.5rem;
+}
+
+.user__input,
+.password__input{
+  display: grid;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.input__item{
+  width: 19rem;
+  height: 96%;
+  position: relative;
+  margin: 0;
+  outline: none;
+  border: none;
+  border-bottom: .2rem solid #00d9ff;
+  padding-left: 2.5rem;
+  font-size: 1.2rem;
+  color: #939eb0;
+  letter-spacing: .12rem;
+  background-color: #f4f8ff;
+}
+
+.input__icons{
+  position: absolute;
+  font-size: 1.6rem;
+  padding: .7rem .5rem;
+  color: #00d9ff;
+}
+
+.user__title,
+.password__title{
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  padding-left: 1.2rem;
+  font-size: 1.1rem;
+  font-family: sans-serif;
+  font-weight: bold;
+  letter-spacing: .1rem;
+  color: #0eaaff;
+}
+
+.form__register{
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  padding-left: 4.3rem;
+}
+
+.btn__register{
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #0eaaff;
+  letter-spacing: .1rem;
+}
+
+.btn__register:hover{
+  text-decoration: underline;
+}
+
+.form__btn{
+  display: grid;
+  margin: 1rem 7rem 3rem 7rem;
+  align-items: center;
+  font-size: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: .2rem;
+  cursor: pointer;
+  background-color: #00d9ff;
+  outline: none;
+  border: .15rem solid #0eaaff;
+  color: #f4f8ff;
+  border-radius: 1rem;
+  transition: .5s;
+} 
+
+.form__btn:hover{
+  background-color: #0eaaff;
+}
+
+@media screen and (max-width: 1024px) {
+  .container{
+    width: 50rem;
+  }
+  .container__logo,
+  .container__form{
+    width: 25rem;
+  }
+  .form__user > *,
+  .form__password > *{
+    margin: 0 1rem 0 1rem;
+  }
+  .logo__medicalHub{
+    width: 22rem;
+  }
+  .form__btn{
+    margin: 2.2rem 7rem 2.2rem 7rem;
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .container{
+    width: 30rem;
+  }
+  .container__logo{
+    width: 7rem;
+  }
+  .container__form{
+    width: 23rem;
+  }
+  .form__user > *,
+  .form__password > *{
+    margin: 0;
+  }
+  .logo__medicalHub{
+    display: none;
+  }
+  .form__title{
+    display: grid;
+    grid-template-rows: 60% 40%;
+  }
+  .formLogo__item{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    width: 21rem;
+    height: 80%;
+    margin: 1rem 1rem 0 1rem;
+  }
+  .formTitle__item{
+    font-size: 1.5rem;
+  }
+  .input__item{
+    width: 15rem;
+    margin-left: 2rem;
+  }
+  .input__icons{
+    padding: .7rem 2.2rem;
+  }
+  .user__title,
+  .password__title{
+    padding-left: 3rem;
+  }
+  .form__register{
+    padding-left: 2.8rem;
+  }
+  .btn__register{
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #0eaaff;
+    letter-spacing: .09rem;
+  }
+  .form__btn{
+    margin: .5rem 5rem 4rem 5rem;
+    font-size: 1.5rem;
+    letter-spacing: .2rem;
+  } 
+}
+
+@media screen and (max-width: 490px){
+  .container{
+    width: 20rem;
+  }
+  .container__logo{
+    display: none;
+  }
+  .container__form{
+    width: 20rem;
+  }
+  .formLogo__item{
+    width: 18rem;
+    height: 80%;
+    margin: 1rem 1rem 0 1rem;
+  }
+  .formTitle__item{
+    font-size: 1.6rem;
+  }
+  .input__item{
+    width: 12rem;
+    margin-left: 1.3rem;
+  }
+  .input__icons{
+    padding: .7rem 1.7rem;
+  }
+  .user__title,
+  .password__title{
+    padding-left: 2.4rem;
+  }
+  .form__register{
+    padding-left: 2.3rem;
+  }
+  .btn__register{
+    font-size: .9rem;
+    letter-spacing: .09rem;
+  }
+  .form__btn{
+    margin: .5rem 5rem 4rem 5rem;
+    font-size: 1.5rem;
+    letter-spacing: .2rem;
+  } 
+}  */
