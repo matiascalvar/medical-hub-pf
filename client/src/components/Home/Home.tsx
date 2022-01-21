@@ -44,7 +44,7 @@ export default function Home() : JSX.Element{
         if (activeUser.email) {
             getUserInfo()
         }    
-    }, [])
+    }, [activeUser])
     if (myInfo.firstName) {
         return (
             <div className={s.home}>
@@ -59,7 +59,7 @@ export default function Home() : JSX.Element{
         )
     } else {
         return (
-            <div>Loading...</div>
+            <div>NO USER LOGGED.</div>
         )
     }
 }
