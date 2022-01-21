@@ -1,11 +1,15 @@
-import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+import {Model, Column, Table,AllowNull, CreatedAt, UpdatedAt} from 'sequelize-typescript';
 @Table
 export class Plan extends Model {//<Plan>
-    @Column
+    
+	@AllowNull(false)
+	@Column
 	name!: string;
 
+	@AllowNull(false)
 	@Column
 	coveragePercentage!: number;
+
 
 	@CreatedAt
 	@Column

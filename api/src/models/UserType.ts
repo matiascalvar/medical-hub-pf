@@ -1,7 +1,9 @@
-import {Model, Column, Table, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+import {Model, Column, Table, CreatedAt,AllowNull, UpdatedAt} from 'sequelize-typescript';
 @Table
 export class UserType extends Model {//<UserType>
-    @Column
+    
+	@AllowNull(false)
+	@Column
 	typeName!: string;
 
 	@CreatedAt

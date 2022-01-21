@@ -1,20 +1,26 @@
-import {Model, Column, Table, CreatedAt, UpdatedAt, Default} from 'sequelize-typescript';
+import {Model, Column, Table, CreatedAt,AllowNull, UpdatedAt, Default} from 'sequelize-typescript';
 @Table
 export class User extends Model {//<User>
-    @Column
+    
+	@AllowNull(false)
+	@Column
 	email!: string;
 
+	@AllowNull(false)
 	@Column
 	hashedPass!: string;
 
+	@AllowNull(false)
 	@Default(true)
 	@Column
 	active!: boolean;
 
+	@AllowNull(false)
 	@Default(false)
 	@Column
 	isStaff!: boolean;
 
+	
 	@CreatedAt
 	@Column
 	createdAt!: Date;
