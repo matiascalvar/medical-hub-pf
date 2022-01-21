@@ -20,14 +20,14 @@ export class MedicalStaff extends Model {
     availability!: "L a V'|'L M V";
 
 
-    @Column
-	avbFrom!: Date ;
+    @Column(DataType.TIME)
+	avbFrom!: number;
 
-    @Column
-	avbTo!: Date ;
+    @Column(DataType.TIME)
+	avbTo!: number;
 
-    @Column
-	appointmentDuration!: Date ;
+    @Column(DataType.TIME)
+	appointmentDuration!: number;
 
 
 	@CreatedAt
