@@ -60,6 +60,7 @@ const LoginPage: FunctionComponent = () => {
             const user: any = await loginUser(input)
             if (user) {
                 dispatch(logUser(user))
+                history.push('/home')
             }
             setInput(emptyInput)
         } else {
