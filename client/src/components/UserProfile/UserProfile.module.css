@@ -1,0 +1,36 @@
+
+.mainContainer{
+
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+}
+
+
+.profileCard{
+
+    background-color: #ffffff;
+    width: 43rem;
+    height: 47rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userPhoto{
+   
+    overflow: hidden;
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.photo{
+    width: 20rem;
+}
