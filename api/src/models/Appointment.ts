@@ -17,12 +17,12 @@ export class Appointment extends Model {//<Appointment>
     @Column(DataType.ENUM('ACTIVE', 'PAYED', 'COMPLETED'))
     state!: 'ACTIVE'|'PAYED'|'COMPLETED';
 
-	@AllowNull(false)
+	
 	@CreatedAt
 	@Column
 	createdAt!: Date;
 
-	@AllowNull(false)
+	
 	@UpdatedAt
 	@Column
 	updatedAt!: Date;
