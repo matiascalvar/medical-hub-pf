@@ -10,7 +10,7 @@ import register from  './register'
 import appointments from './appointments'
 import medicalstaff from './medicalstaff'
 import studies from './studies'
-
+import plans from './plans'
 
 router.use('/login', login)
 router.use('/users', users)
@@ -18,6 +18,7 @@ router.use('/register', register)
 router.use('/appointments', appointments)
 router.use('/medicalstaff', medicalstaff)
 router.use('/studies', studies)
+router.use('/plans', plans)
 
 
 router.get('/', (req: Request, res: Response) => {
