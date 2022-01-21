@@ -1,13 +1,14 @@
 import {Response, Request, Router, response} from 'express';
 import { Appointment } from '../models/Appointment';
 import { MedicalStaff } from '../models/MedicalStaff';
-import { Specialitie } from '../models/Specialitie';
 import { Studie } from '../models/Studie';
 import { StudyType } from '../models/StudyType';
 const router = Router();
 
 
 router.get('/', (req, res) => {
+    //Nestor, tendrías que trabajar acá
+    //traer todos los estudios de todos los pacientes para el usuario admin 
     res.send('STUDIES')
 });
 
