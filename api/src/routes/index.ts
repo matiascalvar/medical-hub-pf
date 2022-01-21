@@ -11,6 +11,7 @@ import appointments from './appointments'
 import medicalstaff from './medicalstaff'
 import studies from './studies'
 import plans from './plans'
+import specialities from './specialities'
 
 router.use('/login', login)
 router.use('/users', users)
@@ -19,7 +20,7 @@ router.use('/appointments', appointments)
 router.use('/medicalstaff', medicalstaff)
 router.use('/studies', studies)
 router.use('/plans', plans)
-
+router.use('/specialities', specialities)
 
 router.get('/', (req: Request, res: Response) => {
 	res.send('soy la ruta home get! Probá /test');

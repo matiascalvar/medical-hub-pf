@@ -1,12 +1,52 @@
-import React from 'react';
+import Nav from "./Nav/Nav";
+import s from "./Home.module.css";
+import UserHome from "./UserHome/UserHome";
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import {getUserInfo} from "../../actions/index";
 
-// Defino mediante una interface el tipado de las props
-interface HomeProps {
-  title: string;
+interface Info{
+    firstName: any;
+    lastName: any;
 }
 
-// El tipado del return de las funciones de React debe ser: JSX:Element
-export default function Home({title}:HomeProps): JSX.Element {
-    return <h1>Home component. Este es nuestro { title }</h1>
+export default function Home() : JSX.Element{
+
+    const activeUser = useSelector((state: any) => state.user);
+    const response = useSelector((state:any) => state.userInfo);
+    const dispatch = useDispatch();
+    const [ myInfo, setMyInfo ] = useState<Info> ({
+        firstName: "",
+        lastName: ""
+    })
+    
+    useEffect ( () => {
+        if (response) {
+            setMyInfo({
+                firstName: response.firstName,
+                    lastName: response.lastName
+                })
+            }
+        if (activeUser.email && !myInfo.firstName) {
+            dispatch(getUserInfo(activeUser));
+        }    
+    }, [response]);
+
+    if (myInfo.firstName) {
+        return (
+            <div className={s.home}>
+                <div className={s.nav}>
+                    <Nav/>
+                </div>
+                <div className={s.main}>
+                  <UserHome id={response.id} userName={myInfo.firstName} /> 
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div>NO USER LOGGED.</div>
+        )
+    }
 }
 
