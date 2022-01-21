@@ -5,12 +5,12 @@ export class UserType extends Model {//<UserType>
 	@Column
 	typeName!: string;
 
-	@AllowNull(false)
+	
 	@CreatedAt
 	@Column
 	createdAt!: Date;
 
-	@AllowNull(false)
+	
 	@UpdatedAt
 	@Column
 	updatedAt!: Date;
