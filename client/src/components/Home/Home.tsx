@@ -32,7 +32,6 @@ export default function Home() : JSX.Element{
         }    
     }, [response]);
 
-
     if (myInfo.firstName) {
         return (
             <div className={s.home}>
@@ -46,7 +45,7 @@ export default function Home() : JSX.Element{
         )
     } else {
         return (
-            <div>Loading...</div>
+            <div>NO USER LOGGED.</div>
         )
     }
 }
