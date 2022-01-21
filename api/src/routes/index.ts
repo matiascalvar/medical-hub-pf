@@ -9,12 +9,16 @@ import users from './users'
 import register from  './register'
 import appointments from './appointments'
 import medicalstaff from './medicalstaff'
+import specialities from './specialities'
+
 
 router.use('/login', login)
 router.use('/users', users)
 router.use('/register', register)
 router.use('/appointments', appointments)
 router.use('/medicalstaff', medicalstaff)
+router.use('/specialities', specialities)
+
 
 router.get('/', (req: Request, res: Response) => {
 	res.send('soy la ruta home get! Probá /test');
