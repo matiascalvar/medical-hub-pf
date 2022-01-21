@@ -25,14 +25,14 @@ router.post('/', async (req, res) => {
                 res.cookie('token', refreshToken, { httpOnly: true})
                 return res.send({ accessToken: accessToken })
             } else {
-                return res.status(401).send({"Error": "Contrasenia incorrecta."})
+                return res.status(401).send({"error": "Contrasenia incorrecta."})
             }
         } catch(error) {
             console.log(error)
             return res.sendStatus(500)
         }
     } else {
-        return res.status(401).send({"Error": "No existe el usuario."})
+        return res.status(401).send({"error": "No existe el usuario."})
     }
 });
 

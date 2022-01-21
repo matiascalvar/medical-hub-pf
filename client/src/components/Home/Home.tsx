@@ -1,12 +1,18 @@
-import React from 'react';
+import Nav from "./Nav/Nav";
+import s from "./Home.module.css";
+import UserHome from "./UserHome/UserHome";
 
-// Defino mediante una interface el tipado de las props
-interface HomeProps {
-  title: string;
+export default function Home() : JSX.Element{
+
+    return (
+        <div className={s.home}>
+            <div className={s.nav}>
+                <Nav/>
+            </div>
+            <div className={s.main}>
+              <UserHome/> 
+            </div>
+        </div>
+    )
+
 }
-
-// El tipado del return de las funciones de React debe ser: JSX:Element
-export default function Home({title}:HomeProps): JSX.Element {
-    return <h1>Home component. Este es nuestro { title }</h1>
-}
-
