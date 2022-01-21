@@ -1,4 +1,6 @@
 // QUITAR FORCE: TRUE SI SE QUIERE CONSERVAR LAS TABLAS DE LA DB
+import populateDB from './src/assets/populate';
+import jsonSpecialities from '../api/src/assets/specialitiesJSON';
 
 import {sequelize} from './src/db';
 import app from './src/app';
@@ -9,5 +11,9 @@ sequelize
 		app.listen(3001, function () {
 			console.log('App is listening on port 3001!');
 		});
+		populateDB(jsonSpecialities);
+		
+        
+
 	})
 	.catch((err) => console.error(err));
