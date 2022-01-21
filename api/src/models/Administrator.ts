@@ -21,12 +21,12 @@ export class Administrator extends Model {
 	@Column
 	dni!: number;
 
-	@AllowNull(false)
+	
 	@CreatedAt
 	@Column
 	createdAt!: Date;
 
-	@AllowNull(false)
+	
 	@UpdatedAt
 	@Column
 	updatedAt!: Date;
