@@ -120,6 +120,8 @@ router.get('/:id', async (req, res) => {
 //Change info about Studie
 router.put('/', async (req, res) => {
 
+
+    
     const TriggerStudyType = await StudyType.findOne(  
         {
             where: {
@@ -187,7 +189,6 @@ catch(e) {
     console.log(e)
     return res.status(500).send(e)
 };
-
 })
 
 

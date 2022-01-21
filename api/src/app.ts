@@ -23,7 +23,7 @@ app.use(
 interface error {
 	status: number;
 	message: string;
-}
+				}
 
 app.use((err: error, req: Request, res: Response, next: NextFunction) => {
 	// eslint-disable-line no-unused-vars
