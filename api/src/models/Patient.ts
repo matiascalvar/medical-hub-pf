@@ -21,12 +21,12 @@ export class Patient extends Model {//<Patient>
 	@Column
 	dni!: number;
 
-	@AllowNull(false)
+	
 	@CreatedAt
 	@Column
 	createdAt!: Date;
 
-	@AllowNull(false)
+	
 	@UpdatedAt
 	@Column
 	updatedAt!: Date;
