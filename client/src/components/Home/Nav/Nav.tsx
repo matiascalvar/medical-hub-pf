@@ -1,5 +1,5 @@
 import s from "./Nav.module.css";
-import Logo from "../../../assets/img/logo.svg";
+import Logo from "../../../assets/img/minimalLogo.png";
 import * as icons from "react-icons/bi";
 import * as iconsb from "react-icons/md";
 import { TiTick } from "react-icons/ti";
