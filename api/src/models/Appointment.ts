@@ -3,8 +3,8 @@ import {Model, Column, Table, CreatedAt, UpdatedAt, DataType, Default} from 'seq
 
 @Table
 export class Appointment extends Model {//<Appointment>
-    @Column
-	date!: Date;
+    @Column(DataType.DATEONLY)
+	date!: number;
 
 	@Column(DataType.TIME)
 	time!: number;
