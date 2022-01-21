@@ -6,8 +6,8 @@ export class Appointment extends Model {//<Appointment>
     @Column
 	date!: Date;
 
-	@Column
-	time!: Date;
+	@Column(DataType.TIME)
+	time!: number;
 
 	@Default('ACTIVE')
     @Column(DataType.ENUM('ACTIVE', 'PAYED', 'COMPLETED'))
