@@ -19,12 +19,12 @@ export class User extends Model {//<User>
 	@Column
 	isStaff!: boolean;
 
-	@AllowNull(false)
+	
 	@CreatedAt
 	@Column
 	createdAt!: Date;
 
-	@AllowNull(false)
+	
 	@UpdatedAt
 	@Column
 	updatedAt!: Date;
