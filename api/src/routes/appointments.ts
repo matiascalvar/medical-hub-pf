@@ -1,6 +1,7 @@
 import {Response, Request, Router, response} from 'express';
 import { Appointment } from '../models/Appointment';
 import { MedicalStaff } from '../models/MedicalStaff';
+import { Specialitie } from '../models/Specialitie';
 const router = Router();
 
 
@@ -14,7 +15,11 @@ router.get('/:id', async (req, res) => {
         const appointments = await Appointment.findAll({
             include: [{
                 model: MedicalStaff,
-                attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['idNumber', 'availability', 'avbFrom', 'avbTo', 'appointmentDuration', 'createdAt','updatedAt', 'UserId', 'SpecialitieId']}
+                attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['idNumber', 'availability', 'avbFrom', 'avbTo', 'appointmentDuration', 'createdAt','updatedAt', 'UserId', 'SpecialitieId']},
+                include:[{
+                    model: Specialitie,
+                    attributes: {include:['name'], exclude:['id', 'createdAt','updatedAt']}
+                }]
               }],
             where: {PatientId: idPatient},
             attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']}
