@@ -10,25 +10,17 @@ router.get('/', (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const { id } = req.params;
-        const appointment = await Appointment.findByPk(id, {
+        const idPatient = req.params.id;
+        const appointments = await Appointment.findAll({
+            include: [{
+                model: MedicalStaff,
+                attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['idNumber', 'availability', 'avbFrom', 'avbTo', 'appointmentDuration', 'createdAt','updatedAt', 'UserId', 'SpecialitieId']}
+              }],
+            where: {PatientId: idPatient},
             attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']}
-        });
-
-       if(appointment){
-        const dataStaffMedical = await MedicalStaff.findOne({
-            where: {id: appointment.id},
-            attributes:{include:  ['id', 'firstName', 'lastName'], exclude: ['idNumber', 'availability', 'avbFrom', 'avbTo', 'appointmentDuration', 'SpecialitieId', 'UserId', 'createdAt','updatedAt']}
-        })
-        
-        const result = {
-            appointmentData: appointment,
-            medicalStaffData: dataStaffMedical
-        }       
+        });         
  
-         res.send(result)
-
-       }        
+        res.send(appointments)
         
     } catch (e) {
         console.log(e)
