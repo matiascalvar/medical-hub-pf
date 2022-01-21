@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import { FaAt, FaLock } from "react-icons/fa";
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom"
+import { logUser } from "../../actions"
 import axios from 'axios';
 import BackImg from "../../assets/img/back_login.jpeg";
 import Logo from "../../assets/img/logo.svg";
@@ -10,9 +12,12 @@ import "../../styles/LoginPage/Login.css";
 axios.defaults.withCredentials = true
 
 const LoginPage: FunctionComponent = () => {
+
+    const activeUser = useSelector((state: any) => state.user) 
+    const dispatch = useDispatch()
     const history = useHistory()
 
-    const logUser = async function(newUser: any) {
+    const loginUser = async function(newUser: any) {
         const options = {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }
@@ -52,10 +57,9 @@ const LoginPage: FunctionComponent = () => {
     const handleSubmit = async function(e: any) {
         e.preventDefault()
         if (input.email && input.password) {
-            const user: any = await logUser(input)
+            const user: any = await loginUser(input)
             if (user) {
-                // agregar action para guardar token y email en store
-                console.log(user)
+                dispatch(logUser(user))
             }
             setInput(emptyInput)
         } else {
