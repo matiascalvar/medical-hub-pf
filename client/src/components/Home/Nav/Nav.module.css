@@ -1,6 +1,5 @@
 
 .nav{
-
     background-color: #ffffff;
     width: 12rem;
     height: 100vh;
@@ -15,8 +14,7 @@
 
 .logo{
     width: 6rem;
-    margin: 2rem 0 0 .8rem;
-    
+    margin: 2rem 0 0 .8rem;   
 }
 
 
@@ -25,7 +23,6 @@
     flex-direction: column;
     margin-top: auto;
     margin-bottom: auto;
-    
 }
 
 .navButton{

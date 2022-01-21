@@ -4,6 +4,7 @@ import * as iconsb from "react-icons/md";
 import * as icons from "react-icons/bi";
 import {appoinments, payments, history} from "./data";
 
+
 export default function UserHome() : JSX.Element {
 
 
@@ -85,6 +86,7 @@ export default function UserHome() : JSX.Element {
                                </div>
                            ))
                        }
+
                     </div>
                 </div>
 
