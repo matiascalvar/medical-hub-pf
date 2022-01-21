@@ -18,12 +18,12 @@ export class Studie extends Model {
     @Column
 	studyPDF!: string;
 
-	@AllowNull(false)
+	
     @CreatedAt
 	@Column
 	createdAt!: Date;
 
-	@AllowNull(false)
+	
 	@UpdatedAt
 	@Column
 	updatedAt!: Date;
