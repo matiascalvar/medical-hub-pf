@@ -10,6 +10,7 @@
 
 .loginContainer{
   height: 100vh;
+  width: 100vw;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -67,8 +68,9 @@
   font-family: 'Montserrat';
   font-size: 1rem;
   text-align: center;
-  margin: 0 1.8rem;
-  font-weight: 700;
+  margin: 0 1.3rem;
+  margin-bottom: 0;
+  font-weight: 500;
   color: #939eb0;
   height: 100%;
   width: 100%;
@@ -84,10 +86,9 @@
   font-size: 1rem;
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 0;
   align-items: flex-end;
-  margin-bottom: 1rem;
-  padding-left: 2rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
   font-family: 'Montserrat';
   font-weight: 500;
   color: #0eaaff;
@@ -107,43 +108,61 @@
   border: .15rem solid #AFB6BA;
   font-size: 0.9rem;
   font-family: 'Montserrat';
-  letter-spacing: .1rem;
   background: transparent;
   border-radius: 0.5rem;
   max-height: 2.2rem;
 }
 
-.loginInput__icons{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 2rem;
-  padding: .4rem;
-  font-size: 1.4rem;
-  color: #00d9ff;
-}
 
 .form__register{
-  max-height: 5rem;
+  max-height: 3rem;
 }
 
 .btn__register{
-  padding-left: 1.9rem;
-  display: grid;
-  align-items: end;
-  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  font-size: 1rem;
   text-decoration: none;
   color: #939eb0;
 }
 
+.btn__register p{
+  width: 100%;
+}
+
+.btn__register span {
+  display: inline;
+}
+
+.blue_text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  font-weight: 700;
+  color: #00d9ff;
+}
+
 .register__isMedic{
-  padding-left: 1rem;
+  padding-left: 1.2rem;
   max-height: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   font-weight: 500;
+}
+
+.errors {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+  color: red;
+  font-weight: 500;
+  width: 50%;
 }
 
 
@@ -158,14 +177,14 @@
   align-items: center;
   color: #939eb0;
   font-weight: 500;
-  letter-spacing: .1rem;
 }
 
 .form__btn{
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
   margin: 0rem 0.5rem;
   cursor: pointer;
   border: none;
-  background: #00d9ff;
   border-radius: 1rem;
   font-size: 1.4rem;
   font-family: 'Montserrat';
@@ -176,7 +195,10 @@
 }
 
 .form__btn:hover{
-  background:#0eaaff;
+  background-image: radial-gradient( circle farthest-corner at -3.7% -5%,  rgba(113,213,225,1) 0.3%, rgba(73,146,226,1) 90.5% );
+
+
+
 }
 
 /* 
