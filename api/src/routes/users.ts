@@ -5,15 +5,16 @@ import { authenticateToken } from './middelwares'
 const router = Router();
 
 
-router.get('/', authenticateToken , async (req, res) => {
-    
+router.get('/', authenticateToken , async (req: any, res) => {
+    let email = req.email.email
+
     try {
-        let user: any = await User.findOne({ where: { email: req.body.email }});
+        let user: any = await User.findOne({ where: { email: email}});
 
         let userId = user.dataValues.id
         const patient: any = await Patient.findOne({ where: {UserId: userId} });
         
-        res.send(patient.dataValues)
+        res.send(patient.dataValues) 
     }
     catch (error) {
         console.log(error)

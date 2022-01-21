@@ -1,11 +1,11 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Home from "./components/Home/Home";
 import { Route, Switch } from "react-router-dom";
 import Landing from "./components/Landing/Landing";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import Home from "./components/Home/Home";
 
 function App() {
   return (

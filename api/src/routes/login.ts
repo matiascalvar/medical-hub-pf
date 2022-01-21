@@ -23,16 +23,16 @@ router.post('/', async (req, res) => {
                 const refreshToken = generateRefreshToken(user)
                 const response = await RefreshToken.create({token: refreshToken})
                 res.cookie('token', refreshToken, { httpOnly: true})
-                return res.send({ accessToken: accessToken })
+                return res.send({ token_type: "Bearer", access_token: accessToken })
             } else {
-                return res.status(401).send({"Error": "Contrasenia incorrecta."})
+                return res.status(401).send({"error": "Contrasenia incorrecta."})
             }
         } catch(error) {
             console.log(error)
             return res.sendStatus(500)
         }
     } else {
-        return res.status(401).send({"Error": "No existe el usuario."})
+        return res.status(401).send({"error": "No existe el usuario."})
     }
 });
 

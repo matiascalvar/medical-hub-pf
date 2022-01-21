@@ -21,12 +21,25 @@ User.hasOne(Patient, { sourceKey: "id" })
 Plan.hasOne(Patient, { sourceKey: "id" })
 Patient.belongsTo(Plan, { targetKey: "id" })
 
-Appointment.belongsTo(Patient)
+Patient.hasMany(Appointment, {
+	sourceKey: "id",
+  	foreignKey: "PatientId"
+})
 
-MedicalStaff.belongsToMany(Specialitie, { through: "MedicalStaff_Specialities" });
-Specialitie.belongsToMany(MedicalStaff, { through: "MedicalStaff_Specialities" });
+Specialitie.hasMany(MedicalStaff, {
+	sourceKey: "id",
+  	foreignKey: "SpecialitieId"
+})
+MedicalStaff.belongsTo(Specialitie)
 
-MedicalStaff.belongsTo(User);
+MedicalStaff.belongsTo(User, { targetKey: "id" });
+User.hasOne(MedicalStaff, { sourceKey: "id" });
+
+MedicalStaff.hasMany(Appointment, {
+	sourceKey: "id",
+  	foreignKey: "MedicalStaffId"
+})
+Appointment.belongsTo(MedicalStaff)
 
 // Studies retaltions 
 StudyType.hasOne(Studie);
@@ -36,4 +49,5 @@ Studie.belongsTo(Appointment);
 Studie.belongsTo(Patient)
 
 Appointment.hasOne(AppointmentDetail)
+
 
