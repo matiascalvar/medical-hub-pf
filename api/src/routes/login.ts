@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
                 const refreshToken = generateRefreshToken(user)
                 const response = await RefreshToken.create({token: refreshToken})
                 res.cookie('token', refreshToken, { httpOnly: true})
-                return res.send({ accessToken: accessToken })
+                return res.send({ token_type: "Bearer", access_token: accessToken })
             } else {
                 return res.status(401).send({"error": "Contrasenia incorrecta."})
             }
