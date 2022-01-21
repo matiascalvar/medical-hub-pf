@@ -26,3 +26,44 @@ export const logUser = (user: User) => {
 // 		console.log(error, "function fetchUsers");
 // 	}
 // }
+
+
+ export const getUserInfo = (activeUser:any) => async(dispatch : any) => {
+    const headers = {
+        headers: {
+            Authorization: activeUser.token,
+            Accept: 'aplication/json'
+        },
+    }
+    const authAxios = axios.create(headers)
+    try {
+        const response = await authAxios.get('http://localhost:3001/users');
+        if (response) {
+            dispatch({
+                type: ActionTypes.getUserInfo, payload:response.data});
+            
+        }
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+
+export const getAppointments = (id:number) => async(dispatch : any) => {
+   /*  const headers = {
+        headers: {
+            Accept: 'aplication/json'
+        },
+    }
+    const authAxios = axios.create(headers); */
+    try {
+        const response = await axios.get(`http://localhost:3001/appointments/${id}`);
+        if (response) {
+            dispatch({
+                type: ActionTypes.getAppointments, payload:response.data});
+            
+        }
+    } catch(error) {
+        console.log(error)
+    }
+}
