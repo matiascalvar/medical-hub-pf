@@ -1,32 +1,32 @@
-import {Model, Column, Table, CreatedAt, UpdatedAt, AllowNull} from 'sequelize-typescript';
+import {Model, Column, Table, CreatedAt,AllowNull, UpdatedAt } from 'sequelize-typescript';
 @Table
 export class Administrator extends Model {
     
-	@AllowNull(false) 
-	@Column
-	firstName!: string;
+		@AllowNull(false) 
+		@Column
+		firstName!: string;
 
-	@AllowNull(false)
-	@Column
-	lastName!: string; 
+		@AllowNull(false)
+		@Column
+		lastName!: string; 
 
-	@AllowNull(false)
-	@Column
-	email!: string;
+		@AllowNull(false)
+		@Column
+		email!: string;
 
-	@AllowNull(false)
-	@Column
-	phone!: number;
+		@AllowNull(false)
+		@Column
+		phone!: number;
 
-	@AllowNull(false)
-	@Column
-	dni!: number;
+		@AllowNull(false)
+		@Column
+		dni!: number;
 
-	@CreatedAt
-	@Column
-	createdAt!: Date;
+		@CreatedAt
+		@Column
+		createdAt!: Date;
 
-	@UpdatedAt
-	@Column
-	updatedAt!: Date;
+		@UpdatedAt
+		@Column
+		updatedAt!: Date;
 }
