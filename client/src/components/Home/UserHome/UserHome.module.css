@@ -33,7 +33,7 @@
 
 .shiftCard{
 
-    width: 45rem;
+    width: 53rem;
     height: 22rem;
     background-color: #fff;
     border-radius: .7rem;
@@ -68,7 +68,7 @@
 
 .dataContainer{
     color: #939eb0;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -86,12 +86,12 @@
 }
 
 .historyCard{
-    width: 45rem;
+    width: 53rem;
     height: 22rem;
     background-color:#fff;
     border-radius: .7rem;
     overflow: hidden;
-    margin: 2rem 0 0 2rem;
+    margin: 2rem 0 1.5rem 2rem;
 } 
 .appointment{
     border-bottom: 1px solid rgba(196, 196, 196, 0.445);
@@ -103,7 +103,7 @@
 .subtitlesContainer{
     display: flex;
     justify-content: space-around;
-    width: 90%;
+    width: 100%;
     font-size: 1rem;
     font-weight: 500;
     margin: 2rem 0 1rem 0;
@@ -117,7 +117,7 @@
     color: #939eb0;
     font-weight: 500;
     padding: 0;
-    margin-left: 1rem;
+    margin-left:0;
 }
 
 .appointmentButton:hover{
@@ -125,17 +125,31 @@
 }
 
 .time{
-    width: 10rem;
+    width: 8rem;
     height: 2rem;
     margin-left: 1.6rem;
     padding: 0;
 }
 .date{
-    width: 12rem;
-    margin-left: 2rem;
+    width: 10rem;
+    margin-left: 1rem;
 }
 .medic{
     margin-left: 2rem;
+}
+
+.specialitie{
+    margin-left: 4rem;
+}
+.active{
+    margin-left: 6rem;
+    color: rgb(76, 236, 76);
+    font-weight: 500;
+}
+.complete{
+    margin-left: 6rem;
+    color: #0eaaff;
+    font-weight: 500;
 }
 
 .payments{
@@ -187,3 +201,33 @@
     align-items: center;
     margin-right: 1rem;
 }
+
+
+
+.hDate{
+    margin: 0 3rem 0 3.5rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+}
+
+.hType{
+    margin: 0 2rem 0 4rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+}
+
+.hMedic{
+    margin: 0 .5rem 0 5.5rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+}
+
