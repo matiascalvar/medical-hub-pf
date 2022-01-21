@@ -12,14 +12,11 @@ router.post('/', async (req, res) => {
     }  
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    
         const newUser = {
             email: req.body.email,
             hashedPass: hashedPassword
         }
-
         const user = await User.create(newUser)
-
         const newPatient = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -28,9 +25,7 @@ router.post('/', async (req, res) => {
             UserId: user.id,
             PlanId: req.body.planId
         }
-
         const patient = await Patient.create(newPatient)
-
         return res.status(201).send({message: 'Usuario creado con éxito'}) 
     } catch(e) {
         console.log(e)
