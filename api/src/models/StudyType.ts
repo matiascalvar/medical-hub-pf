@@ -13,12 +13,12 @@ export class StudyType extends Model {
 	@Column(DataType.TEXT)
 	neededPreparation!: string;
 
-	@AllowNull(false)
+	
     @CreatedAt
 	@Column
 	createdAt!: Date;
 
-	@AllowNull(false)
+	
 	@UpdatedAt
 	@Column
 	updatedAt!: Date;
