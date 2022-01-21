@@ -2,23 +2,23 @@ import {Model, Column, Table, CreatedAt, UpdatedAt, AllowNull} from 'sequelize-t
 @Table
 export class Patient extends Model {//<Patient>
    
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	firstName!: string;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	lastName!: string;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	email!: string;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	phone!: number;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	dni!: number;
 

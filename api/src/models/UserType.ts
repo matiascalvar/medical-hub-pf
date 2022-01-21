@@ -2,11 +2,11 @@ import {Model, Column, Table, CreatedAt,AllowNull, UpdatedAt} from 'sequelize-ty
 @Table
 export class UserType extends Model {//<UserType>
     
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	typeName!: string;
 
-	@CreatedAt
+   @CreatedAt
 	@Column
 	createdAt!: Date;
 

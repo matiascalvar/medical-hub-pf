@@ -4,15 +4,15 @@ import {Model, Column, Table,AllowNull, CreatedAt, UpdatedAt, DataType, Default}
 @Table
 export class Appointment extends Model {//<Appointment>
     
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	date!: Date;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	time!: Date;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Default('ACTIVE')
     @Column(DataType.ENUM('ACTIVE', 'PAYED', 'COMPLETED'))
     state!: 'ACTIVE'|'PAYED'|'COMPLETED';

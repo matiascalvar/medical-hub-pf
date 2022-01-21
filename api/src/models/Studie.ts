@@ -10,7 +10,7 @@ export class Studie extends Model {
 	@Column(DataType.ENUM('ACTIVE', 'PAYED', 'COMPLETED'))
 	state!: 'ACTIVE'|'PAYED'|'COMPLETED';
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column(DataType.TEXT)
 	diagnosis!: string;
 

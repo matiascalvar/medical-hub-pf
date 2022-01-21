@@ -2,20 +2,20 @@ import {Model, Column, Table, CreatedAt,AllowNull, UpdatedAt, Default} from 'seq
 @Table
 export class User extends Model {//<User>
     
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	email!: string;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column
 	hashedPass!: string;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Default(true)
 	@Column
 	active!: boolean;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Default(false)
 	@Column
 	isStaff!: boolean;
@@ -25,7 +25,7 @@ export class User extends Model {//<User>
 	@Column
 	createdAt!: Date;
 
-	@UpdatedAt
+    @UpdatedAt
 	@Column
 	updatedAt!: Date;
 }

@@ -8,7 +8,7 @@ export class Administrator extends Model {
 
 	@AllowNull(false)
 	@Column
-	lastName!: string;
+	lastName!: string; 
 
 	@AllowNull(false)
 	@Column

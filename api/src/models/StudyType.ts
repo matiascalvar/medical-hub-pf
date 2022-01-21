@@ -5,11 +5,11 @@ import {Model, Column,Default,AllowNull, Table, CreatedAt,DataType,  UpdatedAt} 
 @Table
 export class StudyType extends Model {
    
-	@AllowNull(false)
+   @AllowNull(false)
     @Column
 	name!: string;
 	
-	@AllowNull(false)
+   @AllowNull(false)
 	@Column(DataType.TEXT)
 	neededPreparation!: string;
 

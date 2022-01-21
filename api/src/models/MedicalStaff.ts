@@ -5,28 +5,28 @@ import {Model, Column,Default, Table,AllowNull, CreatedAt,DataType,  UpdatedAt} 
 @Table
 export class MedicalStaff extends Model {
 	
-    @AllowNull(false)
+   @AllowNull(false)
     @Column
 	name!: string;
 
-	@AllowNull(false)
+   @AllowNull(false)
     @Column
 	idNumber!: number;
 
-	@AllowNull(false)
+   @AllowNull(false)
 	@Default('L a V')
 	@Column(DataType.ENUM('L a V', 'L M V'))
     availability!: "L a V'|'L M V";
 
-	@AllowNull(false)
+   @AllowNull(false)
     @Column
 	avbFrom!: Date ;
 
-	@AllowNull(false)
+   @AllowNull(false)
     @Column
 	avbTo!: Date ;
 
-	@AllowNull(false)
+   @AllowNull(false)
     @Column
 	appointmentDuration!: Date ;
 
