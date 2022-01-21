@@ -10,12 +10,12 @@ export class Plan extends Model {//<Plan>
 	@Column
 	coveragePercentage!: number;
 
-	@AllowNull(false)
+	
 	@CreatedAt
 	@Column
 	createdAt!: Date;
 
-	@AllowNull(false)
+	
 	@UpdatedAt
 	@Column
 	updatedAt!: Date;
