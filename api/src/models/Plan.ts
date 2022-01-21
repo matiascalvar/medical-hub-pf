@@ -2,7 +2,7 @@ import {Model, Column, Table,AllowNull, CreatedAt, UpdatedAt} from 'sequelize-ty
 @Table
 export class Plan extends Model {//<Plan>
     
-   @AllowNull(false)
+   @AllowNull(false) 
 	@Column
 	name!: string;
 

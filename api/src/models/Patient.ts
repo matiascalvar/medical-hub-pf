@@ -2,7 +2,7 @@ import {Model, Column, Table, CreatedAt, UpdatedAt, AllowNull} from 'sequelize-t
 @Table
 export class Patient extends Model {//<Patient>
    
-   @AllowNull(false)
+   @AllowNull(false) 
 	@Column
 	firstName!: string;
 
@@ -23,7 +23,7 @@ export class Patient extends Model {//<Patient>
 	dni!: number;
 
 	
-	@CreatedAt
+	@CreatedAt 
 	@Column
 	createdAt!: Date;
 

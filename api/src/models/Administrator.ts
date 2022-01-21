@@ -2,7 +2,7 @@ import {Model, Column, Table, CreatedAt, UpdatedAt, AllowNull} from 'sequelize-t
 @Table
 export class Administrator extends Model {
     
-	@AllowNull(false)
+	@AllowNull(false) 
 	@Column
 	firstName!: string;
 

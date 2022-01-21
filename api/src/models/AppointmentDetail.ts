@@ -3,7 +3,7 @@ import {Model, Column, Table, CreatedAt,AllowNull, UpdatedAt, DataType} from 'se
 @Table
 export class AppointmentDetail extends Model {
    
-   @AllowNull(false)
+   @AllowNull(false) 
 	@Column(DataType.TEXT)
 	details!: string;
 

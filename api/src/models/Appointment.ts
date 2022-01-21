@@ -4,7 +4,7 @@ import {Model, Column, Table,AllowNull, CreatedAt, UpdatedAt, DataType, Default}
 @Table
 export class Appointment extends Model {//<Appointment>
     
-   @AllowNull(false)
+   @AllowNull(false) 
 	@Column
 	date!: Date;
 

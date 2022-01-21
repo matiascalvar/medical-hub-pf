@@ -5,7 +5,7 @@ import {Model, Column,Default, Table,AllowNull, CreatedAt,DataType,  UpdatedAt} 
 @Table
 export class Studie extends Model {
 
-	@AllowNull(false)
+	@AllowNull(false) 
     @Default('ACTIVE')
 	@Column(DataType.ENUM('ACTIVE', 'PAYED', 'COMPLETED'))
 	state!: 'ACTIVE'|'PAYED'|'COMPLETED';

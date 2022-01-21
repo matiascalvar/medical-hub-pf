@@ -2,7 +2,7 @@ import {Model, Column, Table, CreatedAt,AllowNull, UpdatedAt, Default} from 'seq
 @Table
 export class User extends Model {//<User>
     
-   @AllowNull(false)
+   @AllowNull(false)  
 	@Column
 	email!: string;
 

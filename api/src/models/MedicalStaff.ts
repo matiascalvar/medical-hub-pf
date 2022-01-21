@@ -5,7 +5,7 @@ import {Model, Column,Default, Table,AllowNull, CreatedAt,DataType,  UpdatedAt} 
 @Table
 export class MedicalStaff extends Model {
 	
-   @AllowNull(false)
+   @AllowNull(false) 
     @Column
 	name!: string;
 

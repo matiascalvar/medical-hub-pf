@@ -5,8 +5,8 @@ import {Model, Column,Default,AllowNull, Table, CreatedAt,DataType,  UpdatedAt} 
 @Table
 export class StudyType extends Model {
    
-   @AllowNull(false)
-    @Column
+   @AllowNull(false) 
+    @Column 
 	name!: string;
 	
    @AllowNull(false)

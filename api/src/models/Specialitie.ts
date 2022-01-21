@@ -3,7 +3,7 @@ import {Model, Column, Table, CreatedAt,AllowNull, UpdatedAt} from 'sequelize-ty
 @Table
 export class Specialitie extends Model {
 
-   @AllowNull(false)
+   @AllowNull(false) 
 	@Column
 	name!: string;     
 
