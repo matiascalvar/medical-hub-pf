@@ -24,6 +24,8 @@ export default function UserHome({userName, id}:UserHomeProps) : JSX.Element {
         }
     }, [appoinments]);
 
+    console.log(appoinments);
+
     function stateColor(state : string) : any{
         let color = state.toLowerCase() === "active" ? s.active : s.complete;
         return color;
@@ -54,7 +56,7 @@ export default function UserHome({userName, id}:UserHomeProps) : JSX.Element {
                         <div className={s.dataContainer}>
                             {
                                 appoinments.length > 0? appoinments.map(data => (
-                                    <div className={s.appointment} key={data.time}>
+                                    <div className={s.appointment} key={data.id}>
                                         <span className={s.time}>{data.time}</span>
                                         <span className={s.date}>{data.date}</span>
                                         <span className={s.medic}>{data.MedicalStaff.firstName}</span>
