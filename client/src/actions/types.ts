@@ -4,5 +4,6 @@
 export enum ActionTypes {
   logUser,
   getUserInfo,
-  getAppointments
+  getAppointments,
+  logout
 }
