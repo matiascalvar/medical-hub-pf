@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const idPatient = req.params.id;
-        const appointments = await Studie.findAll({
+        const studies = await Studie.findAll({
             include: [{
                 model: StudyType,
                 attributes: {include:['name','neededPreparation'], exclude:['id', 'createdAt','updatedAt']}
@@ -53,13 +53,13 @@ router.get('/:id', async (req, res) => {
             ],
             where: {PatientId: idPatient},
             attributes: {include:  ['id', 'state', 'diagnosis', 'studyPDF'], exclude: ['createdAt','updatedAt', 'StudyTypeId', 'AppointmentId', 'PatientId', 'MedicalStaffId']}
-        });         
- 
-        res.send(appointments)
+        });  
+        
+        studies.length > 0 ? res.send(studies) : res.send({message: 'El paciente no tiene estudios agendados.'})
         
     } catch (e) {
         console.log(e)
-        return res.status(401).send({Error: "No existe el Appointment."})
+        return res.status(401).send({Error: "No existe el Estudio."})
     }
     
 });
