@@ -30,7 +30,7 @@ export default function Home() : JSX.Element{
         if (activeUser.email && !myInfo.firstName) {
             dispatch(getUserInfo(activeUser));
         }    
-    }, [response]);
+    }, [response, activeUser]);
 
     if (myInfo.firstName) {
         return (

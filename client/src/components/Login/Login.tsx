@@ -135,7 +135,7 @@ const LoginPage: FunctionComponent = () => {
             <button type="submit" className="form__btn">
               Log in
             </button>
-            <p className="loginErrors">Email/Password its wrong</p>
+            {(errors.email || errors.password) && <p className="loginErrors">Either Email or Password is wrong</p>}
             <Link to="/register" className="btn__register">
               <p>
                 Don't have an account? <span className="blue_text">Sign up</span>
