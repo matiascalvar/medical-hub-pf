@@ -11,7 +11,7 @@ export const logUser = (user: User) => {
 
 export const logout = () => async(dispatch: any) => {
     try {
-        const response = await axios.delete('http://localhost/3001/login/remove')
+        const response = await axios.delete('http://localhost:3001/login/remove')
     } catch(error) {
         console.log(error)
     }
