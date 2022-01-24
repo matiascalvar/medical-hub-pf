@@ -22,10 +22,14 @@ router.get('/:id', async (req, res) => {
                 }]
               }],
             where: {PatientId: idPatient},
-            attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']}
+            attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']},
+            order: [
+                ['date', 'ASC'],
+                ['time', 'ASC']
+            ]
         });         
- 
-        res.send(appointments)
+
+        appointments.length > 0 ? res.send(appointments) : res.send({message: "El paciente no tiene turnos agendados."})
         
     } catch (e) {
         console.log(e)
@@ -37,7 +41,6 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
    
     try {
-
         const newAppointment = {
             date: req.body.date,
             time: req.body.time,
