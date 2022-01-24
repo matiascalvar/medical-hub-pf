@@ -3,8 +3,8 @@ import { User } from '../models/User'
 import { Patient } from '../models/Patient'
 import { MedicalStaff } from '../models/MedicalStaff'
 
-const hashedPass = '$2b$10$RZzG/LFklcl/UazrmEKH2.gmoLLKLQ5U10XsYsA6afnRb5JH6ZlQ6'
-// Resultado de hashear "12345"
+const hashedPass = '$2b$10$TEqPlvX6MQVI7QcOYU6taOS5QiyRXQwWFVoUa4UaKjzGbruxBX2D.'
+// Resultado de hashear "12345678"
 const defaultMedicalStaff = async () => {
 
     const usersFromDB = await User.findAll();
