@@ -19,7 +19,6 @@ export default function Home() : JSX.Element{
         firstName: "",
         lastName: ""
     })
-    
     useEffect ( () => {
         if (response) {
             setMyInfo({
@@ -30,7 +29,7 @@ export default function Home() : JSX.Element{
         if (activeUser.email && !myInfo.firstName) {
             dispatch(getUserInfo(activeUser));
         }    
-    }, [response]);
+    }, [response, activeUser]);
 
     if (myInfo.firstName) {
         return (

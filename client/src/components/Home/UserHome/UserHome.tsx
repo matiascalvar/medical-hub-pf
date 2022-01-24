@@ -19,7 +19,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (appoinments.length === 0) {
+    if(appoinments.length === 0){
       dispatch(getAppointments(id));
     }
   }, [appoinments]);
@@ -60,7 +60,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
                     <span className={s.time}>{data.time}</span>
                     <span className={s.date}>{data.date}</span>
                     <span className={s.medic}>{data.MedicalStaff.firstName}</span>
-                    <span className={s.specialitie}>{data.MedicalStaff.Specialitie.name}</span>
+                    <span className={s.specialitie}>{data.MedicalStaff.Specialitie ? data.MedicalStaff.Specialitie.name : "None"}</span>
                     <span className={stateColor(data.state)}>{data.state.toLowerCase()}</span>
                     <button className={s.appointmentButton} type="button"><icons.BiChevronRight /></button>
                   </div>
