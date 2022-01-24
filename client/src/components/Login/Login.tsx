@@ -75,11 +75,9 @@ const LoginPage: FunctionComponent = () => {
 
   const validateForm = () => {
     let errors: any = {};
-    if (!input.email) {
+    if(!input.email) {
       errors.email = "Email is required";
-    } else if (
-      !/^([\w\d._\-#])+@([\w\d._\-#]+[.][\w\d._\-#]+)+$/.test(input.email)
-    ) {
+    } else if (!/^([\w\d._\-#])+@([\w\d._\-#]+[.][\w\d._\-#]+)+$/.test(input.email)) {
       errors.email = "Must be a valid email";
     }
     if (!input.password) {
@@ -87,7 +85,6 @@ const LoginPage: FunctionComponent = () => {
     } else if (!/(?=.{8,})/.test(input.password)) {
       errors.password = "Password must be at least 8 characters";
     }
-
     setErrors(errors);
   };
 
@@ -114,36 +111,37 @@ const LoginPage: FunctionComponent = () => {
                 onChange={handleInputChange}
               />
             </div>
-            {errors.email && <p className="errors">{errors.email}</p>}
+            {errors.email && <p className="loginErrors">{errors.email}</p>}
           </div>
           <div className="form__password">
             <label className="password__title">Password</label>
             <div className="password__input">
               <input
                 type="password"
-                placeholder="********"
+                placeholder="password..."
                 className="loginInput__item"
                 name="password"
                 value={input.password}
                 onChange={handleInputChange}
               />
             </div>
-            {errors.password && <p className="errors">{errors.password}</p>}
+            {errors.password && <p className="loginErrors">{errors.password}</p>}
           </div>
-          <div className="form__register">
-            <div className="register__isMedic">
-              <input type="checkbox" className="isMedic__check" />
-              <label className="isMedic__title">I am Medic</label>
-            </div>
+          <div className="form__register"> 
+            <input type="checkbox" className="isMedic__check" />
+            <label className="isMedic__title">I am Medic</label>
           </div>
-          <button type="submit" className="form__btn">
-            Log in
-          </button>
-          <Link to="/register" className="btn__register">
-            <p>
-              Don't have an account? <span className="blue_text">Sign up</span>
-            </p>
-          </Link>
+          <div className="form__bottom">
+            <button type="submit" className="form__btn">
+              Log in
+            </button>
+            {(errors.email || errors.password) && <p className="loginErrors">Either Email or Password is wrong</p>}
+            <Link to="/register" className="btn__register">
+              <p>
+                Don't have an account? <span className="blue_text">Sign up</span>
+              </p>
+            </Link>
+          </div>
         </form>
       </div>
     </div>
