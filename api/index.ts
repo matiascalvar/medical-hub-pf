@@ -4,6 +4,7 @@ import jsonSpecialities from '../api/src/assets/specialitiesJSON';
 
 import {sequelize} from './src/db';
 import app from './src/app';
+import defaultMedicalStaff from './src/assets/defaultMedicalStaff';
 sequelize
 	.sync({force: true, logging: false})
 	.then(() => {
@@ -12,7 +13,7 @@ sequelize
 			console.log('App is listening on port 3001!');
 		});
 		populateDB(jsonSpecialities);
-		
+		defaultMedicalStaff()
         
 
 	})

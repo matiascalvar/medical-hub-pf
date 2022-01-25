@@ -21,12 +21,12 @@
 .containerCreate__register{
   position:absolute;
   width: 38rem;
-  height: 28rem;
+  height: 29rem;
   border-radius: 1rem;
   background: #f4f8ff;
   display: grid;
-  grid-template-rows: 14% 24% auto;
-  padding: 2rem 0;
+  grid-template-rows: 12% 22% 66%;
+  padding: 1.5rem 0;
 } 
 
 
@@ -45,7 +45,6 @@
 .createRegister__redes{
   display: grid;
   grid-template-rows: 70% auto;
-  overflow: hidden;
   height: 100%;
 }
 
@@ -79,13 +78,20 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(5, 1fr);
+  height: 100%;
+  padding: .5rem 0;
 }
 
 .register__item{
-  margin: 1rem 2rem;
+  margin: 0rem 1.5rem;
   display: grid;
   overflow: hidden;
-  border-bottom: .2rem solid #00d9ff;
+  grid-template-rows: 60% auto;
+}
+
+.item__container{
+  display: grid;
+  border-bottom: .2rem solid #0eaaff;;
 }
 
 .register__input{
@@ -101,10 +107,22 @@
 
 .register__icons{
   position: absolute;
-  padding: 0 .3rem .2rem .4rem;
-  font-size: 1.1rem;
+  padding: .4rem;
+  font-size: 1.2rem;
   color: #0eaaff;
-  margin-right: 1rem;
+}
+
+.registerErrors{
+  margin: 0;
+  width: 100%;
+  color: rgb(202, 32, 32);
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  font-size: .8rem;
+  padding-left: .4rem;
+
 }
 
 .register__button{
@@ -139,10 +157,9 @@
 .register__select{
   display: grid;
   grid-column: 1/3;
-  padding: 0 8rem;
-  height: 1.5rem;
+  padding: .6rem 8rem;
+  height: 100%;
   grid-template-columns: 30% auto;
-  border: none;
 }
 
 .register__plan{
@@ -163,4 +180,6 @@
   letter-spacing: .1rem;
   font-family: 'Montserrat';
 }
+ 
+
 

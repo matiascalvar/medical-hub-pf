@@ -1,4 +1,6 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
+import { useHistory } from "react-router-dom"
+import axios from 'axios';
 import "../../styles/LoginPage/Register.css";
 import {
   FaAt,
@@ -11,6 +13,94 @@ import {
 } from "react-icons/fa";
 
 const CreatePage: FunctionComponent = () => {
+
+    const history = useHistory()
+
+    const registerUser = async function(user: any) {
+        try {
+            const response = await axios.post('http://localhost:3001/register', user);
+            setErrors(emptyInput);
+            return response;
+        } catch(error) {
+            console.log(error)
+            return error
+        }
+    }
+
+    const emptyInput = {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        dni: '',
+        phone: '',
+    }
+
+    const [errors, setErrors] = React.useState(emptyInput);
+    const [ input, setInput ] = React.useState(emptyInput);
+
+    useEffect(() => {
+      console.log("input", input);
+      console.log("pswd", input.password.length);
+      console.log("errors", errors);
+    }, [input, errors]);
+
+    const handleInputChange = function(e: any) {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
+        validateForm();
+    }
+
+    const handleSubmit = async function(e: any) {
+        e.preventDefault()
+        const newUser: any = await registerUser(input)
+        if (newUser.status === 201) {
+            // Agregar cartel de: Agregado con exito
+            history.push('/login')
+        } else {
+            console.log('No se pudo agregar:')
+            console.log(newUser)
+        }
+        setInput(emptyInput)
+    }
+
+    const validateForm = () => {
+      let errors:any = {};
+      if (!input.email) {
+        errors.email = "Email is required";
+      } else if (!/^([\w\d._\-#])+@([\w\d._\-#]+[.][\w\d._\-#]+)+$/.test(input.email)){
+        errors.email = "Must be a valid email";
+      }
+      if (!input.password) {
+        errors.password = "Password is required";
+      } else if (!/(?=.{8,})/.test(input.password)) {
+        errors.password = "Should be more than 8 characters";
+      }
+      if(input.firstName.length < 4){
+        errors.firstName = "First Name is required";
+      }else if(/[^a-zA-Z ]/g.test(input.firstName)){
+        errors.firstName = "Only text";
+      }
+      if(input.lastName.length < 4){
+        errors.lastName = "Last Name is required";
+      }else if(/[^a-zA-Z ]/g.test(input.lastName)){
+        errors.lastName = "Only text";
+      }
+      if(input.dni.length < 3){
+        errors.dni = "DNI is required"
+      }else if(/[^0-9]/g.test(input.dni)){
+        errors.dni = "Received only numbers"
+      }
+      if(input.phone.length < 3){
+        errors.phone = "Phone is required"
+      }else if(/[^0-9]/g.test(input.phone)){
+        errors.phone = "Received only numbers"
+      }
+      setErrors(errors);
+    }
+
   return (
     <div className="containerCreate">
       <div className="containerCreate__register">
@@ -23,50 +113,96 @@ const CreatePage: FunctionComponent = () => {
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
           </p>
         </div>
-        <div className="container__register">
+        <form onSubmit={handleSubmit} className="container__register">
           <div className="register__item">
-            <input
-              type="text"
-              className="register__input"
-              placeholder="Email"
-            />
-            <FaAt className="register__icons" />
+            <div className="item__container">
+              <input
+                type="text"
+                className="register__input"
+                name="email"
+                value={input.email}
+                onChange={handleInputChange}
+                placeholder="Email"
+              />
+              <FaAt className="register__icons" />
+            </div>
+            {errors.email && <p className="registerErrors">{errors.email}</p>}
+            {/* <p className="registerErrors">Must be a valid email</p> */}
           </div>
           <div className="register__item">
-            <input
-              type="password"
-              className="register__input"
-              placeholder="Password"
-            />
-            <FaLock className="register__icons" />
+            <div className="item__container">
+              <input
+                type="password"
+                className="register__input"
+                name="password"
+                value={input.password}
+                onChange={handleInputChange}
+                placeholder="Password"
+              />
+              <FaLock className="register__icons" />
+            </div>
+            {errors.password && <p className="registerErrors">{errors.password}</p>}
+            {/* <p className="registerErrors">Should be more than 8 characters</p> */}
           </div>
           <div className="register__item">
-            <input type="text" className="register__input" placeholder="Name" />
-            <FaUserAlt className="register__icons" />
+            <div className="item__container">
+              <input 
+                type="text" 
+                className="register__input"
+                name="firstName"
+                value={input.firstName}
+                onChange={handleInputChange}
+                placeholder="Name" 
+              />
+              <FaUserAlt className="register__icons" />
+            </div>
+            {errors.firstName && <p className="registerErrors">{errors.firstName}</p>}
+            {/* <p className="registerErrors">First Name is required</p> */}
           </div>
           <div className="register__item">
-            <input
-              type="text"
-              className="register__input"
-              placeholder="Last Name"
-            />
-            <FaUserCircle className="register__icons" />
+            <div className="item__container">
+              <input
+                type="text"
+                className="register__input"
+                name="lastName"
+                value={input.lastName}
+                onChange={handleInputChange}
+                placeholder="Last Name"
+              />
+              <FaUserCircle className="register__icons" />
+            </div>
+            {errors.lastName && <p className="registerErrors">{errors.lastName}</p>}
+            {/* <p className="registerErrors">Last Name is required</p> */}
           </div>
           <div className="register__item">
-            <input
-              type="number"
-              className="register__input"
-              placeholder="DNI"
-            />
-            <FaRegIdCard className="register__icons" />
+            <div className="item__container">
+              <input
+                type="number"
+                className="register__input"
+                name="dni"
+                value={input.dni}
+                onChange={handleInputChange}
+                placeholder="DNI"
+              />
+              <FaRegIdCard className="register__icons" />
+            </div>
+            {errors.dni && <p className="registerErrors">{errors.dni}</p>}
+            {/* <p className="registerErrors">DNI is required</p> */}
           </div>
           <div className="register__item">
-            <input
-              type="number"
-              className="register__input"
-              placeholder="Phone"
-            />
-            <FaPhoneSquareAlt className="register__icons" />
+            <div className="item__container">
+              <input
+                type="number"
+                className="register__input"
+                name="phone"
+                value={input.phone}
+                onChange={handleInputChange}
+                placeholder="Phone"
+              />
+              <FaPhoneSquareAlt className="register__icons" />
+            </div>
+            {errors.phone && <p className="registerErrors">{errors.phone}</p>}
+            {/* <p className="registerErrors">Phone is required</p> */}
           </div>
           <div className="register__item register__select">
             <label className="plan__title">Plans:</label>
@@ -82,8 +218,8 @@ const CreatePage: FunctionComponent = () => {
               </option>
             </select>
           </div>
-          <button className="register__button">REGISTER</button>
-        </div>
+          <button type="submit" className="register__button">REGISTER</button>
+        </form>
       </div>
     </div>
   );

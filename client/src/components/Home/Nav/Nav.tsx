@@ -1,10 +1,21 @@
+import { logout } from "../../../actions";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import s from "./Nav.module.css";
-import Logo from "../../../assets/img/logo.svg";
+import Logo from "../../../assets/img/minimalLogo.png";
 import * as icons from "react-icons/bi";
 import * as iconsb from "react-icons/md";
 import { TiTick } from "react-icons/ti";
+
 export default function Nav() : JSX.Element{
  
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+    const handleClick = function (e: any) {
+        dispatch(logout())
+        history.push('/')
+    }
 
     return (
         <nav className={s.nav}>
@@ -30,8 +41,10 @@ export default function Nav() : JSX.Element{
                     <icons.BiMoney className={s.icon}/>
                     <div className={s.tooltip}>Services</div> 
                 </div>
+                <button onClick={handleClick}>LOGOUT</button>
             </div>
         </nav>
     )
 
 }
+

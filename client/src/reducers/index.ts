@@ -1,14 +1,34 @@
-import { actionI, stateI } from "./interfaces";
+import { actionI } from "./interfaces";
 import { ActionTypes } from "../actions/types";
 
-const initialState: stateI = {
-	counter: 1,
+const initialState: any = {
+    user: {},
+    userInfo :{},
+    appointments:[]
 };
 
-export default function reducer(state:stateI = initialState, action: actionI) {
+
+export default function reducer(state = initialState, action: actionI) {
 	switch (action.type) {
-		case ActionTypes.fetchUsers:
-			return action.payload;
+		case ActionTypes.logUser:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case ActionTypes.logout:
+            return {
+                initialState
+            }
+        case ActionTypes.getUserInfo:
+            return {
+                ...state,
+                userInfo: action.payload
+            }
+        case ActionTypes.getAppointments:
+            return {
+                ...state,
+                appointments: action.payload
+            }
 		default:
 			return state;
 	}
