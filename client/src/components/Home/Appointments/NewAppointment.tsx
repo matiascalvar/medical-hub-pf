@@ -19,6 +19,11 @@ const NewAppointment: FunctionComponent = () => {
           <img className={style.userLogo} src={userLogo} alt="" />
         </div>
         <h1 className={style.title}>Appointments</h1>
+        <div className={style.formContainer}>
+          <form>
+            <select name="speciality"></select>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -24,3 +24,8 @@
   margin-bottom: 2rem;
   font-size: 4rem;
 }
+
+.formContainer {
+  background-color: #fff;
+  width: 80%;
+}

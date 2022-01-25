@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const Appointments: FunctionComponent = () => {
   const userActive = useSelector((state: any) => state.userInfo);
   const appoinments: any[] = useSelector((state: any) => state.appointments);
-  console.log(userActive);
+  console.log(appoinments);
 
   function stateColor(state: string): any {
     let color =
@@ -51,9 +51,7 @@ const Appointments: FunctionComponent = () => {
                     <span className={style.medic}>
                       {data.MedicalStaff.firstName}
                     </span>
-                    <span className={style.specialitie}>
-                      {data.MedicalStaff.Specialitie.name}
-                    </span>
+                    <span className={style.specialitie}>Rompe aca</span>
                     <span className={stateColor(data.state)}>
                       {data.state.toLowerCase()}
                     </span>
