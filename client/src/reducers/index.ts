@@ -4,7 +4,8 @@ import { ActionTypes } from "../actions/types";
 const initialState: any = {
     user: {},
     userInfo :{},
-    appointments:[]
+    appointments:[],
+    history : []
 };
 
 
@@ -28,6 +29,11 @@ export default function reducer(state = initialState, action: actionI) {
             return {
                 ...state,
                 appointments: action.payload
+            }
+        case ActionTypes.getHistory:
+            return{
+                ...state,
+                history: action.payload
             }
 		default:
 			return state;

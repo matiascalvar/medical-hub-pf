@@ -113,11 +113,12 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    height: 1.7rem;
     font-size: 1.9rem;
     color: #939eb0;
     font-weight: 500;
     padding: 0;
-    margin-left:0;
+    margin: 0;
 }
 
 .appointmentButton:hover{
@@ -125,31 +126,47 @@
 }
 
 .time{
-    width: 8rem;
-    height: 2rem;
-    margin-left: 1.6rem;
+    width: 20%;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .date{
-    width: 10rem;
-    margin-left: 1rem;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 .medic{
-    margin-left: 2rem;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    padding-left: 2rem;
 }
 
 .specialitie{
-    margin-left: 4rem;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .active{
-    margin-left: 6rem;
+    width: 20%;
     color: rgb(76, 236, 76);
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 1.5rem;
 }
 .complete{
-    margin-left: 6rem;
     color: #0eaaff;
     font-weight: 500;
+    margin: 0;
+    padding: 0;
 }
 
 .payments{

@@ -69,3 +69,18 @@
     transition: 150ms;
     font-size:1.1rem;
 }
+
+.logout{
+    border: none;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: 1rem;
+    color:  #939eb0;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    bottom: 2rem;
+}
+.logout:hover{
+    color: #0eaaff;
+}
