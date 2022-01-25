@@ -50,3 +50,18 @@ export const getAppointments = (id:number) => async(dispatch : any) => {
         console.log(error)
     }
 }
+
+export const getHistory = (id:number) => async(dispatch : any) => {
+    try {
+        const response = await axios.get(`http://localhost:3001/studies/${id}`);
+        if (response) {
+            dispatch({
+                type: ActionTypes.getHistory, payload:response.data});
+            
+        }
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+

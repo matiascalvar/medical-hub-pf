@@ -41,7 +41,7 @@ export default function Nav() : JSX.Element{
                     <icons.BiMoney className={s.icon}/>
                     <div className={s.tooltip}>Services</div> 
                 </div>
-                <button onClick={handleClick}>LOGOUT</button>
+                <button className={s.logout} onClick={handleClick}>Logout</button>
             </div>
         </nav>
     )
