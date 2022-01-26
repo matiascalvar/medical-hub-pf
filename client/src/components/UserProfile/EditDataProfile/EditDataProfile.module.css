@@ -1,0 +1,49 @@
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 1rem 0;
+}
+
+.label{
+    align-self: flex-start;
+    font-size: .8rem;
+    font-weight: 600;
+    color: #939eb0;
+    margin-bottom: .2rem;
+}
+
+
+.input{
+    border: none;
+    border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+    width: 20rem;
+    height: 1.7rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #939eb0;
+}
+
+.input:hover{
+    border: none;
+    border-bottom: 2px solid #0eaaff;
+}
+
+.input:focus{
+    border: none;
+    border-bottom: 2px solid #0eaaff;
+    outline: none;
+    color: black;
+}
+
+.saveButton{
+    border: none;
+    
+}
