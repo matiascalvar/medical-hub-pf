@@ -1,8 +1,9 @@
 .bigContainer {
   width: 100vw;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
   background-color: #f1f1f1;
 }
 
@@ -15,6 +16,10 @@
 }
 
 .aside {
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 2rem;
 }
 
 .title {
@@ -23,17 +28,6 @@
   margin-left: 2rem;
   margin-bottom: 2rem;
   font-size: 4rem;
-}
-
-.appContainer {
-  width: 50%;
-  min-height: 50vh;
-  background-color: #ffff;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 1rem;
 }
 
 .btnAppointment {
@@ -70,7 +64,7 @@
 }
 
 .shiftCard {
-  width: 53rem;
+  width: 90%;
   height: 22rem;
   background-color: #fff;
   border-radius: 0.7rem;

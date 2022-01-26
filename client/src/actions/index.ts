@@ -53,21 +53,30 @@ export const getAppointments = (id: number) => async (dispatch: any) => {
   }
 };
 
-export const getSpecialities =
-  (id: any = "") =>
-  async (dispatch: any) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3001//specialities` + id
-      );
-      if (response) {
-        dispatch({
-          type: ActionTypes.getSpecialities,
-          payload: response.data,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  };
+export const getSpecialities = () => async (dispatch: any) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/specialities`);
+    dispatch({
+      type: ActionTypes.getSpecialities,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const getMedicSpeciality = (id: any) => async (dispatch: any) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/specialities/${id}`
+    );
+    dispatch({
+      type: ActionTypes.getMedicSpeciality,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

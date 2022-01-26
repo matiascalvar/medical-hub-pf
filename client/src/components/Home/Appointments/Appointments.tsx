@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const Appointments: FunctionComponent = () => {
   const userActive = useSelector((state: any) => state.userInfo);
   const appoinments: any[] = useSelector((state: any) => state.appointments);
-  console.log(appoinments);
+  console.log(userActive);
 
   function stateColor(state: string): any {
     let color =
@@ -40,7 +40,7 @@ const Appointments: FunctionComponent = () => {
               <span>Date</span>
               <span>Medic</span>
               <span>Speciality</span>
-              <span>State</span>
+              <span>Status</span>
             </div>
             <div className={style.dataContainer}>
               {appoinments.length > 0 ? (
