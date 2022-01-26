@@ -2,19 +2,18 @@ import userLogo from "../userLogo.png";
 import s from "./UserHome.module.css";
 import * as iconsb from "react-icons/md";
 import * as icons from "react-icons/bi";
-import { payments} from "./data";
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAppointments, getHistory } from "../../../actions/index";
+import { payments, history } from "./data";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAppointments } from "../../../actions/index";
 
 
 interface UserHomeProps {
-  userName: string,
-  id: number
+  userName: string;
+  id: number;
 }
 
 export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
-
   const appoinments: any[] = useSelector((state: any) => state.appointments);
   const history : any[] = useSelector((state:any)=> state.history);
   const dispatch = useDispatch();
@@ -48,7 +47,6 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
             <span className={s.cardTitle}>
               <iconsb.MdComputer className={s.icon} />
               Appointments
-
             </span>
             <div className={s.subtitlesContainer}>
               <span>Time</span>
@@ -110,25 +108,26 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
             <span>State</span>
           </div>
           <div className={s.dataContainer}>
-            {
-              payments.map(data => (
-                <div key={data.amount} className={s.payments}>
-                  <span className={s.pay}>{data.pay}</span>
-                  <span className={s.amount}>${data.amount}</span>
-                  <span className={s.check}>{data.pending ? "Pending" : <span>paid out<icons.BiCheck /></span>}</span>
-                  <icons.BiDetail className={s.detailIcon} />
-                </div>
-              ))
-            }
-
+            {payments.map((data) => (
+              <div key={data.amount} className={s.payments}>
+                <span className={s.pay}>{data.pay}</span>
+                <span className={s.amount}>${data.amount}</span>
+                <span className={s.check}>
+                  {data.pending ? (
+                    "Pending"
+                  ) : (
+                    <span>
+                      paid out
+                      <icons.BiCheck />
+                    </span>
+                  )}
+                </span>
+                <icons.BiDetail className={s.detailIcon} />
+              </div>
+            ))}
           </div>
         </div>
-
       </div>
-
     </div>
-  )
-
-
-
+  );
 }
