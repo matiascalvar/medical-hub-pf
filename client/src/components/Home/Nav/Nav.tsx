@@ -12,11 +12,11 @@ export default function Nav(): JSX.Element {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleClick = function (e: any) {
-    dispatch(logout());
-    history.push("/");
-  };
 
+    const handleClick = function (e: any) {
+        dispatch(logout())
+        history.push('/')
+    }
   return (
     <nav className={s.nav}>
       <img className={s.logo} src={Logo} alt="" />

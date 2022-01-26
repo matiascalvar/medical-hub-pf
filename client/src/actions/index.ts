@@ -80,3 +80,20 @@ export const getMedicSpeciality = (id: any) => async (dispatch: any) => {
     return false;
   }
 };
+
+
+export const getHistory = (id:number) => async(dispatch : any) => {
+    try {
+        const response = await axios.get(`http://localhost:3001/studies/${id}`);
+        if (response) {
+            dispatch({
+                type: ActionTypes.getHistory, payload:response.data});
+            
+        }
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+
+

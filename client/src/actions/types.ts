@@ -8,4 +8,5 @@ export enum ActionTypes {
   getSpecialities,
   getMedicSpeciality,
   logout,
-}
+  getHistory,
+};

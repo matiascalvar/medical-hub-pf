@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointments } from "../../../actions/index";
 
+
 interface UserHomeProps {
   userName: string;
   id: number;
@@ -14,15 +15,19 @@ interface UserHomeProps {
 
 export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
   const appoinments: any[] = useSelector((state: any) => state.appointments);
+  const history : any[] = useSelector((state:any)=> state.history);
   const dispatch = useDispatch();
-
+  
+  console.log(appoinments);
   useEffect(() => {
-    if (appoinments.length === 0) {
+    if(appoinments.length === 0){
       dispatch(getAppointments(id));
     }
-  }, [appoinments]);
+    if(history.length ===  0){
+      dispatch(getHistory(id));
+    }
 
-  console.log(appoinments);
+  }, [appoinments, history]);
 
   function stateColor(state: string): any {
     let color = state.toLowerCase() === "active" ? s.active : s.complete;
@@ -51,24 +56,21 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
               <span>State</span>
             </div>
             <div className={s.dataContainer}>
-              {appoinments.length > 0
-                ? appoinments.map((data) => (
-                    <div className={s.appointment} key={data.id}>
-                      <span className={s.time}>{data.time}</span>
-                      <span className={s.date}>{data.date}</span>
-                      <span className={s.medic}>
-                        {data.MedicalStaff.firstName}
-                      </span>
-                      <span className={s.specialitie}>Rompe aca</span>
-                      <span className={stateColor(data.state)}>
-                        {data.state.toLowerCase()}
-                      </span>
-                      <button className={s.appointmentButton} type="button">
-                        <icons.BiChevronRight />
-                      </button>
-                    </div>
-                  ))
-                : "There are no appoiments"}
+              {
+               appoinments && appoinments.length > 0 ? appoinments.map(data => (
+                  <div className={s.appointment} key={data.id}>
+                    <span className={s.time}>{data.time}</span>
+                    <span className={s.date}>{data.date}</span>
+                    <span className={s.medic}>{data.MedicalStaff.firstName + " " + data.MedicalStaff.firstName}</span>
+                    <span className={s.specialitie}>{data.MedicalStaff.Specialitie ? data.MedicalStaff.Specialitie.name : "None"}</span>
+                    <span className={stateColor(data.state)}>
+                      {data.state.toLowerCase()}
+                      <button className={s.appointmentButton} type="button"><icons.BiChevronRight /></button>
+                    </span>
+                   
+                  </div>
+                )) : "There are no appoiments"
+              }
             </div>
           </div>
           <div className={s.historyCard}>
@@ -82,14 +84,16 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
               <span>Medic</span>
             </div>
             <div className={s.dataContainer}>
-              {history.map((data) => (
-                <div className={s.appointment} key={data.id}>
-                  <span className={s.hDate}>{data.date}</span>
-                  <span className={s.hType}>{data.type}</span>
-                  <span className={s.hMedic}>{data.medic}</span>
-                  <icons.BiHistory className={s.detailIcon} />
-                </div>
-              ))}
+              {
+                 history.length > 0 ?history.map(data => (
+                  <div className={s.appointment} key={data.id}>
+                    <span className={s.hDate}>{data.Appointment.date}</span>
+                    <span className={s.hType}>{data.StudyType.name.toLowerCase()}</span>
+                    <span className={s.hMedic}>{data.MedicalStaff.firstName + " " + data.MedicalStaff.lastName}</span>
+                    <icons.BiHistory className={s.detailIcon} />
+                  </div>
+                )) : "No studies done"
+              }
             </div>
           </div>
         </div>

@@ -19,7 +19,6 @@ export default function Home() : JSX.Element{
         firstName: "",
         lastName: ""
     })
-    
     useEffect ( () => {
         if (response) {
             setMyInfo({

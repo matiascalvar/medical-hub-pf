@@ -1,7 +1,7 @@
-import { Response, Request, Router } from "express";
-import { MedicalStaff } from "../models/MedicalStaff";
-import { Specialitie } from "../models/Specialitie";
-import { authenticateToken } from "./middelwares";
+import {Response, Request, Router} from 'express';
+import { MedicalStaff } from '../models/MedicalStaff';
+import { Specialitie } from '../models/Specialitie';
+import { authenticateToken } from './middelwares'
 const router = Router();
 
 router.get("/", async (req, res) => {

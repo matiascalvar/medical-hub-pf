@@ -7,6 +7,7 @@ const initialState: any = {
   appointments: [],
   specialities: [],
   medicSpeciality: [],
+  history : []
 };
 
 export default function reducer(state = initialState, action: actionI) {
@@ -40,6 +41,11 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         medicSpeciality: action.payload,
       };
+    case ActionTypes.getHistory:
+          return{
+              ...state,
+              history: action.payload
+          }
 
     default:
       return state;
