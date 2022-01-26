@@ -1,6 +1,9 @@
 // QUITAR FORCE: TRUE SI SE QUIERE CONSERVAR LAS TABLAS DE LA DB
 import populateDB from './src/assets/populate';
+import populateStudyTypes from './src/assets/populateStudyTypes';
 import jsonSpecialities from '../api/src/assets/specialitiesJSON';
+import jsonStudyTypes from './src/assets/studiesList';
+
 import {sequelize} from './src/db';
 import app from './src/app';
 import defaultMedicalStaff from './src/assets/defaultMedicalStaff';
@@ -16,6 +19,7 @@ sequelize
 		});
 		//populateDB(jsonSpecialities);
 		defaultMedicalStaff()
+		populateStudyTypes(jsonStudyTypes)
         
 
 	})
