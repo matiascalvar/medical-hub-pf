@@ -5,5 +5,8 @@ export enum ActionTypes {
   logUser,
   getUserInfo,
   getAppointments,
-  logout
-}
+  getSpecialities,
+  getMedicSpeciality,
+  logout,
+  getHistory,
+};

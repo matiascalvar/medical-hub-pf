@@ -2,6 +2,7 @@ import { Response, Request, Router } from 'express';
 import { Patient } from '../models/Patient';
 import { Plan } from '../models/Plan';
 import  { User } from '../models/User'
+import { authenticateToken } from './middelwares'
 const bcrypt = require('bcrypt')
 const router = Router();
 
@@ -33,5 +34,18 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.post('/password', authenticateToken, async (req: any, res) => {
+    let email = req.email.email
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    try {
+        let user: any = await User.findOne({ where: { email: email}});
+        const response = await user.update({hashedPass: hashedPassword})
+        return res.status(201).send({message: 'Pass modificada con éxito'}) 
+    } catch (error) {
+        console.log(error)
+        return res.sendStatus(404)
+    }
+
+})
 
 export default router;
