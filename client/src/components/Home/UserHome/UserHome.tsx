@@ -5,7 +5,7 @@ import * as icons from "react-icons/bi";
 import { payments, history } from "./data";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAppointments } from "../../../actions/index";
+import { getAppointments, getHistory } from "../../../actions/index";
 
 
 interface UserHomeProps {

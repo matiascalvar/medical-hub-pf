@@ -60,7 +60,6 @@ export default function UserProfile() : JSX.Element{
             }) 
         }
     }
-
     return(
         <div className={s.mainContainer}>
             <Nav/>
@@ -89,6 +88,7 @@ export default function UserProfile() : JSX.Element{
                     planId={myInfo.planId}
                     id={myInfo.id}
                     email={activeUser.email}
+                    activeUser = {activeUser}
                     />
                 
                    }

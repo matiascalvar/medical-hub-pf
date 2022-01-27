@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import s from "./EditDataProfile.module.css";
+import { useSelector, useDispatch } from 'react-redux';
+import {updateUserInfo} from "../../../actions/index";
+
 interface EditDataProfileProps{
     firstName: any;
     lastName: any;
@@ -7,8 +10,10 @@ interface EditDataProfileProps{
     dni: any,
     phone: any,
     planId : any,
-    email : any
+    email : any,
+    activeUser : any
 }
+
 interface Info{
     firstName: any;
     lastName: any;
@@ -20,7 +25,7 @@ interface Info{
     password : any
 }
 
-export default function EditDataProfile ({firstName, lastName, id, dni, phone, planId, email} : EditDataProfileProps) : JSX.Element {
+export default function EditDataProfile ({firstName, lastName, id, dni, phone, planId, email, activeUser} : EditDataProfileProps) : JSX.Element {
 
     const [ myInfo, setMyInfo ] = useState<Info> ({
         firstName: firstName,
@@ -30,8 +35,24 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
         phone: phone,
         planId : planId,
         email: email,
-        password: "******"
+        password: ""
     });
+    const [loading, setLoading] = useState<any> ({
+        loading: false
+    })
+    const response = useSelector((state :any) => state.updateResponse);
+    const dispatch = useDispatch();
+
+    useEffect(() =>{
+        if(response){
+            setLoading((data:any)=>{
+                return{
+                    ...data,
+                    loading:false
+                }
+            })
+        }
+    }, [response]);
 
     function handleOnChangeInfo(e : any){
         setMyInfo((data : any) =>{
@@ -42,9 +63,22 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
         })
     }
 
+    function handleSubmit(e : any){
+        e.preventDefault();
+        if(!loading.loading){
+            dispatch(updateUserInfo(activeUser, myInfo));
+            setLoading((data:any)=>{
+                return{
+                    ...data,
+                    loading:true
+                }
+            })
+        }
+    }
+
     return (
         <div>
-            <form className={s.form}>
+            <form onSubmit={handleSubmit} className={s.form}>
                 <div className={s.inputContainer}>
                     <label className={s.label}>FirstName:</label>
                     <input className={s.input} name="firstName" type="text" onChange={handleOnChangeInfo} value={myInfo.firstName} />
@@ -59,7 +93,7 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
                 </div>
                 <div className={s.inputContainer}>
                     <label className={s.label}>Password</label>
-                    <input className={s.input} name="password" type="text" onChange={handleOnChangeInfo} value={myInfo.password} />
+                    <input className={s.input} name="password" type="text" placeholder='****' onChange={handleOnChangeInfo} value={myInfo.password} />
                 </div>
                 <div className={s.inputContainer}>
                     <label className={s.label}>Dni</label>
@@ -69,7 +103,10 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
                     <label className={s.label}>Phone</label>
                     <input className={s.input} name="phone" type="text" onChange={handleOnChangeInfo} value={myInfo.phone} />
                 </div>
-                <button type='submit' className={s.saveButton}>Save changes</button>
+                {
+                    response.message ? <div className={s.alert}>Datos actualizados</div> : ""
+                }
+                <button type='submit' className={s.saveButton}>{loading.loading ? <div className={s.loading}></div> : "Save Changes"}</button>
             </form>
         </div>
     )

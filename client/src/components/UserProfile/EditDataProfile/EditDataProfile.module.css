@@ -45,5 +45,47 @@
 
 .saveButton{
     border: none;
-    
+    background-color: #00d9ff;
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: .3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-top: .5rem;
+}
+.saveButton:hover{
+    opacity: .8;
+}
+
+.loading{
+    border: .4rem solid #ccc;
+    border-top-color: aqua;
+    border-top-style: grove;
+    border-radius: 100%;
+    width: 1rem;
+    height: 1rem;
+    -webkit-animation: girar 1.5s linear infinite;
+    -o-animation: girar 1.5s linear infinite;
+    animation: girar 1.5s linear infinite;
+
+}
+
+@keyframes girar {
+    from {transform: rotate(0deg) ;}
+    to {transform:rotate(360deg);}
+}
+
+.alert{
+    background-color: rgb(96, 255, 96);
+    width: 10rem;
+    height: 1.5rem;
+    font-size: .8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .3rem;
 }
