@@ -1,0 +1,194 @@
+.bigContainer {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #f1f1f1;
+}
+
+.navContainer {
+  height: 100%;
+}
+
+.userLogo {
+  width: 4rem;
+}
+
+.aside {
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.title {
+  display: block;
+  text-align: start;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  font-size: 4rem;
+}
+
+.btnAppointment {
+  width: 8rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #0eaaff;
+  color: #ffff;
+}
+
+.btnAppointment:hover {
+  cursor: pointer;
+  background-color: #00d9ff;
+}
+
+.appContent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.appContainer span {
+  font-size: 5rem;
+  color: #0eaaff;
+}
+
+.appContainer p {
+  width: 100%;
+  font-weight: 500;
+  font-size: 2rem;
+  color: #000;
+}
+
+.shiftCard {
+  width: 90%;
+  height: 22rem;
+  background-color: #fff;
+  border-radius: 0.7rem;
+  overflow: auto;
+  margin-left: 2rem;
+  position: relative;
+  transition: 200ms;
+  z-index: 300;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cardTitle {
+  color: #000000;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.icon {
+  margin-right: 0.5rem;
+}
+
+.dataContainer {
+  color: #939eb0;
+  font-size: 1.2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.paymentsCard {
+  width: 45rem;
+  height: 32rem;
+  background-color: #fff;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  margin-left: 2rem;
+}
+
+.historyCard {
+  width: 53rem;
+  height: 22rem;
+  background-color: #fff;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  margin: 2rem 0 1.5rem 2rem;
+}
+.appointment {
+  border-bottom: 1px solid rgba(196, 196, 196, 0.445);
+  width: 100%;
+  padding: 1rem 0 1rem 0;
+  display: flex;
+}
+
+.subtitlesContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 2rem 0 1rem 0;
+}
+
+.appointmentButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.9rem;
+  color: #939eb0;
+  font-weight: 500;
+  padding: 0;
+  margin-left: 0;
+}
+
+.appointmentButton:hover {
+  color: #0eaaff;
+}
+
+.noAppointments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.noAppointments p {
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.time {
+  width: 8rem;
+  height: 2rem;
+  margin-left: 1.6rem;
+  padding: 0;
+}
+.date {
+  width: 10rem;
+  margin-left: 1rem;
+}
+.medic {
+  margin-left: 2rem;
+}
+
+.specialitie {
+  margin-left: 4rem;
+}
+.active {
+  margin-left: 6rem;
+  color: rgb(76, 236, 76);
+  font-weight: 500;
+}
+.complete {
+  margin-left: 6rem;
+  color: #0eaaff;
+  font-weight: 500;
+}
