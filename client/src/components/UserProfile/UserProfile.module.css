@@ -1,0 +1,58 @@
+
+.mainContainer{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background-color: #f1f1f1;
+}
+
+
+.profileCard{
+
+    background-color: #ffffff;
+    width: 44rem;
+    height: 50rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.userPhoto{
+   
+    overflow: hidden;
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.photo{
+    width: 20rem;
+}
+
+.cardContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editButton{
+    align-self: end;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #939eb0;
+    background-color: transparent;
+    border: none;
+    margin: 1rem 1rem 0 0;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.editButton:hover{
+    color: #0eaaff;
+}
