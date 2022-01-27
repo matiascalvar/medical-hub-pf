@@ -29,10 +29,11 @@ const Appointments: FunctionComponent = () => {
           <img className={style.userLogo} src={userLogo} alt="" />
         </div>
         <h1 className={style.title}>Appointments</h1>
-
-        <Link to="/home/appointments/new">
-          <button className={style.btnAppointment}>New appointment</button>
-        </Link>
+        <div className={style.btnContainer}>
+          <Link to="/home/appointments/new">
+            <button className={style.btnAppointment}>New appointment</button>
+          </Link>
+        </div>
         <div>
           <div className={style.shiftCard}>
             <div className={style.subtitlesContainer}>
