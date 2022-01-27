@@ -2,10 +2,13 @@ import { Sequelize } from "sequelize-typescript";
 import config from "../lib/config";
 config;
 
-export const sequelize = new Sequelize(config.dbonline, {
-  models: [__dirname + "/models"],
-  logging: false,
-});
+export const sequelize = new Sequelize(
+  `postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}/yytgfamu`,
+  {
+    models: [__dirname + "/models"],
+    logging: false,
+  }
+);
 
 const {
   User,
