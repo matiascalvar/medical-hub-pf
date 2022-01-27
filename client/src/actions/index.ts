@@ -105,55 +105,64 @@ export const getHistory = (id: number) => async (dispatch: any) => {
         payload: response.data,
       });
     }
-}
-
-export const updateUserInfo = (activeUser: any , data : any) => async (dispatch: any) => {
-  const headers = {
-    headers: {
-      Authorization: activeUser.token,
-      Accept: "aplication/json",
-    },
-  };
-  const authAxios = axios.create(headers);
-  try {
-    const response = await authAxios.post("http://localhost:3001/updateUser", {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phone : data.phone,
-      dni: data.dni,
-    });
-    if (response) {
-      dispatch({
-        type: ActionTypes.updateUserInfo,
-        payload: response.data,
-      });
-    }
-
   } catch (error) {
     console.log(error);
   }
 };
 
-export const changePassword = (activeUser: any , data : any) => async (dispatch: any) => {
-  const headers = {
-    headers: {
-      Authorization: activeUser.token,
-      Accept: "aplication/json",
-    },
-  };
-  const authAxios = axios.create(headers);
-  try {
-    const response = await authAxios.post("http://localhost:3001/register/password", {
-      password: data.password
-    });
-    if (response) {
-      dispatch({
-        type: ActionTypes.changePassResponse,
-        payload: response.data,
-      });
+export const updateUserInfo =
+  (activeUser: any, data: any) => async (dispatch: any) => {
+    const headers = {
+      headers: {
+        Authorization: activeUser.token,
+        Accept: "aplication/json",
+      },
+    };
+    const authAxios = axios.create(headers);
+    try {
+      const response = await authAxios.post(
+        "http://localhost:3001/updateUser",
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+          dni: data.dni,
+        }
+      );
+      if (response) {
+        dispatch({
+          type: ActionTypes.updateUserInfo,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
+  };
 
+export const changePassword =
+  (activeUser: any, data: any) => async (dispatch: any) => {
+    const headers = {
+      headers: {
+        Authorization: activeUser.token,
+        Accept: "aplication/json",
+      },
+    };
+    const authAxios = axios.create(headers);
+    try {
+      const response = await authAxios.post(
+        "http://localhost:3001/register/password",
+        {
+          password: data.password,
+        }
+      );
+      if (response) {
+        dispatch({
+          type: ActionTypes.changePassResponse,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
