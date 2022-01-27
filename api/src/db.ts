@@ -1,12 +1,11 @@
 import { Sequelize } from "sequelize-typescript";
+import config from "../lib/config";
+config;
 
-export const sequelize = new Sequelize(
-  "postgres://yytgfamu:o7PCNaSN1dGtgQVIPHEUYsMmmcdloHQm@kesavan.db.elephantsql.com/yytgfamu",
-  {
-    models: [__dirname + "/models"],
-    logging: false,
-  }
-);
+export const sequelize = new Sequelize(config.dbonline, {
+  models: [__dirname + "/models"],
+  logging: false,
+});
 
 const {
   User,
