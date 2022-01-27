@@ -17,7 +17,7 @@
 
 .aside {
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   margin-left: 2rem;
 }
@@ -31,14 +31,10 @@
 }
 
 .formContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
   background-color: #fff;
   min-height: 5rem;
   border-radius: 1rem;
-  width: 80%;
+  width: 90%;
 }
 
 .formContainer form {
@@ -49,9 +45,17 @@
 }
 
 .formContainer select {
+  background-color: transparent;
+  margin: 0;
+  width: 40%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
   font-size: 1rem;
   margin: 1rem;
   border: none;
-  padding: 0.5rem;
+  outline: none;
+  padding: 0.5rem 1rem;
   border-bottom: 1px solid #000;
 }

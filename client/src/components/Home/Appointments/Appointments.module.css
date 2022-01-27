@@ -17,7 +17,7 @@
 
 .aside {
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   margin-left: 2rem;
 }
@@ -30,13 +30,22 @@
   font-size: 4rem;
 }
 
+.btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  margin-right: 8.5rem;
+}
+
 .btnAppointment {
-  width: 8rem;
-  height: 2.5rem;
+  width: 12rem;
+  height: 3rem;
   border-radius: 0.5rem;
   border: none;
   background-color: #0eaaff;
   color: #ffff;
+  font-size: 1rem;
 }
 
 .btnAppointment:hover {
@@ -133,7 +142,7 @@
   width: 100%;
   font-size: 1rem;
   font-weight: 500;
-  margin: 2rem 0 1rem 0;
+  margin: 1.5rem 0 1rem 0;
 }
 
 .appointmentButton {
@@ -152,10 +161,8 @@
 }
 
 .noAppointments {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  transform: translateY(80%);
   margin-top: 1rem;
 }
 

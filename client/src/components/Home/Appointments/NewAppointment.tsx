@@ -4,19 +4,32 @@ import Nav from "../Nav/Nav";
 import style from "./NewAppointment.module.css";
 import userLogo from "../userLogo.png";
 import { Link } from "react-router-dom";
-import { getSpecialities, getMedicSpeciality } from "../../../actions/index";
+import {
+  getSpecialities,
+  getMedicSpeciality,
+  getAppointments,
+  getAppointmentsAvailable,
+} from "../../../actions/index";
 
 const NewAppointment: FunctionComponent = () => {
   const dispatch = useDispatch();
 
   const userActive = useSelector((state: any) => state.userInfo);
   const medicalSpecialities = useSelector((state: any) => state.specialities);
-  const medics = useSelector((state: any) => state.meidcSpeciality);
+  const medics = useSelector((state: any) => state.medicSpeciality);
 
   const handleChange = (e: any) => {
     if (e.target.value == "selectSpeciality") return;
     dispatch(getMedicSpeciality(e.target.value));
   };
+
+  const handleChangeMedics = (e: any) => {
+    if (e.target.value == "selectMedic") return;
+    dispatch(getAppointmentsAvailable(e.target.value));
+  };
+  useEffect(() => {
+    console.log("medics", medics);
+  }, []);
 
   useEffect(() => {
     dispatch(getSpecialities());
@@ -49,8 +62,9 @@ const NewAppointment: FunctionComponent = () => {
                 })}
             </select>
             <select name="medic">
-              <option value="selectSpeciality">Select a medic</option>
-              {medics &&
+              <option value="selectMedic">Select a medic</option>
+              <option value="all">All</option>
+              {medics.length &&
                 medics.map((medic: any) => {
                   return (
                     <option value={medic.id} key={medic.id}>
