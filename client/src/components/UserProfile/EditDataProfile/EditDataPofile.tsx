@@ -2,6 +2,7 @@ import { useState , useEffect } from 'react';
 import s from "./EditDataProfile.module.css";
 import { useSelector, useDispatch } from 'react-redux';
 import {updateUserInfo} from "../../../actions/index";
+import ChangePass from "./ChangePass/ChangePass";
 
 interface EditDataProfileProps{
     firstName: any;
@@ -91,10 +92,9 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
                     <label className={s.label}>Email</label>
                     <input className={s.input} name="email" type="text" onChange={handleOnChangeInfo} value={myInfo.email} />
                 </div>
-                <div className={s.inputContainer}>
-                    <label className={s.label}>Password</label>
-                    <input className={s.input} name="password" type="text" placeholder='****' onChange={handleOnChangeInfo} value={myInfo.password} />
-                </div>
+                
+                <ChangePass activeUser={activeUser}/>
+                
                 <div className={s.inputContainer}>
                     <label className={s.label}>Dni</label>
                     <input className={s.input} name="dni" type="text" onChange={handleOnChangeInfo} value={myInfo.dni} />
