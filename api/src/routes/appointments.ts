@@ -57,20 +57,19 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/avb/:idMedicalStaff', async (req, res) => {
-    function addDays(date: any, days: number) {
-        const dates = new Date(date);
-        dates.setDate(dates.getDate() + days);
-        const array = dates.toLocaleDateString().toString().split('/');
-        let day: string ='';
-        array[1].length < 2 ? day = '0' + array[1] : day = array[1]
-        const formatedDate = array[2] + '-' + (array[0].length<2 && '0'+array[0]) + '-' + day;
-        return formatedDate.toString();
-    }     
+function addDays(date: any, days: number) {
+    const dates = new Date(date);
+    dates.setDate(dates.getDate() + days);
+    const array = dates.toLocaleDateString().toString().split('/');
+    let day: string ='';
+    array[1].length < 2 ? day = '0' + array[1] : day = array[1]
+    const formatedDate = array[2] + '-' + (array[0].length<2 && '0'+array[0]) + '-' + day;
+    return formatedDate.toString();
+}
 
+router.get('/avb/:idMedicalStaff', async (req, res) => {        
     try {
         const { idMedicalStaff } = req.params;
-        //const date = req.body.date;
 
         const date = new Date();
         const totalDays: number = 1;
@@ -88,35 +87,37 @@ router.get('/avb/:idMedicalStaff', async (req, res) => {
 
             let availability: any = {
                 fecha: today,
-                avb: {
-                    '09:00:00': 'avb',
-                    '09:30:00': 'avb',
-                    '10:00:00': 'avb',
-                    '10:30:00': 'avb',
-                    '11:00:00': 'avb',
-                    '11:30:00': 'avb',
-                    '12:00:00': 'avb',
-                    '12:30:00': 'avb',
-                    '13:00:00': 'avb',
-                    '13:30:00': 'avb',
-                    '14:00:00': 'avb',
-                    '14:30:00': 'avb',
-                    '15:00:00': 'avb',
-                    '15:30:00': 'avb',
-                    '16:00:00': 'avb',
-                    '16:30:00': 'avb',
-                    '17:00:00': 'avb',
-                    '17:30:00': 'avb'
-                }               
+                avb: [
+                    '09:00:00',
+                    '09:30:00',
+                    '10:00:00',
+                    '10:30:00',
+                    '11:00:00',
+                    '11:30:00',
+                    '12:00:00',
+                    '12:30:00',
+                    '13:00:00',
+                    '13:30:00',
+                    '14:00:00',
+                    '14:30:00',
+                    '15:00:00',
+                    '15:30:00',
+                    '16:00:00',
+                    '16:30:00',
+                    '17:00:00',
+                    '17:30:00',                
+                ]             
             }
             //devuelve un objeto con 2 propiedades fecha y avb que es un objeto SOLO CON LOS TURNOS DISPONIBLES
             appointments.map(a => {
                 let objProp: string = a.time.toString();
-                availability.avb[objProp] ? delete availability.avb[objProp] : null      
+                    var index = availability.avb.indexOf(objProp);
+                        if (index !== -1) {
+                        availability.avb.splice(index, 1);
+                        }     
             })
 
             result.push(availability)
-
         }
 
         res.send(result)
