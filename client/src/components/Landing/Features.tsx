@@ -17,21 +17,14 @@ const Features: FunctionComponent = () => {
             </span>
             <div className={style.textInside}>
               <h2>
-                Last <br></br>Studies
+                Personal<br></br>Account
               </h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
-                consectetur explicabo culpa eius aliquam dicta quis harum.
-              </p>
               <ul>
+                <li>Create your own personal profile</li>
+                <li>Edit your personal information</li>
                 <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Have access to a preview of appointments, medical records, and
+                  payments
                 </li>
               </ul>
             </div>
@@ -47,22 +40,12 @@ const Features: FunctionComponent = () => {
             </span>
             <div className={style.textInside}>
               <h2>
-                Last <br></br>Studies
+                Make an<br></br>Appointment
               </h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
-                consectetur explicabo culpa eius aliquam dicta quis harum.
-              </p>
               <ul>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
+                <li>Filter by medical specialty</li>
+                <li>Choose a date and an hour for your appointment</li>
+                <li>Pay it with our integrate system</li>
               </ul>
             </div>
           </div>
@@ -77,22 +60,11 @@ const Features: FunctionComponent = () => {
             </span>
             <div className={style.textInside}>
               <h2>
-                Last <br></br>Studies
+                Medical<br></br>Records
               </h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
-                consectetur explicabo culpa eius aliquam dicta quis harum.
-              </p>
               <ul>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
+                <li>See your medical records with detail</li>
+                <li>Upload your studies results</li>
               </ul>
             </div>
           </div>
