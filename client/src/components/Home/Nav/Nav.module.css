@@ -84,3 +84,17 @@
 .logout:hover {
   color: #0eaaff;
 }
+
+.link{
+    text-decoration: none;
+    color: #939eb0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.link:hover{
+    color: black;
+}
+

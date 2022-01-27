@@ -22,17 +22,19 @@ export default function Nav(): JSX.Element {
       <img className={s.logo} src={Logo} alt="" />
       <div className={s.buttonsContainer}>
         <div className={s.navButton}>
-          <Link to="/home">
+          <Link className={s.link} to="/home">
             <icons.BiHome className={s.icon} />
           </Link>
           <div className={s.tooltip}>Home</div>
         </div>
         <div className={s.navButton}>
+          <Link className={s.link} to="/home/userProfile">
           <icons.BiUser className={s.icon} />
+          </Link>
           <div className={s.tooltip}>My Account</div>
         </div>
         <div className={s.navButton}>
-          <Link to="/home/appointments">
+          <Link className={s.link} to="/home/appointments">
             <iconsb.MdComputer className={s.icon} />
             <div className={s.tooltip}>Appointments</div>
           </Link>
@@ -45,7 +47,7 @@ export default function Nav(): JSX.Element {
           <icons.BiMoney className={s.icon} />
           <div className={s.tooltip}>Services</div>
         </div>
-        <button onClick={handleClick}>LOGOUT</button>
+        <button className={s.logout} onClick={handleClick}>Logout</button>
       </div>
     </nav>
   );

@@ -11,9 +11,10 @@ const Main: FunctionComponent = () => {
           <span className={style.blue}>your Health</span>
         </h1>
         <p>
-          MedicalHub is rerum obcaecati officia reprehenderit sed molestias ea
-          quae quod, eligendi rem pariatur repudiandae delectus labore natus
-          minus at voluptates facilis
+          Welcome to Medical Hub! A web platform where you can search amongst
+          many medical specialties and get an appointment with just one click!
+          On top of that you can see all your medical studies and records all in
+          one place. Isn’t it great?
         </p>
       </div>
       <div className={style.homeImg}>
