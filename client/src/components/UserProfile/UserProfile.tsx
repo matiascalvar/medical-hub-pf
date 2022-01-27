@@ -62,7 +62,9 @@ export default function UserProfile() : JSX.Element{
     }
     return(
         <div className={s.mainContainer}>
-            <Nav/>
+            <div>
+                <Nav/>
+            </div>
             <div className={s.cardContainer}>
                 <div className={s.profileCard}>
                 <button className={s.editButton} onClick={editOn} type="button">Edit</button>
