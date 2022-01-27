@@ -12,12 +12,11 @@ const Us: FunctionComponent = () => {
             <BiPlusMedical />
           </span>
           <div>
-            <h2>Lorem Ipsum</h2>
+            <h2>All in one place</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt
-              labore a laboriosam omnis esse nostrum fuga. Nisi tempora a,
-              officia animi, inventore ducimus in, assumenda doloribus
-              blanditiis at repellat maiores!
+              Have your appointments and your medical records together. <br />{" "}
+              No more need to carry with you your records every time you go to a
+              new doctor.
             </p>
           </div>
         </div>
@@ -25,24 +24,19 @@ const Us: FunctionComponent = () => {
           <span className={style.icons}>
             <BiPlusMedical />
           </span>
-          <h2>Lorem Ipsum</h2>
+          <h2>Secure payment</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt
-            labore a laboriosam omnis esse nostrum fuga. Nisi tempora a, officia
-            animi, inventore ducimus in, assumenda doloribus blanditiis at
-            repellat maiores!
+            Pay your appointments with any doctor of our staff with a robust
+            payment system using your credit card, cash or MercadoPago account.
           </p>
         </div>
         <div className={style.column}>
           <span className={style.icons}>
             <BiPlusMedical />
           </span>
-          <h2>Lorem Ipsum</h2>
+          <h2>Medical plans</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt
-            labore a laboriosam omnis esse nostrum fuga. Nisi tempora a, officia
-            animi, inventore ducimus in, assumenda doloribus blanditiis at
-            repellat maiores!
+            If you have health coverage, your payments will be adjusted to it.
           </p>
         </div>
       </div>
