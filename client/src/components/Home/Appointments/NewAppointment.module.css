@@ -59,3 +59,23 @@
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #000;
 }
+
+.cardBigContainer {
+  max-width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cardBigContainer h2 {
+  margin-left: 2rem;
+  font-size: 2rem;
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}

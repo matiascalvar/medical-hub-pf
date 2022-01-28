@@ -166,3 +166,17 @@ export const changePassword =
       console.log(error);
     }
   };
+
+export const getMedicAvailableTime = (id: number) => async (dispatch: any) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/appointments/avb/${id}`
+    );
+    dispatch({
+      type: ActionTypes.medicAppointments,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

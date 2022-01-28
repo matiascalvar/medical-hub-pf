@@ -7,9 +7,10 @@ const initialState: any = {
   appointments: [],
   specialities: [],
   medicSpeciality: [],
-  history : [],
+  history: [],
   updateResponse: {},
-  changePassResponse: {}
+  changePassResponse: {},
+  medicAppointments: [],
 };
 
 export default function reducer(state = initialState, action: actionI) {
@@ -44,19 +45,24 @@ export default function reducer(state = initialState, action: actionI) {
         medicSpeciality: action.payload,
       };
     case ActionTypes.getHistory:
-      return{
+      return {
         ...state,
-        history: action.payload
+        history: action.payload,
       };
     case ActionTypes.updateUserInfo:
-      return{
+      return {
         ...state,
-        updateResponse: action.payload
+        updateResponse: action.payload,
       };
-      case ActionTypes.changePassResponse:
-      return{
+    case ActionTypes.changePassResponse:
+      return {
         ...state,
-        changePassResponse: action.payload
+        changePassResponse: action.payload,
+      };
+    case ActionTypes.medicAppointments:
+      return {
+        ...state,
+        medicAppointments: action.payload,
       };
 
     default:

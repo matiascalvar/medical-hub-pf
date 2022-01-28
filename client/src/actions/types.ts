@@ -10,5 +10,6 @@ export enum ActionTypes {
   logout,
   getHistory,
   updateUserInfo,
-  changePassResponse
-};
+  changePassResponse,
+  medicAppointments,
+}
