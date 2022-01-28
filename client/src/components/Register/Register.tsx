@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { useHistory } from "react-router-dom"
-import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 import "../../styles/LoginPage/Register.css";
 import {
   FaAt,
@@ -13,93 +13,94 @@ import {
 } from "react-icons/fa";
 
 const CreatePage: FunctionComponent = () => {
+  const history = useHistory();
 
-    const history = useHistory()
-
-    const registerUser = async function(user: any) {
-        try {
-            const response = await axios.post('http://localhost:3001/register', user);
-            setErrors(emptyInput);
-            return response;
-        } catch(error) {
-            console.log(error)
-            return error
-        }
+  const registerUser = async function (user: any) {
+    try {
+      const response = await axios.post("http://localhost:3001/register", user);
+      setErrors(emptyInput);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
     }
+  };
 
-    const emptyInput = {
-        email: '',
-        password: '',
-        firstName: '',
-        lastName: '',
-        dni: '',
-        phone: '',
+  const emptyInput = {
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    dni: "",
+    phone: "",
+  };
+
+  const [errors, setErrors] = React.useState(emptyInput);
+  const [input, setInput] = React.useState(emptyInput);
+
+  useEffect(() => {
+    console.log("input", input);
+    console.log("pswd", input.password.length);
+    console.log("errors", errors);
+  }, [input, errors]);
+
+  const handleInputChange = function (e: any) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+    validateForm();
+  };
+
+  const handleSubmit = async function (e: any) {
+    e.preventDefault();
+    const newUser: any = await registerUser(input);
+    if (newUser.status === 201) {
+      // Agregar cartel de: Agregado con exito
+      history.push("/login");
+    } else {
+      console.log("No se pudo agregar:");
+      console.log(newUser);
     }
+    setInput(emptyInput);
+  };
 
-    const [errors, setErrors] = React.useState(emptyInput);
-    const [ input, setInput ] = React.useState(emptyInput);
-
-    useEffect(() => {
-      console.log("input", input);
-      console.log("pswd", input.password.length);
-      console.log("errors", errors);
-    }, [input, errors]);
-
-    const handleInputChange = function(e: any) {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        })
-        validateForm();
+  const validateForm = () => {
+    let errors: any = {};
+    if (!input.email) {
+      errors.email = "Email is required";
+    } else if (
+      !/^([\w\d._\-#])+@([\w\d._\-#]+[.][\w\d._\-#]+)+$/.test(input.email)
+    ) {
+      errors.email = "Must be a valid email";
     }
-
-    const handleSubmit = async function(e: any) {
-        e.preventDefault()
-        const newUser: any = await registerUser(input)
-        if (newUser.status === 201) {
-            // Agregar cartel de: Agregado con exito
-            history.push('/login')
-        } else {
-            console.log('No se pudo agregar:')
-            console.log(newUser)
-        }
-        setInput(emptyInput)
+    if (!input.password) {
+      errors.password = "Password is required";
+    } else if (!/(?=.{7,})/.test(input.password)) {
+      errors.password = "Should have 8 or more characters";
     }
-
-    const validateForm = () => {
-      let errors:any = {};
-      if (!input.email) {
-        errors.email = "Email is required";
-      } else if (!/^([\w\d._\-#])+@([\w\d._\-#]+[.][\w\d._\-#]+)+$/.test(input.email)){
-        errors.email = "Must be a valid email";
-      }
-      if (!input.password) {
-        errors.password = "Password is required";
-      } else if (!/(?=.{8,})/.test(input.password)) {
-        errors.password = "Should be more than 8 characters";
-      }
-      if(input.firstName.length < 4){
-        errors.firstName = "First Name is required";
-      }else if(/[^a-zA-Z ]/g.test(input.firstName)){
-        errors.firstName = "Only text";
-      }
-      if(input.lastName.length < 4){
-        errors.lastName = "Last Name is required";
-      }else if(/[^a-zA-Z ]/g.test(input.lastName)){
-        errors.lastName = "Only text";
-      }
-      if(input.dni.length < 3){
-        errors.dni = "DNI is required"
-      }else if(/[^0-9]/g.test(input.dni)){
-        errors.dni = "Received only numbers"
-      }
-      if(input.phone.length < 3){
-        errors.phone = "Phone is required"
-      }else if(/[^0-9]/g.test(input.phone)){
-        errors.phone = "Received only numbers"
-      }
-      setErrors(errors);
+    if (input.firstName.length < 4) {
+      errors.firstName = "First Name is required";
+    } else if (/[^a-zA-Z ]/g.test(input.firstName)) {
+      errors.firstName = "Only text";
     }
+    if (input.lastName.length < 4) {
+      errors.lastName = "Last Name is required";
+    } else if (/[^a-zA-Z ]/g.test(input.lastName)) {
+      errors.lastName = "Only text";
+    }
+    if (input.dni.length < 3) {
+      errors.dni = "DNI is required";
+    } else if (/[^0-9]/g.test(input.dni)) {
+      errors.dni = "Received only numbers";
+    }
+    if (input.phone.length < 3) {
+      errors.phone = "Phone is required";
+    } else if (/[^0-9]/g.test(input.phone)) {
+      errors.phone = "Received only numbers";
+    }
+    setErrors(errors);
+  };
 
   return (
     <div className="containerCreate">
@@ -141,22 +142,26 @@ const CreatePage: FunctionComponent = () => {
               />
               <FaLock className="register__icons" />
             </div>
-            {errors.password && <p className="registerErrors">{errors.password}</p>}
+            {errors.password && (
+              <p className="registerErrors">{errors.password}</p>
+            )}
             {/* <p className="registerErrors">Should be more than 8 characters</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
-              <input 
-                type="text" 
+              <input
+                type="text"
                 className="register__input"
                 name="firstName"
                 value={input.firstName}
                 onChange={handleInputChange}
-                placeholder="Name" 
+                placeholder="Name"
               />
               <FaUserAlt className="register__icons" />
             </div>
-            {errors.firstName && <p className="registerErrors">{errors.firstName}</p>}
+            {errors.firstName && (
+              <p className="registerErrors">{errors.firstName}</p>
+            )}
             {/* <p className="registerErrors">First Name is required</p> */}
           </div>
           <div className="register__item">
@@ -171,7 +176,9 @@ const CreatePage: FunctionComponent = () => {
               />
               <FaUserCircle className="register__icons" />
             </div>
-            {errors.lastName && <p className="registerErrors">{errors.lastName}</p>}
+            {errors.lastName && (
+              <p className="registerErrors">{errors.lastName}</p>
+            )}
             {/* <p className="registerErrors">Last Name is required</p> */}
           </div>
           <div className="register__item">
@@ -218,7 +225,9 @@ const CreatePage: FunctionComponent = () => {
               </option>
             </select>
           </div>
-          <button type="submit" className="register__button">REGISTER</button>
+          <button type="submit" className="register__button">
+            REGISTER
+          </button>
         </form>
       </div>
     </div>
