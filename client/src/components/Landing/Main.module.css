@@ -81,3 +81,9 @@ p {
     transform: scale3d(1, 1, 1);
   }
 }
+
+@media (max-width: 992px) {
+  .container .text h1 {
+    font-size: 5rem;
+  }
+}
