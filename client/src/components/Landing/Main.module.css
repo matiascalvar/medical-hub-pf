@@ -87,3 +87,9 @@ p {
     font-size: 5rem;
   }
 }
+
+@media screen and (max-height: 800px) {
+  .container {
+    font-size: 4rem;
+  }
+}
