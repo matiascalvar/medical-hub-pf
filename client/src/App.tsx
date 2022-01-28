@@ -12,6 +12,7 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
 import UserProfile from "./components/UserProfile/UserProfile";
+import History from "./components/History/History";
 
 function App() {
   const activeUser = useSelector((state: any) => state.user);
@@ -43,6 +44,7 @@ function App() {
         <Route exact path="/home/appointments" component={Appointments} />
         <Route exact path="/home/appointments/new" component={NewAppointment} />
         <Route exact path="/home/userProfile" component={UserProfile} />
+        <Route exact path="/home/history" component={History} />
       </Switch>
     </div>
   );
