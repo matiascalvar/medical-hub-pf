@@ -6,6 +6,7 @@ import { payments, history } from "./data";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointments, getHistory } from "../../../actions/index";
+import Header from "./Header/Header";
 
 interface UserHomeProps {
   userName: string;
@@ -17,7 +18,6 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
   const history: any[] = useSelector((state: any) => state.history);
   const dispatch = useDispatch();
 
-  console.log(appoinments);
   useEffect(() => {
     if (appoinments.length === 0) {
       dispatch(getAppointments(id));
@@ -34,11 +34,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
 
   return (
     <div className={s.mainContainer}>
-      <div className={s.userName}>
-        <span className={s.userNameText}>{userName}</span>
-        <img className={s.userLogo} src={userLogo} alt="" />
-      </div>
-      <h1 className={s.title}>Home</h1>
+     <Header userName={userName} title="Home"/>
       <div className={s.cardsContainer}>
         <div>
           <div className={s.shiftCard}>
@@ -91,7 +87,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
               <span>Medic</span>
             </div>
             <div className={s.dataContainer}>
-              {history.length > 0
+              {history && history.length > 0
                 ? history.map((data) => (
                     <div className={s.appointment} key={data.id}>
                       <span className={s.hDate}>{data.Appointment.date}</span>
@@ -121,7 +117,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
             <span>State</span>
           </div>
           <div className={s.dataContainer}>
-            {payments.map((data) => (
+            {payments && payments.map((data) => (
               <div key={data.amount} className={s.payments}>
                 <span className={s.pay}>{data.pay}</span>
                 <span className={s.amount}>${data.amount}</span>

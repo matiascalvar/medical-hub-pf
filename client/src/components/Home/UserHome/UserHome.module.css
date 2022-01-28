@@ -1,237 +1,224 @@
-.userLogo {
-  width: 4rem;
+
+
+.mainContainer{
+    min-height: 100vh;
+    background-color: #f1f1f1;
+    width: 100%;
+
 }
 
-.userName {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: flex-end;
-  font-size: 1.2rem;
-  padding: 1rem 0 0 0;
+.shiftCard{
+
+    width: 53rem;
+    height: 22rem;
+    background-color: #fff;
+    border-radius: .7rem;
+    overflow:auto;
+    margin-left: 2rem;
+    position: relative;
+    transition: 200ms;
+    z-index: 300;
 }
 
-.userNameText {
-  font-weight: 600;
+
+.cardsContainer{
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.mainContainer {
-  min-height: 100vh;
-  background-color: #f1f1f1;
-  width: 100%;
+.cardTitle{
+
+    color: #000000;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+.icon{
+    margin-right: .5rem;
 }
 
-.title {
-  display: block;
-  text-align: start;
-  margin-left: 2rem;
-  margin-bottom: 2rem;
-  font-size: 4rem;
+.dataContainer{
+    color: #939eb0;
+    font-size: 1.2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
 }
 
-.shiftCard {
-  width: 53rem;
-  height: 22rem;
-  background-color: #fff;
-  border-radius: 0.7rem;
-  overflow: auto;
-  margin-left: 2rem;
-  position: relative;
-  transition: 200ms;
-  z-index: 300;
+.paymentsCard{
+    
+    width: 45rem;
+    height: 32rem;
+    background-color:#fff;
+    border-radius: .7rem;
+    overflow: hidden;
+    margin-left: 2rem;
 }
 
-.cardsContainer {
-  display: flex;
-  flex-wrap: wrap;
+.historyCard{
+    width: 53rem;
+    height: 22rem;
+    background-color:#fff;
+    border-radius: .7rem;
+    overflow: hidden;
+    margin: 2rem 0 1.5rem 2rem;
+} 
+.appointment{
+    border-bottom: 1px solid rgba(196, 196, 196, 0.445);
+    width: 100%;
+    padding: 1rem 0 1rem 0;
+    display: flex;
 }
 
-.cardTitle {
-  color: #000000;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-  margin-top: 2rem;
-  font-size: 1.4rem;
-  font-weight: 500;
-}
-.icon {
-  margin-right: 0.5rem;
+.subtitlesContainer{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 2rem 0 1rem 0;
 }
 
-.dataContainer {
-  color: #939eb0;
-  font-size: 1.2rem;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.appointmentButton{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    height: 1.7rem;
+    font-size: 1.9rem;
+    color: #939eb0;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
 }
 
-.paymentsCard {
-  width: 45rem;
-  height: 32rem;
-  background-color: #fff;
-  border-radius: 0.7rem;
-  overflow: hidden;
-  margin-left: 2rem;
+.appointmentButton:hover{
+    color: #0eaaff;
 }
 
-.historyCard {
-  width: 53rem;
-  height: 22rem;
-  background-color: #fff;
-  border-radius: 0.7rem;
-  overflow: hidden;
-  margin: 2rem 0 1.5rem 2rem;
+.time{
+    width: 20%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.appointment {
-  border-bottom: 1px solid rgba(196, 196, 196, 0.445);
-  width: 100%;
-  padding: 1rem 0 1rem 0;
-  display: flex;
+.date{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
-
-.subtitlesContainer {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  font-size: 1rem;
-  font-weight: 500;
-  margin: 2rem 0 1rem 0;
+.medic{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    padding-left: 2rem;
 }
 
-.appointmentButton {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  height: 1.7rem;
-  font-size: 1.9rem;
-  color: #939eb0;
-  font-weight: 500;
-  padding: 0;
-  margin: 0;
+.specialitie{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.active{
+    width: 20%;
+    color: rgb(76, 236, 76);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 1.5rem;
+}
+.complete{
+    color: #0eaaff;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
 }
 
-.appointmentButton:hover {
-  color: #0eaaff;
+.payments{
+   
+    border-bottom: 1px solid rgba(196, 196, 196, 0.445);
+    width: 100%;
+    padding: 1rem 0 1rem 0;
+    display: flex;
+    
 }
 
-.time {
-  width: 20%;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.pay{
+    margin: 0 2rem 0 2rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
 }
-.date {
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.amount{
+    margin: 0 2rem 0 2rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
 }
-.medic {
-  width: 20%;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  padding-left: 2rem;
+.check{
+    margin: 0 0 0 2rem;
+    min-width: 10rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0eaaff;
 }
-
-.specialitie {
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.detailIcon{
+    height: 2.5rem;
+    width: 1.6rem;
+    cursor: pointer;
+    margin-left: 1rem;
 }
-.active {
-  width: 20%;
-  color: rgb(76, 236, 76);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 1.5rem;
+.detailIcon:hover{
+   color: #0eaaff;
 }
-.complete {
-  color: #0eaaff;
-  font-weight: 500;
-  margin: 0;
-  padding: 0;
+.medicName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
 }
 
-.payments {
-  border-bottom: 1px solid rgba(196, 196, 196, 0.445);
-  width: 100%;
-  padding: 1rem 0 1rem 0;
-  display: flex;
+
+.hDate{
+    margin: 0 3rem 0 3.5rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
 }
 
-.pay {
-  margin: 0 2rem 0 2rem;
-  min-width: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2.5rem;
-}
-.amount {
-  margin: 0 2rem 0 2rem;
-  min-width: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2.5rem;
-}
-.check {
-  margin: 0 0 0 2rem;
-  min-width: 10rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #0eaaff;
-}
-.detailIcon {
-  height: 2.5rem;
-  width: 1.6rem;
-  cursor: pointer;
-  margin-left: 1rem;
-}
-.detailIcon:hover {
-  color: #0eaaff;
-}
-.medicName {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 1rem;
+.hType{
+    margin: 0 2rem 0 4rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
 }
 
-.hDate {
-  margin: 0 3rem 0 3.5rem;
-  min-width: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2.5rem;
-}
-
-.hType {
-  margin: 0 2rem 0 4rem;
-  min-width: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2.5rem;
-}
-
-.hMedic {
-  margin: 0 0.5rem 0 5.5rem;
-  min-width: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2.5rem;
+.hMedic{
+    margin: 0 .5rem 0 5.5rem;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
 }
