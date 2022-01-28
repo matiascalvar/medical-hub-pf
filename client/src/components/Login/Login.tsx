@@ -101,11 +101,11 @@ const LoginPage: FunctionComponent = () => {
           <div className="form__logo">
             <h2>Log in</h2>
             <p className="login__text">
-              Welcome back! Please login to your account!
+              Welcome back! Please login to your account
             </p>
           </div>
           <div className="form__user">
-            <label className="user__title">Your e-mail</label>
+            <label className="user__title">Email</label>
             <div className="user__input">
               <input
                 type="email"
