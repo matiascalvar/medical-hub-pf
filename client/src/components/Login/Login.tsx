@@ -75,14 +75,16 @@ const LoginPage: FunctionComponent = () => {
 
   const validateForm = () => {
     let errors: any = {};
-    if(!input.email) {
+    if (!input.email) {
       errors.email = "Email is required";
-    } else if (!/^([\w\d._\-#])+@([\w\d._\-#]+[.][\w\d._\-#]+)+$/.test(input.email)) {
+    } else if (
+      !/^([\w\d._\-#])+@([\w\d._\-#]+[.][\w\d._\-#]+)+$/.test(input.email)
+    ) {
       errors.email = "Must be a valid email";
     }
     if (!input.password) {
       errors.password = "Password is required";
-    } else if (!/(?=.{8,})/.test(input.password)) {
+    } else if (!/(?=.{7,})/.test(input.password)) {
       errors.password = "Password must be at least 8 characters";
     }
     setErrors(errors);
@@ -125,9 +127,11 @@ const LoginPage: FunctionComponent = () => {
                 onChange={handleInputChange}
               />
             </div>
-            {errors.password && <p className="loginErrors">{errors.password}</p>}
+            {errors.password && (
+              <p className="loginErrors">{errors.password}</p>
+            )}
           </div>
-          <div className="form__register"> 
+          <div className="form__register">
             <input type="checkbox" className="isMedic__check" />
             <label className="isMedic__title">I am Medic</label>
           </div>
@@ -135,10 +139,13 @@ const LoginPage: FunctionComponent = () => {
             <button type="submit" className="form__btn">
               Log in
             </button>
-            {(errors.email || errors.password) && <p className="loginErrors">Either Email or Password is wrong</p>}
+            {(errors.email || errors.password) && (
+              <p className="loginErrors">Either Email or Password is wrong</p>
+            )}
             <Link to="/register" className="btn__register">
               <p>
-                Don't have an account? <span className="blue_text">Sign up</span>
+                Don't have an account?{" "}
+                <span className="blue_text">Sign up</span>
               </p>
             </Link>
           </div>
