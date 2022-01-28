@@ -1,6 +1,9 @@
 import React, { FunctionComponent } from "react";
 import style from "./Us.module.css";
+import { BsWalletFill } from "react-icons/bs";
 import { BiPlusMedical } from "react-icons/bi";
+import { RiSecurePaymentLine } from "react-icons/ri";
+import { FaHandHoldingMedical } from "react-icons/fa";
 
 const Us: FunctionComponent = () => {
   return (
@@ -9,7 +12,7 @@ const Us: FunctionComponent = () => {
       <div className={style.text}>
         <div className={style.column}>
           <span className={style.icons}>
-            <BiPlusMedical />
+            <BsWalletFill />
           </span>
           <div>
             <h2>All in one place</h2>
@@ -22,7 +25,7 @@ const Us: FunctionComponent = () => {
         </div>
         <div className={style.column}>
           <span className={style.icons}>
-            <BiPlusMedical />
+            <RiSecurePaymentLine />
           </span>
           <h2>Secure payment</h2>
           <p>
@@ -32,7 +35,7 @@ const Us: FunctionComponent = () => {
         </div>
         <div className={style.column}>
           <span className={style.icons}>
-            <BiPlusMedical />
+            <FaHandHoldingMedical />
           </span>
           <h2>Medical plans</h2>
           <p>

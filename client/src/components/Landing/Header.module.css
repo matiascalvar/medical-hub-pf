@@ -41,9 +41,9 @@ ul li:hover {
 }
 
 .container img {
-  max-width: 20rem;
+  max-width: 25rem;
   padding-left: 2rem;
-  width: 11%;
+  width: 15%;
 }
 
 .buttons {
@@ -99,4 +99,11 @@ ul li:hover {
   cursor: pointer;
   background-color: transparent;
   border-color: #dff2fd;
+}
+
+@media screen and (max-height: 800px) {
+  .container {
+    min-height: 40vh;
+    align-items: flex-start;
+  }
 }

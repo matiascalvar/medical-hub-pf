@@ -1,6 +1,9 @@
 import React, { FunctionComponent } from "react";
 import style from "./Features.module.css";
 import { BiPlusMedical } from "react-icons/bi";
+import { BsFillCalendarCheckFill } from "react-icons/bs";
+import { RiAccountPinCircleFill } from "react-icons/ri";
+import { ImHistory } from "react-icons/im";
 
 const Features: FunctionComponent = () => {
   return (
@@ -13,7 +16,7 @@ const Features: FunctionComponent = () => {
           </div>
           <div className={style.colText}>
             <span className={style.icons}>
-              <BiPlusMedical />
+              <RiAccountPinCircleFill />
             </span>
             <div className={style.textInside}>
               <h2>
@@ -36,7 +39,7 @@ const Features: FunctionComponent = () => {
           </div>
           <div className={style.colText}>
             <span className={style.icons}>
-              <BiPlusMedical />
+              <BsFillCalendarCheckFill />
             </span>
             <div className={style.textInside}>
               <h2>
@@ -56,7 +59,7 @@ const Features: FunctionComponent = () => {
           </div>
           <div className={style.colText}>
             <span className={style.icons}>
-              <BiPlusMedical />
+              <ImHistory />
             </span>
             <div className={style.textInside}>
               <h2>

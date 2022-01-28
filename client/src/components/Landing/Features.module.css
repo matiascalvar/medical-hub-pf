@@ -120,6 +120,15 @@
   width: 50%;
 }
 
+.textInside ul li {
+  color: #000;
+}
+
+.textInside ul li:hover {
+  cursor: auto;
+  color: #000;
+}
+
 /* CSS ANIMATIONS */
 
 @-webkit-keyframes pulse {
