@@ -20,6 +20,19 @@
     margin-bottom: .2rem;
 }
 
+.inputEmail{
+    border: none;
+    border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+    width: 20rem;
+    height: 1.7rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #939eb0;
+    display: flex;
+    justify-content: start;
+    cursor:no-drop;
+
+}
 
 .input{
     border: none;
@@ -30,6 +43,7 @@
     font-weight: 600;
     color: #939eb0;
 }
+
 
 .input:hover{
     border: none;
