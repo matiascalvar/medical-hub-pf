@@ -9,9 +9,14 @@ import {
   getMedicSpeciality,
   getAppointments,
   getAppointmentsAvailable,
+  getMedicAvailableTime,
 } from "../../../actions/index";
+import { obj } from "./data";
+import Card from "./Card";
 
 const NewAppointment: FunctionComponent = () => {
+  const medicInfo = useSelector((state: any) => state.medicAppointments);
+  console.log("MedicInfo", medicInfo);
   const dispatch = useDispatch();
 
   const userActive = useSelector((state: any) => state.userInfo);
@@ -23,17 +28,13 @@ const NewAppointment: FunctionComponent = () => {
     dispatch(getMedicSpeciality(e.target.value));
   };
 
-  const handleChangeMedics = (e: any) => {
+  const handleChangeAvailable = (e: any) => {
     if (e.target.value == "selectMedic") return;
-    dispatch(getAppointmentsAvailable(e.target.value));
+    dispatch(getMedicAvailableTime(e.target.value));
   };
-  useEffect(() => {
-    console.log("medics", medics);
-  }, []);
 
   useEffect(() => {
     dispatch(getSpecialities());
-    console.log("medicalSpeciality", medicalSpecialities);
   }, []);
   return (
     <div className={style.bigContainer}>
@@ -61,7 +62,7 @@ const NewAppointment: FunctionComponent = () => {
                   );
                 })}
             </select>
-            <select name="medic">
+            <select name="medic" onChange={handleChangeAvailable}>
               <option value="selectMedic">Select a medic</option>
               <option value="all">All</option>
               {medics.length &&
@@ -74,6 +75,16 @@ const NewAppointment: FunctionComponent = () => {
                 })}
             </select>
           </form>
+        </div>
+        <div className={style.cardBigContainer}>
+          <h2>{medicInfo.medic}</h2>
+          <div className={style.cardsContainer}>
+            {medicInfo.data &&
+              medicInfo.data.map((day: any) => {
+                return <Card date={day.fecha} hours={day.avb} />;
+              })}
+          </div>
+          <button>Submit</button>
         </div>
       </div>
     </div>
