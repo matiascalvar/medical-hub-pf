@@ -30,10 +30,11 @@ const LoginPage: FunctionComponent = () => {
         email: newUser.email,
         token: `${response.data.token_type} ${response.data.access_token}`,
       };
+      console.log("response data", response);
       setErrors(emptyInput);
       return user;
     } catch (error: any) {
-      console.log(errors);
+      setServer(true);
       return false;
     }
   };
@@ -46,6 +47,8 @@ const LoginPage: FunctionComponent = () => {
   const [errors, setErrors] = React.useState(emptyInput);
 
   const [input, setInput] = React.useState(emptyInput);
+
+  const [server, setServer] = React.useState(false);
 
   useEffect(() => {
     console.log("input", input);
@@ -133,15 +136,13 @@ const LoginPage: FunctionComponent = () => {
           </div>
           <div className="form__register">
             <input type="checkbox" className="isMedic__check" />
-            <label className="isMedic__title">I am Medic</label>
+            <label className="isMedic__title">I am a Medic</label>
           </div>
           <div className="form__bottom">
             <button type="submit" className="form__btn">
               Log in
             </button>
-            {(errors.email || errors.password) && (
-              <p className="loginErrors">Either Email or Password is wrong</p>
-            )}
+            {server && <p className="loginErrors">Invalid email or password</p>}
             <Link to="/register" className="btn__register">
               <p>
                 Don't have an account?{" "}
