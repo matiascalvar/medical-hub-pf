@@ -111,7 +111,7 @@ const CreatePage: FunctionComponent = () => {
             <FaGoogle className="redes__item" />
           </div>
           <p className="redes__title">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Please complete the fields to use our services
           </p>
         </div>
         <form onSubmit={handleSubmit} className="container__register">
@@ -212,7 +212,7 @@ const CreatePage: FunctionComponent = () => {
             {/* <p className="registerErrors">Phone is required</p> */}
           </div>
           <div className="register__item register__select">
-            <label className="plan__title">Plans:</label>
+            <label className="plan__title">Plan:</label>
             <select name="plan" className="register__plan">
               <option value="particular" className="plan__option">
                 Particular
