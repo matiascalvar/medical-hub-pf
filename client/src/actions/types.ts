@@ -9,4 +9,6 @@ export enum ActionTypes {
   getMedicSpeciality,
   logout,
   getHistory,
+  updateUserInfo,
+  changePassResponse
 };
