@@ -90,7 +90,7 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
                 </div>
                 <div className={s.inputContainer}>
                     <label className={s.label}>Email</label>
-                    <input className={s.input} name="email" type="text" onChange={handleOnChangeInfo} value={myInfo.email} />
+                    <span className={s.inputEmail}>{myInfo.email}</span>
                 </div>
                 
                 <ChangePass activeUser={activeUser}/>
