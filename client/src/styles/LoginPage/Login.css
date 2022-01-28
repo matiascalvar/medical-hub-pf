@@ -141,11 +141,12 @@
   align-items: start;
   justify-items: start;
   height: 100%;
-  width: 100%;
+  width: 50%;
   margin: 0;
   padding: 0;
   margin-left: .2rem;
 }
+
 
 .isMedic__title{
   font-size: 1.15rem;
@@ -210,7 +211,6 @@
   font-weight: 600;
   max-height: 3.5rem;
   transition: .4s;
-  border: 2px solid blue;
 }
 
 .form__btn:hover{
