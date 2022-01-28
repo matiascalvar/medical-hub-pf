@@ -44,8 +44,10 @@ export default function Nav(): JSX.Element {
           <div className={s.tooltip}>Coverage</div>
         </div>
         <div className={s.navButton}>
-          <icons.BiMoney className={s.icon} />
-          <div className={s.tooltip}>Services</div>
+          <Link className={s.link} to="/home/history">
+            <icons.BiMoney className={s.icon} />
+            <div className={s.tooltip}>History</div>
+          </Link>
         </div>
         <button className={s.logout} onClick={handleClick}>Logout</button>
       </div>
