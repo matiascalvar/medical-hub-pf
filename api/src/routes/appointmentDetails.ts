@@ -3,11 +3,6 @@ import { AppointmentDetail } from '../models/AppointmentDetail';
 
 const router = Router();
 
-
-router.get('/', (req, res) => {
-    res.send('APPOINTMENTS DETAILS')
-});
-
 router.post('/:idAppointment', async (req, res) => { 
 
     const { idAppointment } = req.params;
@@ -20,7 +15,7 @@ router.post('/:idAppointment', async (req, res) => {
 
         const appointmentDetail = await AppointmentDetail.create(newAppointmentDetail)
 
-        return res.status(201).send(appointmentDetail) 
+        return res.status(201).send({message: "Appointment Detail creado con éxito"}) 
     } catch(e) {
         console.log(e)
         return res.status(500).send(e)
