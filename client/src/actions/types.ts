@@ -12,4 +12,5 @@ export enum ActionTypes {
   updateUserInfo,
   changePassResponse,
   medicAppointments,
+  getPreferenceId,
 }

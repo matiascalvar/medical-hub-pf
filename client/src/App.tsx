@@ -13,6 +13,8 @@ import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
 import UserProfile from "./components/UserProfile/UserProfile";
 import History from "./components/History/History";
+import PrePago from "./components/MercadoPago/PrePago";
+import MercadoPago from "./components/MercadoPago/MercadoPago";
 
 function App() {
   const activeUser = useSelector((state: any) => state.user);
@@ -34,20 +36,44 @@ function App() {
     refreshToken();
   }, []);
 
-  return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/home/appointments" component={Appointments} />
-        <Route exact path="/home/appointments/new" component={NewAppointment} />
-        <Route exact path="/home/userProfile" component={UserProfile} />
-        <Route exact path="/home/history" component={History} />
-      </Switch>
-    </div>
-  );
+  const isLoggedIn = useSelector((state: any) => state.userInfo);
+
+  if (isLoggedIn.firstName) {
+    return (
+      <div className="App">
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/home/appointments" component={Appointments} />
+          <Route
+            exact
+            path="/home/appointments/new"
+            component={NewAppointment}
+          />
+          <Route exact path="/home/userProfile" component={UserProfile} />
+          <Route exact path="/home/history" component={History} />
+          <Route exact path="/prepago" component={PrePago} />
+          <Route exact path="/mercadopago" component={MercadoPago} />
+        </Switch>
+      </div>
+    );
+  } else {
+    return (
+      <div className="App">
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route path="/home" component={Login} />
+          {/* OJO */}
+          <Route exact path="/prepago" component={PrePago} />
+          <Route exact path="/mercadopago" component={MercadoPago} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
