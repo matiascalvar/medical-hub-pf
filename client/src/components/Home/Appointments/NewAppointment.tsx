@@ -15,27 +15,27 @@ import { obj } from "./data";
 import Card from "./Card";
 
 const NewAppointment: FunctionComponent = () => {
-  const medicInfo = useSelector((state: any) => state.medicAppointments);
-  console.log("MedicInfo", medicInfo);
-  const dispatch = useDispatch();
+    
+    const dispatch = useDispatch();
+    const medicInfo = useSelector((state: any) => state.medicAppointments);
+    const userActive = useSelector((state: any) => state.userInfo);
+    const medicalSpecialities = useSelector((state: any) => state.specialities);
+    const medics = useSelector((state: any) => state.medicSpeciality);
 
-  const userActive = useSelector((state: any) => state.userInfo);
-  const medicalSpecialities = useSelector((state: any) => state.specialities);
-  const medics = useSelector((state: any) => state.medicSpeciality);
+    const handleChange = (e: any) => {
+        if (e.target.value == "selectSpeciality") return;
+        dispatch(getMedicSpeciality(e.target.value));
+    };
 
-  const handleChange = (e: any) => {
-    if (e.target.value == "selectSpeciality") return;
-    dispatch(getMedicSpeciality(e.target.value));
-  };
+    const handleChangeAvailable = (e: any) => {
+        if (e.target.value == "selectMedic") return;
+        dispatch(getMedicAvailableTime(e.target.value));
+    };
 
-  const handleChangeAvailable = (e: any) => {
-    if (e.target.value == "selectMedic") return;
-    dispatch(getMedicAvailableTime(e.target.value));
-  };
+    useEffect(() => {
+        dispatch(getSpecialities());
+    }, []);
 
-  useEffect(() => {
-    dispatch(getSpecialities());
-  }, []);
   return (
     <div className={style.bigContainer}>
       <div className={style.navContainer}>
@@ -81,10 +81,10 @@ const NewAppointment: FunctionComponent = () => {
           <div className={style.cardsContainer}>
             {medicInfo.data &&
               medicInfo.data.map((day: any) => {
-                return <Card date={day.fecha} hours={day.avb} />;
+                console.log(medicInfo)
+                return <Card date={day.fecha} hours={day.avb} medicInfo={medicInfo} />;
               })}
           </div>
-          <button>Submit</button>
         </div>
       </div>
     </div>

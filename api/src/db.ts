@@ -3,7 +3,7 @@ import config from "../lib/config";
 config;
 
 export const sequelize = new Sequelize(
-  `postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}/yytgfamu`,
+  `postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}/${config.dbName}`,
   {
     models: [__dirname + "/models"],
     logging: false,

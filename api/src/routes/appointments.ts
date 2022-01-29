@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
             PatientId: req.body.patientId,
             MedicalStaffId: req.body.medicalStaffId
         }
-
+        console.log(newAppointment)
         const appointment = await Appointment.create(newAppointment)
 
         return res.status(201).send(appointment) 
@@ -134,6 +134,7 @@ router.get('/avb/:idMedicalStaff', async (req, res) => {
         }
 
         res.send({
+            MedicalStaffId: idMedicalStaff, 
             medic: medic?.firstName + " " + medic?.lastName,
             data: result
         })
