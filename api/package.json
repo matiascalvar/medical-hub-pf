@@ -4,7 +4,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.ts"
+    "deploy": "node dist/index.js",
+    "start": "nodemon index.ts",
+    "postinstall": "tsc",
+    "watch-node": "nodemon dist/index.js",
+    "watch-ts": "tsc -w"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +25,9 @@
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.13.0",
     "sequelize-typescript": "^2.1.2",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",
