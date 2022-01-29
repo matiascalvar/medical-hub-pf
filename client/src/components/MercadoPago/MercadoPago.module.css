@@ -1,0 +1,21 @@
+.card {
+  background-color: #f1f1f1;
+  max-width: 40rem;
+  height: 22rem;
+  border-radius: 0.7rem;
+  margin: 100px auto;
+  padding: 20px;
+  padding-top: 50px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.title {
+  color: #000;
+}
+.card p {
+  font-size: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.card p:last-of-type {
+  padding-bottom: 50px;
+}
