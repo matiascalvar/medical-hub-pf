@@ -53,7 +53,7 @@ router.post('/token', async (req, res) => {
     }
 })
 
-router.post('/remove', async  (req, res) => {
+router.delete('/remove', async  (req, res) => {
     const refreshToken = req.cookies.token
     if (!refreshToken) return res.sendStatus(401)
     try {
