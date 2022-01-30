@@ -13,20 +13,6 @@ const History:FunctionComponent = () => {
   const user = useSelector((state:any) => state.userInfo);
   const userHistory:any|any[] = useSelector((state:any) => state.history);
 
-  // const historys = userHistory.map((history:any) => {
-  //   let hst:any = {
-  //     date: history.Appointment.date,
-  //     numberAppointment: history.Appointment.id,
-  //     studie: history.StudyType.name,
-  //     medicFirst: history.MedicalStaff.firstName,
-  //     medicLast: history.MedicalStaff.lastName,
-  //     status: history.state,
-  //     resultPDF: history.studyPDF
-  //   }
-  //   return hst;
-  // })
-  // console.log(historys)
-
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
@@ -40,7 +26,7 @@ const History:FunctionComponent = () => {
           <img src={userLogo} alt="user_logo" className="contenedor__header--logo" />
         </div>
         <div className="contenedor__sectionTitle">
-          <h3 className="sectionTitle__title">Resultados de estudios</h3>
+          <h3 className="sectionTitle__title">Study History</h3>
           <div className="sectionTitle__sectionFilter">
             <h3 className="sectionFilter__title">Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
             <div className="sectionFilter__buttom">
@@ -48,9 +34,8 @@ const History:FunctionComponent = () => {
                 className="buttom__history" 
                 onClick={() => {
                   setIsOpen(!isOpen)
-                  dispatch(getHistory(user.id))
                 }}
-              >Filtros</button>
+              >Filters</button>
               <BiFilter className="buttom__iconHistory"/>
             </div>
           </div>
@@ -76,7 +61,7 @@ const History:FunctionComponent = () => {
               </div>
             </div>
           }
-          <div className="sectionTitle__name">Para: <strong>{`${user.firstName}, ${user.lastName}`}</strong></div>
+          <div className="sectionTitle__name">To: <strong>{`${user.firstName}, ${user.lastName}`}</strong></div>
         </div>
         <div className="contenedor__sectionCards">
           {
