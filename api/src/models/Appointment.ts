@@ -1,23 +1,35 @@
-import {Model, Column, Table, CreatedAt, UpdatedAt, DataType, Default} from 'sequelize-typescript';
-
+import {
+  Model,
+  Column,
+  Table,
+  CreatedAt,
+  UpdatedAt,
+  DataType,
+  Default,
+} from "sequelize-typescript";
 
 @Table
-export class Appointment extends Model {//<Appointment>
-    @Column(DataType.DATEONLY)
-	date!: number;
+export class Appointment extends Model {
+  //<Appointment>
+  @Column(DataType.DATEONLY)
+  date!: number;
 
-	@Column(DataType.TIME)
-	time!: number;
+  @Column(DataType.TIME)
+  time!: number;
 
-	@Default('ACTIVE')
-    @Column(DataType.ENUM('ACTIVE', 'PAYED', 'COMPLETED'))
-    state!: 'ACTIVE'|'PAYED'|'COMPLETED';
+  @Default("ACTIVE")
+  @Column(DataType.ENUM("ACTIVE", "PAYED", "COMPLETED"))
+  state!: "ACTIVE" | "PAYED" | "COMPLETED";
 
-	@CreatedAt
-	@Column
-	createdAt!: Date;
+  @Default(false)
+  @Column
+  pay!: boolean;
 
-	@UpdatedAt
-	@Column
-	updatedAt!: Date;
+  @CreatedAt
+  @Column
+  createdAt!: Date;
+
+  @UpdatedAt
+  @Column
+  updatedAt!: Date;
 }
