@@ -187,7 +187,7 @@ export const getPreferenceId =
     let medic = `Dr. ${data.MedicalStaff.firstName} ${data.MedicalStaff.lastName}`;
     try {
       const response = await axios.get(
-        `http://localhost:3001/mercadopago?quantity=${quantity}&unit_price=${unit_price}&title=${medic}`
+        `http://localhost:3001/mercadopago?appointmentId=${data.id}&unit_price=${unit_price}&title=${medic}`
       );
       if (response) {
         dispatch({
@@ -202,4 +202,5 @@ export const getPreferenceId =
     } catch (error) {
       console.log(error);
     }
-  };
+};
+
