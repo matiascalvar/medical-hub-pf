@@ -7,6 +7,7 @@ import { BsCalendarFill } from "react-icons/bs";
 import * as iconsb from "react-icons/md";
 import * as icons from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { getPreferenceId } from "../../../actions/index";
 
 const Appointments: FunctionComponent = () => {
   const userActive = useSelector((state: any) => state.userInfo);
@@ -17,6 +18,13 @@ const Appointments: FunctionComponent = () => {
     let color =
       state.toLowerCase() === "active" ? style.active : style.complete;
     return color;
+  }
+  // Una funcion que use el boton, obtenga datos del appointment y redirija al pago
+  let dispatch = useDispatch();
+  function handleBtnPay(id: any, medic: any) {
+    console.log("Medico", medic);
+    console.log("id appointment", id);
+    dispatch(getPreferenceId("1", "500", medic.toUpperCase));
   }
   return (
     <div className={style.bigContainer}>
@@ -42,6 +50,7 @@ const Appointments: FunctionComponent = () => {
               <span>Medic</span>
               <span>Speciality</span>
               <span>Status</span>
+              <span>Pay</span>
             </div>
             <div className={style.dataContainer}>
               {appoinments.length > 0 ? (
@@ -56,9 +65,19 @@ const Appointments: FunctionComponent = () => {
                     <span className={stateColor(data.state)}>
                       {data.state.toLowerCase()}
                     </span>
-                    <button className={style.appointmentButton} type="button">
-                      <icons.BiChevronRight />
-                    </button>
+                    <Link to="/mercadopago">
+                      <button
+                        onClick={() =>
+                          handleBtnPay(data.id, data.MedicalStaff.firstName)
+                        }
+                        className={style.appointmentButton}
+                        type="button"
+                      >
+                        <span>&nbsp;pay</span>
+
+                        <icons.BiChevronRight />
+                      </button>
+                    </Link>
                   </div>
                 ))
               ) : (

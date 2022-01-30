@@ -11,8 +11,8 @@ const MercadoPago: FunctionComponent = () => {
   let dispatch = useDispatch();
 
   let quantity = "1";
-  let unit_price = "550";
-  let title = "Dr Barallobre";
+  let unit_price = "noprice";
+  let title = "Dr John Doe";
 
   // BUG: El componente se renderiza varias veces. Puede ser debido al append
   // Al enviar el mismo id varias veces al backend, esto genera un error y mercadopago no funciona
