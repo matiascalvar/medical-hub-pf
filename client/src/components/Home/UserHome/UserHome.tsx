@@ -19,10 +19,10 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (appoinments.length === 0) {
+    if (appoinments && appoinments.length === 0) {
       dispatch(getAppointments(id));
     }
-    if (history.length === 0) {
+    if (history && history.length === 0) {
       dispatch(getHistory(id));
     }
   }, [appoinments, history]);
@@ -34,7 +34,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
 
   return (
     <div className={s.mainContainer}>
-     <Header userName={userName} title="Home"/>
+      <Header userName={userName} title="Home" />
       <div className={s.cardsContainer}>
         <div>
           <div className={s.shiftCard}>
@@ -117,23 +117,24 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
             <span>State</span>
           </div>
           <div className={s.dataContainer}>
-            {payments && payments.map((data) => (
-              <div key={data.amount} className={s.payments}>
-                <span className={s.pay}>{data.pay}</span>
-                <span className={s.amount}>${data.amount}</span>
-                <span className={s.check}>
-                  {data.pending ? (
-                    "Pending"
-                  ) : (
-                    <span>
-                      paid out
-                      <icons.BiCheck />
-                    </span>
-                  )}
-                </span>
-                <icons.BiDetail className={s.detailIcon} />
-              </div>
-            ))}
+            {payments &&
+              payments.map((data) => (
+                <div key={data.amount} className={s.payments}>
+                  <span className={s.pay}>{data.pay}</span>
+                  <span className={s.amount}>${data.amount}</span>
+                  <span className={s.check}>
+                    {data.pending ? (
+                      "Pending"
+                    ) : (
+                      <span>
+                        paid out
+                        <icons.BiCheck />
+                      </span>
+                    )}
+                  </span>
+                  <icons.BiDetail className={s.detailIcon} />
+                </div>
+              ))}
           </div>
         </div>
       </div>
