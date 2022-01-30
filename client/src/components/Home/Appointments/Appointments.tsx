@@ -8,6 +8,7 @@ import * as iconsb from "react-icons/md";
 import * as icons from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { getPreferenceId } from "../../../actions/index";
+import Header from "../UserHome/Header/Header";
 
 const Appointments: FunctionComponent = () => {
   const userActive = useSelector((state: any) => state.userInfo);
@@ -31,11 +32,7 @@ const Appointments: FunctionComponent = () => {
         <Nav />
       </div>
       <div className={style.aside}>
-        <div>
-          <span className={style.userNameText}>{userActive.firstName}</span>
-          <img className={style.userLogo} src={userLogo} alt="" />
-        </div>
-        <h1 className={style.title}>Appointments</h1>
+        <Header userName={userActive.firstName} title="Appointments"/>
         <div className={style.btnContainer}>
           <Link to="/home/appointments/new">
             <button className={style.btnAppointment}>New appointment</button>
