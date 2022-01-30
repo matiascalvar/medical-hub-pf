@@ -23,23 +23,15 @@ const MercadoPago: FunctionComponent = () => {
   const paymentInfo = useSelector((state: any) => state.paymentInfo);
   console.log("pref id from store outside useEffect: ", paymentInfo);
 
-  useEffect(() => {
-    // console.log("useEffect called");
-    // dispatch(getPreferenceId(quantity, unit_price, title));
-    // console.log("quantity: ", quantity);
-    // console.log("unit price: ", unit_price);
-    // console.log("title: ", title);
-    // console.log("prefID from store: ", preferenceIdFromStore);
-    // console.log("prefID from store: ", typeof preferenceIdFromStore);
-    //
-    let script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src =
-      "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-    script.setAttribute("data-preference-id", paymentInfo.preferenceId);
-    let form: any = document.getElementById(FORM_ID);
-    form.appendChild(script);
-  }, []);
+  // useEffect(() => {
+  //   let script = document.createElement("script");
+  //   script.type = "text/javascript";
+  //   script.src =
+  //     "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
+  //   script.setAttribute("data-preference-id", paymentInfo.preferenceId);
+  //   let form: any = document.getElementById(FORM_ID);
+  //   form.appendChild(script);
+  // }, []);
 
   return (
     <>
@@ -49,11 +41,11 @@ const MercadoPago: FunctionComponent = () => {
           Appointment with: <br /> {paymentInfo.medic}
         </p>
         <p>Price: ${unit_price}</p>
-        <form
-          style={{ display: "flex", justifyContent: "center" }}
-          id={FORM_ID}
-          method="GET"
-        />
+        <a href={paymentInfo.preferenceId}>
+          <button className={style.btn}>
+            <span className={style.btnText}>Pay</span>
+          </button>
+        </a>
       </div>
     </>
   );
