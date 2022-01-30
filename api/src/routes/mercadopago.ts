@@ -16,7 +16,7 @@ router.get("/", async (req: any, res: Response) => {
   unit_price = Number(unit_price);
   quantity = Number(quantity);
 
-  console.log("QUERY: ", unit_price, quantity, title); // Test
+  // console.log("QUERY: ", unit_price, quantity, title); // Test
 
   mercadopago.preferences
     .create({
@@ -36,7 +36,8 @@ router.get("/", async (req: any, res: Response) => {
     })
     .then((preference: any) => {
       console.log(!"PREFERENCE: ", preference); // Test
-      return res.json({ preferenceId: preference.body.id });
+      // return res.json({ preferenceId: preference.body.id });
+      return res.json({ preferenceId: preference.response.sandbox_init_point });
     })
     .catch((e: Error) => console.log(e));
 });
