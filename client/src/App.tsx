@@ -19,44 +19,45 @@ import MercadoPago from "./components/MercadoPago/MercadoPago";
 import NotFound from "./components/NotFound/NotFound";
 
 function App() {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+  
+    const [ loaded, setLoaded ] = React.useState(false)
 
-  React.useEffect(() => {
-    const refreshToken = async function () {
-      try {
-        const response = await axios.post("http://localhost:3001/login/token");
-        const user = {
-          email: response.data.email,
-          token: `${response.data.token_type} ${response.data.access_token}`,
+    React.useEffect(() => {
+        const refreshToken = async function () {
+            try {
+                const response = await axios.post("http://localhost:3001/login/token");
+                const user = {
+                    email: response.data.email,
+                    token: `${response.data.token_type} ${response.data.access_token}`,
+                };
+                dispatch(logUser(user));
+            } catch (error) {
+                console.log("No user logged");
+            }
+        setLoaded(true)
         };
-        dispatch(logUser(user));
-      } catch (error) {
-        console.log(error);
-      }
-    };
     refreshToken();
-  }, []);
+    }, []);
 
     return (
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <ProtectedRoute exact path="/home" component={Home} />
-          <ProtectedRoute exact path="/home/appointments" component={Appointments} />
-          <ProtectedRoute
-            exact
-            path="/home/appointments/new"
-            component={NewAppointment}
-          />
-          <ProtectedRoute exact path="/home/userProfile" component={UserProfile} />
-          <ProtectedRoute exact path="/home/history" component={History} />
-          <ProtectedRoute exact path="/prepago" component={PrePago} />
-          <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
+         <div className="App">
+            {loaded? 
+                <Switch>
+                    <Route exact path="/" component={Landing} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/login" component={Login} />
+                    <ProtectedRoute exact path="/home" component={Home} />
+                    <ProtectedRoute exact path="/home/appointments" component={Appointments} />
+                    <ProtectedRoute exact path="/home/appointments/new" component={NewAppointment}/>
+                    <ProtectedRoute exact path="/home/userProfile" component={UserProfile} />
+                    <ProtectedRoute exact path="/home/history" component={History} />
+                    <ProtectedRoute exact path="/prepago" component={PrePago} />
+                    <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
+                    <Route component={NotFound} />
+                </Switch> :
+                <h4>Loading...</h4>}
+         </div>     
     )
 }
 
