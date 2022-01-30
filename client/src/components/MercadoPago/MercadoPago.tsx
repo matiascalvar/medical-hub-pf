@@ -10,9 +10,7 @@ const MercadoPago: FunctionComponent = () => {
   const FORM_ID = "payment-form";
   let dispatch = useDispatch();
 
-  let quantity = "1";
-  let unit_price = "noprice";
-  let title = "Dr John Doe";
+  let unit_price = "500";
 
   // BUG: El componente se renderiza varias veces. Puede ser debido al append
   // Al enviar el mismo id varias veces al backend, esto genera un error y mercadopago no funciona
@@ -22,8 +20,8 @@ const MercadoPago: FunctionComponent = () => {
   //     dispatch(getPreferenceId(quantity, unit_price, title));
   //   }, []);
 
-  const preferenceIdFromStore = useSelector((state: any) => state.preferenceId);
-  console.log("pref id from store outside useEffect: ", preferenceIdFromStore);
+  const paymentInfo = useSelector((state: any) => state.paymentInfo);
+  console.log("pref id from store outside useEffect: ", paymentInfo);
 
   useEffect(() => {
     // console.log("useEffect called");
@@ -38,7 +36,7 @@ const MercadoPago: FunctionComponent = () => {
     script.type = "text/javascript";
     script.src =
       "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-    script.setAttribute("data-preference-id", preferenceIdFromStore);
+    script.setAttribute("data-preference-id", paymentInfo.preferenceId);
     let form: any = document.getElementById(FORM_ID);
     form.appendChild(script);
   }, []);
@@ -48,7 +46,7 @@ const MercadoPago: FunctionComponent = () => {
       <div className={style.card}>
         <p className={style.title}>Pay with Mercado Pago</p>
         <p>
-          Appointment with: <br /> {title}
+          Appointment with: <br /> {paymentInfo.medic}
         </p>
         <p>Price: ${unit_price}</p>
         <form

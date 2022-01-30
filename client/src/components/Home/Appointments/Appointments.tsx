@@ -21,10 +21,9 @@ const Appointments: FunctionComponent = () => {
   }
   // Una funcion que use el boton, obtenga datos del appointment y redirija al pago
   let dispatch = useDispatch();
-  function handleBtnPay(id: any, medic: any) {
-    console.log("Medico", medic);
-    console.log("id appointment", id);
-    dispatch(getPreferenceId("1", "500", medic.toUpperCase));
+  function handleBtnPay(data: any) {
+    console.log("data", data);
+    dispatch(getPreferenceId("1", "500", data));
   }
   return (
     <div className={style.bigContainer}>
@@ -67,9 +66,7 @@ const Appointments: FunctionComponent = () => {
                     </span>
                     <Link to="/mercadopago">
                       <button
-                        onClick={() =>
-                          handleBtnPay(data.id, data.MedicalStaff.firstName)
-                        }
+                        onClick={() => handleBtnPay(data)}
                         className={style.appointmentButton}
                         type="button"
                       >
