@@ -1,25 +1,42 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
 import style from "./Appointments.module.css";
 import { BsCalendarFill, BsCashStack } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { getPreferenceId } from "../../../actions/index";
+import { getPreferenceId, getUserInfo } from "../../../actions/index";
 import Header from "../UserHome/Header/Header";
 
 const Appointments: FunctionComponent = () => {
   const userActive = useSelector((state: any) => state.userInfo);
+  const user = useSelector((state:any) => state.user); //token
   const appoinments: any[] = useSelector((state: any) => state.appointments);
 
+  const [info, setInfo] = React.useState({
+    firstName: "",
+    lastName: ""
+  })
 
-    async function deleteAppointment (id: any) {
-        try {
-            let response = await axios.delete(`http://localhost:3001/appointments/${id}`);
-        } catch (error) {
-            console.log(error)
-        }       
+  useEffect(() => {
+    if(userActive){
+      setInfo({
+        firstName: userActive.firstName,
+        lastName: userActive.lastName
+      })
     }
+    if(user.email && !info.firstName){
+      dispatch(getUserInfo(user))
+    }
+  }, [user])
+
+  async function deleteAppointment (id: any) {
+    try {
+      let response = await axios.delete(`http://localhost:3001/appointments/${id}`);
+    } catch (error) {
+      console.log(error)
+    }       
+  }
 
   function stateColor(state: string): any {
     let color =
@@ -27,11 +44,14 @@ const Appointments: FunctionComponent = () => {
     return color;
   }
   // Una funcion que use el boton, obtenga datos del appointment y redirija al pago
+
   let dispatch = useDispatch();
+
   function handleBtnPay(data: any) {
     console.log("data", data);
     dispatch(getPreferenceId("1", "500", data));
   }
+
   return (
     <div className={style.bigContainer}>
       <div className={style.navContainer}>
