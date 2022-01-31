@@ -44,7 +44,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
     } 
   }
 
-  console.log(appoinments);
+  
 
   return (
     <div className={s.mainContainer}>

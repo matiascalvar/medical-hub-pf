@@ -2,17 +2,15 @@ import React, { FunctionComponent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
 import style from "./Appointments.module.css";
-import userLogo from "../userLogo.png";
-import { BsCalendarFill } from "react-icons/bs";
-import * as iconsb from "react-icons/md";
-import * as icons from "react-icons/bi";
+import { BsCalendarFill, BsCashStack } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { getPreferenceId } from "../../../actions/index";
+import Header from "../UserHome/Header/Header";
 
 const Appointments: FunctionComponent = () => {
   const userActive = useSelector((state: any) => state.userInfo);
   const appoinments: any[] = useSelector((state: any) => state.appointments);
-  console.log(userActive);
+  console.log(appoinments);
 
   function stateColor(state: string): any {
     let color =
@@ -32,10 +30,8 @@ const Appointments: FunctionComponent = () => {
       </div>
       <div className={style.aside}>
         <div>
-          <span className={style.userNameText}>{userActive.firstName}</span>
-          <img className={style.userLogo} src={userLogo} alt="" />
+          <Header userName={userActive.firstName} title="Appointments" />
         </div>
-        <h1 className={style.title}>Appointments</h1>
         <div className={style.btnContainer}>
           <Link to="/home/appointments/new">
             <button className={style.btnAppointment}>New appointment</button>
@@ -55,24 +51,26 @@ const Appointments: FunctionComponent = () => {
               {appoinments.length > 0 ? (
                 appoinments.map((data) => (
                   <div className={style.appointment} key={data.id}>
-                    <span className={style.time}>{data.time}</span>
-                    <span className={style.date}>{data.date}</span>
-                    <span className={style.medic}>
-                      {data.MedicalStaff.firstName}
+                    <span className={style.box}>{data.time}</span>
+                    <span className={style.box}>{data.date}</span>
+                    <span className={style.box}>
+                      {data.MedicalStaff.firstName + " " + data.MedicalStaff.lastName}
                     </span>
-                    <span className={style.specialitie}>Rompe aca</span>
+                    <span className={style.box}>{data.MedicalStaff.Specialitie.name ? data.MedicalStaff.Specialitie.name : "None"}</span>
+                    <div className={style.box}>
                     <span className={stateColor(data.state)}>
                       {data.state.toLowerCase()}
                     </span>
-                    <Link to="/mercadopago">
+                    </div>
+                    <Link className={style.linkBox} to="/mercadopago">
                       <button
                         onClick={() => handleBtnPay(data)}
                         className={style.appointmentButton}
                         type="button"
                       >
-                        <span>&nbsp;pay</span>
+                        <span>&nbsp;Pay</span>
 
-                        <icons.BiChevronRight />
+                        <BsCashStack className={style.cashIcon}/>
                       </button>
                     </Link>
                   </div>
