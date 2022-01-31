@@ -196,19 +196,25 @@ export const getSpecAvailableTime = (id: number) => async (dispatch: any) => {
 };
 
 export const getPreferenceId =
-  (quantity: string, unit_price: string, title: string) =>
+  (quantity: string, unit_price: string, data: any) =>
   async (dispatch: any) => {
+    let medic = `Dr. ${data.MedicalStaff.firstName} ${data.MedicalStaff.lastName}`;
     try {
       const response = await axios.get(
-        `http://localhost:3001/mercadopago?quantity=${quantity}&unit_price=${unit_price}&title=${title}`
+        `http://localhost:3001/mercadopago?appointmentId=${data.id}&unit_price=${unit_price}&title=${medic}`
       );
       if (response) {
         dispatch({
           type: ActionTypes.getPreferenceId,
-          payload: response.data.preferenceId,
+          payload: {
+            preferenceId: response.data.preferenceId,
+            appointmentId: data.id,
+            medic,
+          },
         });
       }
     } catch (error) {
       console.log(error);
     }
-  };
+};
+

@@ -19,10 +19,10 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (appoinments.length === 0) {
+    if (appoinments && appoinments.length === 0) {
       dispatch(getAppointments(id));
     }
-    if (history.length === 0) {
+    if (history && history.length === 0) {
       dispatch(getHistory(id));
     }
   }, [appoinments, history]);
@@ -31,10 +31,24 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
     let color = state.toLowerCase() === "active" ? s.active : s.complete;
     return color;
   }
+  function payState (pay : boolean) : any {
+    if(!pay){
+      return {
+        text :"Pending",
+        style: s.pending
+      }
+    }
+    return{
+      text: "Paid out",
+      style: s.paidOut
+    } 
+  }
+
+  
 
   return (
     <div className={s.mainContainer}>
-     <Header userName={userName} title="Home"/>
+      <Header userName={userName} title="Home" />
       <div className={s.cardsContainer}>
         <div>
           <div className={s.shiftCard}>
@@ -43,34 +57,38 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
               Appointments
             </span>
             <div className={s.subtitlesContainer}>
-              <span>Time</span>
-              <span>Date</span>
-              <span>Medic</span>
-              <span>Specialitie</span>
-              <span>State</span>
+              <span className={s.appointmentBox}>Time</span>
+              <span className={s.appointmentBox}>Date</span>
+              <span className={s.appointmentBox}>Medic</span>
+              <span className={s.appointmentBox}>Specialitie</span>
+              <span className={s.appointmentBox}>Pay</span>
+              <span className={s.appointmentBox}>State</span>
             </div>
             <div className={s.dataContainer}>
               {appoinments && appoinments.length > 0
                 ? appoinments.map((data) => (
                     <div className={s.appointment} key={data.id}>
-                      <span className={s.time}>{data.time}</span>
-                      <span className={s.date}>{data.date}</span>
-                      <span className={s.medic}>
+                      <span className={s.appointmentBox}>{data.time}</span>
+                      <span className={s.appointmentBox}>{data.date}</span>
+                      <span className={s.appointmentBox}>
                         {data.MedicalStaff.firstName +
                           " " +
-                          data.MedicalStaff.firstName}
+                          data.MedicalStaff.lastName}
                       </span>
-                      <span className={s.specialitie}>
+                      <span className={s.appointmentBox}>
                         {data.MedicalStaff.Specialitie
                           ? data.MedicalStaff.Specialitie.name
                           : "None"}
                       </span>
-                      <span className={stateColor(data.state)}>
-                        {data.state.toLowerCase()}
+                      <div className={s.appointmentBox}>
+                       <span className={payState(data.pay).style}>{payState(data.pay).text}</span> 
+                      </div>
+                      <div className={s.appointmentBox}>
+                        <span className={stateColor(data.state)}>{data.state.toLowerCase()}</span>
                         <button className={s.appointmentButton} type="button">
                           <icons.BiChevronRight />
                         </button>
-                      </span>
+                      </div>
                     </div>
                   ))
                 : "There are no appoiments"}
@@ -81,25 +99,30 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
               <icons.BiHistory className={s.icon} />
               Study History
             </span>
-            <div className={s.subtitlesContainer}>
+            <div className={s.subtitlesHistory}>
               <span>Date</span>
               <span>Study</span>
               <span>Medic</span>
+              <span>Detail</span>
             </div>
             <div className={s.dataContainer}>
               {history && history.length > 0
                 ? history.map((data) => (
-                    <div className={s.appointment} key={data.id}>
-                      <span className={s.hDate}>{data.Appointment.date}</span>
-                      <span className={s.hType}>
+                    <div className={s.history} key={data.id}>
+                      <span className={s.hBox}>{data.Appointment.date}</span>
+                      <span className={s.hBox}>
                         {data.StudyType.name.toLowerCase()}
                       </span>
-                      <span className={s.hMedic}>
+                      <span className={s.hBox}>
                         {data.MedicalStaff.firstName +
                           " " +
                           data.MedicalStaff.lastName}
                       </span>
-                      <icons.BiHistory className={s.detailIcon} />
+                      <div className={s.hBox}>
+                        <span className={s.historyIcon} >
+                          <icons.BiHistory className={s.iconH} />
+                        </span>
+                      </div>
                     </div>
                   ))
                 : "No studies done"}
@@ -111,29 +134,34 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
             <icons.BiMoney className={s.icon} />
             Payments
           </span>
-          <div className={s.subtitlesContainer}>
+          <div className={s.subtitlesPayments}>
             <span>Study</span>
             <span>Amount</span>
             <span>State</span>
+            <span>Detail</span>
           </div>
           <div className={s.dataContainer}>
-            {payments && payments.map((data) => (
-              <div key={data.amount} className={s.payments}>
-                <span className={s.pay}>{data.pay}</span>
-                <span className={s.amount}>${data.amount}</span>
-                <span className={s.check}>
-                  {data.pending ? (
-                    "Pending"
-                  ) : (
-                    <span>
-                      paid out
-                      <icons.BiCheck />
-                    </span>
-                  )}
-                </span>
-                <icons.BiDetail className={s.detailIcon} />
-              </div>
-            ))}
+            {payments &&
+              payments.map((data) => (
+                <div key={data.amount} className={s.payments}>
+                  <span className={s.paymentsBox}>{data.pay}</span>
+                  <span className={s.paymentsBox}>${data.amount}</span>
+                  <span className={s.paymentsBox}>
+                    {data.pending ? (
+                      "Pending"
+                    ) : (
+                      <span className={s.paidOut2}>
+                        paid out
+                        <icons.BiCheck />
+                      </span>
+                    )}
+                  </span>
+                  <div className={s.paymentsBox}>
+                    <icons.BiDetail className={s.detailIcon} />
+                  </div>
+                  
+                </div>
+              ))}
           </div>
         </div>
       </div>
