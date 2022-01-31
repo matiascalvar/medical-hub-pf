@@ -5,7 +5,11 @@ import Nav from "../Nav/Nav";
 import style from "./Appointments.module.css";
 import { BsCalendarFill, BsCashStack, BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { getPreferenceId, getUserInfo } from "../../../actions/index";
+import {
+  getPreferenceId,
+  getUserInfo,
+  getAppointments,
+} from "../../../actions/index";
 import Header from "../UserHome/Header/Header";
 
 const Appointments: FunctionComponent = () => {
@@ -17,13 +21,14 @@ const Appointments: FunctionComponent = () => {
     if (activeUser.email) {
       dispatch(getUserInfo(activeUser));
     }
-  }, [activeUser]);
+  }, [activeUser, appoinments]);
 
   async function deleteAppointment(id: any) {
     try {
       let response = await axios.delete(
         `http://localhost:3001/appointments/${id}`
       );
+      dispatch(getAppointments(userActive.id));
     } catch (error) {
       console.log(error);
     }
