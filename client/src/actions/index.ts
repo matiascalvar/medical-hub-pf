@@ -181,6 +181,20 @@ export const getMedicAvailableTime = (id: number) => async (dispatch: any) => {
   }
 };
 
+export const getSpecAvailableTime = (id: number) => async (dispatch: any) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/appointments/avbspeciality/${id}`
+    );
+    dispatch({
+      type: ActionTypes.specAppointments,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getPreferenceId =
   (quantity: string, unit_price: string, title: string) =>
   async (dispatch: any) => {
