@@ -12,6 +12,7 @@ interface Info {
 }
 
 export default function Home(): JSX.Element {
+
     const activeUser = useSelector((state: any) => state.user);
     const response = useSelector((state: any) => state.userInfo);
     const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function Home(): JSX.Element {
         } catch (error) {
             console.log(error)
         }
+
     }
       
     
