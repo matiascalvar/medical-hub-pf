@@ -178,8 +178,7 @@
   font-weight: 500;
 }
 
-.box{
-  
+.box {
   margin: 0;
   height: 2.5rem;
   display: flex;
@@ -189,7 +188,7 @@
   font-size: 1.1rem;
 }
 
-.linkBox{ 
+.linkBox {
   margin: 0;
   height: 2.5rem;
   display: flex;
@@ -198,7 +197,6 @@
   overflow: hidden;
   font-size: 1.1rem;
   text-decoration: none;
-  
 }
 .active {
   color: rgb(76, 236, 76);
@@ -209,6 +207,42 @@
   font-weight: 600;
 }
 
-.cashIcon{
-  margin-left: .5rem;
+.cashIcon {
+  margin-left: 0.5rem;
+}
+
+.complete {
+  color: #0eaaff;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+.pending {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(76, 236, 76);
+  font-size: 1.3rem;
+}
+.paidOut {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  color: #0eaaff;
+}
+
+.btnDelete {
+  background-color: transparent;
+  color: red;
+  min-width: 2rem;
+  min-height: 2rem;
+  font-size: 1.2rem;
+  border: none;
+}
+
+.btnDelete :hover {
+  cursor: pointer;
 }

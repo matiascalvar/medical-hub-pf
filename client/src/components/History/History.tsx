@@ -1,39 +1,38 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Home/Nav/Nav";
-import userLogo from '../Home/userLogo.png';
+import userLogo from "../Home/userLogo.png";
 import "../../styles/History/History.css";
-import {BiFilter, BiDownload} from "react-icons/bi";
+import { BiFilter, BiDownload } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { getHistory, getUserInfo } from "../../actions";
 
-const History:FunctionComponent = () => {
-
-  const dispatch = useDispatch(); 
-  const activeUser = useSelector((state:any) => state.user);
-  const user = useSelector((state:any) => state.userInfo);
-  const userHistory:any|any[] = useSelector((state:any) => state.history);
+const History: FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const activeUser = useSelector((state: any) => state.user);
+  const user = useSelector((state: any) => state.userInfo);
+  const userHistory: any | any[] = useSelector((state: any) => state.history);
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [info, setInfo] = React.useState({
     firstName: "",
     lastName: "",
-    id: 0
-  })
+    id: 0,
+  });
 
   useEffect(() => {
-    if(user){
+    if (user) {
       setInfo({
         firstName: user.firstName,
         lastName: user.lastName,
-        id: user.id 
-      })
+        id: user.id,
+      });
     }
     if (activeUser.email && !info.firstName) {
       dispatch(getUserInfo(activeUser));
-      dispatch(getHistory(user.UserId))
+      dispatch(getHistory(user.UserId));
     }
-  }, [user])
+  }, [user]);
 
   return (
     <div className="containerHistory">
@@ -43,25 +42,31 @@ const History:FunctionComponent = () => {
       <div className="containerHistory__contenedor">
         <div className="contenedor__header">
           <h3 className="contenedor__header--name">{info.firstName}</h3>
-          <img src={userLogo} alt="user_logo" className="contenedor__header--logo" />
+          <img
+            src={userLogo}
+            alt="user_logo"
+            className="contenedor__header--logo"
+          />
         </div>
         <div className="contenedor__sectionTitle">
           <h3 className="sectionTitle__title">Study History</h3>
           <div className="sectionTitle__sectionFilter">
-            <h3 className="sectionFilter__title">Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+            <h3 className="sectionFilter__title">
+              Lorem ipsum dolor sit amet consectetur adipisicing.
+            </h3>
             <div className="sectionFilter__buttom">
-              <button 
-                className="buttom__history" 
+              <button
+                className="buttom__history"
                 onClick={() => {
-                  setIsOpen(!isOpen)
+                  setIsOpen(!isOpen);
                 }}
-              >Filters</button>
-              <BiFilter className="buttom__iconHistory"/>
+              >
+                Filters
+              </button>
+              <BiFilter className="buttom__iconHistory" />
             </div>
           </div>
-          {
-            isOpen 
-            && 
+          {isOpen && (
             <div className="filterButtom">
               <div className="filterButtom__top">
                 <h3 className="filterButtom__top--item">Estado:</h3>
@@ -80,33 +85,41 @@ const History:FunctionComponent = () => {
                 </select>
               </div>
             </div>
-          }
-          <div className="sectionTitle__name">To: <strong>{`${info.firstName}, ${info.lastName}`}</strong></div>
+          )}
+          <div className="sectionTitle__name">
+            To: <strong>{`${info.firstName}, ${info.lastName}`}</strong>
+          </div>
         </div>
         <div className="contenedor__sectionCards">
-          {
-            userHistory.length > 0 
-            ? userHistory.map((history:any) => (
-                <div className="cardHistory__container">
-                  <div className="cardHistory__top">
-                    <h4 className="cardHistory__top--date">{history.Appointment.date}</h4>
-                    <h4 className="cardHistory__top--numberApp">{`N° ${history.Appointment.id}`}</h4>
-                  </div>
-                  <div className="cardHistory__center">
-                    <h4 className="cardHistory__center--studie">{history.StudyType.name}</h4>
-                    <h4 className="cardHistory__center--doc">{`${history.MedicalStaff.firstName} ${history.MedicalStaff.lastName}`}</h4>
-                  </div>
-                  <div className="cardHistory__bottom">
-                    <h4 className="cardHistory__bottom--state">{history.state}</h4>
-                  </div>
+          {userHistory && userHistory.length > 0 ? (
+            userHistory.map((history: any) => (
+              <div className="cardHistory__container">
+                <div className="cardHistory__top">
+                  <h4 className="cardHistory__top--date">
+                    {history.Appointment.date}
+                  </h4>
+                  <h4 className="cardHistory__top--numberApp">{`N° ${history.Appointment.id}`}</h4>
                 </div>
-              ))
-            : <h3 className="cardHistory__message">{userHistory.message}</h3>
-          }
+                <div className="cardHistory__center">
+                  <h4 className="cardHistory__center--studie">
+                    {history.StudyType.name}
+                  </h4>
+                  <h4 className="cardHistory__center--doc">{`${history.MedicalStaff.firstName} ${history.MedicalStaff.lastName}`}</h4>
+                </div>
+                <div className="cardHistory__bottom">
+                  <h4 className="cardHistory__bottom--state">
+                    {history.state}
+                  </h4>
+                </div>
+              </div>
+            ))
+          ) : (
+            <h3 className="cardHistory__message">{userHistory.message}</h3>
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default History;
