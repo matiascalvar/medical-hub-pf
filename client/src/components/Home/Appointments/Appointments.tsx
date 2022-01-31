@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
 import style from "./Appointments.module.css";
@@ -10,7 +11,15 @@ import Header from "../UserHome/Header/Header";
 const Appointments: FunctionComponent = () => {
   const userActive = useSelector((state: any) => state.userInfo);
   const appoinments: any[] = useSelector((state: any) => state.appointments);
-  console.log(appoinments);
+
+
+    async function deleteAppointment (id: any) {
+        try {
+            let response = await axios.delete(`http://localhost:3001/appointments/${id}`);
+        } catch (error) {
+            console.log(error)
+        }       
+    }
 
   function stateColor(state: string): any {
     let color =
