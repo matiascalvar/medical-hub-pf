@@ -1,25 +1,37 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
 import style from "./Appointments.module.css";
-import { BsCalendarFill, BsCashStack } from "react-icons/bs";
+import { BsCalendarFill, BsCashStack, BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { getPreferenceId } from "../../../actions/index";
+import { getPreferenceId, getUserInfo } from "../../../actions/index";
 import Header from "../UserHome/Header/Header";
 
 const Appointments: FunctionComponent = () => {
   const userActive = useSelector((state: any) => state.userInfo);
+  const activeUser = useSelector((state: any) => state.user);
   const appoinments: any[] = useSelector((state: any) => state.appointments);
 
-
-    async function deleteAppointment (id: any) {
-        try {
-            let response = await axios.delete(`http://localhost:3001/appointments/${id}`);
-        } catch (error) {
-            console.log(error)
-        }       
+  useEffect(() => {
+    if (activeUser.email) {
+      dispatch(getUserInfo(activeUser));
     }
+  }, [activeUser]);
+
+  async function deleteAppointment(id: any) {
+    try {
+      let response = await axios.delete(
+        `http://localhost:3001/appointments/${id}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  function payState(pay: boolean): any {
+    if (!pay) return false;
+    return true;
+  }
 
   function stateColor(state: string): any {
     let color =
@@ -38,7 +50,6 @@ const Appointments: FunctionComponent = () => {
         <Nav />
       </div>
       <div className={style.aside}>
-
         <div>
           <Header userName={userActive.firstName} title="Appointments" />
         </div>
@@ -65,25 +76,43 @@ const Appointments: FunctionComponent = () => {
                     <span className={style.box}>{data.time}</span>
                     <span className={style.box}>{data.date}</span>
                     <span className={style.box}>
-                      {data.MedicalStaff.firstName + " " + data.MedicalStaff.lastName}
+                      {data.MedicalStaff.firstName +
+                        " " +
+                        data.MedicalStaff.lastName}
                     </span>
-                    <span className={style.box}>{data.MedicalStaff.Specialitie.name ? data.MedicalStaff.Specialitie.name : "None"}</span>
+                    <span className={style.box}>
+                      {data.MedicalStaff.Specialitie.name
+                        ? data.MedicalStaff.Specialitie.name
+                        : "None"}
+                    </span>
                     <div className={style.box}>
-                    <span className={stateColor(data.state)}>
-                      {data.state.toLowerCase()}
-                    </span>
+                      <span className={stateColor(data.state)}>
+                        {data.state.toLowerCase()}
+                      </span>
                     </div>
-                    <Link className={style.linkBox} to="/mercadopago">
-                      <button
-                        onClick={() => handleBtnPay(data)}
-                        className={style.appointmentButton}
-                        type="button"
-                      >
-                        <span>&nbsp;Pay</span>
+                    {!payState(data.pay) ? (
+                      <Link className={style.linkBox} to="/mercadopago">
+                        <button
+                          onClick={() => handleBtnPay(data)}
+                          className={style.appointmentButton}
+                          type="button"
+                        >
+                          <span className={style.pending}>&nbsp;Pay</span>
 
-                        <BsCashStack className={style.cashIcon}/>
+                          <BsCashStack className={style.cashIcon} />
+                        </button>
+                      </Link>
+                    ) : (
+                      <span className={style.paidOut}>Payout</span>
+                    )}
+                    <span className={style.box}>
+                      <button
+                        className={style.btnDelete}
+                        onClick={() => deleteAppointment(data.id)}
+                      >
+                        <BsTrash />
                       </button>
-                    </Link>
+                    </span>
                   </div>
                 ))
               ) : (

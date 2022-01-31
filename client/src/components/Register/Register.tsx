@@ -38,12 +38,6 @@ const CreatePage: FunctionComponent = () => {
   const [errors, setErrors] = React.useState(emptyInput);
   const [input, setInput] = React.useState(emptyInput);
 
-  useEffect(() => {
-    console.log("input", input);
-    console.log("pswd", input.password.length);
-    console.log("errors", errors);
-  }, [input, errors]);
-
   const handleInputChange = function (e: any) {
     setInput({
       ...input,

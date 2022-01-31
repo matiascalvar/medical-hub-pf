@@ -50,12 +50,6 @@ const LoginPage: FunctionComponent = () => {
 
   const [server, setServer] = React.useState(false);
 
-  useEffect(() => {
-    console.log("input", input);
-    console.log("pass", input.password.length);
-    console.log("errors", errors);
-  }, [input, errors]);
-
   const handleInputChange = function (e: any) {
     setInput({
       ...input,
