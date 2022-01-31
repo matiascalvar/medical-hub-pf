@@ -73,6 +73,17 @@ router.put('/:id', async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    try {
+        let response = await Appointment.destroy({ where: {id: req.params.id}})
+        if (!response) return res.sendStatus(403)
+        return res.status(200).send({message: 'Appointment eliminada con exito'})
+    } catch (error) {
+        console.log(error)
+        return res.sendStatus(404)
+    }
+})
+
 function addDays(date: any, days: number) {
     const dates = new Date(date);
     dates.setDate(dates.getDate() + days);
