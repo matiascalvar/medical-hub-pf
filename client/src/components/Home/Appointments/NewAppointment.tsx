@@ -13,6 +13,7 @@ import {
 } from "../../../actions/index";
 import { obj } from "./data";
 import Card from "./Card";
+import Header from "../UserHome/Header/Header";
 
 const NewAppointment: FunctionComponent = () => {
     
@@ -42,11 +43,7 @@ const NewAppointment: FunctionComponent = () => {
         <Nav />
       </div>
       <div className={style.aside}>
-        <div>
-          <span className={style.userNameText}>{userActive.firstName}</span>
-          <img className={style.userLogo} src={userLogo} alt="" />
-        </div>
-        <h1 className={style.title}>Appointments</h1>
+        <Header userName={userActive.firstName} title="New Appointment" />
         <div className={style.formContainer}>
           <form>
             <select name="speciality" onChange={handleChange}>

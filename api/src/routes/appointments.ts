@@ -62,6 +62,17 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    try {
+        let appointment: any = await Appointment.findOne({ where: { id: req.params.id}});
+        const response = await appointment.update(req.body)
+        return res.status(201).send({message: 'Pago acreditado con exito'})
+    } catch (error) {
+        console.log(error)
+        return res.sendStatus(404)
+    }
+})
+
 function addDays(date: any, days: number) {
     const dates = new Date(date);
     dates.setDate(dates.getDate() + days);

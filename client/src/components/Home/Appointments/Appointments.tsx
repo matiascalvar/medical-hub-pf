@@ -29,9 +29,11 @@ const Appointments: FunctionComponent = () => {
         <Nav />
       </div>
       <div className={style.aside}>
+
         <div>
           <Header userName={userActive.firstName} title="Appointments" />
         </div>
+
         <div className={style.btnContainer}>
           <Link to="/home/appointments/new">
             <button className={style.btnAppointment}>New appointment</button>
