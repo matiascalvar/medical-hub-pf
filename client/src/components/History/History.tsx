@@ -5,15 +5,35 @@ import userLogo from '../Home/userLogo.png';
 import "../../styles/History/History.css";
 import {BiFilter, BiDownload} from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { getHistory } from "../../actions";
+import { getHistory, getUserInfo } from "../../actions";
 
 const History:FunctionComponent = () => {
 
   const dispatch = useDispatch(); 
+  const activeUser = useSelector((state:any) => state.user);
   const user = useSelector((state:any) => state.userInfo);
   const userHistory:any|any[] = useSelector((state:any) => state.history);
 
   const [isOpen, setIsOpen] = React.useState(false);
+  const [info, setInfo] = React.useState({
+    firstName: "",
+    lastName: "",
+    id: 0
+  })
+
+  useEffect(() => {
+    if(user){
+      setInfo({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        id: user.id 
+      })
+    }
+    if (activeUser.email && !info.firstName) {
+      dispatch(getUserInfo(activeUser));
+      dispatch(getHistory(user.UserId))
+    }
+  }, [user])
 
   return (
     <div className="containerHistory">
@@ -22,7 +42,7 @@ const History:FunctionComponent = () => {
       </div>
       <div className="containerHistory__contenedor">
         <div className="contenedor__header">
-          <h3 className="contenedor__header--name">{user.firstName}</h3>
+          <h3 className="contenedor__header--name">{info.firstName}</h3>
           <img src={userLogo} alt="user_logo" className="contenedor__header--logo" />
         </div>
         <div className="contenedor__sectionTitle">
@@ -61,7 +81,7 @@ const History:FunctionComponent = () => {
               </div>
             </div>
           }
-          <div className="sectionTitle__name">To: <strong>{`${user.firstName}, ${user.lastName}`}</strong></div>
+          <div className="sectionTitle__name">To: <strong>{`${info.firstName}, ${info.lastName}`}</strong></div>
         </div>
         <div className="contenedor__sectionCards">
           {
