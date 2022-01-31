@@ -41,7 +41,7 @@ const defaultMedicalStaff = async () => {
         UserId: user.id,
         PlanId: null,
       };
-      const patient = await Patient.create(newPatient);
+      // const patient = await Patient.create(newPatient);
 
       const newMedic = {
         UserId: user.id,
