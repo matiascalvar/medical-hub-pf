@@ -3,11 +3,58 @@ import { Appointment } from '../models/Appointment';
 import { AppointmentDetail } from '../models/AppointmentDetail';
 import { MedicalStaff } from '../models/MedicalStaff';
 import { Specialitie } from '../models/Specialitie';
+import addDays from '../assets/addDays'
+import { Patient } from '../models/Patient';
+import { Studie } from '../models/Studie';
+import { StudyType } from '../models/StudyType';
+const { Op } = require("sequelize");
 const router = Router();
 
 
 router.get('/', (req, res) => {
     res.send('APPOINTMENTS')
+});
+
+router.get('/:idMedic', async (req, res) => {
+    try {
+        const { idMedic } = req.params;
+        const appointments = await Appointment.findAll({
+            include: [{
+                model: Patient,
+                  attributes: {include:  ['id', 'firstName', 'lastName','phone','dni','PlanId'], exclude: ['createdAt','updatedAt', 'UserId']},
+              },
+              {
+                model: Studie,
+                  attributes: {include:['id','state','diagnosis','studyPDF'], exclude:['createdAt','updatedAt','StudyTypeId','MedicalStaffId','AppointmentId','PatientId']},
+                  include:[
+                    {
+                        model: StudyType,
+                        attributes:{exclude:['createdAt','updatedAt']}
+                    }
+                ]
+            },
+            {
+                model: AppointmentDetail,
+                attributes: {include:  ['details'], exclude: ['id', 'createdAt','updatedAt', 'AppointmentId']}
+            }
+        ],
+            where: {
+                MedicalStaffId: idMedic
+            },
+            attributes: {include:  ['id','date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']},
+            order: [
+                ['date', 'ASC'],
+                ['time', 'ASC']
+            ]
+        });         
+
+        appointments.length > 0 ? res.send(appointments) : res.send({message: "Dr. doesn't have appointments yet."})
+        
+    } catch (e) {
+        console.log(e)
+        return res.status(401).send({Error: "Sorry: " + e})
+    }
+    
 });
 
 router.get('/:idPatient', async (req, res) => {
@@ -83,19 +130,6 @@ router.delete('/:id', async (req, res) => {
         return res.sendStatus(404)
     }
 })
-
-function addDays(date: any, days: number) {
-    const dates = new Date(date);
-    dates.setDate(dates.getDate() + days);
-    const array = dates.toLocaleDateString().toString().split('/');
-    let day: string ='';
-    let month: string ='';
-    array[1].length < 2 ? day = '0' + array[1] : day = array[1];
-    array[0].length < 2 ? month = '0' + array[0] : month = array[0];
-
-    const formatedDate = array[2] + '-' + month + '-' + day;
-    return formatedDate.toString();
-}
 
 router.get('/avb/:idMedicalStaff', async (req, res) => {        
     try {
