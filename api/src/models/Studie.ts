@@ -6,8 +6,8 @@ import {Model, Column,Default, Table, CreatedAt,DataType,  UpdatedAt} from 'sequ
 export class Studie extends Model {
 
     @Default('ACTIVE')
-	@Column(DataType.ENUM('ACTIVE', 'PAYED', 'COMPLETED'))
-	state!: 'ACTIVE'|'PAYED'|'COMPLETED';
+	@Column(DataType.ENUM('ACTIVE','COMPLETED'))
+	state!: 'ACTIVE'|'COMPLETED';
 
 	@Column(DataType.TEXT)
 	diagnosis!: string;
