@@ -72,7 +72,18 @@ router.get('/:idPatient', async (req, res) => {
             {
                 model: AppointmentDetail,
                 attributes: {include:  ['details'], exclude: ['id', 'createdAt','updatedAt', 'AppointmentId']}
-            }],
+            },
+            {
+                model: Studie,
+                  attributes: {include:['id','state','diagnosis','studyPDF'], exclude:['createdAt','updatedAt','StudyTypeId','MedicalStaffId','AppointmentId','PatientId']},
+                  include:[
+                    {
+                        model: StudyType,
+                        attributes:{exclude:['createdAt','updatedAt']}
+                    }
+                ]
+            }
+        ],
             where: {PatientId: idPatient},
             attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']},
             order: [
