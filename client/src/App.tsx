@@ -17,6 +17,7 @@ import History from "./components/History/History";
 import PrePago from "./components/MercadoPago/PrePago";
 import MercadoPago from "./components/MercadoPago/MercadoPago";
 import NotFound from "./components/NotFound/NotFound";
+import Admin from "./components/Admin/Admin";
 
 function App() {
     const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function App() {
                     <ProtectedRoute exact path="/home/history" component={History} />
                     <ProtectedRoute exact path="/prepago" component={PrePago} />
                     <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
+                    <ProtectedRoute exact path="/admin" component={Admin} />
                     <Route component={NotFound} />
                 </Switch> :
                 <h4>Loading...</h4>}
