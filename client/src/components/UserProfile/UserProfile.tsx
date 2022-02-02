@@ -4,7 +4,7 @@ import Nav from "../Home/Nav/Nav";
 import DataProfile from "./DataProfile/DataProfile";
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import {getUserInfo} from "../../actions/index";
+import {getPatientInfo} from "../../actions/index";
 import EditDataProfile from "./EditDataProfile/EditDataPofile";
 
 interface Info{
@@ -21,7 +21,7 @@ interface EditState{
 export default function UserProfile() : JSX.Element{
 
     const activeUser = useSelector((state: any) => state.user);
-    const response = useSelector((state:any) => state.userInfo);
+    const response = useSelector((state:any) => state.patientInfo);
     const dispatch = useDispatch();
     const [ myInfo, setMyInfo ] = useState<Info> ({
         firstName: "",
@@ -46,7 +46,7 @@ export default function UserProfile() : JSX.Element{
                 })
             }
         if (activeUser.email && !myInfo.firstName) {
-            dispatch(getUserInfo(activeUser));
+            dispatch(getPatientInfo(activeUser));
         }    
     }, [response, activeUser]);
 

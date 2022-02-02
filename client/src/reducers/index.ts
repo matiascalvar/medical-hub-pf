@@ -3,7 +3,7 @@ import { ActionTypes } from "../actions/types";
 
 const initialState: any = {
   user: {},
-  userInfo: {},
+  patientInfo: {},
   appointments: [],
   specialities: [],
   medicSpeciality: [],
@@ -13,7 +13,8 @@ const initialState: any = {
   medicAppointments: [],
   specAppointments: [],
   preferenceId: "",
-  paymentInfo: {}
+  paymentInfo: {},
+  appointmentsPatients: [],
 };
 
 export default function reducer(state = initialState, action: actionI) {
@@ -27,17 +28,17 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         initialState,
       };
-    case ActionTypes.getUserInfo:
+    case ActionTypes.getPatientInfo:
       return {
         ...state,
-        userInfo: action.payload,
+        patientInfo: action.payload,
       };
     case ActionTypes.getAppointments:
       return {
         ...state,
         appointments: action.payload,
         medicAppointments: {},
-        specAppointments: []
+        specAppointments: [],
       };
     case ActionTypes.getSpecialities:
       return {
@@ -49,14 +50,14 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         medicSpeciality: action.payload,
         medicAppointments: {},
-        specAppointments: []
+        specAppointments: [],
       };
     case ActionTypes.getHistory:
       return {
         ...state,
         history: action.payload,
       };
-    case ActionTypes.updateUserInfo:
+    case ActionTypes.updatePatientInfo:
       return {
         ...state,
         updateResponse: action.payload,
@@ -70,17 +71,22 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         medicAppointments: action.payload,
-        specAppointments: []
+        specAppointments: [],
       };
-      case ActionTypes.specAppointments:
-        return {
-          ...state,
-          specAppointments: action.payload,
-        };  
+    case ActionTypes.specAppointments:
+      return {
+        ...state,
+        specAppointments: action.payload,
+      };
     case ActionTypes.getPreferenceId:
       return {
         ...state,
         paymentInfo: action.payload,
+      };
+    case ActionTypes.getAppointmentsPatients:
+      return {
+        ...state,
+        appointmentsPatients: action.payload,
       };
 
     default:

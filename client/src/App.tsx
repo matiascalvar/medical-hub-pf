@@ -5,7 +5,7 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logUser } from "./actions";
-import ProtectedRoute from "./protectedRoute"
+import ProtectedRoute from "./protectedRoute";
 import Appointments from "./components/Home/Appointments/Appointments";
 import NewAppointment from "./components/Home/Appointments/NewAppointment";
 import Landing from "./components/Landing/Landing";
@@ -17,6 +17,7 @@ import History from "./components/History/History";
 import PrePago from "./components/MercadoPago/PrePago";
 import MercadoPago from "./components/MercadoPago/MercadoPago";
 import NotFound from "./components/NotFound/NotFound";
+import MedicAppointments from "./components/Medic/MedicAppointments/MedicAppointments";
 
 function App() {
     const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
                 const response = await axios.post("http://localhost:3001/login/token");
                 const user = {
                     email: response.data.email,
+                    role: response.data.role,
                     token: `${response.data.token_type} ${response.data.access_token}`,
                 };
                 dispatch(logUser(user));
@@ -40,25 +42,44 @@ function App() {
     refreshToken();
     }, []);
 
-    return (
-         <div className="App">
-            {loaded? 
-                <Switch>
-                    <Route exact path="/" component={Landing} />
-                    <Route exact path="/register" component={Register} />
-                    <Route exact path="/login" component={Login} />
-                    <ProtectedRoute exact path="/home" component={Home} />
-                    <ProtectedRoute exact path="/home/appointments" component={Appointments} />
-                    <ProtectedRoute exact path="/home/appointments/new" component={NewAppointment}/>
-                    <ProtectedRoute exact path="/home/userProfile" component={UserProfile} />
-                    <ProtectedRoute exact path="/home/history" component={History} />
-                    <ProtectedRoute exact path="/prepago" component={PrePago} />
-                    <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
-                    <Route component={NotFound} />
-                </Switch> :
-                <h4>Loading...</h4>}
-         </div>     
-    )
+  return (
+    <div className="App">
+      {loaded ? (
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <ProtectedRoute exact path="/home" component={Home} />
+          <ProtectedRoute
+            exact
+            path="/home/appointments"
+            component={Appointments}
+          />
+          <ProtectedRoute
+            exact
+            path="/home/appointments/new"
+            component={NewAppointment}
+          />
+          <ProtectedRoute
+            exact
+            path="/home/userProfile"
+            component={UserProfile}
+          />
+          <ProtectedRoute exact path="/home/history" component={History} />
+          <ProtectedRoute exact path="/prepago" component={PrePago} />
+          <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
+          <Route
+            exact
+            path="/home/medic/appointments"
+            component={MedicAppointments}
+          />
+          <Route component={NotFound} />
+        </Switch>
+      ) : (
+        <h4>Loading...</h4>
+      )}
+    </div>
+  );
 }
 
 export default App;

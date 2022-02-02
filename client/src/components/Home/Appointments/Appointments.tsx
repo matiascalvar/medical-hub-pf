@@ -7,28 +7,23 @@ import { BsCalendarFill, BsCashStack, BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import {
   getPreferenceId,
-  getUserInfo,
+  getPatientInfo,
   getAppointments,
 } from "../../../actions/index";
 import Header from "../UserHome/Header/Header";
 
 const Appointments: FunctionComponent = () => {
-  const userActive = useSelector((state: any) => state.userInfo);
+  const patient = useSelector((state: any) => state.patientInfo);
   const activeUser = useSelector((state: any) => state.user);
   const appoinments: any[] = useSelector((state: any) => state.appointments);
-
-  useEffect(() => {
-    if (activeUser.email) {
-      dispatch(getUserInfo(activeUser));
-    }
-  }, [activeUser, appoinments]);
+  let dispatch = useDispatch();
 
   async function deleteAppointment(id: any) {
     try {
       let response = await axios.delete(
         `http://localhost:3001/appointments/${id}`
       );
-      dispatch(getAppointments(userActive.id));
+      dispatch(getAppointments(patient.id));
     } catch (error) {
       console.log(error);
     }
@@ -44,11 +39,18 @@ const Appointments: FunctionComponent = () => {
     return color;
   }
   // Una funcion que use el boton, obtenga datos del appointment y redirija al pago
-  let dispatch = useDispatch();
+  
   function handleBtnPay(data: any) {
     console.log("data", data);
     dispatch(getPreferenceId("1", "500", data));
   }
+
+  useEffect(() => {
+    if (patient.id) {
+      dispatch(getAppointments(patient.id));
+    }
+  }, [patient]);
+
   return (
     <div className={style.bigContainer}>
       <div className={style.navContainer}>
@@ -56,7 +58,7 @@ const Appointments: FunctionComponent = () => {
       </div>
       <div className={style.aside}>
         <div>
-          <Header userName={userActive.firstName} title="Appointments" />
+          <Header userName={patient.firstName} title="Appointments" />
         </div>
 
         <div className={style.btnContainer}>
