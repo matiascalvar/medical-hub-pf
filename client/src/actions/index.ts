@@ -3,8 +3,30 @@ import { Dispatch } from "react";
 import { User } from "./interfaces";
 import { ActionTypes } from "./types";
 
-export const logUser = (user: User) => {
-  return { type: ActionTypes.logUser, payload: user };
+function createHeaders(token: string) {
+  return {
+    headers: {
+      Authorization: token,
+      Accept: "aplication/json",
+    },
+  };
+}
+
+export const logUser = (activeUser: User) => async (dispatch: any) => {
+  dispatch({ type: ActionTypes.logUser, payload: activeUser });
+  const headers = createHeaders(activeUser.token)
+  const authAxios = axios.create(headers);
+  try {
+    const response = await authAxios.get("http://localhost:3001/users");
+    if (response) {
+      dispatch({
+        type: ActionTypes.getPatientInfo,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const logout = () => async (dispatch: any) => {
@@ -16,19 +38,14 @@ export const logout = () => async (dispatch: any) => {
   dispatch({ type: ActionTypes.logout });
 };
 
-export const getUserInfo = (activeUser: any) => async (dispatch: any) => {
-  const headers = {
-    headers: {
-      Authorization: activeUser.token,
-      Accept: "aplication/json",
-    },
-  };
+export const getPatientInfo = (activeUser: any) => async (dispatch: any) => {
+  const headers = createHeaders(activeUser.token)
   const authAxios = axios.create(headers);
   try {
     const response = await authAxios.get("http://localhost:3001/users");
     if (response) {
       dispatch({
-        type: ActionTypes.getUserInfo,
+        type: ActionTypes.getPatientInfo,
         payload: response.data,
       });
     }
@@ -110,14 +127,9 @@ export const getHistory = (id: number) => async (dispatch: any) => {
   }
 };
 
-export const updateUserInfo =
+export const updatePatientInfo =
   (activeUser: any, data: any) => async (dispatch: any) => {
-    const headers = {
-      headers: {
-        Authorization: activeUser.token,
-        Accept: "aplication/json",
-      },
-    };
+    const headers = createHeaders(activeUser.token)
     const authAxios = axios.create(headers);
     try {
       const response = await authAxios.post(
@@ -131,7 +143,7 @@ export const updateUserInfo =
       );
       if (response) {
         dispatch({
-          type: ActionTypes.updateUserInfo,
+          type: ActionTypes.updatePatientInfo,
           payload: response.data,
         });
       }
@@ -142,12 +154,7 @@ export const updateUserInfo =
 
 export const changePassword =
   (activeUser: any, data: any) => async (dispatch: any) => {
-    const headers = {
-      headers: {
-        Authorization: activeUser.token,
-        Accept: "aplication/json",
-      },
-    };
+    const headers = createHeaders(activeUser.token)
     const authAxios = axios.create(headers);
     try {
       const response = await authAxios.post(
