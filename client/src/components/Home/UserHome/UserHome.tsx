@@ -48,7 +48,10 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
       <div className={s.nav}>
           <Nav />
         </div>
-      <Header userName={userName} title="Home" />
+      <div> 
+        <div className={s.header}>
+        <Header userName={userName} title="Home" />
+        </div>
       <div className={s.cardsContainer}>
         <div>
           <div className={s.shiftCard}>
@@ -165,6 +168,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
           </div>
         </div>
       </div>
+      </div> 
     </div>
   );
 }
