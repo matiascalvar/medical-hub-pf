@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserInfo } from "../../actions/index";
 import axios from "axios";
+import MedicHome from "../Medic/MedicHome/MedicHome";
 
 interface Info {
   firstName: any;
@@ -35,7 +36,8 @@ export default function Home(): JSX.Element {
         }
 
     }
-      
+      console.log("Active", activeUser);
+      console.log("Response", response);
     
     useEffect(() => {
         let url = new URL(window.location.href)
@@ -61,11 +63,9 @@ export default function Home(): JSX.Element {
   if (myInfo.firstName) {
     return (
       <div className={s.home}>
-        <div className={s.nav}>
-          <Nav />
-        </div>
         <div className={s.main}>
-          <UserHome id={response.id} userName={myInfo.firstName} />
+         {/*  <UserHome id={response.id} userName={myInfo.firstName} />  */}
+          <MedicHome id={response.id} userName={myInfo.firstName} />
         </div>
       </div>
     );
