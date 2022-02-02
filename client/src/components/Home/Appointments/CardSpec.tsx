@@ -14,7 +14,7 @@ interface CardProps {
 export const Card = ({ date, hours, medicInfo }: CardProps): JSX.Element => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const userActive = useSelector((state: any) => state.userInfo);
+    const userActive = useSelector((state: any) => state.patientInfo);
 
     const [selected, setSelected] = React.useState({
         hour: ""

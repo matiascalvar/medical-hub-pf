@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     res.send('APPOINTMENTS')
 });
 
-router.get('/:idMedic', async (req, res) => {
+router.get('/medic/:idMedic', async (req, res) => {
     try {
         const { idMedic } = req.params;
         const appointments = await Appointment.findAll({
@@ -52,7 +52,7 @@ router.get('/:idMedic', async (req, res) => {
         
     } catch (e) {
         console.log(e)
-        return res.status(401).send({Error: "Sorry: " + e})
+        return res.status(401).send({Error: e})
     }
     
 });
@@ -72,7 +72,18 @@ router.get('/:idPatient', async (req, res) => {
             {
                 model: AppointmentDetail,
                 attributes: {include:  ['details'], exclude: ['id', 'createdAt','updatedAt', 'AppointmentId']}
-            }],
+            },
+            {
+                model: Studie,
+                  attributes: {include:['id','state','diagnosis','studyPDF'], exclude:['createdAt','updatedAt','StudyTypeId','MedicalStaffId','AppointmentId','PatientId']},
+                  include:[
+                    {
+                        model: StudyType,
+                        attributes:{exclude:['createdAt','updatedAt']}
+                    }
+                ]
+            }
+        ],
             where: {PatientId: idPatient},
             attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']},
             order: [
@@ -85,7 +96,7 @@ router.get('/:idPatient', async (req, res) => {
         
     } catch (e) {
         console.log(e)
-        return res.status(401).send({Error: "No existe el Appointment."})
+        return res.status(401).send({Error: e})
     }
     
 });

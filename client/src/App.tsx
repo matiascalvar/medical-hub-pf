@@ -20,26 +20,27 @@ import NotFound from "./components/NotFound/NotFound";
 import MedicAppointments from "./components/Medic/MedicAppointments/MedicAppointments";
 
 function App() {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+  
+    const [ loaded, setLoaded ] = React.useState(false)
 
-  const [loaded, setLoaded] = React.useState(false);
-
-  React.useEffect(() => {
-    const refreshToken = async function () {
-      try {
-        const response = await axios.post("http://localhost:3001/login/token");
-        const user = {
-          email: response.data.email,
-          token: `${response.data.token_type} ${response.data.access_token}`,
+    React.useEffect(() => {
+        const refreshToken = async function () {
+            try {
+                const response = await axios.post("http://localhost:3001/login/token");
+                const user = {
+                    email: response.data.email,
+                    role: response.data.role,
+                    token: `${response.data.token_type} ${response.data.access_token}`,
+                };
+                dispatch(logUser(user));
+            } catch (error) {
+                console.log("No user logged");
+            }
+        setLoaded(true)
         };
-        dispatch(logUser(user));
-      } catch (error) {
-        console.log("No user logged");
-      }
-      setLoaded(true);
-    };
     refreshToken();
-  }, []);
+    }, []);
 
   return (
     <div className="App">
