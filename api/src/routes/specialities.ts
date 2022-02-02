@@ -1,7 +1,7 @@
-import {Response, Request, Router} from 'express';
-import { MedicalStaff } from '../models/MedicalStaff';
-import { Specialitie } from '../models/Specialitie';
-import { authenticateToken } from './middelwares'
+import { Response, Request, Router } from "express";
+import { MedicalStaff } from "../models/MedicalStaff";
+import { Specialitie } from "../models/Specialitie";
+import { authenticateToken } from "./middelwares";
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -38,7 +38,7 @@ router.get("/:id", async (req, res) => {
 
     medicalStaff.length > 0
       ? res.send(medicalStaff)
-      : res.send({ message: "No hay médicos con esa Especialidad." });
+      : res.send({ message: "There is any medic of that speciality ." });
   } catch (e) {
     console.log(e);
     return res.status(401).send({ Error: e });
