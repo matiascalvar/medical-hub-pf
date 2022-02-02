@@ -29,6 +29,7 @@ function App() {
                 const response = await axios.post("http://localhost:3001/login/token");
                 const user = {
                     email: response.data.email,
+                    role: response.data.role,
                     token: `${response.data.token_type} ${response.data.access_token}`,
                 };
                 dispatch(logUser(user));
