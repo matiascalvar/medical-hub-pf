@@ -218,3 +218,9 @@ export const getPreferenceId =
     }
 };
 
+export const filterHistoryStatus = (payload:any) => {
+  return {
+    type: ActionTypes.filterHistoryStatus,
+    payload
+  }
+}
