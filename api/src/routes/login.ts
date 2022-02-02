@@ -14,16 +14,25 @@ function generateRefreshToken(user: any) {
 }
 
 router.post('/', async (req, res) => {
-    let response = await User.findOne({where: {email: req.body.email}})
-    if (response) {
+    let user = await User.findOne({where: {email: req.body.email}})
+    if (user) {
         try {
-            if (await bcrypt.compare(req.body.password, response.hashedPass)) {
-                const user = { email: req.body.email }
-                const accessToken = generateAccessToken(user)
-                const refreshToken = generateRefreshToken(user)
+            if (await bcrypt.compare(req.body.password, user.hashedPass)) {
+                const userData = {
+                    email: user.email,
+                    isStaff: user.isStaff,
+                    isAdmin: user.isAdmin,
+                }
+                const accessToken = generateAccessToken(userData)
+                const refreshToken = generateRefreshToken(userData)
                 const response = await RefreshToken.create({token: refreshToken})
                 res.cookie('token', refreshToken, { httpOnly: true})
-                return res.send({ token_type: "Bearer", access_token: accessToken })
+                return res.send({
+                    email: user.email,
+                    role: "patient",
+                    token_type: "Bearer",
+                    access_token: accessToken
+                })
             } else {
                 return res.status(401).send({"error": "Contrasenia incorrecta."})
             }
@@ -45,7 +54,12 @@ router.post('/token', async (req, res) => {
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err: any, user: any) => {
             if (err) return res.sendStatus(403)
             const accessToken = generateAccessToken({ email: user.email })
-            return res.send({ email: user.email, token_type: "Bearer", access_token: accessToken })
+            return res.send({
+                email: user.email,
+                role: "patient",
+                token_type: "Bearer",
+                access_token: accessToken
+            })
         })
     } catch(error) {
         console.log(error)

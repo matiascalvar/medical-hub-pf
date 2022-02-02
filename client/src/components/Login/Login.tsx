@@ -12,7 +12,7 @@ import "../../styles/LoginPage/Login.css";
 axios.defaults.withCredentials = true;
 
 const LoginPage: FunctionComponent = () => {
-  const activeUser = useSelector((state: any) => state.user);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -28,9 +28,9 @@ const LoginPage: FunctionComponent = () => {
       );
       const user = {
         email: newUser.email,
+        role: newUser.role,
         token: `${response.data.token_type} ${response.data.access_token}`,
       };
-      console.log("response data", response);
       setErrors(emptyInput);
       return user;
     } catch (error: any) {
@@ -45,9 +45,7 @@ const LoginPage: FunctionComponent = () => {
   };
 
   const [errors, setErrors] = React.useState(emptyInput);
-
   const [input, setInput] = React.useState(emptyInput);
-
   const [server, setServer] = React.useState(false);
 
   const handleInputChange = function (e: any) {
