@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     res.send('APPOINTMENTS')
 });
 
-router.get('/:idMedic', async (req, res) => {
+router.get('/medic/:idMedic', async (req, res) => {
     try {
         const { idMedic } = req.params;
         const appointments = await Appointment.findAll({
@@ -52,7 +52,7 @@ router.get('/:idMedic', async (req, res) => {
         
     } catch (e) {
         console.log(e)
-        return res.status(401).send({Error: "Sorry: " + e})
+        return res.status(401).send({Error: e})
     }
     
 });
@@ -85,7 +85,7 @@ router.get('/:idPatient', async (req, res) => {
         
     } catch (e) {
         console.log(e)
-        return res.status(401).send({Error: "No existe el Appointment."})
+        return res.status(401).send({Error: e})
     }
     
 });
