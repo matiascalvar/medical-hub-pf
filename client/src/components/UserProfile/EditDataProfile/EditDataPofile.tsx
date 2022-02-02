@@ -1,7 +1,7 @@
 import { useState , useEffect } from 'react';
 import s from "./EditDataProfile.module.css";
 import { useSelector, useDispatch } from 'react-redux';
-import {updateUserInfo} from "../../../actions/index";
+import {updatePatientInfo} from "../../../actions/index";
 import ChangePass from "./ChangePass/ChangePass";
 
 interface EditDataProfileProps{
@@ -67,7 +67,7 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
     function handleSubmit(e : any){
         e.preventDefault();
         if(!loading.loading){
-            dispatch(updateUserInfo(activeUser, myInfo));
+            dispatch(updatePatientInfo(activeUser, myInfo));
             setLoading((data:any)=>{
                 return{
                     ...data,
