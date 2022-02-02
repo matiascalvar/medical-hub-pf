@@ -7,25 +7,25 @@ import { BiFilter, BiDownload } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { filterHistoryStatus, getHistory, getUserInfo } from "../../actions";
 
+
 const History: FunctionComponent = () => {
   const dispatch = useDispatch();
   const activeUser = useSelector((state: any) => state.user);
   const user = useSelector((state: any) => state.userInfo);
   const userHistory: any|any[] = useSelector((state: any) => state.filterHistory);
-
+  const patient = useSelector((state: any) => state.patientInfo);
+  
+  useEffect(() => {
+    if (patient.id) {
+      dispatch(getHistory(patient.id));
+    }
+  }, [patient]);
+  
   const [isOpen, setIsOpen] = React.useState(false);
   const [info, setInfo] = React.useState({
     firstName: "",
     lastName: ""
   });
-
-  useEffect(() => {
-    if(user.id){
-      dispatch(getHistory(user.id));
-    }else{
-      dispatch(getUserInfo(activeUser));
-    }
-  }, [dispatch])
 
   useEffect(() => {
     if (user) {
@@ -53,7 +53,7 @@ const History: FunctionComponent = () => {
       </div>
       <div className="containerHistory__contenedor">
         <div className="contenedor__header">
-          <h3 className="contenedor__header--name">{info.firstName}</h3>
+          <h3 className="contenedor__header--name">{patient.firstName}</h3>
           <img
             src={userLogo}
             alt="user_logo"
@@ -103,7 +103,7 @@ const History: FunctionComponent = () => {
             </div>
           )}
           <div className="sectionTitle__name">
-            To: <strong>{`${info.firstName}, ${info.lastName}`}</strong>
+            To: <strong>{`${patient.firstName}, ${patient.lastName}`}</strong>
           </div>
         </div>
         <div className="contenedor__sectionCards">

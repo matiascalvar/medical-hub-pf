@@ -3,7 +3,7 @@ import { ActionTypes } from "../actions/types";
 
 const initialState: any = {
   user: {},
-  userInfo: {},
+  patientInfo: {},
   appointments: [],
   specialities: [],
   medicSpeciality: [],
@@ -28,10 +28,10 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         initialState,
       };
-    case ActionTypes.getUserInfo:
+    case ActionTypes.getPatientInfo:
       return {
         ...state,
-        userInfo: action.payload,
+        patientInfo: action.payload,
       };
     case ActionTypes.getAppointments:
       return {
@@ -58,7 +58,7 @@ export default function reducer(state = initialState, action: actionI) {
         history: action.payload,
         filterHistory: action.payload
       };
-    case ActionTypes.updateUserInfo:
+    case ActionTypes.updatePatientInfo:
       return {
         ...state,
         updateResponse: action.payload,

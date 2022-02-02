@@ -32,6 +32,7 @@ Patient.hasMany(Appointment, {
   sourceKey: "id",
   foreignKey: "PatientId",
 });
+Appointment.belongsTo(Patient)
 
 Specialitie.hasMany(MedicalStaff, {
   sourceKey: "id",

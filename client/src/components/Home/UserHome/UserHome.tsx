@@ -18,15 +18,6 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
   const history: any[] = useSelector((state: any) => state.history);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (appoinments && appoinments.length === 0) {
-      dispatch(getAppointments(id));
-    }
-    if (history && history.length === 0) {
-      dispatch(getHistory(id));
-    }
-  }, [appoinments, history]);
-
   function stateColor(state: string): any {
     let color = state.toLowerCase() === "active" ? s.active : s.complete;
     return color;
@@ -44,7 +35,12 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
     } 
   }
 
-  
+  useEffect(() => {
+    if (id) {
+      dispatch(getAppointments(id));
+      dispatch(getHistory(id));
+    }
+  }, [id]);
 
   return (
     <div className={s.mainContainer}>
