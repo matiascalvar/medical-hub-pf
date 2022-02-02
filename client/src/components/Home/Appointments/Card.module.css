@@ -49,3 +49,13 @@
   margin-bottom: 0;
   font-weight: 700 !important;
 }
+
+.btn {
+  border: 1px white solid;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+}
+.btn:hover {
+  border: 1px grey solid;
+}
