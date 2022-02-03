@@ -37,14 +37,14 @@ router.post('/', async (req, res) => {
                     access_token: accessToken
                 })
             } else {
-                return res.status(401).send({"error": "Contrasenia incorrecta."})
+                return res.status(401).send({"error": "Incorrect password"})
             }
         } catch(error) {
             console.log(error)
             return res.sendStatus(500)
         }
     } else {
-        return res.status(401).send({"error": "No existe el usuario."})
+        return res.status(401).send({"error": "This user doesn't exist"})
     }
 });
 
