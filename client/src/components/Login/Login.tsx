@@ -15,6 +15,7 @@ const LoginPage: FunctionComponent = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const [errorLogin, setErrorLogin] = React.useState('');
 
   const loginUser = async function (newUser: any) {
     const options = {
@@ -23,18 +24,20 @@ const LoginPage: FunctionComponent = () => {
     try {
       const response = await axios.post(
         "http://localhost:3001/login",
-        `email=${newUser.email}&password=${newUser.password}`,
+        `email=${newUser.email}&password=${newUser.password}&role=${role}`,
         options
       );
+      console.log("login", response);
       const user = {
         email: newUser.email,
-        role: newUser.role,
+        role: role,
         token: `${response.data.token_type} ${response.data.access_token}`,
       };
       setErrors(emptyInput);
       return user;
     } catch (error: any) {
       setServer(true);
+      setErrorLogin(error.response.data.error);
       return false;
     }
   };
@@ -47,6 +50,7 @@ const LoginPage: FunctionComponent = () => {
   const [errors, setErrors] = React.useState(emptyInput);
   const [input, setInput] = React.useState(emptyInput);
   const [server, setServer] = React.useState(false);
+  const [ role, setRole ] = React.useState("patient");
 
   const handleInputChange = function (e: any) {
     setInput({
@@ -67,6 +71,10 @@ const LoginPage: FunctionComponent = () => {
       setInput(emptyInput);
     }
   };
+
+  const handleCheckbox = function (e: any) {
+    e.target.checked? setRole("medic") : setRole("patient")
+  }
 
   const validateForm = () => {
     let errors: any = {};
@@ -127,14 +135,14 @@ const LoginPage: FunctionComponent = () => {
             )}
           </div>
           <div className="form__register">
-            <input type="checkbox" className="isMedic__check" />
+            <input type="checkbox" className="isMedic__check" onChange={(e) => handleCheckbox(e)}/>
             <label className="isMedic__title">I am a Medic</label>
           </div>
           <div className="form__bottom">
             <button type="submit" className="form__btn">
               Log in
             </button>
-            {server && <p className="loginErrors">Invalid email or password</p>}
+            {server && <p className="loginErrors">{errorLogin}</p>}
             <Link to="/register" className="btn__register">
               <p>
                 Don't have an account?{" "}

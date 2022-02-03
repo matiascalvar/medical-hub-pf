@@ -14,5 +14,7 @@ export enum ActionTypes {
   medicAppointments,
   specAppointments,
   getPreferenceId,
+  filterHistoryStatus,
   getAppointmentsPatients,
+  getMedicInfo,
 }

@@ -190,6 +190,7 @@
   grid-template-rows: 20% auto 20%;
   border-radius: 1rem;
   border: .1rem solid gray;
+  margin: 1rem;
 }
 
 .cardHistory__top{

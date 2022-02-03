@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
@@ -11,6 +11,7 @@ import {
   getAppointments,
 } from "../../../actions/index";
 import Header from "../UserHome/Header/Header";
+import MercadoPago from "../../MercadoPago/MercadoPago";
 
 const Appointments: FunctionComponent = () => {
   const patient = useSelector((state: any) => state.patientInfo);
@@ -43,7 +44,10 @@ const Appointments: FunctionComponent = () => {
   function handleBtnPay(data: any) {
     console.log("data", data);
     dispatch(getPreferenceId("1", "500", data));
+    setIsOpen(true);
   }
+  // state para abrir el modal
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (patient.id) {
@@ -53,6 +57,7 @@ const Appointments: FunctionComponent = () => {
 
   return (
     <div className={style.bigContainer}>
+      <MercadoPago onClose={() => setIsOpen(false)} open={isOpen}></MercadoPago>
       <div className={style.navContainer}>
         <Nav />
       </div>
@@ -98,7 +103,7 @@ const Appointments: FunctionComponent = () => {
                       </span>
                     </div>
                     {!payState(data.pay) ? (
-                      <Link className={style.linkBox} to="/mercadopago">
+                      // <Link className={style.linkBox} to="/mercadopago">
                         <button
                           onClick={() => handleBtnPay(data)}
                           className={style.appointmentButton}
@@ -108,7 +113,7 @@ const Appointments: FunctionComponent = () => {
 
                           <BsCashStack className={style.cashIcon} />
                         </button>
-                      </Link>
+                      // </Link>
                     ) : (
                       <span className={style.paidOut}>Payout</span>
                     )}

@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getPreferenceId } from "../../actions/index";
 import style from "./MercadoPago.module.css";
+import ReactDOM from "react-dom";
 
-const MercadoPago: FunctionComponent = () => {
+
+const MercadoPago: FunctionComponent<{ open: boolean, onClose:any }> = ({open, onClose}) => {
   const FORM_ID = "payment-form";
   let dispatch = useDispatch();
 
@@ -33,22 +35,29 @@ const MercadoPago: FunctionComponent = () => {
   //   form.appendChild(script);
   // }, []);
 
-  return (
-    <>
-      <div className={style.card}>
-        <p className={style.title}>Pay with Mercado Pago</p>
-        <p>
-          Appointment with: <br /> {paymentInfo.medic}
-        </p>
-        <p>Price: ${unit_price}</p>
-        <a href={paymentInfo.preferenceId}>
-          <button className={style.btn}>
-            <span className={style.btnText}>Pay</span>
-          </button>
-        </a>
-      </div>
-    </>
+  if (!open) {
+    return null
+  }
+  
+  return ReactDOM.createPortal(
+      <div className={style.body}>
+        <div className={style.card}>
+          <button className={style.btnClose} onClick={onClose}>X</button>
+          <p className={style.title}>Pay with Mercado Pago</p>
+          <p>
+            Appointment with: <br /> {paymentInfo.medic}
+          </p>
+          <p>Price: ${unit_price}</p>
+          <a href={paymentInfo.preferenceId}>
+            <button className={style.btn}>
+              <span className={style.btnText}>Pay</span>
+            </button>
+          </a>
+        </div>
+      </div>,
+    document.getElementById("portal")!
   );
+
 };
 
 export default MercadoPago;

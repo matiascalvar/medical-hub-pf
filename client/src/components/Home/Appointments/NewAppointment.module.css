@@ -101,6 +101,5 @@
 
 .cardSpecContainer{
   display: flex;
-  /* grid-template-columns: 25% 25% 25% 25%;  
-  grid-gap: 5px !important; */
+  flex-wrap: wrap;
 }

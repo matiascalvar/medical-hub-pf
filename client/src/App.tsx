@@ -14,12 +14,13 @@ import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
 import UserProfile from "./components/UserProfile/UserProfile";
 import History from "./components/History/History";
-import PrePago from "./components/MercadoPago/PrePago";
 import MercadoPago from "./components/MercadoPago/MercadoPago";
 import NotFound from "./components/NotFound/NotFound";
+import Admin from "./components/Admin/Admin";
 import MedicAppointments from "./components/Medic/MedicAppointments/MedicAppointments";
 import MedicAppointmentDetail from "./components/Medic/MedicAppointments/MedicAppointmentDetail";
 import NewReviewAppointment from "./components/Medic/MedicAppointments/NewReviewAppointment";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -68,7 +69,6 @@ function App() {
             component={UserProfile}
           />
           <ProtectedRoute exact path="/home/history" component={History} />
-          <ProtectedRoute exact path="/prepago" component={PrePago} />
           <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
           <Route
             exact

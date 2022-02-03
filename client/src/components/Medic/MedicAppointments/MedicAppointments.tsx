@@ -5,6 +5,7 @@ import style from "./MedicAppointments.module.css";
 import { Link } from "react-router-dom";
 import {
   getPreferenceId,
+  getPatientInfo,
   getAppointmentsPatients,
 } from "../../../actions/index";
 import Nav from "../../Home/Nav/Nav";

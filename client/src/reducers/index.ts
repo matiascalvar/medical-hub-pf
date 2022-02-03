@@ -4,10 +4,12 @@ import { ActionTypes } from "../actions/types";
 const initialState: any = {
   user: {},
   patientInfo: {},
+  medicInfo: {},
   appointments: [],
   specialities: [],
   medicSpeciality: [],
   history: [],
+  filterHistory: [],
   updateResponse: {},
   changePassResponse: {},
   medicAppointments: [],
@@ -33,6 +35,11 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         patientInfo: action.payload,
       };
+    case ActionTypes.getMedicInfo:
+      return {
+        ...state,
+        medicInfo: action.payload,
+      };
     case ActionTypes.getAppointments:
       return {
         ...state,
@@ -44,6 +51,7 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         specialities: action.payload,
+        medicSpeciality: []
       };
     case ActionTypes.getMedicSpeciality:
       return {
@@ -56,6 +64,7 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         history: action.payload,
+        filterHistory: action.payload
       };
     case ActionTypes.updatePatientInfo:
       return {
@@ -83,12 +92,20 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         paymentInfo: action.payload,
       };
+    case ActionTypes.filterHistoryStatus:
+      const patientHistory = state.filterHistory;
+      const resHistory = action.payload === "ALL"
+                       ? patientHistory
+                       : patientHistory.filter((h:any) => h.state === action.payload);
+      return {
+        ...state,
+        filterHistory: resHistory
+      };
     case ActionTypes.getAppointmentsPatients:
       return {
         ...state,
         appointmentsPatients: action.payload,
       };
-
     default:
       return state;
   }
