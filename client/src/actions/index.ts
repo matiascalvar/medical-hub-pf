@@ -250,7 +250,7 @@ export const filterHistoryStatus = (payload:any) => {
 export const getAppointmentsPatients =
   (id: number) => async (dispatch: any) => {
     try {
-      const response = await axios.get(`http://localhost:3001/medic/${id}`);
+      const response = await axios.get(`http://localhost:3001/appointments/medic/${id}`);
       dispatch({
         type: ActionTypes.getAppointmentsPatients,
         payload: response.data,
