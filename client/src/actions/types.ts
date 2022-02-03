@@ -3,13 +3,13 @@
 // Nos devuelve un indice. Si queremos que devuelva un string debemos asignarlo y luego cambiar el type en interfaces
 export enum ActionTypes {
   logUser,
-  getUserInfo,
+  getPatientInfo,
   getAppointments,
   getSpecialities,
   getMedicSpeciality,
   logout,
   getHistory,
-  updateUserInfo,
+  updatePatientInfo,
   changePassResponse,
   medicAppointments,
   specAppointments,
