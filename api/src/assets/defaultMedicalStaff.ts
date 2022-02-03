@@ -1,9 +1,9 @@
-import medicalStafList from "./medicalStafList";
+import medicalStafList from "./Lists/medicalStafList";
 import { User } from "../models/User";
 import { Patient } from "../models/Patient";
 import { MedicalStaff } from "../models/MedicalStaff";
-import populateDB from "./populate";
-import jsonSpecialities from "./specialitiesJSON";
+import populateSpecialities from "./populateSpecialities";
+import specialitiesList from "./Lists/specialitiesList";
 
 const hashedPass =
   "$2b$10$JRLczMb2BmdDqgG/bDM0xu0QOtnDG1/1BFEQPt6WI.O8jWBBxd2Em";
@@ -11,7 +11,7 @@ const hashedPass =
 
 const defaultMedicalStaff = async () => {
   // lleno especialidades con una funcion y un json
-  const specialities = await populateDB(jsonSpecialities);
+  const specialities = await populateSpecialities(specialitiesList);
 
   // Esto está raro (specialities.length?)
   let specQuantity: number[] = [];
