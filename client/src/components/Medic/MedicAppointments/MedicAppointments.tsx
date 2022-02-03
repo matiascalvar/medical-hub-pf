@@ -5,7 +5,7 @@ import style from "./MedicAppointments.module.css";
 import { Link } from "react-router-dom";
 import {
   getPreferenceId,
-  getUserInfo,
+  getPatientInfo,
   getAppointmentsPatients,
 } from "../../../actions/index";
 import Nav from "../../Home/Nav/Nav";
@@ -25,7 +25,7 @@ const Appointments: FunctionComponent = () => {
 
   useEffect(() => {
     if (activeUser.email) {
-      dispatch(getUserInfo(activeUser));
+      dispatch(getPatientInfo(activeUser));
     }
   }, [activeUser, appoinments]);
 
