@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointments, getHistory } from "../../../actions/index";
 import Header from "./Header/Header";
+import Nav from "../Nav/Nav";
 
 interface UserHomeProps {
   userName: string;
@@ -44,7 +45,13 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
 
   return (
     <div className={s.mainContainer}>
-      <Header userName={userName} title="Home" />
+      <div className={s.nav}>
+          <Nav />
+        </div>
+      <div> 
+        <div className={s.header}>
+        <Header userName={userName} title="Home" />
+        </div>
       <div className={s.cardsContainer}>
         <div>
           <div className={s.shiftCard}>
@@ -161,6 +168,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
           </div>
         </div>
       </div>
+      </div> 
     </div>
   );
 }
