@@ -18,9 +18,12 @@ router.post('/', async (req, res) => {
     if (user) {
         try {
             if (await bcrypt.compare(req.body.password, user.hashedPass)) {
+                if (req.body.role === "medic") {
+                    if (!user.isStaff) return res.status(401).send({"error": "No tiene permisos de medico"})
+                }
                 const userData = {
                     email: user.email,
-                    isStaff: user.isStaff,
+                    role: req.body.role,
                     isAdmin: user.isAdmin,
                 }
                 const accessToken = generateAccessToken(userData)
@@ -29,7 +32,7 @@ router.post('/', async (req, res) => {
                 res.cookie('token', refreshToken, { httpOnly: true})
                 return res.send({
                     email: user.email,
-                    role: "patient",
+                    role: req.body.role,
                     token_type: "Bearer",
                     access_token: accessToken
                 })
@@ -53,10 +56,10 @@ router.post('/token', async (req, res) => {
         if (!response) return res.sendStatus(403)
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err: any, user: any) => {
             if (err) return res.sendStatus(403)
-            const accessToken = generateAccessToken({ email: user.email })
+            const accessToken = generateAccessToken(user)
             return res.send({
                 email: user.email,
-                role: "patient",
+                role: user.role,
                 token_type: "Bearer",
                 access_token: accessToken
             })
