@@ -18,29 +18,31 @@ import PrePago from "./components/MercadoPago/PrePago";
 import MercadoPago from "./components/MercadoPago/MercadoPago";
 import NotFound from "./components/NotFound/NotFound";
 import MedicAppointments from "./components/Medic/MedicAppointments/MedicAppointments";
+import MedicAppointmentDetail from "./components/Medic/MedicAppointments/MedicAppointmentDetail";
+import NewReviewAppointment from "./components/Medic/MedicAppointments/NewReviewAppointment";
 
 function App() {
-    const dispatch = useDispatch();
-  
-    const [ loaded, setLoaded ] = React.useState(false)
+  const dispatch = useDispatch();
 
-    React.useEffect(() => {
-        const refreshToken = async function () {
-            try {
-                const response = await axios.post("http://localhost:3001/login/token");
-                const user = {
-                    email: response.data.email,
-                    role: response.data.role,
-                    token: `${response.data.token_type} ${response.data.access_token}`,
-                };
-                dispatch(logUser(user));
-            } catch (error) {
-                console.log("No user logged");
-            }
-        setLoaded(true)
+  const [loaded, setLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    const refreshToken = async function () {
+      try {
+        const response = await axios.post("http://localhost:3001/login/token");
+        const user = {
+          email: response.data.email,
+          role: response.data.role,
+          token: `${response.data.token_type} ${response.data.access_token}`,
         };
+        dispatch(logUser(user));
+      } catch (error) {
+        console.log("No user logged");
+      }
+      setLoaded(true);
+    };
     refreshToken();
-    }, []);
+  }, []);
 
   return (
     <div className="App">
@@ -72,6 +74,15 @@ function App() {
             exact
             path="/home/medic/appointments"
             component={MedicAppointments}
+          />
+          <Route
+            exact
+            path="/home/medic/appointments/:id"
+            component={MedicAppointmentDetail}
+          />
+          <Route
+            path="/home/medic/appointments/review/:id"
+            component={NewReviewAppointment}
           />
           <Route component={NotFound} />
         </Switch>
