@@ -76,6 +76,7 @@ export default function AddMedic() : JSX.Element {
                         autoComplete='off'
                         onChange={handleInputChange}
                     />
+                    <span>Default password</span>
                 </div>
                 <div>
                     <label htmlFor="avbFrom">AVB FROM</label>
@@ -116,6 +117,7 @@ export default function AddMedic() : JSX.Element {
                         autoComplete='off'
                         onChange={handleInputChange}
                     />
+                    <span>Enter an ID</span>
                 </div>
                 <div>
                     <input type="submit"/>
