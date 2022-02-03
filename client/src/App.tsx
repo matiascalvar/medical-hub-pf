@@ -14,7 +14,6 @@ import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
 import UserProfile from "./components/UserProfile/UserProfile";
 import History from "./components/History/History";
-import PrePago from "./components/MercadoPago/PrePago";
 import MercadoPago from "./components/MercadoPago/MercadoPago";
 import NotFound from "./components/NotFound/NotFound";
 import Admin from "./components/Admin/Admin";
@@ -56,7 +55,6 @@ function App() {
                     <ProtectedRoute exact path="/home/appointments/new" component={NewAppointment}/>
                     <ProtectedRoute exact path="/home/userProfile" component={UserProfile} />
                     <ProtectedRoute exact path="/home/history" component={History} />
-                    <ProtectedRoute exact path="/prepago" component={PrePago} />
                     <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
                     <ProtectedRoute exact path="/admin" component={Admin} />
                     <Route exact path="/home/medic/appointments" component={MedicAppointments}/>
