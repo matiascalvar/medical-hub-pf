@@ -14,14 +14,15 @@ import {
 
 const CreatePage: FunctionComponent = () => {
   const history = useHistory();
+  const [errorRegister, setErrorRegister] = React.useState('');
 
   const registerUser = async function (user: any) {
     try {
       const response = await axios.post("http://localhost:3001/register", user);
       setErrors(emptyInput);
       return response;
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      setErrorRegister(error.response.data.error);
       return error;
     }
   };
@@ -122,7 +123,6 @@ const CreatePage: FunctionComponent = () => {
               <FaAt className="register__icons" />
             </div>
             {errors.email && <p className="registerErrors">{errors.email}</p>}
-            {/* <p className="registerErrors">Must be a valid email</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -139,7 +139,6 @@ const CreatePage: FunctionComponent = () => {
             {errors.password && (
               <p className="registerErrors">{errors.password}</p>
             )}
-            {/* <p className="registerErrors">Should be more than 8 characters</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -156,7 +155,6 @@ const CreatePage: FunctionComponent = () => {
             {errors.firstName && (
               <p className="registerErrors">{errors.firstName}</p>
             )}
-            {/* <p className="registerErrors">First Name is required</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -173,7 +171,6 @@ const CreatePage: FunctionComponent = () => {
             {errors.lastName && (
               <p className="registerErrors">{errors.lastName}</p>
             )}
-            {/* <p className="registerErrors">Last Name is required</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -188,7 +185,6 @@ const CreatePage: FunctionComponent = () => {
               <FaRegIdCard className="register__icons" />
             </div>
             {errors.dni && <p className="registerErrors">{errors.dni}</p>}
-            {/* <p className="registerErrors">DNI is required</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -203,7 +199,6 @@ const CreatePage: FunctionComponent = () => {
               <FaPhoneSquareAlt className="register__icons" />
             </div>
             {errors.phone && <p className="registerErrors">{errors.phone}</p>}
-            {/* <p className="registerErrors">Phone is required</p> */}
           </div>
           <div className="register__item register__select">
             <label className="plan__title">Plan:</label>
@@ -219,9 +214,12 @@ const CreatePage: FunctionComponent = () => {
               </option>
             </select>
           </div>
-          <button type="submit" className="register__button">
-            REGISTER
-          </button>
+          <div className="register__item register__button">
+            <button type="submit" className="button__btnRegister">
+              REGISTER
+            </button>
+            {errorRegister.length ? <p className="registerError">{errorRegister}</p> : null}
+          </div>
         </form>
       </div>
     </div>
