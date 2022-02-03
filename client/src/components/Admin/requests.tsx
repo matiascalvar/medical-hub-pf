@@ -22,3 +22,22 @@ export const getMedics = async () => {
         return error
     }
 }
+
+export const getMedicDetail = async (id: number) => {
+    try {
+        const response = await axios.get(URL + "/medicalstaff/" + id)
+        return response
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export const updateMedic = async (id: number, data: any) => {
+    try {
+        const response = await axios.post(URL + "/updateMedic/" + id, data);
+        return response
+      } catch (error) {
+        console.log(error);
+      }
+}
