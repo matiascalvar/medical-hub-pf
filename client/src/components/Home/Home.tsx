@@ -5,13 +5,16 @@ import { useSelector } from "react-redux";
 
 export default function Home(): JSX.Element {
 
-    const patient = useSelector((state: any) => state.patientInfo);
+  const activeUser = useSelector((state: any) => state.user);
+  const patient = useSelector((state: any) => state.patientInfo);
+  // const medic = useSelector((state: any) => state.medic);
+  const medic = { name: "Dr Chapatin"}
 
+  if (activeUser.role === "patient") {
     return (
       <>
         {patient?
           <div className={s.home}>
-            <div>{patient.id}</div>
             <div className={s.nav}>
               <Nav />
             </div>
@@ -19,8 +22,29 @@ export default function Home(): JSX.Element {
               <UserHome id={patient.id} userName={patient.firstName} />
             </div>
           </div> :
-        <h3>Loading...</h3>
+          <h3>Loading...</h3>
         }
       </>
     );
+  } else if (activeUser.role === "medic") {
+    return (
+      <>
+        {medic?
+          <div className={s.home}>
+            <div className={s.nav}>
+              <Nav />
+            </div>
+            <div className={s.main}>
+              <h2>PAGINA DE: {medic.name}</h2>
+            </div>
+          </div> :
+          <h3>Loading...</h3>
+        }
+      </>
+    );
+  } else {
+    return (
+      <h4>Algo salio mal :( </h4>
+    )
+  }
 }

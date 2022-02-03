@@ -16,6 +16,7 @@ import plans from './plans'
 import specialities from './specialities'
 import updateUser from './updateUser'
 import mercadopago from "./mercadopago";
+import updateMedic from "./updateMedic";
 
 router.use('/login', login)
 router.use('/users', users)
@@ -27,7 +28,8 @@ router.use('/studies', studies)
 router.use('/plans', plans)
 router.use('/specialities', specialities)
 router.use('/updateUser', updateUser)
-router.use("/mercadopago", mercadopago);
+router.use("/mercadopago", mercadopago)
+router.use('/updateMedic', updateMedic)
 
 router.get("/", (req: Request, res: Response) => {
   res.send("soy la ruta home get! Probá /test");
