@@ -1,6 +1,6 @@
 // QUITAR FORCE: TRUE SI SE QUIERE CONSERVAR LAS TABLAS DE LA DB
 import populateStudyTypes from "./src/assets/populateStudyTypes";
-import jsonStudyTypes from "./src/assets/studiesList";
+import studiesList from "./src/assets/Lists/studiesList";
 import defaultMedicalStaff from "./src/assets/defaultMedicalStaff";
 import { sequelize } from "./src/db";
 import app from "./src/app";
@@ -14,9 +14,9 @@ sequelize
     app.listen(process.env.PORT || 3001, function () {
       console.log("App is listening on port 3001!");
     });
-    //populateDB(jsonSpecialities);
+
     defaultMedicalStaff();
-    populateStudyTypes(jsonStudyTypes);
+    populateStudyTypes(studiesList);
   })
   .catch((err) => console.error(err));
 
