@@ -4,11 +4,9 @@ import  { User } from '../models/User'
 import { authenticateToken } from './middelwares'
 const router = Router();
 
-router.post('/', authenticateToken, async (req: any, res) => {
-    let email = req.email.email
+router.post('/:id', async (req: any, res) => {
     try {
-        let user: any = await User.findOne({ where: { email: email}});
-        let medic: any = await MedicalStaff.findOne({ where: {UserId: user.id}})
+        let medic: any = await MedicalStaff.findOne({ where: {id: req.params.id}})
         const response = await medic.update(req.body)
         return res.status(201).send({message: 'Datos actualizados con exito'})
     } catch (error) {

@@ -35,7 +35,7 @@ export default function AddMedic() : JSX.Element {
 
     return(
         <div>
-            <h4>NEW MEDIC</h4>
+            <h2>New medic:</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">EMAIL</label>
