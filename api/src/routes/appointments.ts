@@ -15,6 +15,47 @@ router.get('/', (req, res) => {
     res.send('APPOINTMENTS')
 });
 
+router.get('/details/:idAppointment', async (req, res) => { 
+    try {
+        const { idAppointment } = req.params;
+
+        const appointment = await Appointment.findOne(
+            {
+                include: [{
+                    model: MedicalStaff,
+                    attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['idNumber', 'availability', 'avbFrom', 'avbTo', 'appointmentDuration', 'createdAt','updatedAt', 'UserId', 'SpecialitieId']},
+                    include:[{
+                        model: Specialitie,
+                        attributes: {include:['name'], exclude:['id', 'createdAt','updatedAt']}
+                    }]
+                  },
+                {
+                    model: AppointmentDetail,
+                    attributes: {include:  ['details'], exclude: ['id', 'createdAt','updatedAt', 'AppointmentId']}
+                },
+                {
+                    model: Studie,
+                      attributes: {include:['id','state','diagnosis','studyPDF'], exclude:['createdAt','updatedAt','StudyTypeId','MedicalStaffId','AppointmentId','PatientId']},
+                      include:[
+                        {
+                            model: StudyType,
+                            attributes:{exclude:['createdAt','updatedAt']}
+                        }
+                    ]
+                }
+            ],
+                where:{id: idAppointment},
+                attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']}
+            })
+
+        if(!appointment) res.send({message: "There is not an appointment with that ID."})
+        res.send(appointment)        
+    } catch (error) {
+        res.send({Error: error})        
+    }
+
+})
+
 router.get('/medic/:idMedic', async (req, res) => {
     try {
         const { idMedic } = req.params;
