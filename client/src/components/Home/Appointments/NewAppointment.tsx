@@ -72,7 +72,7 @@ const NewAppointment: FunctionComponent = () => {
                 </select>
                 <select id="medic"name="medic" onChange={handleChangeAvailable}>
                   <option  value="selectMedic">Select a medic</option>
-                  {medics.length && <option value="all">All</option>}
+                  {(medics.length && medics.length > 1) && <option value="all">All</option>}
                   {medics.length &&
                     medics.map((medic: any) => {
                       return (

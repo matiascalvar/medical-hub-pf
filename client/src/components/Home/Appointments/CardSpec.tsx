@@ -31,10 +31,10 @@ export const Card = ({ date, hours, medicInfo }: CardProps): JSX.Element => {
       const response = await axios.post("http://localhost:3001/appointments", {
         date: date,
         time: selected.hour,
-        patientId: userActive.UserId,
+        patientId: userActive.id,
         medicalStaffId: medicInfo.MedicalStaffId,
       });
-      dispatch(getAppointments(userActive.UserId));
+      dispatch(getAppointments(userActive.id));
       history.push("/home/appointments");
     } catch (error) {
       console.log(error);
