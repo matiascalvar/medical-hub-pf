@@ -44,6 +44,7 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         specialities: action.payload,
+        medicSpeciality: []
       };
     case ActionTypes.getMedicSpeciality:
       return {
