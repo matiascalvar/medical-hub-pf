@@ -5,20 +5,22 @@
   border-radius: 1rem;
   padding: 1.2rem 2.5rem;
   margin: 1rem 0.5rem;
+  transition: background-color 0.5s;
 }
 
-.cardContainer input{
+.cardContainer input {
   background-color: transparent;
   border: none;
 }
 
-.cardContainer:hover, .cardContainer input:hover {
+.cardContainer:hover,
+.cardContainer input:hover {
   background-color: #0eaaff;
   border-color: transparent;
   color: #fff;
 }
 
-.cardContainer input:hover{
+.cardContainer input:hover {
   cursor: pointer;
 }
 
@@ -58,4 +60,14 @@
   color: #000;
   margin-bottom: 0;
   font-weight: 700 !important;
+}
+
+.btn {
+  border: 1px white solid;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+}
+.btn:hover {
+  border: 1px grey solid;
 }
