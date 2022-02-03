@@ -227,6 +227,13 @@ export const getPreferenceId =
     }
   };
 
+export const filterHistoryStatus = (payload:any) => {
+  return {
+    type: ActionTypes.filterHistoryStatus,
+    payload
+  }
+}
+
 // Conseguir los turnos de los pacientes como medicos
 export const getAppointmentsPatients =
   (id: number) => async (dispatch: any) => {

@@ -5,22 +5,47 @@ import userLogo from "../Home/userLogo.png";
 import "../../styles/History/History.css";
 import { BiFilter, BiDownload } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { getHistory, getPatientInfo } from "../../actions";
+import { filterHistoryStatus, getHistory, getUserInfo } from "../../actions";
+
 
 const History: FunctionComponent = () => {
   const dispatch = useDispatch();
   const activeUser = useSelector((state: any) => state.user);
+  const user = useSelector((state: any) => state.userInfo);
+  const userHistory: any|any[] = useSelector((state: any) => state.filterHistory);
   const patient = useSelector((state: any) => state.patientInfo);
-  const userHistory: any | any[] = useSelector((state: any) => state.history);
-
-  const [isOpen, setIsOpen] = React.useState(false);
-
+  
   useEffect(() => {
     if (patient.id) {
       dispatch(getHistory(patient.id));
     }
   }, [patient]);
   
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [info, setInfo] = React.useState({
+    firstName: "",
+    lastName: ""
+  });
+
+  useEffect(() => {
+    if (user) {
+      setInfo({
+        firstName: user.firstName,
+        lastName: user.lastName
+      });
+    }
+    if (activeUser.email && !info.firstName) {
+      dispatch(getUserInfo(activeUser));
+    }
+  }, [user, dispatch, userHistory]);
+
+  const getFilterStatus = (e:any) => {
+    dispatch(filterHistoryStatus(e.target.value));
+    if(e.target.value === "ALL"){
+      dispatch(getHistory(user.id))
+    }
+  }
+
   return (
     <div className="containerHistory">
       <div className="containerHistory__nav">
@@ -60,15 +85,19 @@ const History: FunctionComponent = () => {
                 <h3 className="filterButtom__top--item">Tipo de estudio:</h3>
               </div>
               <div className="filterButtom__center">
-                <select className="center__izq">
-                  <option className="izq__pendiente">Pending</option>
-                  <option className="izq__parcial">Complete</option>
-                  <option className="izq__completo">Active</option>
+                <select 
+                  className="center__izq" 
+                  onChange={(e) => getFilterStatus(e)}
+                >
+                  <option value="ALL">All</option>
+                  <option value="PENDING">Pending</option>
+                  <option value="COMPLETE">Complete</option>
+                  <option value="ACTIVE">Active</option>
                 </select>
                 <select className="center__der">
-                  <option className="der__pendiente">Laboratorio</option>
-                  <option className="der__parcial">Imagenes</option>
-                  <option className="der__completo">Welltest</option>
+                  <option value="LAB">Laboratorio</option>
+                  <option value="IMAGE">Imagenes</option>
+                  <option value="WELL">Welltest</option>
                 </select>
               </div>
             </div>
@@ -78,29 +107,31 @@ const History: FunctionComponent = () => {
           </div>
         </div>
         <div className="contenedor__sectionCards">
-          {userHistory && userHistory.length > 0 ? (
-            userHistory.map((history: any) => (
-              <div className="cardHistory__container">
-                <div className="cardHistory__top">
-                  <h4 className="cardHistory__top--date">
-                    {history.Appointment.date}
-                  </h4>
-                  <h4 className="cardHistory__top--numberApp">{`N° ${history.Appointment.id}`}</h4>
-                </div>
-                <div className="cardHistory__center">
-                  <h4 className="cardHistory__center--studie">
-                    {history.StudyType.name}
-                  </h4>
-                  <h4 className="cardHistory__center--doc">{`${history.MedicalStaff.firstName} ${history.MedicalStaff.lastName}`}</h4>
-                </div>
-                <div className="cardHistory__bottom">
-                  <h4 className="cardHistory__bottom--state">
-                    {history.state}
-                  </h4>
-                </div>
-              </div>
-            ))
-          ) : (
+          {userHistory && userHistory.length > 0
+            ? (
+                userHistory.map((history:any) => (
+                  <div className="cardHistory__container">
+                    <div className="cardHistory__top">
+                      <h4 className="cardHistory__top--date">
+                        {history.Appointment.date}
+                      </h4>
+                      <h4 className="cardHistory__top--numberApp">{`N° ${history.Appointment.id}`}</h4>
+                    </div>
+                    <div className="cardHistory__center">
+                      <h4 className="cardHistory__center--studie">
+                        {history.StudyType.name}
+                      </h4>
+                      <h4 className="cardHistory__center--doc">{`${history.MedicalStaff.firstName} ${history.MedicalStaff.lastName}`}</h4>
+                    </div>
+                    <div className="cardHistory__bottom">
+                      <h4 className="cardHistory__bottom--state">
+                        {history.state}
+                      </h4>
+                    </div>
+                  </div>
+                ))
+              ) 
+          : (
             <h3 className="cardHistory__message">{userHistory.message}</h3>
           )}
         </div>

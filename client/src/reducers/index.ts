@@ -8,6 +8,7 @@ const initialState: any = {
   specialities: [],
   medicSpeciality: [],
   history: [],
+  filterHistory: [],
   updateResponse: {},
   changePassResponse: {},
   medicAppointments: [],
@@ -56,6 +57,7 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         history: action.payload,
+        filterHistory: action.payload
       };
     case ActionTypes.updatePatientInfo:
       return {
@@ -83,12 +85,20 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         paymentInfo: action.payload,
       };
+    case ActionTypes.filterHistoryStatus:
+      const patientHistory = state.filterHistory;
+      const resHistory = action.payload === "ALL"
+                       ? patientHistory
+                       : patientHistory.filter((h:any) => h.state === action.payload);
+      return {
+        ...state,
+        filterHistory: resHistory
+      };
     case ActionTypes.getAppointmentsPatients:
       return {
         ...state,
         appointmentsPatients: action.payload,
       };
-
     default:
       return state;
   }
