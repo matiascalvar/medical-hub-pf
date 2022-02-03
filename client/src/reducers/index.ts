@@ -13,7 +13,8 @@ const initialState: any = {
   medicAppointments: [],
   specAppointments: [],
   preferenceId: "",
-  paymentInfo: {}
+  paymentInfo: {},
+  appointmentsPatients: [],
 };
 
 export default function reducer(state = initialState, action: actionI) {
@@ -37,7 +38,7 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         appointments: action.payload,
         medicAppointments: {},
-        specAppointments: []
+        specAppointments: [],
       };
     case ActionTypes.getSpecialities:
       return {
@@ -49,7 +50,7 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         medicSpeciality: action.payload,
         medicAppointments: {},
-        specAppointments: []
+        specAppointments: [],
       };
     case ActionTypes.getHistory:
       return {
@@ -70,17 +71,22 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         medicAppointments: action.payload,
-        specAppointments: []
+        specAppointments: [],
       };
-      case ActionTypes.specAppointments:
-        return {
-          ...state,
-          specAppointments: action.payload,
-        };  
+    case ActionTypes.specAppointments:
+      return {
+        ...state,
+        specAppointments: action.payload,
+      };
     case ActionTypes.getPreferenceId:
       return {
         ...state,
         paymentInfo: action.payload,
+      };
+    case ActionTypes.getAppointmentsPatients:
+      return {
+        ...state,
+        appointmentsPatients: action.payload,
       };
 
     default:

@@ -3,6 +3,7 @@ import { Appointment } from '../models/Appointment';
 import { MedicalStaff } from '../models/MedicalStaff';
 import { Studie } from '../models/Studie';
 import { StudyType } from '../models/StudyType';
+const upload = require('../../lib/storage')
 const router = Router();
 
 
@@ -63,5 +64,9 @@ router.get('/:id', async (req, res) => {
     }
     
 });
+
+router.put('/:id', upload.single('studyPDF'), (req,res) => {
+    res.send({message: 'Study file updated successfuly!'})
+})
 
 export default router;

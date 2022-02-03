@@ -225,5 +225,18 @@ export const getPreferenceId =
     } catch (error) {
       console.log(error);
     }
-};
+  };
 
+// Conseguir los turnos de los pacientes como medicos
+export const getAppointmentsPatients =
+  (id: number) => async (dispatch: any) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/medic/${id}`);
+      dispatch({
+        type: ActionTypes.getAppointmentsPatients,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };

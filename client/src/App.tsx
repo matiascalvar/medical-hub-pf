@@ -5,7 +5,7 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logUser } from "./actions";
-import ProtectedRoute from "./protectedRoute"
+import ProtectedRoute from "./protectedRoute";
 import Appointments from "./components/Home/Appointments/Appointments";
 import NewAppointment from "./components/Home/Appointments/NewAppointment";
 import Landing from "./components/Landing/Landing";
@@ -18,6 +18,8 @@ import PrePago from "./components/MercadoPago/PrePago";
 import MercadoPago from "./components/MercadoPago/MercadoPago";
 import NotFound from "./components/NotFound/NotFound";
 import Admin from "./components/Admin/Admin";
+import MedicAppointments from "./components/Medic/MedicAppointments/MedicAppointments";
+
 
 function App() {
     const dispatch = useDispatch();
@@ -57,6 +59,7 @@ function App() {
                     <ProtectedRoute exact path="/prepago" component={PrePago} />
                     <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
                     <ProtectedRoute exact path="/admin" component={Admin} />
+                    <Route exact path="/home/medic/appointments" component={MedicAppointments}/>
                     <Route component={NotFound} />
                 </Switch> :
                 <h4>Loading...</h4>}
