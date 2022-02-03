@@ -1,8 +1,4 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { displayPartsToString } from "typescript";
-import { } from "../../actions/index";
 import AddMedic from "./AddMedic";
 import MedicsTable from "./MedicsTable";
 import { getMedics } from "./requests"
@@ -10,7 +6,7 @@ import { getMedics } from "./requests"
 
 export default function Admin() : JSX.Element {
 
-    const [ display, setDisplay ] : any = React.useState({
+    const [ display, setDisplay ] : any = useState({
         component: "",
         data: []
     })
