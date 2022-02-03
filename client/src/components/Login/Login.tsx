@@ -15,6 +15,7 @@ const LoginPage: FunctionComponent = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const [errorLogin, setErrorLogin] = React.useState('');
 
   const loginUser = async function (newUser: any) {
     const options = {
@@ -26,6 +27,7 @@ const LoginPage: FunctionComponent = () => {
         `email=${newUser.email}&password=${newUser.password}&role=${role}`,
         options
       );
+      console.log("login", response);
       const user = {
         email: newUser.email,
         role: role,
@@ -35,6 +37,7 @@ const LoginPage: FunctionComponent = () => {
       return user;
     } catch (error: any) {
       setServer(true);
+      setErrorLogin(error.response.data.error);
       return false;
     }
   };
@@ -47,7 +50,7 @@ const LoginPage: FunctionComponent = () => {
   const [errors, setErrors] = React.useState(emptyInput);
   const [input, setInput] = React.useState(emptyInput);
   const [server, setServer] = React.useState(false);
-  const [ role, setRole ] = React.useState("patient")
+  const [ role, setRole ] = React.useState("patient");
 
   const handleInputChange = function (e: any) {
     setInput({
@@ -139,7 +142,7 @@ const LoginPage: FunctionComponent = () => {
             <button type="submit" className="form__btn">
               Log in
             </button>
-            {server && <p className="loginErrors">Invalid email or password</p>}
+            {server && <p className="loginErrors">{errorLogin}</p>}
             <Link to="/register" className="btn__register">
               <p>
                 Don't have an account?{" "}
