@@ -28,6 +28,18 @@ export const logUser = (activeUser: User) => async (dispatch: any) => {
     } catch (error) {
       console.log(error);
     }
+  } else if (activeUser.role === "medic"){
+    try {
+      const response = await authAxios.get("http://localhost:3001/users/medic");
+      if (response) {
+        dispatch({
+          type: ActionTypes.getMedicInfo,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 
