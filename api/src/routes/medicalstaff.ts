@@ -10,7 +10,7 @@ router.get('/', async (req,res) => {
         let response: any = await MedicalStaff.findAll({
             include: [{
                 model: Specialitie,
-                    attributes: {include: ["name"], exclude: ["id", "createdAt", "updatedAt"]}
+                    attributes: {include: ["name", "id"], exclude: [ "createdAt", "updatedAt"]}
             }]
         })
         response? res.status(200).send(response) : res.send(204).send({"Msg": "No hay medicos registrados"})
@@ -19,6 +19,23 @@ router.get('/', async (req,res) => {
         return res.status(500).send(e)
     }
 })
+
+router.get('/:id', async (req,res) => {
+    try {
+        let response: any = await MedicalStaff.findOne({
+            where: {id: req.params.id},
+            include: [{
+                model: Specialitie,
+                    attributes: {include: ["name", "id"], exclude: ["createdAt", "updatedAt"]}
+            }]
+        })
+        response? res.status(200).send(response) : res.send(204).send({"Msg": "No hay medicos con esa Id"})
+    } catch (e) {
+        console.log(e)
+        return res.status(500).send(e)
+    }
+})
+
 
 router.post('/', async (req, res) => {
     let response = await User.findOne({where: {email: req.body.email}})
