@@ -85,3 +85,41 @@ export const updatePatient = async (id: number, data: any) => {
 
 
 // --------------------------------------------- APPOINTMENTS ---------------------------------------------
+
+export const getAppointments = async () => {
+    try {
+        const response = await axios.get(URL + "/appointments")
+        return response
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export const getAppointmentDetail = async (id: number) => {
+    try {
+        const response = await axios.get(URL + "/appointments/details/" + id)
+        return response
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export const removeAppointment = async (id: number) => {
+    try {
+        const response = await axios.delete(URL + "/appointments/" + id)
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export const updateAppointment = async (id: number, data: any) => {
+    try {
+        const response = await axios.put(URL + "/appointments/update/" + id, data)
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
