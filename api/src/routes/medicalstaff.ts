@@ -53,17 +53,21 @@ router.post('/', async (req, res) => {
 
         const user = await User.create(newUser)
 
+        const [speciality, created] = await Specialitie.findOrCreate({
+          where: { name: req.body.speciality }
+        });
+
         const newMedicalStaff = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            idNumber: req.body.idNumber,
-            availability: req.body.availability,
-            //avbFrom: req.body.avbFrom,
-            //avbTo: req.body.avbTo,
-            //appointmentDuration: req.body.appointmentDuration,
-            SpecialitieId: req.body.specialitieId,
-            UserId: user.id
-        }
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          idNumber: req.body.idNumber,
+          availability: req.body.availability,
+          //avbFrom: req.body.avbFrom,
+          //avbTo: req.body.avbTo,
+          //appointmentDuration: req.body.appointmentDuration,
+          SpecialitieId: speciality.id,
+          UserId: user.id,
+        };
 
         const medicalStaff = await MedicalStaff.create(newMedicalStaff)
 
