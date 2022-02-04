@@ -10,7 +10,7 @@ export default function Home(): JSX.Element {
   const activeUser = useSelector((state: any) => state.user);
   const patient = useSelector((state: any) => state.patientInfo);
   const medic = useSelector((state: any) => state.medicInfo);
-  console.log(medic);
+ 
 
   if (activeUser.role === "patient") {
     return (

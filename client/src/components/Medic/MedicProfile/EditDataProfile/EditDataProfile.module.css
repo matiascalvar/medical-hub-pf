@@ -1,0 +1,105 @@
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 1rem 0;
+}
+
+.label{
+    align-self: flex-start;
+    font-size: .8rem;
+    font-weight: 600;
+    color: #939eb0;
+    margin-bottom: .2rem;
+}
+
+.inputEmail{
+    border: none;
+    border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+    width: 20rem;
+    height: 1.7rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #939eb0;
+    display: flex;
+    justify-content: start;
+    cursor:no-drop;
+
+}
+
+.input{
+    border: none;
+    border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+    width: 20rem;
+    height: 1.7rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #939eb0;
+}
+
+
+.input:hover{
+    border: none;
+    border-bottom: 2px solid #0eaaff;
+}
+
+.input:focus{
+    border: none;
+    border-bottom: 2px solid #0eaaff;
+    outline: none;
+    color: black;
+}
+
+.saveButton{
+    border: none;
+    background-color: #00d9ff;
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: .3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-top: .5rem;
+}
+.saveButton:hover{
+    opacity: .8;
+}
+
+.loading{
+    border: .4rem solid #ccc;
+    border-top-color: aqua;
+    border-top-style: grove;
+    border-radius: 100%;
+    width: 1rem;
+    height: 1rem;
+    -webkit-animation: girar 1.5s linear infinite;
+    -o-animation: girar 1.5s linear infinite;
+    animation: girar 1.5s linear infinite;
+
+}
+
+@keyframes girar {
+    from {transform: rotate(0deg) ;}
+    to {transform:rotate(360deg);}
+}
+
+.alert{
+    background-color: rgb(96, 255, 96);
+    width: 10rem;
+    height: 1.5rem;
+    font-size: .8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .3rem;
+}

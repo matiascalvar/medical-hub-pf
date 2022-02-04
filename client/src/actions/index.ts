@@ -260,3 +260,28 @@ export const getAppointmentsPatients =
       console.log(error);
     }
   };
+
+  export const updateMedicInfo = (activeUser: any, data: any, id : any) => async (dispatch: any) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/updateMedic/${id}`,
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+          idNumber: data.dni,
+          availability: data.availability,
+          SpecialitieId: data.specialitie,
+
+        }
+      );
+      if (response) {
+        dispatch({
+          type: ActionTypes.updateMedicInfo,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
