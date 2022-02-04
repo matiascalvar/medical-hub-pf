@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { FaVuejs } from "react-icons/fa";
 import { getMedicDetail, updateMedic  } from "./requests";
 
 export default function MedicsDetail(props: any) : JSX.Element {
