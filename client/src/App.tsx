@@ -20,6 +20,7 @@ import Admin from "./components/Admin/Admin";
 import MedicAppointments from "./components/Medic/MedicAppointments/MedicAppointments";
 import MedicAppointmentDetail from "./components/Medic/MedicAppointments/MedicAppointmentDetail";
 import NewReviewAppointment from "./components/Medic/MedicAppointments/NewReviewAppointment";
+import MedicPatientHistory from "./components/Medic/MedicPatientHistory/MedicPatientHistory";
 
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
             path="/home/medic/appointments/review/:id"
             component={NewReviewAppointment}
           />
+          <Route exact path="/home/medic/patientHistory" component={MedicPatientHistory}/>
           <Route component={NotFound} />
         </Switch>
       ) : (
