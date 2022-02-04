@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addPatient } from "./requests"
-import { } from "../../actions/index";
+import { addPatient } from "../requests"
 
 
 export default function AddPatient() : JSX.Element {
@@ -33,7 +32,7 @@ export default function AddPatient() : JSX.Element {
 
     return(
         <div>
-            <h2>New medic:</h2>
+            <h2>New patient:</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">EMAIL:</label>

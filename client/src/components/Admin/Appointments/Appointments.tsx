@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getPatients } from "./requests";
-import PatientsDetail from "./PatientsDetail";
+import { getPatients } from "../requests";
+import AppointmentsDetail from "./AppointmentsDetail";
 
-export default function Patients() : JSX.Element {
+export default function Appointments() : JSX.Element {
 
     class Patient {
         id: number;
@@ -62,7 +62,7 @@ export default function Patients() : JSX.Element {
     return (
         <div>
             <h2>Patients:</h2>
-            {detailed? <PatientsDetail id={detailed} return={() => setDetailed(undefined)} reolad={() => reload()}/> : 
+            {detailed? <AppointmentsDetail id={detailed} return={() => setDetailed(undefined)} reolad={() => reload()}/> : 
                 <div>
                     <div>
                         <input 

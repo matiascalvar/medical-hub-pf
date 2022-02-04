@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addMedic } from "./requests"
-import { } from "../../actions/index";
+import { addMedic } from "../requests"
+import { } from "../../../actions/index";
 
 
 export default function AddMedic() : JSX.Element {

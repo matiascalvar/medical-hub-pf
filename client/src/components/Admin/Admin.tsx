@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import AddMedic from "./AddMedic";
-import Medics from "./Medics";
-import AddPatient from "./AddPatient";
-import Patients from "./Patients";
+import AddMedic from "./Medics/AddMedic";
+import Medics from "./Medics/Medics";
+import AddPatient from "./Patients/AddPatient";
+import Patients from "./Patients/Patients";
 
 
 

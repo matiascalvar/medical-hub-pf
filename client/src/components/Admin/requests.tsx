@@ -2,6 +2,7 @@ import axios from "axios";
 
 const URL = "http://localhost:3001"
 
+// --------------------------------------------- MEDICS ---------------------------------------------
 
 export const addMedic = async (input: any) => {
     try {
@@ -42,6 +43,8 @@ export const updateMedic = async (id: number, data: any) => {
       }
 }
 
+// --------------------------------------------- PATIENTS ---------------------------------------------
+
 export const addPatient = async (input: any) => {
     try {
         const response = await axios.post(URL + "/patients", input)
@@ -79,3 +82,6 @@ export const updatePatient = async (id: number, data: any) => {
         console.log(error);
       }
 }
+
+
+// --------------------------------------------- APPOINTMENTS ---------------------------------------------

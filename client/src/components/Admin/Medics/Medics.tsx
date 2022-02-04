@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getMedics } from "./requests";
+import { getMedics } from "../requests";
 import MedicsDetail from "./MedicsDetail";
 
 export default function Medics(medics: any) : JSX.Element {
