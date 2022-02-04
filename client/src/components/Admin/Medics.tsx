@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { RiH2 } from "react-icons/ri";
 import { getMedics } from "./requests";
 import MedicsDetail from "./MedicsDetail";
 
-export default function AddMedic(medics: any) : JSX.Element {
+export default function Medics(medics: any) : JSX.Element {
 
     class Medic {
         id: number;
