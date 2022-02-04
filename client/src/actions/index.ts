@@ -14,7 +14,7 @@ function createHeaders(token: string) {
 
 export const logUser = (activeUser: User) => async (dispatch: any) => {
   dispatch({ type: ActionTypes.logUser, payload: activeUser });
-  const headers = createHeaders(activeUser.token)
+  const headers = createHeaders(activeUser.token);
   const authAxios = axios.create(headers);
   if (activeUser.role === "patient") {
     try {
@@ -53,7 +53,7 @@ export const logout = () => async (dispatch: any) => {
 };
 
 export const getPatientInfo = (activeUser: any) => async (dispatch: any) => {
-  const headers = createHeaders(activeUser.token)
+  const headers = createHeaders(activeUser.token);
   const authAxios = axios.create(headers);
   try {
     const response = await authAxios.get("http://localhost:3001/users");
@@ -143,7 +143,7 @@ export const getHistory = (id: number) => async (dispatch: any) => {
 
 export const updatePatientInfo =
   (activeUser: any, data: any) => async (dispatch: any) => {
-    const headers = createHeaders(activeUser.token)
+    const headers = createHeaders(activeUser.token);
     const authAxios = axios.create(headers);
     try {
       const response = await authAxios.post(
@@ -168,7 +168,7 @@ export const updatePatientInfo =
 
 export const changePassword =
   (activeUser: any, data: any) => async (dispatch: any) => {
-    const headers = createHeaders(activeUser.token)
+    const headers = createHeaders(activeUser.token);
     const authAxios = axios.create(headers);
     try {
       const response = await authAxios.post(
@@ -250,7 +250,8 @@ export const filterHistoryStatus = (payload:any) => {
 export const getAppointmentsPatients =
   (id: number) => async (dispatch: any) => {
     try {
-      const response = await axios.get(`http://localhost:3001/medic/${id}`);
+      const response = await axios.get(`http://localhost:3001/appointments/medic/${id}`);
+
       dispatch({
         type: ActionTypes.getAppointmentsPatients,
         payload: response.data,

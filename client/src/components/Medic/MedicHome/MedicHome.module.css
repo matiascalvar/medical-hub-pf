@@ -58,7 +58,7 @@
     width: 100%;
     padding: 1rem 0 1rem 0;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
 }
 .appointmentBox {
@@ -75,7 +75,7 @@
 
 .subtitlesContainer{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     width: 100%;
     font-size: 1rem;

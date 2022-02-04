@@ -5,7 +5,7 @@ import * as iconsb from "react-icons/md";
 import * as icons from "react-icons/bi";
 import {useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAppointments, getHistory } from "../../../actions/index";
+import { getAppointmentsPatients } from "../../../actions/index";
 
 interface UserHomeProps {
   userName: string;
@@ -14,15 +14,15 @@ interface UserHomeProps {
 
 export default function ({ userName, id }: UserHomeProps): JSX.Element {
 
-  const appoinments: any[] = useSelector((state: any) => state.appointments);
+  const appoinments: any[] = useSelector((state: any) => state.appointmentsPatients);
   const dispatch = useDispatch();
-
+  console.log(appoinments);
   useEffect(() => {
-    if (appoinments && appoinments.length === 0) {
-      dispatch(getAppointments(id));
+    if (appoinments && appoinments.length === 0 && id) {
+      dispatch(getAppointmentsPatients(id));
     }
 
-  }, [appoinments]);
+  }, [appoinments, id]);
 
   function payState (pay : boolean) : any {
     if(!pay){
@@ -44,9 +44,7 @@ export default function ({ userName, id }: UserHomeProps): JSX.Element {
 
   return (
     <div className={s.mainContainer}>
-      <div>
-        <Nav/>
-      </div>
+     
       <div className={s.header}>
         <Header userName={userName} title="Home" />
         <div>
@@ -58,26 +56,20 @@ export default function ({ userName, id }: UserHomeProps): JSX.Element {
             <div className={s.subtitlesContainer}>
               <span className={s.appointmentBox}>Time</span>
               <span className={s.appointmentBox}>Date</span>
-              <span className={s.appointmentBox}>Medic</span>
-              <span className={s.appointmentBox}>Specialitie</span>
+              <span className={s.appointmentBox}>Patient</span>
               <span className={s.appointmentBox}>Pay</span>
               <span className={s.appointmentBox}>State</span>
             </div>
             <div className={s.dataContainer}>
-            {appoinments && appoinments.length > 0
+            { appoinments && appoinments.length > 0
                 ? appoinments.map((data) => (
                     <div className={s.appointment} key={data.id}>
                       <span className={s.appointmentBox}>{data.time}</span>
                       <span className={s.appointmentBox}>{data.date}</span>
                       <span className={s.appointmentBox}>
-                        {data.MedicalStaff.firstName +
+                        {data.Patient.firstName +
                           " " +
-                          data.MedicalStaff.lastName}
-                      </span>
-                      <span className={s.appointmentBox}>
-                        {data.MedicalStaff.Specialitie
-                          ? data.MedicalStaff.Specialitie.name
-                          : "None"}
+                          data.Patient.lastName}
                       </span>
                       <div className={s.appointmentBox}>
                        <span className={payState(data.pay).style}>{payState(data.pay).text}</span> 
@@ -90,7 +82,8 @@ export default function ({ userName, id }: UserHomeProps): JSX.Element {
                       </div>
                     </div>
                   ))
-                : "There are no appoiments"}
+                : "There are no appoiments" 
+            }
             </div>
           </div>
         </div>

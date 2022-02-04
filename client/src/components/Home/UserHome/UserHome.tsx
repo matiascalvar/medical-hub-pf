@@ -45,9 +45,6 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
 
   return (
     <div className={s.mainContainer}>
-      {/* <div className={s.nav}>
-          <Nav />
-        </div> */}
       <div>
         <div className={s.header}>
           <Header userName={userName} title="Home" />

@@ -1,0 +1,38 @@
+.bigContainer {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #f1f1f1;
+}
+
+.navContainer {
+  height: 100%;
+}
+
+.userLogo {
+  width: 4rem;
+}
+
+.aside {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.title {
+  display: block;
+  text-align: start;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  font-size: 4rem;
+}
+
+.reviewContainer {
+  padding: 2rem;
+  width: 90%;
+  border-radius: 0.7rem;
+  background-color: #fff;
+}

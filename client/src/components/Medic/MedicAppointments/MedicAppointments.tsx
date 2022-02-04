@@ -11,23 +11,18 @@ import {
 import Nav from "../../Home/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
 
-const Appointments: FunctionComponent = () => {
+const MedicAppointments: FunctionComponent = () => {
   let dispatch = useDispatch();
   const userActive = useSelector((state: any) => state.userInfo);
   const activeUser = useSelector((state: any) => state.user);
-  const appoinments: any[] = useSelector(
+  const appointments: any[] = useSelector(
     (state: any) => state.appointmentsPatients
   );
 
   useEffect(() => {
-    dispatch(getAppointmentsPatients(5));
+    dispatch(getAppointmentsPatients(42)); // Cambiar por ID de medico
+    console.log(appointments);
   }, []);
-
-  useEffect(() => {
-    if (activeUser.email) {
-      dispatch(getPatientInfo(activeUser));
-    }
-  }, [activeUser, appoinments]);
 
   function stateColor(state: string): any {
     let color =
@@ -42,7 +37,7 @@ const Appointments: FunctionComponent = () => {
       </div>
       <div className={style.aside}>
         <div>
-          <Header userName={userActive.firstName} title="Appointments" />
+          <Header userName="Asd" title="Appointments" />
         </div>
         <div>
           <div className={style.shiftCard}>
@@ -54,26 +49,22 @@ const Appointments: FunctionComponent = () => {
               <span>Details</span>
             </div>
             <div className={style.dataContainer}>
-              {appoinments.length > 0 ? (
-                appoinments.map((data) => (
+              {appointments.length > 0 ? (
+                appointments.map((data) => (
                   <div className={style.appointment} key={data.id}>
-                    <span className={style.box}>{data.time}</span>
+                    <span className={style.box}>{data.time.slice(0, -3)}</span>
                     <span className={style.box}>{data.date}</span>
                     <span className={style.box}>
-                      {data.MedicalStaff.firstName +
-                        " " +
-                        data.MedicalStaff.lastName}
-                    </span>
-                    <span className={style.box}>
-                      {data.MedicalStaff.Specialitie.name
-                        ? data.MedicalStaff.Specialitie.name
-                        : "None"}
+                      {data.Patient.firstName + " " + data.Patient.lastName}
                     </span>
                     <div className={style.box}>
                       <span className={stateColor(data.state)}>
                         {data.state.toLowerCase()}
                       </span>
                     </div>
+                    <Link to={`/home/medic/appointments/${data.id}`}>
+                      <span>View more details</span>
+                    </Link>
                   </div>
                 ))
               ) : (
@@ -89,4 +80,4 @@ const Appointments: FunctionComponent = () => {
   );
 };
 
-export default Appointments;
+export default MedicAppointments;
