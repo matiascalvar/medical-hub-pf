@@ -17,6 +17,7 @@ const initialState: any = {
   preferenceId: "",
   paymentInfo: {},
   appointmentsPatients: [],
+  plans:[]
 };
 
 export default function reducer(state = initialState, action: actionI) {
@@ -51,7 +52,7 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         specialities: action.payload,
-        medicSpeciality: []
+        medicSpeciality: [],
       };
     case ActionTypes.getMedicSpeciality:
       return {
@@ -64,7 +65,7 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         history: action.payload,
-        filterHistory: action.payload
+        filterHistory: action.payload,
       };
     case ActionTypes.updatePatientInfo:
       return {
@@ -94,17 +95,23 @@ export default function reducer(state = initialState, action: actionI) {
       };
     case ActionTypes.filterHistoryStatus:
       const patientHistory = state.filterHistory;
-      const resHistory = action.payload === "ALL"
-                       ? patientHistory
-                       : patientHistory.filter((h:any) => h.state === action.payload);
+      const resHistory =
+        action.payload === "ALL"
+          ? patientHistory
+          : patientHistory.filter((h: any) => h.state === action.payload);
       return {
         ...state,
-        filterHistory: resHistory
+        filterHistory: resHistory,
       };
     case ActionTypes.getAppointmentsPatients:
       return {
         ...state,
         appointmentsPatients: action.payload,
+      };
+    case ActionTypes.getPlans:
+      return {
+        ...state,
+        plans: action.payload,
       };
     default:
       return state;

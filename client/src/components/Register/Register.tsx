@@ -11,10 +11,16 @@ import {
   FaPhoneSquareAlt,
   FaGoogle,
 } from "react-icons/fa";
+import { getPlans } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreatePage: FunctionComponent = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const plans = useSelector((state: any) => state.plans);
   const [errorRegister, setErrorRegister] = React.useState(''); 
+
 
   const registerUser = async function (user: any) {
     try {
@@ -35,6 +41,7 @@ const CreatePage: FunctionComponent = () => {
     lastName: "",
     dni: "",
     phone: "",
+    planId: "1",
   };
 
   const [errors, setErrors] = React.useState(emptyInput);
@@ -47,6 +54,13 @@ const CreatePage: FunctionComponent = () => {
     });
     validateForm();
   };
+
+  function handleChangePlan(e: { target: any }) {
+    setInput({
+      ...input,
+      planId: e.target.value,
+    });
+  }
 
   const handleSubmit = async function (e: any) {
     e.preventDefault();
@@ -98,6 +112,10 @@ const CreatePage: FunctionComponent = () => {
     setErrors(errors);
   };
 
+  useEffect(() => {
+    dispatch(getPlans());
+  }, []);
+ 
   return (
     <div className="containerCreate">
       <div className="containerCreate__register">
@@ -203,23 +221,26 @@ const CreatePage: FunctionComponent = () => {
           </div>
           <div className="register__item register__select">
             <label className="plan__title">Plan:</label>
-            <select name="plan" className="register__plan">
-              <option value="particular" className="plan__option">
-                Particular
-              </option>
-              <option value="planA" className="plan__option">
-                Plan A
-              </option>
-              <option value="planB" className="plan__option">
-                Plan B
-              </option>
+            <select
+              onChange={handleChangePlan}
+              name="planId"
+              className="register__plan"
+            >
+              {plans.map((e: any) => (
+                <option value={e.id} key={e.id} className="plan__option">
+                  {e.name}
+                </option>
+              ))}
             </select>
           </div>
+
           <div className="register__button register__item">
             <button type="submit" className="button__btnRegister">
               REGISTER
             </button>
-            {errorRegister ? <p className="errorRegister">{errorRegister}</p> : null}
+            {errorRegister ? (
+              <p className="errorRegister">{errorRegister}</p>
+            ) : null}
           </div>
         </form>
       </div>
