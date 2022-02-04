@@ -28,7 +28,7 @@ export const logUser = (activeUser: User) => async (dispatch: any) => {
     } catch (error) {
       console.log(error);
     }
-  } else if (activeUser.role === "medic"){
+  } else if (activeUser.role === "medic") {
     try {
       const response = await authAxios.get("http://localhost:3001/users/medic");
       if (response) {
@@ -239,18 +239,20 @@ export const getPreferenceId =
     }
   };
 
-export const filterHistoryStatus = (payload:any) => {
+export const filterHistoryStatus = (payload: any) => {
   return {
     type: ActionTypes.filterHistoryStatus,
-    payload
-  }
-}
+    payload,
+  };
+};
 
 // Conseguir los turnos de los pacientes como medicos
 export const getAppointmentsPatients =
   (id: number) => async (dispatch: any) => {
     try {
-      const response = await axios.get(`http://localhost:3001/appointments/medic/${id}`);
+      const response = await axios.get(
+        `http://localhost:3001/appointments/medic/${id}`
+      );
 
       dispatch({
         type: ActionTypes.getAppointmentsPatients,
@@ -274,3 +276,20 @@ export const getPlans =
       console.log(error);
     }
   };
+
+export const addReview = (id: any, payload: any) => async (dispatch: any) => {
+  try {
+    const response = await axios.post(`http://localhost:3001/appointmentsDetails/${id}`, payload);
+    dispatch({
+      type: ActionTypes.addReview,
+      payload: true,
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ActionTypes.addReview,
+      payload: false,
+    })
+  }
+}
+

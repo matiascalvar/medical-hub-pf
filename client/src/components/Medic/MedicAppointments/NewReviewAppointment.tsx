@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import {
   getPreferenceId,
   getAppointmentsPatients,
+  addReview,
 } from "../../../actions/index";
 import Nav from "../../Home/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
@@ -18,23 +19,26 @@ export interface IUserPublicProfileRouteParams {
 const NewReviewAppointment: FunctionComponent = () => {
   let dispatch = useDispatch();
   const userActive = useSelector((state: any) => state.userInfo);
-  const activeUser = useSelector((state: any) => state.user);
-  const appointments: any[] = useSelector(
-    (state: any) => state.appointmentsPatients
-  );
-  const { id, name } = useParams<IUserPublicProfileRouteParams>();
-  const [appointmentDetail, setAppointmentDetail] = useState<any>("");
+  const review = useSelector((state: any) => state.postReview);
 
-  useEffect(() => {
-    if (!appointments.length) dispatch(getAppointmentsPatients(42)); // Cambiar ID sin hardcodear cuando podamos sacar la ID de la info del medico
-    setAppointmentDetail(
-      appointments.find((a) => {
-        return a.id == id;
-      })
-    );
-    console.log(appointments);
-    console.log("app", appointmentDetail);
-  }, [appointments]);
+  const { id, name } = useParams<IUserPublicProfileRouteParams>();
+  const [input, setInput] = useState<any>({
+    details: "",
+  });
+
+  const handleChange = (e: any) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+    console.log(input);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (!input.details) return;
+    dispatch(addReview(id, input));
+  };
 
   return (
     <div className={style.bigContainer}>
@@ -46,12 +50,23 @@ const NewReviewAppointment: FunctionComponent = () => {
           <Header userName="Asd" title="Add Review" />
         </div>
         <div className={style.reviewContainer}>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-            beatae ipsam fugit maiores iste excepturi, distinctio blanditiis
-            voluptate quisquam reprehenderit commodi sunt. Accusantium at
-            dignissimos tenetur ipsam quo, vero nihil.
-          </p>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="details"
+              value={input.details}
+              onChange={handleChange}
+              placeholder="Write your review here.."
+            ></input>
+            {!input.details ? (
+              <button disabled className={style.errorBtn} type="submit">
+                Please complete the form
+              </button>
+            ) : (
+              <button type="submit">Submit</button>
+            )}
+          </form>
+          {review && <p>Your review was send</p>}
         </div>
       </div>
     </div>
