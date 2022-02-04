@@ -11,8 +11,27 @@ const { Op } = require("sequelize");
 const router = Router();
 
 
-router.get('/', (req, res) => {
-    res.send('APPOINTMENTS')
+router.get('/', async (req, res) => {
+    try {
+        const response = await Appointment.findAll({
+            include: [{
+                model: MedicalStaff,
+                attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['idNumber', 'availability', 'avbFrom', 'avbTo', 'appointmentDuration', 'createdAt','updatedAt', 'UserId', 'SpecialitieId']},
+                include:[{
+                    model: Specialitie,
+                    attributes: {include:['id', 'name'], exclude:['createdAt','updatedAt']}
+                }]
+            },
+            {
+                model: Patient,
+                attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['phone', 'dni', 'createdAt','updatedAt']},
+            }]
+        })
+        response? res.status(200).send(response) : res.send(204).send({"Msg": "No hay medicos registrados"})
+    } catch (e) {
+        console.log(e)
+        return res.status(500).send(e)
+    }
 });
 
 router.get('/details/:idAppointment', async (req, res) => { 
@@ -34,6 +53,10 @@ router.get('/details/:idAppointment', async (req, res) => {
                     attributes: {include:  ['details'], exclude: ['id', 'createdAt','updatedAt', 'AppointmentId']}
                 },
                 {
+                    model: Patient,
+                    attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['phone', 'dni', 'createdAt','updatedAt']},
+                },
+                {
                     model: Studie,
                       attributes: {include:['id','state','diagnosis','studyPDF'], exclude:['createdAt','updatedAt','StudyTypeId','MedicalStaffId','AppointmentId','PatientId']},
                       include:[
@@ -48,10 +71,10 @@ router.get('/details/:idAppointment', async (req, res) => {
                 attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']}
             })
 
-        if(!appointment) res.send({message: "There is not an appointment with that ID."})
-        res.send(appointment)        
+        if(!appointment) return res.send({message: "There is not an appointment with that ID."})
+        return res.send(appointment)        
     } catch (error) {
-        res.send({Error: error})        
+        return res.send({Error: error})        
     }
 
 })
@@ -162,6 +185,17 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
+    try {
+        let appointment: any = await Appointment.findOne({ where: { id: req.params.id}});
+        const response = await appointment.update(req.body)
+        return res.status(201).send({message: 'Pago acreditado con exito'})
+    } catch (error) {
+        console.log(error)
+        return res.sendStatus(404)
+    }
+})
+
+router.put('/update/:id', async (req, res) => {
     try {
         let appointment: any = await Appointment.findOne({ where: { id: req.params.id}});
         const response = await appointment.update(req.body)
