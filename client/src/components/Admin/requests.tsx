@@ -2,6 +2,7 @@ import axios from "axios";
 
 const URL = "http://localhost:3001"
 
+// --------------------------------------------- MEDICS ---------------------------------------------
 
 export const addMedic = async (input: any) => {
     try {
@@ -35,9 +36,52 @@ export const getMedicDetail = async (id: number) => {
 
 export const updateMedic = async (id: number, data: any) => {
     try {
-        const response = await axios.post(URL + "/updateMedic/" + id, data);
+        const response = await axios.post(URL + "/medicalstaff/" + id, data);
         return response
       } catch (error) {
         console.log(error);
       }
 }
+
+// --------------------------------------------- PATIENTS ---------------------------------------------
+
+export const addPatient = async (input: any) => {
+    try {
+        const response = await axios.post(URL + "/patients", input)
+        return response
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export const getPatients = async () => {
+    try {
+        const response = await axios.get(URL + "/patients")
+        return response
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export const getPatientDetails = async (id: number) => {
+    try {
+        const response = await axios.get(URL + "/patients/" + id)
+        return response
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+export const updatePatient = async (id: number, data: any) => {
+    try {
+        const response = await axios.post(URL + "/patients/" + id, data);
+        return response
+      } catch (error) {
+        console.log(error);
+      }
+}
+
+
+// --------------------------------------------- APPOINTMENTS ---------------------------------------------
