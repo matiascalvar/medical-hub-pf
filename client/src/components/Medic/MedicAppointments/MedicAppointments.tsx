@@ -20,7 +20,7 @@ const MedicAppointments: FunctionComponent = () => {
   );
 
   useEffect(() => {
-    dispatch(getAppointmentsPatients(42)); // Cambiar por ID de medico
+    dispatch(getAppointmentsPatients(48)); // Cambiar por ID de medico
     console.log(appointments);
   }, []);
 

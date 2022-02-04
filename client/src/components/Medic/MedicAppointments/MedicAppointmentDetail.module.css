@@ -75,6 +75,7 @@
 }
 
 .reviewContainer {
+  min-width: 20vw;
   width: 80%;
   height: auto;
   padding: 1rem 0;
@@ -134,10 +135,12 @@
 
 .studiesContainer h3 {
   font-size: 1.5rem;
+  padding-left: 2rem;
 }
 
 .studiesContainer p {
   display: flex;
+  padding-left: 2rem;
   width: 20%;
   font-weight: 500;
 }

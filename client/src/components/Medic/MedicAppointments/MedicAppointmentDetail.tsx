@@ -27,7 +27,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
   const [appointmentDetail, setAppointmentDetail] = useState<any>("");
 
   useEffect(() => {
-    if (!appointments.length) dispatch(getAppointmentsPatients(42)); // Cambiar ID sin hardcodear cuando podamos sacar la ID de la info del medico
+    if (!appointments.length) dispatch(getAppointmentsPatients(48)); // Cambiar ID sin hardcodear cuando podamos sacar la ID de la info del medico
     setAppointmentDetail(
       appointments.find((a) => {
         return a.id == id;
@@ -92,7 +92,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
               <div className={style.reviewContainer}>
                 <h3>Review</h3>
                 {appointmentDetail.AppointmentDetail ? (
-                  <p>appointmentDetail.AppointmentDetail </p>
+                  <p>{appointmentDetail.AppointmentDetail.details} </p>
                 ) : (
                   <div className={style.reviewP}>
                     <p>

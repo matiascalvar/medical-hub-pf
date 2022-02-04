@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Header from "../Landing/Header";
 import Footer from "../Landing/Footer";
 
-const notFound: FunctionComponent = () => {
+const NotFound: FunctionComponent = () => {
   return (
     <div className={style.bigContainer}>
       <div className={style.header}>
@@ -24,4 +24,4 @@ const notFound: FunctionComponent = () => {
   );
 };
 
-export default notFound;
+export default NotFound;
