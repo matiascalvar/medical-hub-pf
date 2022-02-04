@@ -51,16 +51,16 @@ export default function MedicsDetail(props: any) : JSX.Element {
     async function acceptChanges (e: any) {
         e.preventDefault()
         let updatedMedic = {
-            firstName: medic.firstName,
-            lastName: medic.lastName,
-            idNumber: medic.idNumber,
-            availability: medic.availability,
-            avbFrom:medic.avbFrom,
-            avbTo: medic.avbTo,
-            appointmentDuration: medic.appointmentDuration,
-            createdAt: medic.createdAt,
-            SpecialitieId: 1
-        }
+          firstName: medic.firstName,
+          lastName: medic.lastName,
+          idNumber: medic.idNumber,
+          availability: medic.availability,
+          avbFrom: medic.avbFrom,
+          avbTo: medic.avbTo,
+          appointmentDuration: medic.appointmentDuration,
+          createdAt: medic.createdAt,
+          speciality: medic.specialty,
+        };
         await updateMedic(props.id, updatedMedic)
         props.reolad()
     }
