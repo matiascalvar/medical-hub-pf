@@ -11,7 +11,10 @@ router.get('/', async (req,res) => {
             include: [{
                 model: Specialitie,
                     attributes: {include: ["name", "id"], exclude: [ "createdAt", "updatedAt"]}
-            }]
+            }],
+            order: [
+                ['id', 'ASC'],
+            ]
         })
         response? res.status(200).send(response) : res.send(204).send({"Msg": "No hay medicos registrados"})
     } catch (e) {
@@ -73,6 +76,17 @@ router.post('/', async (req, res) => {
         return res.status(500).send(e)
     }
 });
+
+router.post('/:id', async (req: any, res) => {
+    try {
+        let medic: any = await MedicalStaff.findOne({ where: {id: req.params.id}})
+        const response = await medic.update(req.body)
+        return res.status(201).send({message: 'Datos actualizados con exito'})
+    } catch (error) {
+        console.log(error)
+        return res.sendStatus(404)
+    }
+})
 
 
 export default router;
