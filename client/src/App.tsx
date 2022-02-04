@@ -19,6 +19,7 @@ import MercadoPago from "./components/MercadoPago/MercadoPago";
 import NotFound from "./components/NotFound/NotFound";
 import Admin from "./components/Admin/Admin";
 import MedicAppointments from "./components/Medic/MedicAppointments/MedicAppointments";
+import MedicPatientHistory from "./components/Medic/MedicPatientHistory/MedicPatientHistory";
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
                     <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
                     <ProtectedRoute exact path="/admin" component={Admin} />
                     <Route exact path="/home/medic/appointments" component={MedicAppointments}/>
+                    <Route exact path="/home/medic/patientHistory" component={MedicPatientHistory}/>
                     <Route component={NotFound} />
                 </Switch> :
                 <h4>Loading...</h4>}

@@ -9,7 +9,7 @@ const router = Router();
 router.post('/', async (req, res) => {
     let response = await User.findOne({where: {email: req.body.email}})
     if (response) {
-        return res.status(403).send({"Error:": "El email ya esta registrado"})
+        return res.status(403).send({"error": "This email is already registered"})
     }  
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
