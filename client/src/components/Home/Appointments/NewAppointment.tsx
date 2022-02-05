@@ -115,9 +115,9 @@ const NewAppointment: FunctionComponent = () => {
                             
                       </div>
                     <div className={style.cardSpecContainer}>
-                      {specAvb[0].avb[hour].map((m:any) => {
+                      {specAvb[0].avb[hour].map((m:any, index:number) => {
                         //return m.firstName + ' ' + m.lastName + '\n'
-                        return  <CardSpec date={specAvb[0].fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
+                        return  <CardSpec key={index} date={specAvb[0].fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
                       })}
                     </div>
                     
