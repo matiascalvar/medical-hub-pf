@@ -2,8 +2,8 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
 import style from "./NewAppointment.module.css";
-import userLogo from "../userLogo.png";
-import { Link } from "react-router-dom";
+import addDays from '../../../assets/addDays'
+
 import {
   getSpecialities,
   getMedicSpeciality,
@@ -26,22 +26,27 @@ const NewAppointment: FunctionComponent = () => {
     const medics = useSelector((state: any) => state.medicSpeciality);
     const specAvb = useSelector((state: any) => state.specAppointments);
     const [ specId, setSpecId ] = useState(0);
+    const [ pagination, setPagination ] = useState({offset:0, pag:1})
 
     const handleChange = (e: any) => {
         if (e.target.value == "selectSpeciality") return;
         dispatch(getMedicSpeciality(e.target.value));
         setSpecId(e.target.value)
+        setPagination({offset:0, pag:1})
     };
 
     const handleChangeAvailable = (e: any) => {
-        if (e.target.value == "selectMedic") return;
-        if (e.target.value == "all") dispatch(getSpecAvailableTime(specId));
-        dispatch(getMedicAvailableTime(e.target.value));
+        if (e.target.value === "selectMedic") return;
+        if (e.target.value === "all") return dispatch(getSpecAvailableTime(specId));
+        return dispatch(getMedicAvailableTime(e.target.value));
     };
 
     useEffect(() => {
         dispatch(getSpecialities());
     }, []);
+
+    let horariosDisponibles: any[] = [];
+
 
   return (
     <>
@@ -93,36 +98,95 @@ const NewAppointment: FunctionComponent = () => {
                   medicInfo.data.map((day: any) => {
                     //console.log(medicInfo)
                     return <Card date={day.fecha} hours={day.avb} medicInfo={medicInfo} />;
-                  }) : <div>
-                  {specAvb.length > 0 &&
+                  }) : 
+                  
                   <div>
-                  {/* <h2>{(document.getElementById("speciality") as HTMLFormElement).options[(document.getElementById("speciality") as HTMLFormElement).selectedIndex].text}</h2> */}
-                  <h3>{specAvb[0].fecha}</h3>
-                  </div>
-                  }
-                  {specAvb.length>0 &&
-                  Object.getOwnPropertyNames(specAvb[0].avb).map((hour: any) => {
-                    return <div>
-                      <div className={style.hoursContainer}>
-                          {( specAvb[0].avb[hour].length > 0) && 
-                            <label>
-                            <input
-                              type="button"
-                              value={hour.slice(0, -3)}
-                            ></input>
-                          </label>  
-                          }
-                            
-                      </div>
-                    <div className={style.cardSpecContainer}>
-                      {specAvb[0].avb[hour].map((m:any) => {
-                        //return m.firstName + ' ' + m.lastName + '\n'
-                        return  <CardSpec date={specAvb[0].fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
-                      })}
-                    </div>
                     
+                  {specAvb.length > 0 ?
+                  
+                  specAvb.slice(pagination.offset,pagination.pag).map((day: any) => {        
+                    let totalPages = specAvb.length;  
+                    
+                    return (
+                      <div>
+                      <div className={style.paginationBtns}>
+                   {(pagination.offset !== 0) && <button title={addDays(day.fecha, 0)} onClick={() => setPagination({offset:pagination.offset-1, pag:pagination.pag-1})}> {'<<'} </button>}
+                   <h3>{day.fecha}</h3>
+                   {(pagination.pag < totalPages) && <button title={addDays(day.fecha, 2)} onClick={() => setPagination({offset:pagination.offset+1, pag:pagination.pag+1})}> {'>>'} </button>}
+                   </div>
+                   {Object.getOwnPropertyNames(day.avb).map((hour: any) => { 
+                      
+                     if(day.avb[hour].length){ 
+                      
+                      let now = new Date();
+                      const today = addDays(now,0);
+                      let timeToMinutes = (Number(hour.slice(0, -6)*60) + Number(hour.slice(3, -3)))
+                      let nowToMinutes = ((now.getHours()*60) + now.getMinutes())
+                      //let nowToMinutes = (16*60); //ahora en la hora actual
+                      if(day.fecha === today){//de HOY solo mostramos los turnos desde la hora actual en adelante
+                        
+                        if(timeToMinutes > nowToMinutes){             
+                          horariosDisponibles.push(1)         
+                          return (
+                            <div>
+                              <div className={style.hoursContainer}>
+                              <label>
+                                  <input
+                                    type="button"
+                                    value={hour.slice(0, -3)}
+                                  ></input>
+                                </label>   
+                              </div>
+                              <div className={style.cardSpecContainer}>
+                               {day.avb[hour].map((m:any) => {
+                                 return  <CardSpec date={day.fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
+                               })}
+                             </div>
+                             
+                            </div>
+                          )  
+                         }               
+                                          
+                      }else{//desde MAÑANA mostramos todos los horarios
+                        horariosDisponibles.push(1)
+                        return (
+                         <div>
+                           <div className={style.hoursContainer}>
+                           <label>
+                               <input
+                                 type="button"
+                                 value={hour.slice(0, -3)}
+                               ></input>
+                             </label>
+                             <div className={style.cardSpecContainer}>
+                               {day.avb[hour].map((m:any) => {
+                                 return  <CardSpec date={day.fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
+                               })}
+                             </div>  
+ 
+                           </div>
+                         </div>
+                       )
+                      }
+                     }else{
+                       horariosDisponibles.push(0)
+                     }
+
+                    // {console.log(horariosDisponibles)}                 
+                     
+                  })}
+
+                    {(!horariosDisponibles.includes(1) && (document.getElementById("medic") as HTMLInputElement)?.value === "all" ) && // && (document.getElementById("medic") as HTMLInputElement)?.value === "all" ) 
+                    <h2>There isn't appointments available.</h2>                  
+                    }
+                  
                     </div>
-                  }) }
+                  )
+
+                  }) : null
+                  
+                  }                  
+
                   </div>              
                   }
               </div>
