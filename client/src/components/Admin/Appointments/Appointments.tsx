@@ -141,7 +141,7 @@ export default function Appointments() : JSX.Element {
                             )}
                         </tbody>
                     </table> :
-                    <h3>No hay pacientes para mostrar</h3>
+                    <h3>No hay appointments para mostrar</h3>
                     }
                 </div>
             }

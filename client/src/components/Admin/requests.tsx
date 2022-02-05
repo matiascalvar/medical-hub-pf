@@ -43,6 +43,16 @@ export const updateMedic = async (id: number, data: any) => {
       }
 }
 
+export const getSpecialities = async () => {
+    try {
+        const response = await axios.get(URL + "/specialities", )
+        return response
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
 // --------------------------------------------- PATIENTS ---------------------------------------------
 
 export const addPatient = async (input: any) => {
