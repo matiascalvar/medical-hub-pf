@@ -171,8 +171,8 @@ router.post('/', async (req, res) => {
         const newAppointment = {
             date: req.body.date,
             time: req.body.time,
-            PatientId: req.body.patientId,
-            MedicalStaffId: req.body.medicalStaffId
+            PatientId: req.body.PatientId,
+            MedicalStaffId: req.body.MedicalStaffId
         }
         console.log(newAppointment)
         const appointment = await Appointment.create(newAppointment)
@@ -216,6 +216,54 @@ router.delete('/:id', async (req, res) => {
         return res.sendStatus(404)
     }
 })
+
+router.put('/avb/bymedic', async (req, res) => {        
+    try {
+        const MedicalStaffId  = req.body.MedicalStaffId
+        const date = req.body.date
+
+        const appointments = await Appointment.findAll(
+            {where: {
+                MedicalStaffId: MedicalStaffId,
+                date: date
+            }}  
+        )
+        let availability: string[] = [
+            '09:00:00',
+            '09:30:00',
+            '10:00:00',
+            '10:30:00',
+            '11:00:00',
+            '11:30:00',
+            '12:00:00',
+            '12:30:00',
+            '13:00:00',
+            '13:30:00',
+            '14:00:00',
+            '14:30:00',
+            '15:00:00',
+            '15:30:00',
+            '16:00:00',
+            '16:30:00',
+            '17:00:00',
+            '17:30:00',                
+        ]
+
+        appointments.forEach((a) => {
+            const index = availability.indexOf(a.time.toString());
+            if (index > -1) {
+                availability.splice(index, 1);
+            }
+        })
+
+        res.status(200).send(availability)
+           
+    } catch (e) {
+        console.log(e)
+        return res.status(401).send({Error: "No existe el Appointment."})
+    }
+    
+});
 
 router.get('/avb/:idMedicalStaff', async (req, res) => {        
     try {
