@@ -126,6 +126,11 @@ export default function reducer(state = initialState, action: actionI) {
           ...state,
         };
       }
+      case ActionTypes.updateMedicInfo:
+        return {
+          ...state,
+          updateResponse: action.payload,
+        };
     default:
       return state;
   }

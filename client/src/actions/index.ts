@@ -263,6 +263,26 @@ export const getAppointmentsPatients =
     }
 };
 
+  export const updateMedicInfo = (activeUser: any, data: any, id : any) => async (dispatch: any) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/updateMedic/${id}`,
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          idNumber: data.dni,
+          availability: data.availability,
+          speciality: data.specialitie,
+
+        }
+      );
+      if (response) {
+        dispatch({
+          type: ActionTypes.updateMedicInfo,
+          payload: response.data,
+        });
+      }
+
 export const getPlans =
   () => async (dispatch: any) => {
     try {
@@ -272,6 +292,7 @@ export const getPlans =
         type: ActionTypes.getPlans,
         payload: response.data,
       });
+
     } catch (error) {
       console.log(error);
     }
@@ -292,4 +313,3 @@ export const addReview = (id: any, payload: any) => async (dispatch: any) => {
     })
   }
 }
-

@@ -15,7 +15,7 @@ export default function AddMedic() : JSX.Element {
         avbFrom: "",
         avbTo: "",
         appointmentDuration: "",
-        specialitieId: "",
+        speciality: "",
     }
 
     const [input, setInput] = React.useState(emptyInput);
@@ -108,11 +108,11 @@ export default function AddMedic() : JSX.Element {
                     />
                 </div>
                 <div>
-                    <label htmlFor="specialitieId">SPECIALITY:</label>
+                    <label htmlFor="speciality">SPECIALITY:</label>
                     <input
                         type="text" 
-                        name="specialitieId" 
-                        value={input.specialitieId}
+                        name="speciality" 
+                        value={input.speciality}
                         autoComplete='off'
                         onChange={handleInputChange}
                     />
