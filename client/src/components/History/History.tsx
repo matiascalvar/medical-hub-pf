@@ -20,7 +20,7 @@ const History: FunctionComponent = () => {
     if (patient.id) {
       dispatch(getHistory(patient.id));
     }
-  }, [patient]);
+  }, []);
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [info, setInfo] = React.useState({
