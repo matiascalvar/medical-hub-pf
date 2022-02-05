@@ -1,8 +1,15 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getPlans } from "../../actions";
 import Home from "../../assets/img/screen_home.jpeg";
 import style from "./Main.module.css";
 
 const Main: FunctionComponent = () => {
+  let dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getPlans());
+  }, []);
   return (
     <div className={style.container}>
       <div className={style.text}>

@@ -226,7 +226,7 @@ const CreatePage: FunctionComponent = () => {
               name="planId"
               className="register__plan"
             >
-              {plans.map((e: any) => (
+              {plans && plans.map((e: any) => (
                 <option value={e.id} key={e.id} className="plan__option">
                   {e.name}
                 </option>

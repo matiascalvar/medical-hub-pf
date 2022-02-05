@@ -29,9 +29,7 @@ export default function reducer(state = initialState, action: actionI) {
         user: action.payload,
       };
     case ActionTypes.logout:
-      return {
-        initialState,
-      };
+      return {...initialState}
     case ActionTypes.getPatientInfo:
       return {
         ...state,
