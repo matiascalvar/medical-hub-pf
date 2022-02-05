@@ -103,3 +103,9 @@
     justify-content: center;
     border-radius: .3rem;
 }
+
+.error{
+    color: red;
+    font-size: .8rem;
+    font-weight: 600;
+}

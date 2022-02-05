@@ -12,6 +12,7 @@ interface Info{
     lastName: any;
     id : any,
     idNumber: any,
+    availability: any
 }
 interface EditState{
     edit : any
@@ -27,6 +28,7 @@ export default function MedicProfile () : JSX.Element {
         lastName: "",
         id: "",
         idNumber: "",
+        availability: ""
     });
     const [editState , setEditState] = useState<EditState>({
         edit: false
@@ -38,7 +40,8 @@ export default function MedicProfile () : JSX.Element {
                 firstName: response.firstName,
                     lastName: response.lastName,
                     id: response.id,
-                    idNumber: response.idNumber
+                    idNumber: response.idNumber,
+                    availability: response.availability
                 })
             }    
     }, [response, activeUser]);
@@ -73,6 +76,7 @@ export default function MedicProfile () : JSX.Element {
                     dni={myInfo.idNumber}
                     id={myInfo.id}
                     email={activeUser.email}
+                    availability={myInfo.availability}
                     /> : 
                     <EditDataProfile 
                     firstName={myInfo.firstName} 

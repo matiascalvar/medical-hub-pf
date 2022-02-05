@@ -270,10 +270,9 @@ export const getAppointmentsPatients =
         {
           firstName: data.firstName,
           lastName: data.lastName,
-          phone: data.phone,
           idNumber: data.dni,
           availability: data.availability,
-          SpecialitieId: data.specialitie,
+          speciality: data.specialitie,
 
         }
       );

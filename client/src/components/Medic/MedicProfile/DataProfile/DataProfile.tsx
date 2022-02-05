@@ -5,10 +5,11 @@ interface DataProfileProps{
     lastName: any;
     id : any,
     dni: any,
-    email : any
+    email : any,
+    availability: any
 }
 
-export default function DataProfile ({firstName, lastName, id, dni, email} : DataProfileProps) : JSX.Element {
+export default function DataProfile ({firstName, lastName, id, dni, email, availability} : DataProfileProps) : JSX.Element {
 
     
 
@@ -17,10 +18,7 @@ export default function DataProfile ({firstName, lastName, id, dni, email} : Dat
             <div className={s.dataContainer}>
                 
                 <span className={s.fullName}>{firstName + " " + lastName}</span>
-                <span className={s.planText}>Plan</span>
-                <div className={s.planContainer}>
-                    <span>Gold</span>
-                </div>
+                <span className={s.planText}>Medic</span>
                 <div className={s.labelContainer}>
                     <span className={s.label}>Email:</span>
                     <span className={s.dataLabel}>{email}</span>
@@ -32,6 +30,10 @@ export default function DataProfile ({firstName, lastName, id, dni, email} : Dat
                 <div className={s.labelContainer}>
                     <span className={s.label}>DNI:</span>
                     <span className={s.dataLabel}>{dni}</span>
+                </div>
+                <div className={s.labelContainer}>
+                    <span className={s.label}>Availability:</span>
+                    <span className={s.dataLabel}>{availability}</span>
                 </div>
             </div>
             
