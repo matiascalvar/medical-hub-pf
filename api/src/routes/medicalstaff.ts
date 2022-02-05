@@ -83,8 +83,21 @@ router.post('/', async (req, res) => {
 
 router.post('/:id', async (req: any, res) => {
     try {
+        const [speciality, created] = await Specialitie.findOrCreate({
+            where: { name: req.body.speciality }
+          });
         let medic: any = await MedicalStaff.findOne({ where: {id: req.params.id}})
-        const response = await medic.update(req.body)
+        const updatedMedicalStaff = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            idNumber: req.body.idNumber,
+            availability: req.body.availability,
+            //avbFrom: req.body.avbFrom,
+            //avbTo: req.body.avbTo,
+            //appointmentDuration: req.body.appointmentDuration,
+            SpecialitieId: speciality.id,
+          };
+        const response = await medic.update(updatedMedicalStaff)
         return res.status(201).send({message: 'Datos actualizados con exito'})
     } catch (error) {
         console.log(error)
