@@ -263,28 +263,31 @@ export const getAppointmentsPatients =
     }
 };
 
-  export const updateMedicInfo = (activeUser: any, data: any, id : any) => async (dispatch: any) => {
-    try {
-      const response = await axios.post(
-        `http://localhost:3001/updateMedic/${id}`,
-        {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          idNumber: data.dni,
-          availability: data.availability,
-          speciality: data.specialitie,
+export const updateMedicInfo = (activeUser: any, data: any, id : any) => async (dispatch: any) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:3001/updateMedic/${id}`,
+      {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        idNumber: data.dni,
+        availability: data.availability,
+        speciality: data.specialitie,
 
-        }
-      );
-      if (response) {
-        dispatch({
-          type: ActionTypes.updateMedicInfo,
-          payload: response.data,
-        });
       }
+    );
+    if (response) {
+      dispatch({
+        type: ActionTypes.updateMedicInfo,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-export const getPlans =
-  () => async (dispatch: any) => {
+export const getPlans = () => async (dispatch: any) => {
     try {
       const response = await axios.get(`http://localhost:3001/plans`);
 
@@ -296,7 +299,7 @@ export const getPlans =
     } catch (error) {
       console.log(error);
     }
-  };
+};
 
 export const addReview = (id: any, payload: any) => async (dispatch: any) => {
   try {
