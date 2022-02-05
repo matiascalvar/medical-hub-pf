@@ -17,6 +17,7 @@ const initialState: any = {
   preferenceId: "",
   paymentInfo: {},
   appointmentsPatients: [],
+  plans:[],
   postReview: false,
 };
 
@@ -108,7 +109,12 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         appointmentsPatients: action.payload,
       };
-
+    case ActionTypes.getPlans:
+      return {
+        ...state,
+        plans: action.payload,
+      };
+      
     case ActionTypes.addReview:
       if (action.payload) {
         return {
@@ -120,7 +126,6 @@ export default function reducer(state = initialState, action: actionI) {
           ...state,
         };
       }
-
     default:
       return state;
   }

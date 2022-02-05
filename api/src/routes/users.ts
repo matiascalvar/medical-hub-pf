@@ -29,7 +29,7 @@ router.get('/medic', authenticateToken , async (req: any, res) => {
     try {
         let user: any = await User.findOne({ where: { email: email}});
 
-        let userId = user.dataValues.id
+        let userId = user.id
         const medic: any = await MedicalStaff.findOne({ where: {UserId: userId} });
         
         res.send(medic.dataValues) 
