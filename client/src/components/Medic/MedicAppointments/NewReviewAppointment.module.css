@@ -1,0 +1,86 @@
+.bigContainer {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #f1f1f1;
+}
+
+.navContainer {
+  height: 100%;
+}
+
+.userLogo {
+  width: 4rem;
+}
+
+.aside {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.reviewContainer {
+  padding: 0.5rem;
+  margin-left: 2rem;
+  width: 80%;
+  border-radius: 0.7rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewContainer p {
+  color: greenyellow;
+}
+
+.reviewContainer form {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 25vh;
+  width: 100%;
+}
+
+.reviewContainer form input {
+  all: unset;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 25vh;
+  width: 100%;
+  border-radius: 0.7rem;
+  border: 0.2rem solid #f1f1f1;
+  font-size: 1rem;
+}
+
+.reviewContainer form button {
+  margin-top: 2rem;
+  min-height: 3rem;
+  width: 25%;
+  border-radius: 0.7rem;
+  border: none;
+  background-color: #0eaaff;
+  color: #ffff;
+  font-size: 1rem;
+}
+
+.reviewContainer form button:hover {
+  cursor: pointer;
+  background-color: #00d9ff;
+}
+
+.errorBtn {
+  background-color: rgb(241, 31, 31) !important;
+  cursor: not-allowed !important;
+}
+
+.errorBtn:hover {
+  background-color: red !important;
+}

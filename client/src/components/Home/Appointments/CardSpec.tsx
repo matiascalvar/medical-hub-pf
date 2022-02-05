@@ -31,8 +31,8 @@ export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => 
       const response = await axios.post("http://localhost:3001/appointments", {
         date: date,
         time: selected.hour,
-        patientId: userActive.id,
-        medicalStaffId: medicInfo.MedicalStaffId,
+        PatientId: userActive.id,
+        MedicalStaffId: medicInfo.MedicalStaffId,
       });
       dispatch(getAppointments(userActive.id));
       history.push("/home/appointments");

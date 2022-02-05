@@ -101,7 +101,31 @@ const NewAppointment: FunctionComponent = () => {
                   }) : 
                   
                   <div>
-                    
+                  {/* <h2>{(document.getElementById("speciality") as HTMLFormElement).options[(document.getElementById("speciality") as HTMLFormElement).selectedIndex].text}</h2> */}
+                  <h3>{specAvb[0].fecha}</h3>
+                  </div>
+                  }
+                  {specAvb.length>0 &&
+                  Object.getOwnPropertyNames(specAvb[0].avb).map((hour: any) => {
+                    return <div>
+                      <div className={style.hoursContainer}>
+                          {( specAvb[0].avb[hour].length > 0) && 
+                            <label>
+                            <input
+                              type="button"
+                              value={hour.slice(0, -3)}
+                            ></input>
+                          </label>  
+                          }
+                            
+                      </div>
+                    <div className={style.cardSpecContainer}>
+                      {specAvb[0].avb[hour].map((m:any, index:number) => {
+                        //return m.firstName + ' ' + m.lastName + '\n'
+                        return  <CardSpec key={index} date={specAvb[0].fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
+                      })}
+                    </div>
+      
                   {specAvb.length > 0 ?
                   
                   specAvb.slice(pagination.offset,pagination.pag).map((day: any) => {        

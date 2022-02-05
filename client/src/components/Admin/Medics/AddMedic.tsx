@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addMedic } from "./requests"
-import { } from "../../actions/index";
+import { addMedic } from "../requests"
+import { } from "../../../actions/index";
 
 
 export default function AddMedic() : JSX.Element {
@@ -15,7 +15,7 @@ export default function AddMedic() : JSX.Element {
         avbFrom: "",
         avbTo: "",
         appointmentDuration: "",
-        specialitieId: "",
+        speciality: "",
     }
 
     const [input, setInput] = React.useState(emptyInput);
@@ -38,7 +38,7 @@ export default function AddMedic() : JSX.Element {
             <h2>New medic:</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="email">EMAIL</label>
+                    <label htmlFor="email">EMAIL:</label>
                     <input
                         type="text" 
                         name="email" 
@@ -48,7 +48,7 @@ export default function AddMedic() : JSX.Element {
                     />
                 </div>
                 <div>
-                    <label htmlFor="firstName">FIRST NAME</label>
+                    <label htmlFor="firstName">FIRST NAME:</label>
                     <input
                         type="text" 
                         name="firstName" 
@@ -58,7 +58,7 @@ export default function AddMedic() : JSX.Element {
                     />
                 </div>
                 <div>
-                    <label htmlFor="lastName">LAST NAME</label>
+                    <label htmlFor="lastName">LAST NAME:</label>
                     <input
                         type="text" 
                         name="lastName" 
@@ -68,7 +68,7 @@ export default function AddMedic() : JSX.Element {
                     />
                 </div>
                 <div>
-                    <label htmlFor="idNumber">ID NUMBER</label>
+                    <label htmlFor="idNumber">ID NUMBER:</label>
                     <input
                         type="text" 
                         name="idNumber" 
@@ -76,10 +76,9 @@ export default function AddMedic() : JSX.Element {
                         autoComplete='off'
                         onChange={handleInputChange}
                     />
-                    <span>Default password</span>
                 </div>
                 <div>
-                    <label htmlFor="avbFrom">AVB FROM</label>
+                    <label htmlFor="avbFrom">AVB FROM:</label>
                     <input
                         type="text" 
                         name="avbFrom" 
@@ -89,7 +88,7 @@ export default function AddMedic() : JSX.Element {
                     />
                 </div>
                 <div>
-                    <label htmlFor="avbTo">AVB TO</label>
+                    <label htmlFor="avbTo">AVB TO:</label>
                     <input
                         type="text" 
                         name="avbTo" 
@@ -98,8 +97,8 @@ export default function AddMedic() : JSX.Element {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div>
-                    <label htmlFor="appointmentDuration">APP DURATION</label>
+                <div >
+                    <label htmlFor="appointmentDuration">APP DURATION:</label>
                     <input
                         type="text" 
                         name="appointmentDuration" 
@@ -109,15 +108,14 @@ export default function AddMedic() : JSX.Element {
                     />
                 </div>
                 <div>
-                    <label htmlFor="specialitieId">SPECIALITY</label>
+                    <label htmlFor="speciality">SPECIALITY:</label>
                     <input
                         type="text" 
-                        name="specialitieId" 
-                        value={input.specialitieId}
+                        name="speciality" 
+                        value={input.speciality}
                         autoComplete='off'
                         onChange={handleInputChange}
                     />
-                    <span>Enter an ID</span>
                 </div>
                 <div>
                     <input type="submit"/>

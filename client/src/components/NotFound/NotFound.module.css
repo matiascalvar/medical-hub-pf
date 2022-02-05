@@ -1,0 +1,51 @@
+.bigContainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f4f8ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  margin-bottom: 0;
+  margin-top: 1rem;
+}
+
+.header nav {
+  display: none;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.main h2 {
+  font-size: 2rem;
+}
+
+.main button {
+  all: unset;
+  border-radius: 2rem;
+  margin-top: 2rem;
+  min-height: 4rem;
+  min-width: 25%;
+  min-width: 12rem;
+  color: #fff;
+  background-color: #0eaaff;
+  font-size: 1rem;
+}
+
+.main button:hover {
+  background-color: #00d9ff;
+  cursor: pointer;
+}
+
+.main a {
+  all: unset;
+}

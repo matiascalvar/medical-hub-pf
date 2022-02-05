@@ -10,10 +10,27 @@ import { StudyType } from '../models/StudyType';
 const { Op } = require("sequelize");
 const router = Router();
 
-
-router.get('/', (req, res) => {
-    console.log(req.query)
-    res.send('APPOINTMENTS')
+router.get('/', async (req, res) => {
+    try {
+        const response = await Appointment.findAll({
+            include: [{
+                model: MedicalStaff,
+                attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['idNumber', 'availability', 'avbFrom', 'avbTo', 'appointmentDuration', 'createdAt','updatedAt', 'UserId', 'SpecialitieId']},
+                include:[{
+                    model: Specialitie,
+                    attributes: {include:['id', 'name'], exclude:['createdAt','updatedAt']}
+                }]
+            },
+            {
+                model: Patient,
+                attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['phone', 'dni', 'createdAt','updatedAt']},
+            }]
+        })
+        response? res.status(200).send(response) : res.send(204).send({"Msg": "No hay medicos registrados"})
+    } catch (e) {
+        console.log(e)
+        return res.status(500).send(e)
+    }
 });
 
 router.get('/details/:idAppointment', async (req, res) => { 
@@ -35,6 +52,10 @@ router.get('/details/:idAppointment', async (req, res) => {
                     attributes: {include:  ['details'], exclude: ['id', 'createdAt','updatedAt', 'AppointmentId']}
                 },
                 {
+                    model: Patient,
+                    attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['phone', 'dni', 'createdAt','updatedAt']},
+                },
+                {
                     model: Studie,
                       attributes: {include:['id','state','diagnosis','studyPDF'], exclude:['createdAt','updatedAt','StudyTypeId','MedicalStaffId','AppointmentId','PatientId']},
                       include:[
@@ -49,10 +70,10 @@ router.get('/details/:idAppointment', async (req, res) => {
                 attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']}
             })
 
-        if(!appointment) res.send({message: "There is not an appointment with that ID."})
-        res.send(appointment)        
+        if(!appointment) return res.send({message: "There is not an appointment with that ID."})
+        return res.send(appointment)        
     } catch (error) {
-        res.send({Error: error})        
+        return res.send({Error: error})        
     }
 
 })
@@ -149,8 +170,8 @@ router.post('/', async (req, res) => {
         const newAppointment = {
             date: req.body.date,
             time: req.body.time,
-            PatientId: req.body.patientId,
-            MedicalStaffId: req.body.medicalStaffId
+            PatientId: req.body.PatientId,
+            MedicalStaffId: req.body.MedicalStaffId
         }
         //console.log(newAppointment)
         const appointment = await Appointment.create(newAppointment)
@@ -173,6 +194,17 @@ router.put('/:id', async (req, res) => {
     }
 })
 
+router.put('/update/:id', async (req, res) => {
+    try {
+        let appointment: any = await Appointment.findOne({ where: { id: req.params.id}});
+        const response = await appointment.update(req.body)
+        return res.status(201).send({message: 'Pago acreditado con exito'})
+    } catch (error) {
+        console.log(error)
+        return res.sendStatus(404)
+    }
+})
+
 router.delete('/:id', async (req, res) => {
     try {
         let response = await Appointment.destroy({ where: {id: req.params.id}})
@@ -184,6 +216,124 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+router.put('/avb/bymedic', async (req, res) => {        
+    try {
+        const MedicalStaffId  = req.body.MedicalStaffId
+        const date = req.body.date
+
+        const appointments = await Appointment.findAll(
+            {where: {
+                MedicalStaffId: MedicalStaffId,
+                date: date
+            }}  
+        )
+        let availability: string[] = [
+            '09:00:00',
+            '09:30:00',
+            '10:00:00',
+            '10:30:00',
+            '11:00:00',
+            '11:30:00',
+            '12:00:00',
+            '12:30:00',
+            '13:00:00',
+            '13:30:00',
+            '14:00:00',
+            '14:30:00',
+            '15:00:00',
+            '15:30:00',
+            '16:00:00',
+            '16:30:00',
+            '17:00:00',
+            '17:30:00',                
+        ]
+
+        appointments.forEach((a) => {
+            const index = availability.indexOf(a.time.toString());
+            if (index > -1) {
+                availability.splice(index, 1);
+            }
+        })
+
+        res.status(200).send(availability)
+           
+    } catch (e) {
+        console.log(e)
+        return res.status(401).send({Error: "No existe el Appointment."})
+    }
+    
+});
+
+router.get('/avb/:idMedicalStaff', async (req, res) => {        
+    try {
+        const { idMedicalStaff } = req.params;
+
+        const medic = await MedicalStaff.findOne({
+            where: {
+                id: idMedicalStaff
+            }
+        })
+
+        const date = new Date();
+        const totalDays: number = 1;
+
+        let result: any[] = [];
+
+        for(let i=0; i< totalDays; i++){
+            const today = addDays(date,i);
+            const appointments = await Appointment.findAll({
+                where: {
+                    MedicalStaffId: idMedicalStaff,
+                    date: today
+                }
+            })
+
+            let availability: any = {
+                fecha: today,
+                avb: [
+                    '09:00:00',
+                    '09:30:00',
+                    '10:00:00',
+                    '10:30:00',
+                    '11:00:00',
+                    '11:30:00',
+                    '12:00:00',
+                    '12:30:00',
+                    '13:00:00',
+                    '13:30:00',
+                    '14:00:00',
+                    '14:30:00',
+                    '15:00:00',
+                    '15:30:00',
+                    '16:00:00',
+                    '16:30:00',
+                    '17:00:00',
+                    '17:30:00',                
+                ]             
+            }
+            //devuelve un objeto con 2 propiedades fecha y avb que es un objeto SOLO CON LOS TURNOS DISPONIBLES
+            appointments.map(a => {
+                let objProp: string = a.time.toString();
+                    var index = availability.avb.indexOf(objProp);
+                        if (index !== -1) {
+                        availability.avb.splice(index, 1);
+                        }     
+            })
+            result.push(availability)
+        }
+
+        res.send({
+            MedicalStaffId: idMedicalStaff, 
+            medic: medic?.firstName + " " + medic?.lastName,
+            data: result
+        })
+           
+    } catch (e) {
+        console.log(e)
+        return res.status(401).send({Error: "No existe el Appointment."})
+    }
+    
+});
 
 router.get('/avbspeciality/:idSpeciality', async (req: Request, res: Response) => {
     try {
