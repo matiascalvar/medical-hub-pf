@@ -18,8 +18,8 @@ export class Appointment extends Model {
   time!: number;
 
   @Default("ACTIVE")
-  @Column(DataType.ENUM("ACTIVE", "PAYED", "COMPLETED"))
-  state!: "ACTIVE" | "PAYED" | "COMPLETED";
+  @Column(DataType.ENUM("ACTIVE", "CANCELLED", "COMPLETED"))
+  state!: "ACTIVE" | "CANCELLED" | "COMPLETED";
 
   @Default(false)
   @Column

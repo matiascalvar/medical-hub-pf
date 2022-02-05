@@ -20,9 +20,9 @@ router.post('/', async (req, res) => {
             diagnosis: req.body.diagnosis,
             studyPDF: req.body.studyPDF,
             StudyTypeId: req.body.studyTypeId,
-            MedicalStaffId: req.body.medicalStaffId,
+            MedicalStaffId: req.body.MedicalStaffId,
             AppointmentId: req.body.appointmentId,
-            PatientId: req.body.patientId,
+            PatientId: req.body.PatientId,
         }
 
         const study = await Studie.create(newStudy)
