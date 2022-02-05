@@ -18,5 +18,6 @@ export enum ActionTypes {
   getAppointmentsPatients,
   getMedicInfo,
   updateMedicInfo,
+  getPlans,
   addReview,
 }

@@ -261,7 +261,7 @@ export const getAppointmentsPatients =
     } catch (error) {
       console.log(error);
     }
-  };
+};
 
   export const updateMedicInfo = (activeUser: any, data: any, id : any) => async (dispatch: any) => {
     try {
@@ -282,6 +282,17 @@ export const getAppointmentsPatients =
           payload: response.data,
         });
       }
+
+export const getPlans =
+  () => async (dispatch: any) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/plans`);
+
+      dispatch({
+        type: ActionTypes.getPlans,
+        payload: response.data,
+      });
+
     } catch (error) {
       console.log(error);
     }
