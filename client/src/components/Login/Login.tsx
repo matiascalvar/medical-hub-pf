@@ -93,6 +93,13 @@ const LoginPage: FunctionComponent = () => {
     setErrors(errors);
   };
 
+  // To avoid memory leaks. Returning an empty cb fn makes a cleanup on the component
+  useEffect(() => {
+    return () => {
+      ;
+    };
+  }, []);
+
   return (
     <div className="loginContainer">
       <img src={BackImg} alt="fondo" className="imgFondo" />
