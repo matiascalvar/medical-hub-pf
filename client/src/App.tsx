@@ -54,38 +54,16 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <ProtectedRoute exact path="/home" component={Home} />
-          <ProtectedRoute
-            exact
-            path="/home/appointments"
-            component={Appointments}
-          />
-          <ProtectedRoute
-            exact
-            path="/home/appointments/new"
-            component={NewAppointment}
-          />
-          <ProtectedRoute
-            exact
-            path="/home/userProfile"
-            component={UserProfile}
-          />
+          <ProtectedRoute exact path="/home/appointments" component={Appointments} />
+          <ProtectedRoute exact path="/home/appointments/new" component={NewAppointment} />
+          <ProtectedRoute exact path="/home/userProfile" component={UserProfile} />
           <ProtectedRoute exact path="/home/history" component={History} />
           <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
-          <Route
-            exact
-            path="/home/medic/appointments"
-            component={MedicAppointments}
-          />
-          <Route
-            exact
-            path="/home/medic/appointments/:id"
-            component={MedicAppointmentDetail}
-          />
-          <Route
-            path="/home/medic/appointments/review/:id"
-            component={NewReviewAppointment}
-          />
-          <Route exact path="/home/medic/patientHistory" component={MedicPatientHistory}/>
+          <Route exact path="/home/medic/appointments" component={MedicAppointments} />
+          <Route exact path="/home/medic/appointments/:id" component={MedicAppointmentDetail} />
+          <Route path="/home/medic/appointments/review/:id" component={NewReviewAppointment} />
+          <Route exact path="/home/medic/patientHistory" component={MedicPatientHistory} />
+          <Route exact path="/admin" component={Admin} />
           <Route component={NotFound} />
         </Switch>
       ) : (
