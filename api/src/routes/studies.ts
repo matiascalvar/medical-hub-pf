@@ -65,7 +65,7 @@ router.get('/:id', async (req, res) => {
     
 });
 
-router.put('/:id', upload.single('studyPDF'), (req,res) => {
+router.post('/:id', upload.single('studyPDF'), (req,res) => {
     res.send({message: 'Study file updated successfuly!'})
 })
 
