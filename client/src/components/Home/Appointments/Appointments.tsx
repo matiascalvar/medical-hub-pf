@@ -42,7 +42,11 @@ const Appointments: FunctionComponent = () => {
   
   // Obtengo el PlanId, filtro los planes, obtengo el porcentaje de cobertura y hago el calculo del precio final
   let unit_price = "500";
-  let {coveragePercentage} = useSelector((state: any) => state.patientInfo.Plan);
+  let plan = useSelector((state: any) => state.patientInfo.Plan);
+
+  if (plan) {
+    var {coveragePercentage} = plan
+  }
     
   function percentage(unit_price: any, coveragePercentage: any) {
     return unit_price - (unit_price / 100) * coveragePercentage;
