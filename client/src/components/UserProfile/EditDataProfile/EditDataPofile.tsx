@@ -104,7 +104,7 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
                     <input className={s.input} name="phone" type="text" onChange={handleOnChangeInfo} value={myInfo.phone} />
                 </div>
                 {
-                    response.message ? <div className={s.alert}>Datos actualizados</div> : ""
+                    response.message ? <div className={s.alert}>Data updated</div> : ""
                 }
                 <button type='submit' className={s.saveButton}>{loading.loading ? <div className={s.loading}></div> : "Save Changes"}</button>
             </form>
