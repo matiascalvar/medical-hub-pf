@@ -42,7 +42,7 @@ const defaultMedicalStaff = async () => {
       phone: "00000000",
       dni: "00000000",
       UserId: admin.id,
-      PlanId: null,
+      PlanId: "1",
     };
     const patientAdmin = await Patient.create(newPatientAdmin);
     //
@@ -61,7 +61,7 @@ const defaultMedicalStaff = async () => {
         phone: e.phone,
         dni: e.dni,
         UserId: user.id,
-        PlanId: null,
+        PlanId: "1",
       };
       const patient = await Patient.create(newPatient);
       // Creo un nuevo medico

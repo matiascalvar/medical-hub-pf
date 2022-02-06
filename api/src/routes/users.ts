@@ -1,6 +1,7 @@
 import {Response, Request, Router} from 'express';
 import { MedicalStaff } from '../models/MedicalStaff';
 import { Patient } from '../models/Patient';
+import { Plan } from '../models/Plan';
 import { User } from '../models/User';
 import { authenticateToken } from './middelwares'
 const router = Router();
@@ -10,10 +11,21 @@ router.get('/', authenticateToken , async (req: any, res) => {
     let email = req.email.email
 
     try {
-        let user: any = await User.findOne({ where: { email: email}});
+        let user: any = await User.findOne({ where: { email: email }});
 
         let userId = user.dataValues.id
-        const patient: any = await Patient.findOne({ where: {UserId: userId} });
+        const patient: any = await Patient.findOne({
+          where: { UserId: userId },
+          include: [
+            {
+              model: Plan,
+              attributes: {
+                include: ["name", "coveragePercentage"],
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+          ]
+        });
         
         res.send(patient.dataValues) 
     }
