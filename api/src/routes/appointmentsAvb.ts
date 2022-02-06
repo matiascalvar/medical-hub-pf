@@ -65,7 +65,7 @@ router.get('/', async (req, res) => {
                     }
                 })
             }else if(dayOfWeek > 4){
-                h.push()
+                
             }            
 
             const appointments = await Appointment.findAll({
@@ -90,7 +90,7 @@ router.get('/', async (req, res) => {
                         }     
             })
             
-            result.push(availability)
+            avb.length && result.push(availability)
         }
 
         res.send({
