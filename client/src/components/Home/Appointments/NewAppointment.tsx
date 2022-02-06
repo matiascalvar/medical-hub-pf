@@ -101,31 +101,7 @@ const NewAppointment: FunctionComponent = () => {
                   }) : 
                   
                   <div>
-                  {/* <h2>{(document.getElementById("speciality") as HTMLFormElement).options[(document.getElementById("speciality") as HTMLFormElement).selectedIndex].text}</h2> */}
-                  <h3>{specAvb[0].fecha}</h3>
-                  </div>
-                  }
-                  {specAvb.length>0 &&
-                  Object.getOwnPropertyNames(specAvb[0].avb).map((hour: any) => {
-                    return <div>
-                      <div className={style.hoursContainer}>
-                          {( specAvb[0].avb[hour].length > 0) && 
-                            <label>
-                            <input
-                              type="button"
-                              value={hour.slice(0, -3)}
-                            ></input>
-                          </label>  
-                          }
-                            
-                      </div>
-                    <div className={style.cardSpecContainer}>
-                      {specAvb[0].avb[hour].map((m:any, index:number) => {
-                        //return m.firstName + ' ' + m.lastName + '\n'
-                        return  <CardSpec key={index} date={specAvb[0].fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
-                      })}
-                    </div>
-      
+                    
                   {specAvb.length > 0 ?
                   
                   specAvb.slice(pagination.offset,pagination.pag).map((day: any) => {        
@@ -146,7 +122,7 @@ const NewAppointment: FunctionComponent = () => {
                       const today = addDays(now,0);
                       let timeToMinutes = (Number(hour.slice(0, -6)*60) + Number(hour.slice(3, -3)))
                       let nowToMinutes = ((now.getHours()*60) + now.getMinutes())
-                      //let nowToMinutes = (16*60); //ahora en la hora actual
+                      //let nowToMinutes = (16*60); //aqui se puede harcodear la hora actual
                       if(day.fecha === today){//de HOY solo mostramos los turnos desde la hora actual en adelante
                         
                         if(timeToMinutes > nowToMinutes){             
