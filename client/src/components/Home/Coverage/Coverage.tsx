@@ -7,9 +7,10 @@ const Coverage: FunctionComponent<{ open: boolean, onClose: any }> = ({ open, on
 
   let plan = useSelector((state: any) => state.patientInfo.Plan);
 
-  if (plan) {
-    var {coveragePercentage, name} = plan
-  }
+  var coveragePercentage, name;
+  plan
+    ? ({ coveragePercentage, name } = plan)
+    : ({ coveragePercentage, name } = { coveragePercentage: 0, name: "" });
 
   if (!open) {
     return null;

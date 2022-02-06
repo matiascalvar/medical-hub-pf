@@ -40,23 +40,23 @@ const Appointments: FunctionComponent = () => {
     return color;
   }
   
+  function percentage(unit_price: any, coveragePercentage: any) {
+    return unit_price - (unit_price / 100) * coveragePercentage;
+  }
   // Obtengo el PlanId, filtro los planes, obtengo el porcentaje de cobertura y hago el calculo del precio final
   let unit_price = "500";
   let plan = useSelector((state: any) => state.patientInfo.Plan);
 
-  if (plan) {
-    var {coveragePercentage} = plan
-  }
+  var coveragePercentage;
+  plan
+    ? ({ coveragePercentage } = plan)
+    : ({ coveragePercentage } = { coveragePercentage: 0});
     
-  function percentage(unit_price: any, coveragePercentage: any) {
-    return unit_price - (unit_price / 100) * coveragePercentage;
-  }
-  let finalPrice = percentage(unit_price, coveragePercentage);
-  // 
+  let finalPrice = percentage(unit_price, coveragePercentage); 
     
   // Una funcion que use el boton, obtenga datos del appointment y redirija al pago
   function handleBtnPay(data: any) {
-    console.log("data", data);
+    // console.log("data", data);
     dispatch(getPreferenceId("1", finalPrice.toString(), data));
     setIsOpen(true);
   }
