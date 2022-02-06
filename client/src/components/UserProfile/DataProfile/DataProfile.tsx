@@ -13,7 +13,7 @@ interface DataProfileProps{
 
 export default function DataProfile ({firstName, lastName, id, dni, phone, planId, email} : DataProfileProps) : JSX.Element {
 
-        const patientPlanName = useSelector((state: any) => state.patientInfo.Plan.name);
+  const patientPlanName = useSelector((state: any) => state.patientInfo.Plan.name);
 
     return (
       <div>
