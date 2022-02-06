@@ -1,0 +1,35 @@
+.text {
+  display: flex;
+  margin: 0;
+}
+
+.text p {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  font-weight: 500;
+  text-transform: capitalize;
+  padding: 0;
+  margin: 0.5rem;
+}
+
+.textBlue {
+  color: #00d9ff;
+}
+
+.buttons {
+  margin-top: 2rem;
+}
+
+.buttons button {
+  background-color: #0eaaff;
+  border: none;
+  padding: 0.5rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1rem;
+}

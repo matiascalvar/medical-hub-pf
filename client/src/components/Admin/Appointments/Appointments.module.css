@@ -1,0 +1,108 @@
+.appointmentsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-top: 2rem;
+  padding: 4rem;
+}
+
+.appointmentsContainer h2 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.filters select {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.2rem 0;
+  margin: 0.2rem;
+  border: none;
+  width: 10rem;
+  height: 2rem;
+  border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+}
+
+.filters select:hover {
+  border-bottom: 2px solid #0eaaff;
+}
+
+.filters select:focus {
+  border-bottom: 2px solid #0eaaff;
+}
+
+.appointmentsContainer label {
+  font-size: 0.8rem;
+  margin-top: 0;
+  margin-right: 0.5rem;
+}
+
+.appointmentsContainer select {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.2rem 0;
+  margin: 0.2rem;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+}
+
+.appointmentsContainer input {
+  all: unset;
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.2rem 0;
+  margin: 0.2rem;
+  border: none;
+  width: 10rem;
+  height: 1.8rem;
+  border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+}
+
+.appointmentsContainer input::placeholder {
+  padding-left: 0.4rem;
+}
+
+.appointmentsContainer input:hover {
+  border: none;
+  border-bottom: 2px solid #0eaaff;
+}
+
+.appointmentsContainer input:focus {
+  all: unset;
+  width: 10rem;
+  height: 2rem;
+  text-align: left;
+  font-size: 0.8rem;
+  border-bottom: 2px solid #0eaaff;
+}
+
+.appointmentsContainer table {
+  font-size: 1rem;
+}
+
+.appointmentsContainer table tr th {
+  padding: 0.5rem 2rem;
+  border-bottom: 2px solid #0eaaff;
+}
+
+.details {
+  text-decoration: underline;
+}
+
+.appointmentsContainer table tr td {
+  padding-top: 0.3rem;
+  text-transform: capitalize;
+}
+
+.details:hover {
+  cursor: pointer;
+  color: #0eaaff;
+}

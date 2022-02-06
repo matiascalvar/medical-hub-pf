@@ -1,0 +1,72 @@
+.formContainer h2 {
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 4rem;
+}
+
+.inputs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formContainer form div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.3rem 0;
+}
+
+.formContainer form label {
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+.formContainer form input {
+  all: unset;
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.2rem 0;
+  margin: 0.2rem;
+  border: none;
+  height: 2rem;
+  border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+}
+
+.btnEdit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0eaaff;
+  border: none;
+  padding: 0.5rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+.formContainer form {
+  font-size: 0.8rem;
+}
+
+.endBtn {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.endBtn button {
+  padding: 0.5 1rem;
+}
+
+.endBtn button:hover {
+  cursor: pointer;
+  background-color: #00d9ff;
+  padding: 0.5 1rem;
+}
