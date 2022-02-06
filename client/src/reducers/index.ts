@@ -4,6 +4,7 @@ import { ActionTypes } from "../actions/types";
 const initialState: any = {
   user: {},
   patientInfo: {},
+  medicInfo: {},
   appointments: [],
   specialities: [],
   medicSpeciality: [],
@@ -16,6 +17,8 @@ const initialState: any = {
   preferenceId: "",
   paymentInfo: {},
   appointmentsPatients: [],
+  plans:[],
+  postReview: false,
 };
 
 export default function reducer(state = initialState, action: actionI) {
@@ -26,13 +29,16 @@ export default function reducer(state = initialState, action: actionI) {
         user: action.payload,
       };
     case ActionTypes.logout:
-      return {
-        initialState,
-      };
+      return {...initialState}
     case ActionTypes.getPatientInfo:
       return {
         ...state,
         patientInfo: action.payload,
+      };
+    case ActionTypes.getMedicInfo:
+      return {
+        ...state,
+        medicInfo: action.payload,
       };
     case ActionTypes.getAppointments:
       return {
@@ -45,7 +51,7 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         specialities: action.payload,
-        medicSpeciality: []
+        medicSpeciality: [],
       };
     case ActionTypes.getMedicSpeciality:
       return {
@@ -58,7 +64,7 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         history: action.payload,
-        filterHistory: action.payload
+        filterHistory: action.payload,
       };
     case ActionTypes.updatePatientInfo:
       return {
@@ -88,18 +94,41 @@ export default function reducer(state = initialState, action: actionI) {
       };
     case ActionTypes.filterHistoryStatus:
       const patientHistory = state.filterHistory;
-      const resHistory = action.payload === "ALL"
-                       ? patientHistory
-                       : patientHistory.filter((h:any) => h.state === action.payload);
+      const resHistory =
+        action.payload === "ALL"
+          ? patientHistory
+          : patientHistory.filter((h: any) => h.state === action.payload);
       return {
         ...state,
-        filterHistory: resHistory
+        filterHistory: resHistory,
       };
     case ActionTypes.getAppointmentsPatients:
       return {
         ...state,
         appointmentsPatients: action.payload,
       };
+    case ActionTypes.getPlans:
+      return {
+        ...state,
+        plans: action.payload,
+      };
+      
+    case ActionTypes.addReview:
+      if (action.payload) {
+        return {
+          ...state,
+          postReview: true,
+        };
+      } else {
+        return {
+          ...state,
+        };
+      }
+      case ActionTypes.updateMedicInfo:
+        return {
+          ...state,
+          updateResponse: action.payload,
+        };
     default:
       return state;
   }

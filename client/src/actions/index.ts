@@ -14,7 +14,7 @@ function createHeaders(token: string) {
 
 export const logUser = (activeUser: User) => async (dispatch: any) => {
   dispatch({ type: ActionTypes.logUser, payload: activeUser });
-  const headers = createHeaders(activeUser.token)
+  const headers = createHeaders(activeUser.token);
   const authAxios = axios.create(headers);
   if (activeUser.role === "patient") {
     try {
@@ -22,6 +22,18 @@ export const logUser = (activeUser: User) => async (dispatch: any) => {
       if (response) {
         dispatch({
           type: ActionTypes.getPatientInfo,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  } else if (activeUser.role === "medic") {
+    try {
+      const response = await authAxios.get("http://localhost:3001/users/medic");
+      if (response) {
+        dispatch({
+          type: ActionTypes.getMedicInfo,
           payload: response.data,
         });
       }
@@ -41,7 +53,7 @@ export const logout = () => async (dispatch: any) => {
 };
 
 export const getPatientInfo = (activeUser: any) => async (dispatch: any) => {
-  const headers = createHeaders(activeUser.token)
+  const headers = createHeaders(activeUser.token);
   const authAxios = axios.create(headers);
   try {
     const response = await authAxios.get("http://localhost:3001/users");
@@ -131,7 +143,7 @@ export const getHistory = (id: number) => async (dispatch: any) => {
 
 export const updatePatientInfo =
   (activeUser: any, data: any) => async (dispatch: any) => {
-    const headers = createHeaders(activeUser.token)
+    const headers = createHeaders(activeUser.token);
     const authAxios = axios.create(headers);
     try {
       const response = await authAxios.post(
@@ -156,7 +168,7 @@ export const updatePatientInfo =
 
 export const changePassword =
   (activeUser: any, data: any) => async (dispatch: any) => {
-    const headers = createHeaders(activeUser.token)
+    const headers = createHeaders(activeUser.token);
     const authAxios = axios.create(headers);
     try {
       const response = await authAxios.post(
@@ -227,18 +239,21 @@ export const getPreferenceId =
     }
   };
 
-export const filterHistoryStatus = (payload:any) => {
+export const filterHistoryStatus = (payload: any) => {
   return {
     type: ActionTypes.filterHistoryStatus,
-    payload
-  }
-}
+    payload,
+  };
+};
 
 // Conseguir los turnos de los pacientes como medicos
 export const getAppointmentsPatients =
   (id: number) => async (dispatch: any) => {
     try {
-      const response = await axios.get(`http://localhost:3001/medic/${id}`);
+      const response = await axios.get(
+        `http://localhost:3001/appointments/medic/${id}`
+      );
+
       dispatch({
         type: ActionTypes.getAppointmentsPatients,
         payload: response.data,
@@ -246,4 +261,58 @@ export const getAppointmentsPatients =
     } catch (error) {
       console.log(error);
     }
-  };
+};
+
+export const updateMedicInfo = (activeUser: any, data: any, id : any) => async (dispatch: any) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:3001/updateMedic/${id}`,
+      {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        idNumber: data.dni,
+        availability: data.availability,
+        speciality: data.specialitie,
+
+      }
+    );
+    if (response) {
+      dispatch({
+        type: ActionTypes.updateMedicInfo,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getPlans = () => async (dispatch: any) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/plans`);
+
+      dispatch({
+        type: ActionTypes.getPlans,
+        payload: response.data,
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+};
+
+export const addReview = (id: any, payload: any) => async (dispatch: any) => {
+  try {
+    const response = await axios.post(`http://localhost:3001/appointmentsDetails/${id}`, payload);
+    dispatch({
+      type: ActionTypes.addReview,
+      payload: true,
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: ActionTypes.addReview,
+      payload: false,
+    })
+  }
+}

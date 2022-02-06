@@ -2,9 +2,11 @@
 import populateStudyTypes from "./src/assets/populateStudyTypes";
 import studiesList from "./src/assets/Lists/studiesList";
 import defaultMedicalStaff from "./src/assets/defaultMedicalStaff";
+import defaultPlans from "./src/assets/defaultPlans";
 import { sequelize } from "./src/db";
 import app from "./src/app";
 import clearDB from "./src/assets/clearDB";
+import plansList from "./src/assets/Lists/plansList";
 const cron = require("node-cron");
 
 sequelize
@@ -17,6 +19,7 @@ sequelize
 
     defaultMedicalStaff();
     populateStudyTypes(studiesList);
+    defaultPlans(plansList)
   })
   .catch((err) => console.error(err));
 

@@ -11,17 +11,25 @@ import {
   FaPhoneSquareAlt,
   FaGoogle,
 } from "react-icons/fa";
+import { getPlans } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreatePage: FunctionComponent = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const plans = useSelector((state: any) => state.plans);
+  const [errorRegister, setErrorRegister] = React.useState(''); 
+
 
   const registerUser = async function (user: any) {
     try {
       const response = await axios.post("http://localhost:3001/register", user);
       setErrors(emptyInput);
       return response;
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      setErrorRegister(error.response.data.error);
+      console.log(error.response.data.error);
       return error;
     }
   };
@@ -33,6 +41,7 @@ const CreatePage: FunctionComponent = () => {
     lastName: "",
     dni: "",
     phone: "",
+    planId: "1",
   };
 
   const [errors, setErrors] = React.useState(emptyInput);
@@ -45,6 +54,13 @@ const CreatePage: FunctionComponent = () => {
     });
     validateForm();
   };
+
+  function handleChangePlan(e: { target: any }) {
+    setInput({
+      ...input,
+      planId: e.target.value,
+    });
+  }
 
   const handleSubmit = async function (e: any) {
     e.preventDefault();
@@ -96,6 +112,10 @@ const CreatePage: FunctionComponent = () => {
     setErrors(errors);
   };
 
+  useEffect(() => {
+    dispatch(getPlans());
+  }, []);
+ 
   return (
     <div className="containerCreate">
       <div className="containerCreate__register">
@@ -122,7 +142,6 @@ const CreatePage: FunctionComponent = () => {
               <FaAt className="register__icons" />
             </div>
             {errors.email && <p className="registerErrors">{errors.email}</p>}
-            {/* <p className="registerErrors">Must be a valid email</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -139,7 +158,6 @@ const CreatePage: FunctionComponent = () => {
             {errors.password && (
               <p className="registerErrors">{errors.password}</p>
             )}
-            {/* <p className="registerErrors">Should be more than 8 characters</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -156,7 +174,6 @@ const CreatePage: FunctionComponent = () => {
             {errors.firstName && (
               <p className="registerErrors">{errors.firstName}</p>
             )}
-            {/* <p className="registerErrors">First Name is required</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -173,7 +190,6 @@ const CreatePage: FunctionComponent = () => {
             {errors.lastName && (
               <p className="registerErrors">{errors.lastName}</p>
             )}
-            {/* <p className="registerErrors">Last Name is required</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -188,7 +204,6 @@ const CreatePage: FunctionComponent = () => {
               <FaRegIdCard className="register__icons" />
             </div>
             {errors.dni && <p className="registerErrors">{errors.dni}</p>}
-            {/* <p className="registerErrors">DNI is required</p> */}
           </div>
           <div className="register__item">
             <div className="item__container">
@@ -203,25 +218,30 @@ const CreatePage: FunctionComponent = () => {
               <FaPhoneSquareAlt className="register__icons" />
             </div>
             {errors.phone && <p className="registerErrors">{errors.phone}</p>}
-            {/* <p className="registerErrors">Phone is required</p> */}
           </div>
           <div className="register__item register__select">
             <label className="plan__title">Plan:</label>
-            <select name="plan" className="register__plan">
-              <option value="particular" className="plan__option">
-                Particular
-              </option>
-              <option value="planA" className="plan__option">
-                Plan A
-              </option>
-              <option value="planB" className="plan__option">
-                Plan B
-              </option>
+            <select
+              onChange={handleChangePlan}
+              name="planId"
+              className="register__plan"
+            >
+              {plans && plans.map((e: any) => (
+                <option value={e.id} key={e.id} className="plan__option">
+                  {e.name}
+                </option>
+              ))}
             </select>
           </div>
-          <button type="submit" className="register__button">
-            REGISTER
-          </button>
+
+          <div className="register__button register__item">
+            <button type="submit" className="button__btnRegister">
+              REGISTER
+            </button>
+            {errorRegister ? (
+              <p className="errorRegister">{errorRegister}</p>
+            ) : null}
+          </div>
         </form>
       </div>
     </div>

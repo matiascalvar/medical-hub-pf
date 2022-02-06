@@ -20,6 +20,10 @@ const defaultMedicalStaff = async () => {
     specQuantity.push(i++);
   });
 
+  const hoursFrom = [9,10,11,12]
+  const hoursTo = [13,14,15,16,17]
+  const minutes = [0,30]
+
   const usersFromDB = await User.findAll();
   //  Si no hay users en la db la populo
   if (usersFromDB.length === 0) {
@@ -66,6 +70,8 @@ const defaultMedicalStaff = async () => {
         firstName: e.firstName,
         lastName: e.lastName,
         idNumber: e.dni,
+        avbFrom: `${hoursFrom[Math.floor((Math.random() * hoursFrom?.length))]}:${minutes[Math.floor((Math.random() * minutes.length))]}:00"`,
+        avbTo: `${hoursTo[Math.floor((Math.random() * hoursTo?.length))]}:${minutes[Math.floor((Math.random() * minutes.length))]}:00"`,
         SpecialitieId: specQuantity
           ? specQuantity[Math.floor(Math.random() * specQuantity?.length)]
           : null,

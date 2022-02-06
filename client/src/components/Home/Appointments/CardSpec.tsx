@@ -11,7 +11,7 @@ interface CardProps {
   medicInfo: any;
 }
 
-export const Card = ({ date, hours, medicInfo }: CardProps): JSX.Element => {
+export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userActive = useSelector((state: any) => state.patientInfo);
@@ -31,8 +31,8 @@ export const Card = ({ date, hours, medicInfo }: CardProps): JSX.Element => {
       const response = await axios.post("http://localhost:3001/appointments", {
         date: date,
         time: selected.hour,
-        patientId: userActive.id,
-        medicalStaffId: medicInfo.MedicalStaffId,
+        PatientId: userActive.id,
+        MedicalStaffId: medicInfo.MedicalStaffId,
       });
       dispatch(getAppointments(userActive.id));
       history.push("/home/appointments");
@@ -51,7 +51,7 @@ export const Card = ({ date, hours, medicInfo }: CardProps): JSX.Element => {
         />
       </label>
       {selected.hour ? (
-        <div>
+        <div className={style.appConfirm}>
           <h3>
             Confirm appointment with Dr. {medicInfo.medic} at {hours}hs.
           </h3>
@@ -70,4 +70,4 @@ export const Card = ({ date, hours, medicInfo }: CardProps): JSX.Element => {
   );
 };
 
-export default Card;
+export default CardSpec;

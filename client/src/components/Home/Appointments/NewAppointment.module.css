@@ -74,10 +74,38 @@
   font-size: 2rem;
 }
 
+.paginationBtns{
+  display: flex;
+  width: 1028px;
+}
+
+.paginationBtns button{
+  height: 25px;
+  padding: 0.3em 1em 0.5em 1em;
+  margin-top: 5px;
+  background-color: #0eaaff;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.paginationBtns button:hover{
+  background-color: white;
+  color:#0eaaff;
+}
+
 .cardsContainer {
   display: flex;
   justify-content: center;
   flex-direction: row;
+}
+
+.cardsContainer h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #939eb0 !important;
+  width: 100%;
 }
 
 .hoursContainer {

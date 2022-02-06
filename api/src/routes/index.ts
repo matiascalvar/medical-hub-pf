@@ -12,6 +12,7 @@ import appointments from './appointments'
 import appointmentDetails from './appointmentDetails'
 import appointmentsAvb from './appointmentsAvb'
 import medicalstaff from './medicalstaff'
+import patients from './patients'
 import studies from './studies'
 import plans from './plans'
 import specialities from './specialities'
@@ -26,6 +27,7 @@ router.use('/appointments', appointments)
 router.use('/appointmentsDetails', appointmentDetails)
 router.use('/appointmentsAvb', appointmentsAvb)
 router.use('/medicalstaff', medicalstaff)
+router.use('/patients', patients)
 router.use('/studies', studies)
 router.use('/plans', plans)
 router.use('/specialities', specialities)

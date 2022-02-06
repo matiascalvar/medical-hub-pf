@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import { FaVuejs } from "react-icons/fa";
-import { getMedicDetail, updateMedic  } from "./requests";
+import { getMedicDetail, updateMedic, getSpecialities  } from "../requests";
 
 export default function MedicsDetail(props: any) : JSX.Element {
+
+    const loadSpecialites = async () => {
+        const response: any = await getSpecialities()
+        if (response) setSpecialities(response.data)
+    }
 
     const getDetails = async (id: number) => {
         try {
@@ -16,7 +20,7 @@ export default function MedicsDetail(props: any) : JSX.Element {
                 avbTo: response.data.avbTo,
                 appointmentDuration: response.data.appointmentDuration,
                 createdAt: response.data.createdAt,
-                specialty: response.data.Specialitie.name,
+                speciality: response.data.Specialitie.name,
             })
         } catch (error) {
             console.log(error)
@@ -24,7 +28,8 @@ export default function MedicsDetail(props: any) : JSX.Element {
     }
 
     const [ editable, setEditable] = useState("")
-
+    const [ error, setError ] = useState<string>()
+    const [ specialities, setSpecialities ] = useState<any>()
     const [ medic, setMedic ] = useState({
         firstName: "",
         lastName: "",
@@ -34,7 +39,7 @@ export default function MedicsDetail(props: any) : JSX.Element {
         avbTo: "",
         appointmentDuration: "",
         createdAt: "",
-        specialty: "",        
+        speciality: "",        
     })
 
     function handleInputChange(e: any) {
@@ -42,6 +47,15 @@ export default function MedicsDetail(props: any) : JSX.Element {
             ...medic,
             [e.target.name]: e.target.value
         })
+        if (e.target.name === "speciality") verifySpeciality(e.target.value)
+    }
+
+    function verifySpeciality (input: string) {
+        if(!specialities.find((s: any) => s.name === input) && input != "") {
+            setError("New Speciality")
+        } else {
+            setError("")
+        }
     }
 
     function handleSubmit(e: any) {
@@ -50,23 +64,13 @@ export default function MedicsDetail(props: any) : JSX.Element {
 
     async function acceptChanges (e: any) {
         e.preventDefault()
-        let updatedMedic = {
-            firstName: medic.firstName,
-            lastName: medic.lastName,
-            idNumber: medic.idNumber,
-            availability: medic.availability,
-            avbFrom:medic.avbFrom,
-            avbTo: medic.avbTo,
-            appointmentDuration: medic.appointmentDuration,
-            createdAt: medic.createdAt,
-            SpecialitieId: 1
-        }
-        await updateMedic(props.id, updatedMedic)
+        await updateMedic(props.id, medic)
         props.reolad()
     }
 
     useEffect(() => {
         getDetails(props.id)
+        loadSpecialites()
     },[])
 
     return(
@@ -200,21 +204,19 @@ export default function MedicsDetail(props: any) : JSX.Element {
                     </div> }
                 </div>
                 <div>
-                    <label htmlFor="specialty">SPECIALITY: </label>
-                    {editable === "specialty" ?
+                    <label htmlFor="speciality">SPECIALITY: </label>
+                    {editable === "speciality" ?
                     <>
-                        <input
-                            type="text" 
-                            name="specialty" 
-                            value={medic.specialty}
-                            autoComplete='off'
-                            onChange={handleInputChange}
-                        />
+                        <input name="speciality" list="speciality" onChange={handleInputChange} autoComplete="off" />
+                        <datalist id="speciality">
+                            {specialities? specialities.map((s: any) => <option value={s.name}>{s.name}</option> ): <option></option>}
+                        </datalist>
+                        {error? <h5>{error}</h5> : null}
                         <button onClick={() => setEditable("")}>ACCEPT</button>
                     </> :
                     <div>
-                        <span>{medic.specialty}</span>
-                        <button onClick={() => setEditable("specialty")}>EDIT</button>
+                        <span>{medic.speciality}</span>
+                        <button onClick={() => setEditable("speciality")}>EDIT</button>
                     </div> }
                 </div>
                 <div>

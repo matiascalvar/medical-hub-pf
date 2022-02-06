@@ -10,9 +10,27 @@ import { StudyType } from '../models/StudyType';
 const { Op } = require("sequelize");
 const router = Router();
 
-
-router.get('/', (req, res) => {
-    res.send('APPOINTMENTS')
+router.get('/', async (req, res) => {
+    try {
+        const response = await Appointment.findAll({
+            include: [{
+                model: MedicalStaff,
+                attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['idNumber', 'availability', 'avbFrom', 'avbTo', 'appointmentDuration', 'createdAt','updatedAt', 'UserId', 'SpecialitieId']},
+                include:[{
+                    model: Specialitie,
+                    attributes: {include:['id', 'name'], exclude:['createdAt','updatedAt']}
+                }]
+            },
+            {
+                model: Patient,
+                attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['phone', 'dni', 'createdAt','updatedAt']},
+            }]
+        })
+        response? res.status(200).send(response) : res.send(204).send({"Msg": "No hay medicos registrados"})
+    } catch (e) {
+        console.log(e)
+        return res.status(500).send(e)
+    }
 });
 
 router.get('/details/:idAppointment', async (req, res) => { 
@@ -34,6 +52,10 @@ router.get('/details/:idAppointment', async (req, res) => {
                     attributes: {include:  ['details'], exclude: ['id', 'createdAt','updatedAt', 'AppointmentId']}
                 },
                 {
+                    model: Patient,
+                    attributes: {include:  ['id', 'firstName', 'lastName'], exclude: ['phone', 'dni', 'createdAt','updatedAt']},
+                },
+                {
                     model: Studie,
                       attributes: {include:['id','state','diagnosis','studyPDF'], exclude:['createdAt','updatedAt','StudyTypeId','MedicalStaffId','AppointmentId','PatientId']},
                       include:[
@@ -48,10 +70,10 @@ router.get('/details/:idAppointment', async (req, res) => {
                 attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']}
             })
 
-        if(!appointment) res.send({message: "There is not an appointment with that ID."})
-        res.send(appointment)        
+        if(!appointment) return res.send({message: "There is not an appointment with that ID."})
+        return res.send(appointment)        
     } catch (error) {
-        res.send({Error: error})        
+        return res.send({Error: error})        
     }
 
 })
@@ -148,10 +170,10 @@ router.post('/', async (req, res) => {
         const newAppointment = {
             date: req.body.date,
             time: req.body.time,
-            PatientId: req.body.patientId,
-            MedicalStaffId: req.body.medicalStaffId
+            PatientId: req.body.PatientId,
+            MedicalStaffId: req.body.MedicalStaffId
         }
-        console.log(newAppointment)
+        //console.log(newAppointment)
         const appointment = await Appointment.create(newAppointment)
 
         return res.status(201).send(appointment) 
@@ -172,6 +194,17 @@ router.put('/:id', async (req, res) => {
     }
 })
 
+router.put('/update/:id', async (req, res) => {
+    try {
+        let appointment: any = await Appointment.findOne({ where: { id: req.params.id}});
+        const response = await appointment.update(req.body)
+        return res.status(201).send({message: 'Pago acreditado con exito'})
+    } catch (error) {
+        console.log(error)
+        return res.sendStatus(404)
+    }
+})
+
 router.delete('/:id', async (req, res) => {
     try {
         let response = await Appointment.destroy({ where: {id: req.params.id}})
@@ -182,6 +215,54 @@ router.delete('/:id', async (req, res) => {
         return res.sendStatus(404)
     }
 })
+
+router.put('/avb/bymedic', async (req, res) => {        
+    try {
+        const MedicalStaffId  = req.body.MedicalStaffId
+        const date = req.body.date
+
+        const appointments = await Appointment.findAll(
+            {where: {
+                MedicalStaffId: MedicalStaffId,
+                date: date
+            }}  
+        )
+        let availability: string[] = [
+            '09:00:00',
+            '09:30:00',
+            '10:00:00',
+            '10:30:00',
+            '11:00:00',
+            '11:30:00',
+            '12:00:00',
+            '12:30:00',
+            '13:00:00',
+            '13:30:00',
+            '14:00:00',
+            '14:30:00',
+            '15:00:00',
+            '15:30:00',
+            '16:00:00',
+            '16:30:00',
+            '17:00:00',
+            '17:30:00',                
+        ]
+
+        appointments.forEach((a) => {
+            const index = availability.indexOf(a.time.toString());
+            if (index > -1) {
+                availability.splice(index, 1);
+            }
+        })
+
+        res.status(200).send(availability)
+           
+    } catch (e) {
+        console.log(e)
+        return res.status(401).send({Error: "No existe el Appointment."})
+    }
+    
+});
 
 router.get('/avb/:idMedicalStaff', async (req, res) => {        
     try {
@@ -254,30 +335,41 @@ router.get('/avb/:idMedicalStaff', async (req, res) => {
     
 });
 
-
 router.get('/avbspeciality/:idSpeciality', async (req: Request, res: Response) => {
     try {
         const { idSpeciality } = req.params;
 
         const date = new Date();
-        const totalDays: number = 1; //modificar segun la cantidad de dias a mostrar
+        const totalDays: number = 15; //modificar segun la cantidad de dias a mostrar
 
         let result: any[] = [];
         let resultToShow: any[] = [];
+        let now = new Date();
+        let hour: string ='';
+        let minutes: string='';
+        (now.getHours().toString().length < 2) ? hour= '0' + now.getHours().toString() : hour= now.getHours().toString();
+        (now.getMinutes().toString().length < 2) ? minutes= '0' + now.getMinutes().toString() : minutes= now.getMinutes().toString();
+        
+        let actualTime = "'" + (hour + ':' + minutes + ':00' + "'")
+        //console.log(actualTime)
 
         const medicsOfThisSpeciality = await MedicalStaff.findAll({ //consulto los medicos de la esoecialidad
             where:{
-                SpecialitieId: idSpeciality
+                SpecialitieId: idSpeciality                
             },
-            attributes: {include:  ['id', 'firstName', 'lastName','idNumber'], exclude: ['availability', 'avbTo', 'avbFrom', 'appointmentDuration', 'SpecialitieId', 'UserId', 'createdAt','updatedAt']}
+            attributes: {include:  ['id', 'firstName', 'lastName','idNumber', 'avbTo', 'avbFrom'], exclude: ['availability', 'appointmentDuration', 'SpecialitieId', 'UserId', 'createdAt','updatedAt']}
         })
 
        medicsOfThisSpeciality.map(m => result.push(m)) //lleno la cosntante result con los medicos de la especialidad
 
+       //console.log(result)
+
         for(let i=0; i< totalDays; i++){            
 
             const today = addDays(date,i); // today se va a ir modificando segun la cant de dias que contenga totalDays
-
+            const day = new Date(today)
+            const dayOfWeek = day.getDay();
+            //console.log(dayOfWeek)
             const allAppointments = await Appointment.findAll({//consultamo todos los appointments     
                 where:{
                     date: today
@@ -289,41 +381,71 @@ router.get('/avbspeciality/:idSpeciality', async (req: Request, res: Response) =
                     ]
             }); 
 
+            let avbDays: any;
+
+            if(dayOfWeek < 5){ // si today es lunes a viernes
+                avbDays = {
+                    '09:00:00': [...result.filter(m => (m.avbFrom <= '09:00:00' && m.avbTo > '09:00:00'))],
+                    '09:30:00': [...result.filter(m => (m.avbFrom <= '09:30:00' && m.avbTo > '09:30:00'))],
+                    '10:00:00': [...result.filter(m => (m.avbFrom <= '10:00:00' && m.avbTo > '10:00:00'))],
+                    '10:30:00': [...result.filter(m => (m.avbFrom <= '10:30:00' && m.avbTo > '10:30:00'))],
+                    '11:00:00': [...result.filter(m => (m.avbFrom <= '11:00:00' && m.avbTo > '11:00:00'))],
+                    '11:30:00': [...result.filter(m => (m.avbFrom <= '11:30:00' && m.avbTo > '11:30:00'))],
+                    '12:00:00': [...result.filter(m => (m.avbFrom <= '12:00:00' && m.avbTo > '12:00:00'))],
+                    '12:30:00': [...result.filter(m => (m.avbFrom <= '12:30:00' && m.avbTo > '12:30:00'))],
+                    '13:00:00': [...result.filter(m => (m.avbFrom <= '13:00:00' && m.avbTo > '13:00:00'))],
+                    '13:30:00': [...result.filter(m => (m.avbFrom <= '13:30:00' && m.avbTo > '13:30:00'))],
+                    '14:00:00': [...result.filter(m => (m.avbFrom <= '14:00:00' && m.avbTo > '14:00:00'))],
+                    '14:30:00': [...result.filter(m => (m.avbFrom <= '14:30:00' && m.avbTo > '14:30:00'))],
+                    '15:00:00': [...result.filter(m => (m.avbFrom <= '15:00:00' && m.avbTo > '15:00:00'))],
+                    '15:30:00': [...result.filter(m => (m.avbFrom <= '15:30:00' && m.avbTo > '15:30:00'))],
+                    '16:00:00': [...result.filter(m => (m.avbFrom <= '16:00:00' && m.avbTo > '16:00:00'))],
+                    '16:30:00': [...result.filter(m => (m.avbFrom <= '16:30:00' && m.avbTo > '16:30:00'))],
+                    '17:00:00': [...result.filter(m => (m.avbFrom <= '17:00:00' && m.avbTo > '17:00:00'))],
+                    '17:30:00': [...result.filter(m => (m.avbFrom <= '17:30:00' && m.avbTo > '17:30:00'))]
+                }
+            }else{ // sabados y domingos no hay disponibilidad
+                avbDays = {
+                    '09:00:00': [],
+                    '09:30:00': [],
+                    '10:00:00': [],
+                    '10:30:00': [],
+                    '11:00:00': [],
+                    '11:30:00': [],
+                    '12:00:00': [],
+                    '12:30:00': [],
+                    '13:00:00': [],
+                    '13:30:00': [],
+                    '14:00:00': [],
+                    '14:30:00': [],
+                    '15:00:00': [],
+                    '15:30:00': [],
+                    '16:00:00': [],
+                    '16:30:00': [],
+                    '17:00:00': [],
+                    '17:30:00': []
+                }
+            }
+
             let availability: any = { //armamos el calendario inicializando cada horario con los medicos de la especialidad
                 fecha: today,
-                avb: {
-                    '09:00:00': [...result],
-                    '09:30:00': [...result],
-                    '10:00:00': [...result],
-                    '10:30:00': [...result],
-                    '11:00:00': [...result],
-                    '11:30:00': [...result],
-                    '12:00:00': [...result],
-                    '12:30:00': [...result],
-                    '13:00:00': [...result],
-                    '13:30:00': [...result],
-                    '14:00:00': [...result],
-                    '14:30:00': [...result],
-                    '15:00:00': [...result],
-                    '15:30:00': [...result],
-                    '16:00:00': [...result],
-                    '16:30:00': [...result],
-                    '17:00:00': [...result],
-                    '17:30:00': [...result]
-                }               
+                avb: avbDays               
             }
     
             allAppointments.map((a,i) => {//mapeamos los appointmnets
                 let objProp: string = a.time.toString();
                     if(availability.avb[objProp]){ // si encontramos un turno para este horaio...
                         if(a?.toJSON().MedicalStaff.SpecialitieId == idSpeciality && a?.toJSON().date == today){//...para esta especialidad y dia ...
-                                result.map(m => {//..mapeamos los medicos
-                                    if(m.id == a?.toJSON().MedicalStaff.id) {//quitamos del calendario al medico que NO esta disponible
+                            //let filtrados = result.filter(m => m.avbTo > '16:00:00')
+                            result.map(m => {//..mapeamos los medicos
+                                    //if(m.avbTo == '16:00:00') return
+                                    if(m.id == a?.toJSON().MedicalStaff.id) {//quitamos del calendario al medico que NO esta disponible //(m.id == a?.toJSON().MedicalStaff.id) || 
+                                        //availability.avb[objProp] = 'Ojo aca'
                                         var index = availability.avb[objProp].indexOf(m);
                                             if (index !== -1) {
                                             availability.avb[objProp].splice(index, 1);
-                                            }
-                                    }
+                                            } 
+                                    }       
                                 })
                         }                        
                     }              

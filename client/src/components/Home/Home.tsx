@@ -2,13 +2,15 @@ import Nav from "./Nav/Nav";
 import s from "./Home.module.css";
 import UserHome from "./UserHome/UserHome";
 import { useSelector } from "react-redux";
+import MedicHome from "../Medic/MedicHome/MedicHome";
+import MedicNav from "../Medic/MedicHome/Nav/Nav";
 
 export default function Home(): JSX.Element {
 
   const activeUser = useSelector((state: any) => state.user);
   const patient = useSelector((state: any) => state.patientInfo);
-  // const medic = useSelector((state: any) => state.medic);
-  const medic = { name: "Dr Chapatin"}
+  const medic = useSelector((state: any) => state.medicInfo);
+ 
 
   if (activeUser.role === "patient") {
     return (
@@ -32,10 +34,10 @@ export default function Home(): JSX.Element {
         {medic?
           <div className={s.home}>
             <div className={s.nav}>
-              <Nav />
+              <MedicNav />
             </div>
             <div className={s.main}>
-              <h2>PAGINA DE: {medic.name}</h2>
+              <MedicHome userName={medic.firstName} id={medic.id} />
             </div>
           </div> :
           <h3>Loading...</h3>

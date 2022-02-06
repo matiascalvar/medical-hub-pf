@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
@@ -11,6 +11,7 @@ import {
   getAppointments,
 } from "../../../actions/index";
 import Header from "../UserHome/Header/Header";
+import MercadoPago from "../../MercadoPago/MercadoPago";
 
 const Appointments: FunctionComponent = () => {
   const patient = useSelector((state: any) => state.patientInfo);
@@ -38,12 +39,30 @@ const Appointments: FunctionComponent = () => {
       state.toLowerCase() === "active" ? style.active : style.complete;
     return color;
   }
-  // Una funcion que use el boton, obtenga datos del appointment y redirija al pago
   
+  // Obtengo el PlanId, filtro los planes, obtengo el porcentaje de cobertura y hago el calculo del precio final
+  let unit_price = "500";
+  const patientPlanId = useSelector((state: any) => state.patientInfo.PlanId);
+  const plans = useSelector((state: any) => state.plans);
+  
+  let { coveragePercentage, name: planName } = plans.find(
+    (plan: any) => plan.id === patientPlanId
+  );
+    
+  function percentage(unit_price: any, coveragePercentage: any) {
+    return unit_price - (unit_price / 100) * coveragePercentage;
+  }
+  let finalPrice = percentage(unit_price, coveragePercentage);
+  // 
+    
+  // Una funcion que use el boton, obtenga datos del appointment y redirija al pago
   function handleBtnPay(data: any) {
     console.log("data", data);
-    dispatch(getPreferenceId("1", "500", data));
+    dispatch(getPreferenceId("1", finalPrice.toString(), data));
+    setIsOpen(true);
   }
+  // state para abrir el modal
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (patient.id) {
@@ -53,6 +72,11 @@ const Appointments: FunctionComponent = () => {
 
   return (
     <div className={style.bigContainer}>
+      <MercadoPago
+        price={finalPrice}
+        onClose={() => setIsOpen(false)}
+        open={isOpen}
+      ></MercadoPago>
       <div className={style.navContainer}>
         <Nav />
       </div>
@@ -98,18 +122,18 @@ const Appointments: FunctionComponent = () => {
                       </span>
                     </div>
                     {!payState(data.pay) ? (
-                      <Link className={style.linkBox} to="/mercadopago">
-                        <button
-                          onClick={() => handleBtnPay(data)}
-                          className={style.appointmentButton}
-                          type="button"
-                        >
-                          <span className={style.pending}>&nbsp;Pay</span>
+                      // <Link className={style.linkBox} to="/mercadopago">
+                      <button
+                        onClick={() => handleBtnPay(data)}
+                        className={style.appointmentButton}
+                        type="button"
+                      >
+                        <span className={style.pending}>&nbsp;Pay</span>
 
-                          <BsCashStack className={style.cashIcon} />
-                        </button>
-                      </Link>
+                        <BsCashStack className={style.cashIcon} />
+                      </button>
                     ) : (
+                      // </Link>
                       <span className={style.paidOut}>Payout</span>
                     )}
                     <span className={style.box}>

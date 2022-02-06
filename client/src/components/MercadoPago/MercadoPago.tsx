@@ -5,24 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getPreferenceId } from "../../actions/index";
 import style from "./MercadoPago.module.css";
+import ReactDOM from "react-dom";
 
-const MercadoPago: FunctionComponent = () => {
-  const FORM_ID = "payment-form";
-  let dispatch = useDispatch();
 
+const MercadoPago: FunctionComponent<{ price:number, open: boolean, onClose:any }> = ({price, open, onClose}) => {
   let unit_price = "500";
 
-  // BUG: El componente se renderiza varias veces. Puede ser debido al append
-  // Al enviar el mismo id varias veces al backend, esto genera un error y mercadopago no funciona
-  // Una opcion es que el useSelector se haga en otra pagina y me pasen por props el id
-  // Sin embargo si quiero llamar a la store aca voy a tener problemas
-  //   useEffect(() => {
-  //     dispatch(getPreferenceId(quantity, unit_price, title));
-  //   }, []);
-
   const paymentInfo = useSelector((state: any) => state.paymentInfo);
-  console.log("pref id from store outside useEffect: ", paymentInfo);
-
+  
   // useEffect(() => {
   //   let script = document.createElement("script");
   //   script.type = "text/javascript";
@@ -33,22 +23,31 @@ const MercadoPago: FunctionComponent = () => {
   //   form.appendChild(script);
   // }, []);
 
-  return (
-    <>
+  if (!open) {
+    return null
+  }
+  
+  return ReactDOM.createPortal(
+    <div className={style.body}>
       <div className={style.card}>
+        <button className={style.btnClose} onClick={onClose}>
+          X
+        </button>
         <p className={style.title}>Pay with Mercado Pago</p>
         <p>
           Appointment with: <br /> {paymentInfo.medic}
         </p>
-        <p>Price: ${unit_price}</p>
+        <p>Price: ${price}</p>
         <a href={paymentInfo.preferenceId}>
           <button className={style.btn}>
             <span className={style.btnText}>Pay</span>
           </button>
         </a>
       </div>
-    </>
+    </div>,
+    document.getElementById("portal")!
   );
+
 };
 
 export default MercadoPago;

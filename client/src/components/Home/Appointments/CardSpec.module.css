@@ -2,7 +2,7 @@
   height: auto;
   background-color: #fff;
   border-radius: 1rem;
-  padding: 1.2rem 2rem;
+  padding: 1.2rem 1.5rem;
   margin: 1rem 0.5rem;
   transition: background-color 0.5s;
 }
@@ -26,6 +26,10 @@
 .cardContainer p {
   font-weight: 700;
   width: 100%;
+}
+
+.appConfirm h3{
+  color: black !important;
 }
 
 .hoursContainer {
