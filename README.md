@@ -32,6 +32,5 @@ https://lucid.app/lucidchart/11d74553-2f74-489b-bbc3-806387795f25/edit?invitatio
 2. Lucas Barallobre
 3. Luis Isaia
 4. Matias Calvar
-5. Nestor Solera Ayala
-6. Joaquin Carletti
-7. Jose Pardo
+5. Joaquin Carletti
+6. Jose Pardo

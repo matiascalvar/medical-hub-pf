@@ -1,0 +1,31 @@
+.body {
+  background-color: rgba(197, 197, 197, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1000;
+  text-align: center;
+}
+.card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  background-color: #fff;
+  max-width: 40rem;
+  width: 25vw;
+  height: 10rem;
+  border-radius: 0.7rem;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1000;
+}
+.card p {
+    margin:auto;
+}

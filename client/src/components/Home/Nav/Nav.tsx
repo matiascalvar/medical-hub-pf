@@ -7,18 +7,26 @@ import * as icons from "react-icons/bi";
 import * as iconsb from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import { Link } from "react-router-dom";
+import Coverage from "../Coverage/Coverage";
+import { useState } from "react";
 
 export default function Nav(): JSX.Element {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  // state para abrir el modal
+  const [isOpen, setIsOpen] = useState(false);
+  const handleBtn = () => {
+    setIsOpen(true)
+  }
 
-    const handleClick = function (e: any) {
-        dispatch(logout())
-        history.push('/')
-    }
+  const handleClick = function (e: any) {
+    dispatch(logout());
+    history.push("/");
+  };
   return (
     <nav className={s.nav}>
+      <Coverage open={isOpen} onClose={() => setIsOpen(false)} />
       <img className={s.logo} src={Logo} alt="" />
       <div className={s.buttonsContainer}>
         <div className={s.navButton}>
@@ -29,7 +37,7 @@ export default function Nav(): JSX.Element {
         </div>
         <div className={s.navButton}>
           <Link className={s.link} to="/home/userProfile">
-          <icons.BiUser className={s.icon} />
+            <icons.BiUser className={s.icon} />
           </Link>
           <div className={s.tooltip}>My Account</div>
         </div>
@@ -39,7 +47,7 @@ export default function Nav(): JSX.Element {
             <div className={s.tooltip}>Appointments</div>
           </Link>
         </div>
-        <div className={s.navButton}>
+        <div onClick={() => handleBtn()} className={s.navButton}>
           <TiTick className={s.icon} />
           <div className={s.tooltip}>Coverage</div>
         </div>
@@ -49,7 +57,9 @@ export default function Nav(): JSX.Element {
             <div className={s.tooltip}>History</div>
           </Link>
         </div>
-        <button className={s.logout} onClick={handleClick}>Logout</button>
+        <button className={s.logout} onClick={handleClick}>
+          Logout
+        </button>
       </div>
     </nav>
   );
