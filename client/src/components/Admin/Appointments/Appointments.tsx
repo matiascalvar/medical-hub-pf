@@ -67,7 +67,6 @@ export default function Appointments(): JSX.Element {
   };
 
   const filterByState = (e: any) => {
-    if (e.target.value === "Status") return;
     setFilterState(e.target.value);
     updateDisplay(e.target.value, "state");
   };
@@ -90,10 +89,7 @@ export default function Appointments(): JSX.Element {
     let display = appointmentList;
 
     if (filters.search)
-      display = display.filter(
-        (a: any) =>
-          a.medic.includes(filters.search) || a.patient.includes(filters.search)
-      );
+      display = display.filter((a: any) => a.medic.includes(filters.search) || a.patient.includes(filters.search));
     if (filters.state && filters.state != "ALL")
       display = display.filter((a: any) => a.state === filters.state);
     if (filters.date)
@@ -125,10 +121,9 @@ export default function Appointments(): JSX.Element {
           <div>
             <label htmlFor="state"></label>
             <select onChange={filterByState} name="state">
-              <option>Status</option>
-              <option>All</option>
-              <option>Active</option>
-              <option>Completed</option>
+              <option value="ALL">All</option>
+              <option value="ACTIVE">Active</option>
+              <option value="COMPLETED">Completed</option>
             </select>
             <label htmlFor="date"></label>
             <input onChange={filterByDate} name="date" type="date" />
