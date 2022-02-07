@@ -1,8 +1,9 @@
 import React from "react";
 import style from "./AddPatient.module.css";
-import { addPatient } from "../requests";
+import { addPatient, getPlans } from "../requests";
 
 export default function AddPatient(): JSX.Element {
+
   const emptyInput = {
     email: "",
     firstName: "",
@@ -13,7 +14,16 @@ export default function AddPatient(): JSX.Element {
     resetPass: true
   };
 
-  const [input, setInput] = React.useState(emptyInput);
+  const [ plans, setPlans] = React.useState<any[]>()
+  const [ input, setInput] = React.useState(emptyInput);
+
+
+  async function loadPlans() {
+    const response = await getPlans()
+    if(response) {
+      setPlans(response.data)
+    }
+  }
 
   function handleInputChange(e: any) {
     setInput({
@@ -27,6 +37,10 @@ export default function AddPatient(): JSX.Element {
     addPatient(input);
     setInput(emptyInput);
   }
+
+  React.useEffect(()=> {
+    loadPlans()
+  }, [])
 
   return (
     <div className={style.formContainer}>
@@ -89,14 +103,12 @@ export default function AddPatient(): JSX.Element {
         </div>
         <div>
           <label htmlFor="planId">Plan</label>
-          <input
-            type="text"
+          <select
             name="planId"
-            value={input.planId}
-            autoComplete="off"
             onChange={handleInputChange}
-            placeholder="Particular"
-          />
+            placeholder="Particular">
+            {plans? plans.map((p: any) => <option value={p.id}>{p.name}</option>) : null}
+          </select>
         </div>
         <div className={style.formBtn}>
           <button type="submit">Submit </button>
