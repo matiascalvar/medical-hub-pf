@@ -84,9 +84,19 @@ export const getPatientDetails = async (id: number) => {
         return error
     }
 }
+
 export const updatePatient = async (id: number, data: any) => {
     try {
         const response = await axios.post(URL + "/patients/" + id, data);
+        return response
+      } catch (error) {
+        console.log(error);
+      }
+}
+
+export const revokeAccess = async (id: number, data: any) => {
+    try {
+        const response = await axios.post(URL + "/updateUser/revokeAccess/" + id, data);
         return response
       } catch (error) {
         console.log(error);

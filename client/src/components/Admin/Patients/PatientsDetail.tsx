@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import style from "./PatientsDetail.module.css";
-import { getPatientDetails, updatePatient, getPlans } from "../requests";
+import { getPatientDetails, updatePatient, getPlans, revokeAccess } from "../requests";
 import { FiEdit } from "react-icons/fi";
 
 export default function MedicsDetail(props: any): JSX.Element {
@@ -61,6 +61,12 @@ export default function MedicsDetail(props: any): JSX.Element {
   async function acceptChanges(e: any) {
     e.preventDefault();
     await updatePatient(props.id, patient);
+    props.reolad();
+  }
+
+  async function handleRevokeAccess (e: any) {
+    e.preventDefault();
+    await revokeAccess(props.id, { active: false });
     props.reolad();
   }
 
@@ -211,6 +217,7 @@ export default function MedicsDetail(props: any): JSX.Element {
         </div>
       </form>
       <div className={style.endBtn}>
+        <button onClick={handleRevokeAccess} className={style.btnEdit}> Revoke Access</button>
         <button onClick={acceptChanges} className={style.btnEdit}>
           Accept changes
         </button>
