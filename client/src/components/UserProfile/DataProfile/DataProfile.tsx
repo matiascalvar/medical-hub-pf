@@ -14,15 +14,30 @@ interface DataProfileProps{
 export default function DataProfile ({firstName, lastName, id, dni, phone, planId, email} : DataProfileProps) : JSX.Element {
 
   const plan = useSelector((state: any) => state.patientInfo.Plan);
-  var name;
+  let name: any;
   plan ? ({ name } = plan) : ({ name } = { name: "" });
+
+  function colorPlan(){
+    if(name === "Silver"){
+      return s.silver
+    }
+    if(name === "Gold"){
+      return s.planContainer
+    }
+    if(name === "Platinum"){
+      return s.platinum
+    }
+    if(name === "Particular"){
+      return s.particular
+    }
+  }
 
   return (
     <div>
       <div className={s.dataContainer}>
         <span className={s.fullName}>{firstName + " " + lastName}</span>
         <span className={s.planText}>Plan</span>
-        <div className={s.planContainer}>
+        <div className={colorPlan()}>
           <span>{name}</span>
         </div>
         <div className={s.labelContainer}>

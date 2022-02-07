@@ -86,7 +86,7 @@ export default function ChangePass({ activeUser }: ChangePassProps): JSX.Element
   return (
     <div className={s.inputContainer}>
       <label className={s.label}>Password</label>
-      <input onFocus={tooltip} className={s.input} name="password" type="text" placeholder='********' onChange={handleOnChangePass} value={changePass.password} />
+      <input onFocus={tooltip} className={s.input} name="password" type="password" placeholder='********' onChange={handleOnChangePass} value={changePass.password} />
       {
         tooltipState.loading ?
         <div className={s.buttonsContainer}>
