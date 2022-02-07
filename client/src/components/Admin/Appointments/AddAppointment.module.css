@@ -1,0 +1,125 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-top: 2rem;
+  padding: 4rem;
+}
+
+.formContainer h2 {
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 4rem;
+}
+
+.formContainer label {
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.formContainer input {
+  font-family: "Montserrat", sans-serif;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.2rem 0;
+  margin: 0.2rem;
+  border: none;
+  height: 2rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+}
+
+.formContainer select {
+  font-family: "Montserrat", sans-serif;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.2rem 0;
+  margin: 0.2rem;
+  border: none;
+  height: 2rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(212, 212, 212, 0.651);
+}
+
+.formContainer select:hover {
+  border-bottom: 2px solid #0eaaff;
+}
+
+.formContainer select:active {
+  border-bottom: 2px solid #0eaaff;
+}
+
+.formContainer input:hover {
+  border-bottom: 2px solid #0eaaff;
+}
+
+.formContainer input:focus {
+  border-bottom: 2px solid #0eaaff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnNext {
+  width: 50%;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  height: 1rem;
+  border: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.4rem;
+  background-color: #0eaaff;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.btnNext:hover {
+  cursor: pointer;
+  background-color: #00d9ff;
+}
+
+.confirmContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+}
+
+.confirmContainer p {
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.btn {
+  margin: 0 2rem;
+  display: flex;
+  padding: 0.5rem 1rem;
+}
+
+.btn button {
+  margin: 0rem 1rem;
+}
+
+.formContainer h4 {
+  font-size: 0.8rem;
+}
