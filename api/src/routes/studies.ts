@@ -13,6 +13,20 @@ router.get('/', (req, res) => {
     res.send('STUDIES')
 });
 
+router.get('/types', async (req, res) => {
+    
+    try {
+
+        const studyTypes = await StudyType.findAll()
+    
+        res.send(studyTypes)
+        
+    } catch (error) {
+        res.send(error)
+        
+    }
+});
+
 router.post('/', async (req, res) => {
    
     try {
