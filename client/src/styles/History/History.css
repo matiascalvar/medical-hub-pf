@@ -254,17 +254,6 @@
   padding-top: .3rem;
 }
 
-.cardHistory__bottom--state{
-  font-size: 1rem;
-  margin: 0;
-  font-weight: 700;
-  display: grid;
-  justify-items: start;
-  align-items: center;
-  height: 100%;
-  padding-left: .7rem;
-}
-
 .cardHistory__message{
   position: absolute;
   width: 68rem;
@@ -273,4 +262,56 @@
   font-family: 'Montserrat';
   font-weight: 300;
   letter-spacing: .1rem;
+}
+
+.cardHistory__bottom{
+
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.cardHistory__bottom--state{
+  font-size: .75rem;
+  margin: 0;
+  font-weight: 700;
+  display: grid;
+  justify-items: start;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+}
+
+.cardHistory__bottom--down{
+  display: grid;
+  font-size: 1.5rem;
+  justify-items: end;
+  align-items: center;
+  margin: auto;
+  margin-right: 1rem;
+  color: #000;
+}
+
+.cardHistory__bottom--up{
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+.bottom__up--input{
+  height: 100%; 
+  padding-left: .3rem;
+  font-size: .8rem;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  line-height: 33px;
+  margin: auto;
+  width: 70%;
+  cursor: pointer;
+}
+
+.bottom__up--button{
+  letter-spacing: .1rem;
+  cursor: pointer;
+  border-radius: .3rem;
+  margin: .25rem .5rem;
 }

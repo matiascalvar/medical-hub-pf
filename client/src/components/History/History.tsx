@@ -4,11 +4,13 @@ import Nav from "../Home/Nav/Nav";
 import userLogo from "../Home/userLogo.png";
 import "../../styles/History/History.css";
 import { BiFilter, BiDownload } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { filterHistoryStatus, getHistory, getPatientInfo } from "../../actions";
+import axios from "axios";
 
 const History: FunctionComponent = () => {
   const dispatch = useDispatch();
+  const urlHome = useHistory();
   const activeUser = useSelector((state: any) => state.user);
   const user = useSelector((state: any) => state.userInfo);
   const userHistory: any | any[] = useSelector(
@@ -27,6 +29,7 @@ const History: FunctionComponent = () => {
     firstName: "",
     lastName: "",
   });
+  const [file, setFile] = React.useState<any>(null)
 
   useEffect(() => {
     if (user) {
@@ -46,6 +49,23 @@ const History: FunctionComponent = () => {
       dispatch(getHistory(user.id));
     }
   };
+
+  const uploadFiles = (e:any) => {
+    setFile(e[0]);
+  }
+
+  const insertFiles = async(e:any, historyId:any) => {
+    e.preventDefault();
+    const f = new FormData();
+    f.append("studyPDF", file);
+    await axios.post(`http://localhost:3001/studies/${historyId}`, f, {headers:{'Content-Type':"multipart/form-data"}})
+    .then(response => {
+      if(response.status === 200){
+        urlHome.push('/home');
+      }
+    })
+    .catch(error => console.log(error))
+  }
 
   return (
     <div className="containerHistory">
@@ -127,7 +147,30 @@ const History: FunctionComponent = () => {
                   <h4 className="cardHistory__bottom--state">
                     {history.state}
                   </h4>
-                </div>
+                  {
+                    history.state === 'COMPLETED' 
+                    ? <a 
+                        href={`/storage/${history.studyPDF}`} 
+                        target="_blank"
+                        className="cardHistory__bottom--down"
+                      ><BiDownload /></a>
+                    : <form 
+                        onSubmit={(e) => insertFiles(e, history.id)}
+                        className="cardHistory__bottom--up"
+                      >
+                        <input 
+                          type="file" 
+                          name="studyPDF" 
+                          onChange={(e) => uploadFiles(e.target.files)}
+                          className="bottom__up--input"
+                        />
+                        <button 
+                          type="submit"
+                          className="bottom__up--button"
+                        >Insert</button>
+                      </form>
+                  }
+                </div> 
               </div>
             ))
           ) : (
