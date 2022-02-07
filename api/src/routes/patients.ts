@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
             phone: req.body.phone,
             dni: req.body.dni,
             UserId: user.id,
-            // PlanId: req.body.planId
+            PlanId: req.body.planId
         }
         const patient = await Patient.create(newPatient)
         return res.status(201).send({message: 'Paciente creado con éxito'}) 
