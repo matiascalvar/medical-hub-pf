@@ -4,15 +4,23 @@ import UserHome from "./UserHome/UserHome";
 import { useSelector } from "react-redux";
 import MedicHome from "../Medic/MedicHome/MedicHome";
 import MedicNav from "../Medic/MedicHome/Nav/Nav";
+import ResetPassword from "../ResetPassword/ResetPasword";
 
 export default function Home(): JSX.Element {
 
   const activeUser = useSelector((state: any) => state.user);
   const patient = useSelector((state: any) => state.patientInfo);
   const medic = useSelector((state: any) => state.medicInfo);
- 
 
-  if (activeUser.role === "patient") {
+  console.log(activeUser)
+ 
+  if (activeUser.resetPass === true) {
+    return(
+      <div>
+        <ResetPassword />
+      </div>
+    )
+  } else  if (activeUser.role === "patient") {
     return (
       <>
         {patient?

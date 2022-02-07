@@ -32,6 +32,7 @@ const LoginPage: FunctionComponent = () => {
         email: newUser.email,
         role: role,
         token: `${response.data.token_type} ${response.data.access_token}`,
+        resetPass: response.data.resetPass
       };
       setErrors(emptyInput);
       return user;

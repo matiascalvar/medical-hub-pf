@@ -40,7 +40,8 @@ router.post('/', async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.dni, 10)
         const newUser = {
             email: req.body.email,
-            hashedPass: hashedPassword
+            hashedPass: hashedPassword,
+            resetPass: req.body.resetPass
         }
         const user = await User.create(newUser)
         const newPatient = {

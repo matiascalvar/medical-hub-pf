@@ -1,7 +1,5 @@
 import React from "react";
 import style from "./AddPatient.module.css";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { addPatient } from "../requests";
 
 export default function AddPatient(): JSX.Element {
@@ -12,6 +10,7 @@ export default function AddPatient(): JSX.Element {
     phone: "",
     dni: "",
     planId: "",
+    resetPass: true
   };
 
   const [input, setInput] = React.useState(emptyInput);

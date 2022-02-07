@@ -39,7 +39,7 @@ router.post('/password', authenticateToken, async (req: any, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     try {
         let user: any = await User.findOne({ where: { email: email}});
-        const response = await user.update({hashedPass: hashedPassword})
+        const response = await user.update({hashedPass: hashedPassword, resetPass: false})
         return res.status(201).send({message: 'Pass modificada con éxito'}) 
     } catch (error) {
         console.log(error)

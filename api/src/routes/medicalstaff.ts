@@ -51,7 +51,8 @@ router.post('/', async (req, res) => {
         const newUser = {
             email: req.body.email,
             hashedPass: hashedPassword,
-            isStaff:true
+            isStaff: true,
+            resetPass: true
         }
 
         const user = await User.create(newUser)
