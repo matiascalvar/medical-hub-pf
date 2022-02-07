@@ -19,6 +19,10 @@ export class User extends Model {//<User>
 	@Column
 	isAdmin!: boolean;
 
+	@Default(false)
+	@Column
+	resetPass!: boolean;
+
 	@CreatedAt
 	@Column
 	createdAt!: Date;
