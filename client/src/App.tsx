@@ -22,6 +22,8 @@ import MedicAppointmentDetail from "./components/Medic/MedicAppointments/MedicAp
 import NewReviewAppointment from "./components/Medic/MedicAppointments/NewReviewAppointment";
 import MedicPatientHistory from "./components/Medic/MedicPatientHistory/MedicPatientHistory";
 import NewStudie from "./components/Medic/MedicAppointments/NewStudie";
+import MedicProfile from "./components/Medic/MedicProfile/MedicProfile";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -72,28 +74,14 @@ function App() {
           />
           <ProtectedRoute exact path="/home/history" component={History} />
           <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
-          <Route
-            exact
-            path="/home/medic/appointments"
-            component={MedicAppointments}
-          />
-          <Route
-            exact
-            path="/home/medic/appointments/:id"
-            component={MedicAppointmentDetail}
-          />
-          <Route
-            path="/home/medic/appointments/review/:id"
-            component={NewReviewAppointment}
-          />
-          <Route
+          <Route exact path="/home/medic/appointments" component={MedicAppointments} />
+          <Route exact path="/home/medic/appointments/:id" component={MedicAppointmentDetail} />
+          <Route path="/home/medic/appointments/review/:id" component={NewReviewAppointment} />
+          <Route exact path="/home/medic/patientHistory" component={MedicPatientHistory} />
+          <Route exact path="/home/medic/profile" component={MedicProfile} />
+            <Route
             path="/home/medic/appointments/studies/:id"
             component={NewStudie}
-          />
-          <Route
-            exact
-            path="/home/medic/patientHistory"
-            component={MedicPatientHistory}
           />
           <Route exact path="/admin" component={Admin} />
           <Route component={NotFound} />
