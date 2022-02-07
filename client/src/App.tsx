@@ -36,6 +36,7 @@ function App() {
           email: response.data.email,
           role: response.data.role,
           token: `${response.data.token_type} ${response.data.access_token}`,
+          resetPass: response.data.resetPass
         };
         dispatch(logUser(user));
       } catch (error) {

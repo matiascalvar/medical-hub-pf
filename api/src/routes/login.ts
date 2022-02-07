@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
                     email: user.email,
                     role: req.body.role,
                     isAdmin: user.isAdmin,
+                    resetPass: user.resetPass
                 }
                 const accessToken = generateAccessToken(userData)
                 const refreshToken = generateRefreshToken(userData)
@@ -34,7 +35,8 @@ router.post('/', async (req, res) => {
                     email: user.email,
                     role: req.body.role,
                     token_type: "Bearer",
-                    access_token: accessToken
+                    access_token: accessToken,
+                    resetPass: user.resetPass
                 })
             } else {
                 return res.status(401).send({"error": "Incorrect password"})
@@ -61,7 +63,8 @@ router.post('/token', async (req, res) => {
                 email: user.email,
                 role: user.role,
                 token_type: "Bearer",
-                access_token: accessToken
+                access_token: accessToken,
+                resetPass: user.resetPass
             })
         })
     } catch(error) {
