@@ -107,13 +107,18 @@ const MedicAppointmentDetail: FunctionComponent = () => {
             </div>
             <div className={style.studiesContainer}>
               <h3>Studies</h3>
-              {appointmentDetail.Studies.length ? (
-                appointmentDetail.Studies.map((s: any, i: any) => {
-                  return <p>Studie {i}</p>;
-                })
-              ) : (
-                <p>No studies were found</p>
-              )}
+              <div className={style.text}>
+                {appointmentDetail.Studies.length ? (
+                  appointmentDetail.Studies.map((s: any, i: any) => {
+                    return <p>Studie {i}</p>;
+                  })
+                ) : (
+                  <p>No studies were found</p>
+                )}
+              </div>
+              <Link to={`/home/medic/appointments/studies/${id}`}>
+                Add Studie
+              </Link>
             </div>
           </div>
         ) : (
