@@ -12,8 +12,6 @@ export default function Home(): JSX.Element {
   const patient = useSelector((state: any) => state.patientInfo);
   const medic = useSelector((state: any) => state.medicInfo);
 
-  console.log(activeUser)
- 
   if (activeUser.resetPass === true) {
     return(
       <div>
