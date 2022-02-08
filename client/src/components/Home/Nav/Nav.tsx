@@ -53,7 +53,7 @@ export default function Nav(): JSX.Element {
         </div>
         <div className={s.navButton}>
           <Link className={s.link} to="/home/history">
-            <icons.BiMoney className={s.icon} />
+            <icons.BiHistory className={s.icon} />
             <div className={s.tooltip}>History</div>
           </Link>
         </div>

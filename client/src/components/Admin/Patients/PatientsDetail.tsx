@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import style from "./PatientsDetail.module.css";
-import { getPatientDetails, updatePatient } from "../requests";
+import { getPatientDetails, updatePatient, getPlans } from "../requests";
 import { FiEdit } from "react-icons/fi";
 
 export default function MedicsDetail(props: any): JSX.Element {
@@ -13,27 +13,45 @@ export default function MedicsDetail(props: any): JSX.Element {
         phone: response.data.phone,
         dni: response.data.dni,
         createdAt: response.data.createdAt,
+        PlanId: response.data.PlanId
       });
+      let planes = await getPlans()
+      if(planes) {
+        setPlans(planes.data)
+        let plan = planes.data!.find((p: any) => p.id == response.data.PlanId)
+        if (plan) setSelectedPlan(plan.name)
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const [editable, setEditable] = useState("");
-
-  const [patient, setPatient] = useState({
+  const [ plans, setPlans] = useState<any[]>()
+  const [ editable, setEditable] = useState("");
+  const [ patient, setPatient] = useState({
     firstName: "",
     lastName: "",
     phone: "",
     dni: "",
     createdAt: "",
+    PlanId: 1
   });
+  const [ selectedPlan, setSelectedPlan ] = useState("")
+
+  function getSelectedPlan (id: number) {
+    let plan = plans!.find((p: any) => p.id == id)
+    console.log("plan")
+    if (plan) setSelectedPlan(plan.name)
+  }
 
   function handleInputChange(e: any) {
     setPatient({
       ...patient,
       [e.target.name]: e.target.value,
     });
+    if (e.target.name === "PlanId") {
+      getSelectedPlan(e.target.value)
+    }
   }
 
   function handleSubmit(e: any) {
@@ -47,7 +65,7 @@ export default function MedicsDetail(props: any): JSX.Element {
   }
 
   useEffect(() => {
-    getDetails(props.id);
+    getDetails(props.id)
   }, []);
 
   return (
@@ -162,7 +180,31 @@ export default function MedicsDetail(props: any): JSX.Element {
             </div>
           )}
         </div>
-
+        <div>
+          <label htmlFor="PlanId">Plan</label>
+          {editable === "PlanId" ? (
+            <>
+              <select
+                name="PlanId"
+                onChange={handleInputChange}>
+                {plans? plans.map((p: any) => <option value={p.id}>{p.name}</option>) : null}
+              </select>
+              <button onClick={() => setEditable("")} className={style.btnEdit}>
+                Accept
+              </button>
+            </>
+          ) : (
+            <div>
+              <span>{selectedPlan}</span>
+              <button
+                onClick={() => setEditable("PlanId")}
+                className={style.btnEdit}
+              >
+                <FiEdit />
+              </button>
+            </div>
+          )}
+        </div>
         <div>
           <label>Created at</label>
           <span>{patient.createdAt}</span>
