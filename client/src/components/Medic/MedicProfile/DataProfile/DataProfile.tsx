@@ -13,7 +13,6 @@ interface DataProfileProps{
 export default function DataProfile ({firstName, lastName, id, dni, email, availability, speciality} : DataProfileProps) : JSX.Element {
 
     
-    console.log(speciality)
     return(
         <div>
             <div className={s.dataContainer}>

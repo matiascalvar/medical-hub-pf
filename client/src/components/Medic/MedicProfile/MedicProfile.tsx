@@ -37,7 +37,7 @@ export default function MedicProfile () : JSX.Element {
         edit: false
     })
     
-    console.log(response);
+
     useEffect ( () => {
         if (response) {
             setMyInfo((data : any) =>{
@@ -61,7 +61,7 @@ export default function MedicProfile () : JSX.Element {
                 }
                 })
         }
-    }, [response, activeUser]);
+    }, [response, activeUser, specialities]);
 
     function editOn(){
         if(editState.edit){
@@ -94,7 +94,7 @@ export default function MedicProfile () : JSX.Element {
                     id={myInfo.id}
                     email={activeUser.email}
                     availability={myInfo.availability}
-                    speciality={myInfo.speciality[0].name}
+                    speciality={myInfo.speciality.length > 0 ? myInfo.speciality[0].name : ""}
                     /> : 
                     <EditDataProfile 
                     firstName={myInfo.firstName} 
@@ -103,7 +103,7 @@ export default function MedicProfile () : JSX.Element {
                     id={myInfo.id}
                     email={activeUser.email}
                     activeUser = {activeUser}
-                    speciality={myInfo.speciality[0].name}
+                    speciality={myInfo.speciality.length > 0 ? myInfo.speciality[0].name : ""}
                     />
                 
                    }
