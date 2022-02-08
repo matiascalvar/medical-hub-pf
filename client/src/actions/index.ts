@@ -68,6 +68,20 @@ export const getPatientInfo = (activeUser: any) => async (dispatch: any) => {
   }
 };
 
+export const getPatientById = (id:any) => async(dispatch:any) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/patients/${id}`);
+    if(response){
+      dispatch({
+        type: ActionTypes.getPatientById,
+        payload: response.data
+      })
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export const getAppointments = (id: number) => async (dispatch: any) => {
   try {
     const response = await axios.get(
