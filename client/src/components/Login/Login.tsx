@@ -32,7 +32,8 @@ const LoginPage: FunctionComponent = () => {
         email: newUser.email,
         role: role,
         token: `${response.data.token_type} ${response.data.access_token}`,
-        resetPass: response.data.resetPass
+        resetPass: response.data.resetPass,
+        isAdmin: response.data.isAdmin
       };
       setErrors(emptyInput);
       return user;
@@ -67,7 +68,9 @@ const LoginPage: FunctionComponent = () => {
       const user: any = await loginUser(input);
       if (user) {
         dispatch(logUser(user));
-        history.push("/home");
+        if (user.role === "patient") history.push("/home");
+        if (user.role === "medic") history.push("/home/medic")
+        if (user.email === "admin@email.com") history.push("/admin")
       }
       setInput(emptyInput);
     }
