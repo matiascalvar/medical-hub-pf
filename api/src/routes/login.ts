@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
             if (!user.active) return res.status(401).send({"error": "Access revoked"})
             if (await bcrypt.compare(req.body.password, user.hashedPass)) {
                 if (req.body.role === "medic") {
-                    if (!user.isStaff) return res.status(401).send({"error": "No tiene permisos de medico"})
+                    if (!user.isStaff) return res.status(401).send({"error": "You don't have medical access"})
                 }
                 const userData = {
                     email: user.email,
@@ -37,7 +37,8 @@ router.post('/', async (req, res) => {
                     role: req.body.role,
                     token_type: "Bearer",
                     access_token: accessToken,
-                    resetPass: user.resetPass
+                    resetPass: user.resetPass,
+                    isAdmin: user.isAdmin
                 })
             } else {
                 return res.status(401).send({"error": "Incorrect password"})
@@ -65,7 +66,8 @@ router.post('/token', async (req, res) => {
                 role: user.role,
                 token_type: "Bearer",
                 access_token: accessToken,
-                resetPass: user.resetPass
+                resetPass: user.resetPass,
+                isAdmin: user.isAdmin
             })
         })
     } catch(error) {

@@ -10,7 +10,6 @@ export default function AddMedic(): JSX.Element {
     idNumber: "",
     avbFrom: "",
     avbTo: "",
-    appointmentDuration: "",
     speciality: "",
   };
 
@@ -117,17 +116,6 @@ export default function AddMedic(): JSX.Element {
             autoComplete="off"
             onChange={handleInputChange}
             placeholder="18"
-          />
-        </div>
-        <div>
-          <label htmlFor="appointmentDuration">APP duration</label>
-          <input
-            type="text"
-            name="appointmentDuration"
-            value={input.appointmentDuration}
-            autoComplete="off"
-            onChange={handleInputChange}
-            placeholder="30"
           />
         </div>
         <div>

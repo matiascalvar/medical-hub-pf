@@ -5,7 +5,8 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logUser } from "./actions";
-import ProtectedRoute from "./protectedRoute";
+
+import { PatientRoute, MedicRoute, AdminRoute } from "./protectedRoutes";
 import Appointments from "./components/Home/Appointments/Appointments";
 import NewAppointment from "./components/Home/Appointments/NewAppointment";
 import Landing from "./components/Landing/Landing";
@@ -23,7 +24,6 @@ import NewReviewAppointment from "./components/Medic/MedicAppointments/NewReview
 import MedicPatientHistory from "./components/Medic/MedicPatientHistory/MedicPatientHistory";
 import NewStudie from "./components/Medic/MedicAppointments/NewStudie";
 import MedicProfile from "./components/Medic/MedicProfile/MedicProfile";
-
 
 function App() {
   const dispatch = useDispatch();
@@ -56,34 +56,20 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <ProtectedRoute exact path="/home" component={Home} />
-          <ProtectedRoute
-            exact
-            path="/home/appointments"
-            component={Appointments}
-          />
-          <ProtectedRoute
-            exact
-            path="/home/appointments/new"
-            component={NewAppointment}
-          />
-          <ProtectedRoute
-            exact
-            path="/home/userProfile"
-            component={UserProfile}
-          />
-          <ProtectedRoute exact path="/home/history" component={History} />
-          <ProtectedRoute exact path="/mercadopago" component={MercadoPago} />
-          <Route exact path="/home/medic/appointments" component={MedicAppointments} />
-          <Route exact path="/home/medic/appointments/:id" component={MedicAppointmentDetail} />
-          <Route path="/home/medic/appointments/review/:id" component={NewReviewAppointment} />
-          <Route exact path="/home/medic/patientHistory/:id" component={MedicPatientHistory} />
-          <Route exact path="/home/medic/profile" component={MedicProfile} />
-            <Route
-            path="/home/medic/appointments/studies/:id"
-            component={NewStudie}
-          />
-          <Route exact path="/admin" component={Admin} />
+          <PatientRoute exact path="/home" component={Home} />
+          <PatientRoute exact path="/home/appointments" component={Appointments} />
+          <PatientRoute exact path="/home/appointments/new" component={NewAppointment} />
+          <PatientRoute exact path="/home/userProfile" component={UserProfile} />
+          <PatientRoute exact path="/home/history" component={History} />
+          <PatientRoute exact path="/mercadopago" component={MercadoPago} />
+          <MedicRoute exact path="/home/medic" component={Home} />
+          <MedicRoute exact path="/home/medic/appointments" component={MedicAppointments} />
+          <MedicRoute exact path="/home/medic/appointments/:id" component={MedicAppointmentDetail} />
+          <MedicRoute exact path="/home/medic/appointments/review/:id" component={NewReviewAppointment} />
+          <MedicRoute exact path="/home/medic/patientHistory:id" component={MedicPatientHistory} />
+          <MedicRoute exact path="/home/medic/profile" component={MedicProfile} />
+          <MedicRoute exact path="/home/medic/appointments/studies/:id" component={NewStudie} />
+          <AdminRoute exact path="/admin" component={Admin} />
           <Route component={NotFound} />
         </Switch>
       ) : (

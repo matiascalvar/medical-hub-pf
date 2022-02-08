@@ -23,4 +23,6 @@ export enum ActionTypes {
   getPatientById,
   addStudy,
   studyTypes,
+  getStudyTypes,
+  clearSubmitForm,
 }

@@ -15,24 +15,11 @@
     width: 100%;
 }
 
-.shiftCard{
-
-    width: 59rem;
-    height: 22rem;
-    background-color: #fff;
-    border-radius: .7rem;
-    overflow:auto;
-    margin-left: 2rem;
-    position: relative;
-    transition: 200ms;
-    z-index: 300;
-}
-
-
 .cardsContainer{
 
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .cardTitle{
@@ -58,7 +45,7 @@
     flex-direction: column;
 }
 
-.paymentsCard{
+/* .paymentsCard{
     
     width: 40rem;
     height: 32rem;
@@ -66,15 +53,29 @@
     border-radius: .7rem;
     overflow: hidden;
     margin-left: 2rem;
+} */
+
+.shiftCard{
+
+    width: 59rem;
+    height: 22rem;
+    background-color: #fff;
+    border-radius: .7rem;
+    overflow:auto;
+    margin: auto;
+    position: relative;
+    transition: 200ms;
+    z-index: 300;
 }
 
 .historyCard{
-    width: 53rem;
+    width: 59rem;
     height: 22rem;
     background-color:#fff;
     border-radius: .7rem;
     overflow: hidden;
-    margin: 2rem 0 1.5rem 2rem;
+    margin: auto;
+    margin-top: 1rem;
 } 
 .appointment{
     border-bottom: 1px solid rgba(196, 196, 196, 0.445);

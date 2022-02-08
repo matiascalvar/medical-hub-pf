@@ -66,9 +66,8 @@ router.post('/', async (req, res) => {
           lastName: req.body.lastName,
           idNumber: req.body.idNumber,
           availability: req.body.availability,
-          //avbFrom: req.body.avbFrom,
-          //avbTo: req.body.avbTo,
-          //appointmentDuration: req.body.appointmentDuration,
+          avbFrom: req.body.avbFrom,
+          avbTo: req.body.avbTo,
           SpecialitieId: speciality.id,
           UserId: user.id,
         };

@@ -23,31 +23,14 @@ export default function AppointmentsDetail(props: any): JSX.Element {
       const response: any = await getAppointmentDetail(id);
       let appointment: any[] = [];
       appointment.push(new Prop("id", response.data.id));
-      appointment.push(
-        new Prop(
-          "patient",
-          `${response.data.Patient.firstName}, ${response.data.Patient.lastName}`
-        )
-      );
-      appointment.push(
-        new Prop(
-          "medic",
-          `${response.data.MedicalStaff.firstName}, ${response.data.MedicalStaff.lastName}`
-        )
-      );
+      appointment.push(new Prop("patient",`${response.data.Patient.firstName}, ${response.data.Patient.lastName}`));
+      appointment.push(new Prop("medic",`${response.data.MedicalStaff.firstName}, ${response.data.MedicalStaff.lastName}`));
       appointment.push(new Prop("date", response.data.date));
       appointment.push(new Prop("time", response.data.time));
       appointment.push(new Prop("state", response.data.state));
-      appointment.push(new Prop("pay", response.data.pay));
-      appointment.push(
-        new Prop("speciality", response.data.MedicalStaff.Specialitie.name)
-      );
-      appointment.push(
-        new Prop(
-          "AppointmentDetail",
-          response.AppointmentDetail || "No details available"
-        )
-      );
+      appointment.push(new Prop("pay", response.data.pay? "True" : "False"));
+      appointment.push(new Prop("speciality", response.data.MedicalStaff.Specialitie.name));
+      appointment.push(new Prop("AppointmentDetail", response.data.AppointmentDetail? response.data.AppointmentDetail.details : "No details available"));
       setAppointment(appointment);
     } catch (error) {
       console.log(error);
