@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
             PlanId: req.body.planId
         }
         const patient = await Patient.create(newPatient)
-        return res.status(201).send({message: 'Usuario creado con éxito'}) 
+        return res.status(201).send({ message: "User created successfully" }); 
     } catch(e) {
         console.log(e)
         return res.status(500).send(e)
@@ -40,7 +40,9 @@ router.post('/password', authenticateToken, async (req: any, res) => {
     try {
         let user: any = await User.findOne({ where: { email: email}});
         const response = await user.update({hashedPass: hashedPassword, resetPass: false})
-        return res.status(201).send({message: 'Pass modificada con éxito'}) 
+        return res
+          .status(201)
+          .send({ message: "Password modified successfully" }); 
     } catch (error) {
         console.log(error)
         return res.sendStatus(404)
