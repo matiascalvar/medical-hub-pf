@@ -17,6 +17,7 @@ router.post('/', async (req, res) => {
     let user = await User.findOne({where: {email: req.body.email}})
     if (user) {
         try {
+            if (!user.active) return res.status(401).send({"error": "Access revoked"})
             if (await bcrypt.compare(req.body.password, user.hashedPass)) {
                 if (req.body.role === "medic") {
                     if (!user.isStaff) return res.status(401).send({"error": "No tiene permisos de medico"})

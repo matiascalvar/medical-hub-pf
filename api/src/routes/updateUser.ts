@@ -18,4 +18,15 @@ router.post('/', authenticateToken, async (req: any, res) => {
     }
 })
 
+router.post('/permissions/:id', async (req: any, res) => {
+    try {
+        let patient: any = await Patient.findOne({ where: {id: req.params.id}})
+        let user: any = await User.findOne({ where: { id: patient.UserId}});
+        const response = await user.update(req.body)
+        return res.status(201).send({message: 'Datos actualizados con exito'})
+    } catch (error) {
+        console.log(error)
+        return res.sendStatus(404)
+    }
+})
 export default router;
