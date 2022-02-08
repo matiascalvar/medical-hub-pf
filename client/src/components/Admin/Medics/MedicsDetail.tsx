@@ -19,7 +19,6 @@ export default function MedicsDetail(props: any): JSX.Element {
         availability: response.data.availability,
         avbFrom: response.data.avbFrom,
         avbTo: response.data.avbTo,
-        appointmentDuration: response.data.appointmentDuration,
         createdAt: response.data.createdAt,
         speciality: response.data.Specialitie.name,
       });
@@ -38,7 +37,6 @@ export default function MedicsDetail(props: any): JSX.Element {
     availability: "",
     avbFrom: "",
     avbTo: "",
-    appointmentDuration: "",
     createdAt: "",
     speciality: "",
   });
@@ -233,33 +231,6 @@ export default function MedicsDetail(props: any): JSX.Element {
               <span>{medic.avbTo}</span>
               <button
                 onClick={() => setEditable("avbTo")}
-                className={style.btnEdit}
-              >
-                <FiEdit />
-              </button>
-            </div>
-          )}
-        </div>
-        <div>
-          <label htmlFor="appointmentDuration">APP duration: </label>
-          {editable === "appointmentDuration" ? (
-            <>
-              <input
-                type="text"
-                name="appointmentDuration"
-                value={medic.appointmentDuration}
-                autoComplete="off"
-                onChange={handleInputChange}
-              />
-              <button onClick={() => setEditable("")} className={style.btnEdit}>
-                Accept
-              </button>
-            </>
-          ) : (
-            <div>
-              <span>{medic.appointmentDuration}</span>
-              <button
-                onClick={() => setEditable("appointmentDuration")}
                 className={style.btnEdit}
               >
                 <FiEdit />
