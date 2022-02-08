@@ -138,9 +138,13 @@
   padding-left: 2rem;
 }
 
-.studiesContainer p {
+.studiesContainer text {
   display: flex;
+  flex-direction: row;
+  min-width: 20rem;
+}
+
+.studiesContainer p {
   padding-left: 2rem;
-  width: 20%;
   font-weight: 500;
 }

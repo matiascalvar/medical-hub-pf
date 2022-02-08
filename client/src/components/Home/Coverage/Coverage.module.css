@@ -13,10 +13,12 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   background-color: #fff;
   max-width: 40rem;
-  width: 25vw;
-  height: 10rem;
+  width: 17rem;
+  height: 15rem;
   border-radius: 0.7rem;
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -28,4 +30,112 @@
 }
 .card p {
     margin:auto;
+}
+
+
+
+.gold{
+  margin-top: .5rem;
+  border: 3px solid gold;
+  width: 13rem;
+  height: 7rem;
+  font-size: 1rem;
+  border-radius: .5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transition: 300ms;
+}
+
+.gold:hover {
+  box-shadow: 0px 1px 35px -1px gold;
+-webkit-box-shadow: 0px 1px 35px -1px gold;
+-moz-box-shadow: 0px 1px 35px -1px gold;
+background-color: gold;
+}
+
+.silver{
+  margin-top: .5rem;
+  border: 3px solid silver;
+  width: 13rem;
+  height: 7rem;
+  font-size: 1rem;
+  border-radius: .5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transition: 300ms;
+}
+.silver:hover {
+  box-shadow: 0px 1px 35px -1px silver;
+-webkit-box-shadow: 0px 1px 35px -1px silver;
+-moz-box-shadow: 0px 1px 35px -1px silver;
+background-color: silver;
+}
+
+.platinum{
+  margin-top: .5rem;
+  border: 3px solid rgb(52, 255, 177);
+  width: 13rem;
+  height: 7rem;
+  font-size: 1rem;
+  border-radius: .5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transition: 300ms;
+}
+.platinum:hover {
+  box-shadow: 0px 1px 35px -1px rgb(52, 255, 177);
+-webkit-box-shadow: 0px 1px 35px -1px rgb(52, 255, 177);
+-moz-box-shadow: 0px 1px 35px -1px rgb(52, 255, 177);
+background-color: rgb(52, 255, 177);
+}
+
+.particular{
+  margin-top: .5rem;
+  border: 3px solid rgb(255, 191, 52);
+  width: 13rem;
+  height: 7rem;
+  font-size: 1rem;
+  border-radius: .5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transition: 300ms;
+  padding: 1rem 0 1rem 0;
+}
+.particular:hover {
+  box-shadow: 0px 1px 35px -1px rgb(255, 191, 52);
+-webkit-box-shadow: 0px 1px 35px -1px rgb(255, 191, 52);
+-moz-box-shadow: 0px 1px 35px -1px rgb(255, 191, 52);
+background-color: rgb(255, 191, 52);
+}
+
+.text{
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+} 
+
+.coverage{
+  font-size: 1rem;
+  font-weight: 700;
+  color: black;
+  margin: .5rem 0 .5rem 0;
+  display: inilne-block;
+  width: 60%;
+}
+
+.text1{
+  font-size: 1.4rem;
+  font-weight: 700;
 }

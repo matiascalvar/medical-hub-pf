@@ -93,6 +93,14 @@ export const updatePatient = async (id: number, data: any) => {
       }
 }
 
+export const getPlans = async () => {
+    try {
+        const response = await axios.get(URL + "/plans")
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 // --------------------------------------------- APPOINTMENTS ---------------------------------------------
 

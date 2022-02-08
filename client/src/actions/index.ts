@@ -205,7 +205,7 @@ export const changePassword =
 export const getMedicAvailableTime = (id: number) => async (dispatch: any) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/appointments/avb/${id}`
+      `http://localhost:3001/appointmentsAvb?idMedicalStaff=${id}&weekDays=7`
     );
     dispatch({
       type: ActionTypes.medicAppointments,
@@ -275,58 +275,77 @@ export const getAppointmentsPatients =
     } catch (error) {
       console.log(error);
     }
-};
+  };
 
-export const updateMedicInfo = (activeUser: any, data: any, id : any) => async (dispatch: any) => {
-  try {
-    const response = await axios.post(
-      `http://localhost:3001/updateMedic/${id}`,
-      {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        idNumber: data.dni,
-        availability: data.availability,
-        speciality: data.specialitie,
-
-      }
-    );
-    if (response) {
-      dispatch({
-        type: ActionTypes.updateMedicInfo,
-        payload: response.data,
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export const getPlans = () => async (dispatch: any) => {
+export const updateMedicInfo =
+  (activeUser: any, data: any, id: any) => async (dispatch: any) => {
     try {
-      const response = await axios.get(`http://localhost:3001/plans`);
-
-      dispatch({
-        type: ActionTypes.getPlans,
-        payload: response.data,
-      });
-
+      const response = await axios.post(
+        `http://localhost:3001/updateMedic/${id}`,
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          idNumber: data.dni,
+          availability: data.availability,
+          speciality: data.specialitie,
+        }
+      );
+      if (response) {
+        dispatch({
+          type: ActionTypes.updateMedicInfo,
+          payload: response.data,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
+  };
+
+export const getPlans = () => async (dispatch: any) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/plans`);
+
+    dispatch({
+      type: ActionTypes.getPlans,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const addReview = (id: any, payload: any) => async (dispatch: any) => {
   try {
-    const response = await axios.post(`http://localhost:3001/appointmentsDetails/${id}`, payload);
+    const response = await axios.post(
+      `http://localhost:3001/appointmentsDetails/${id}`,
+      payload
+    );
     dispatch({
       type: ActionTypes.addReview,
       payload: true,
-    })
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     dispatch({
       type: ActionTypes.addReview,
       payload: false,
-    })
+    });
   }
-}
+};
+
+export const addStudy = (payload: any) => async (dispatch: any) => {
+  try {
+    const response = await axios.post("http://localhost:3001/studies", payload);
+    console.log(response);
+    dispatch({
+      type: ActionTypes.addStudy,
+      payload: true,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: ActionTypes.addStudy,
+      payload: false,
+    });
+  }
+};

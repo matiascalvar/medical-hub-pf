@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { getPreferenceId } from "../../actions/index";
 import style from "./MercadoPago.module.css";
 import ReactDOM from "react-dom";
+import Logo from "./mercadoLogo.png";
 
 
 const MercadoPago: FunctionComponent<{ price:number, open: boolean, onClose:any }> = ({price, open, onClose}) => {
@@ -30,14 +31,17 @@ const MercadoPago: FunctionComponent<{ price:number, open: boolean, onClose:any 
   return ReactDOM.createPortal(
     <div className={style.body}>
       <div className={style.card}>
+        <div className={style.logoContainer}>
         <button className={style.btnClose} onClick={onClose}>
-          X
+          x
         </button>
-        <p className={style.title}>Pay with Mercado Pago</p>
-        <p>
-          Appointment with: <br /> {paymentInfo.medic}
-        </p>
-        <p>Price: ${price}</p>
+          <img className={style.logo} src={Logo} alt="mercadologo" />
+          <span className={style.title}>Pay with Mercado Pago</span>
+        </div>
+        
+        <span className={style.subtitle}>Appointment with:</span>
+        <span className={style.name}>{paymentInfo.medic}</span>
+        <span className={style.price}>${price}</span>
         <a href={paymentInfo.preferenceId}>
           <button className={style.btn}>
             <span className={style.btnText}>Pay</span>

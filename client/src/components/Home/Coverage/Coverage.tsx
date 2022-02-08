@@ -7,7 +7,7 @@ const Coverage: FunctionComponent<{ open: boolean, onClose: any }> = ({ open, on
 
   let plan = useSelector((state: any) => state.patientInfo.Plan);
 
-  var coveragePercentage, name;
+  let coveragePercentage, name : any;
   plan
     ? ({ coveragePercentage, name } = plan)
     : ({ coveragePercentage, name } = { coveragePercentage: 0, name: "" });
@@ -16,11 +16,30 @@ const Coverage: FunctionComponent<{ open: boolean, onClose: any }> = ({ open, on
     return null;
   }
 
+  function colorPlan(){
+    if(name === "Particular"){
+      return style.particular
+    }
+    if(name === "Silver"){
+      return style.silver
+    }
+    if(name === "Gold"){
+      return style.gold
+    }
+    if(name === "Platinum"){
+      return style.platinum
+    }
+  }
+
   return ReactDOM.createPortal(
     <div onClick={onClose} className={style.body}>
       <div className={style.card}>
-              <p>Your plan is { name }</p>
-              <p>Coverage of { coveragePercentage }%</p>
+              <span className={style.text}>Your plan is</span>
+              <span className={colorPlan()}>
+                {name}
+              <span className={style.coverage}>Coverage:</span>
+              <span className={style.text1}>{ coveragePercentage }%</span>
+              </span>
       </div>
     </div>,
     document.getElementById("portal")!

@@ -18,8 +18,9 @@ const initialState: any = {
   preferenceId: "",
   paymentInfo: {},
   appointmentsPatients: [],
-  plans:[],
+  plans: [],
   postReview: false,
+  postStudy: false,
 };
 
 export default function reducer(state = initialState, action: actionI) {
@@ -30,7 +31,7 @@ export default function reducer(state = initialState, action: actionI) {
         user: action.payload,
       };
     case ActionTypes.logout:
-      return {...initialState}
+      return { ...initialState };
     case ActionTypes.getPatientInfo:
       return {
         ...state,
@@ -118,7 +119,7 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         plans: action.payload,
       };
-      
+
     case ActionTypes.addReview:
       if (action.payload) {
         return {
@@ -130,11 +131,22 @@ export default function reducer(state = initialState, action: actionI) {
           ...state,
         };
       }
-      case ActionTypes.updateMedicInfo:
+    case ActionTypes.updateMedicInfo:
+      return {
+        ...state,
+        updateResponse: action.payload,
+      };
+    case ActionTypes.addStudy:
+      if (action.payload) {
         return {
           ...state,
-          updateResponse: action.payload,
+          postStudy: true,
         };
+      } else {
+        return {
+          ...state,
+        };
+      }
     default:
       return state;
   }
