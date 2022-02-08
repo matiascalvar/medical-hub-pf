@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import style from "./PatientsDetail.module.css";
-import { getPatientDetails, updatePatient, getPlans, revokeAccess } from "../requests";
+import { getPatientDetails, updatePatient, getPlans, updatePermissions } from "../requests";
 import { FiEdit } from "react-icons/fi";
 
 export default function MedicsDetail(props: any): JSX.Element {
@@ -64,9 +64,15 @@ export default function MedicsDetail(props: any): JSX.Element {
     props.reolad();
   }
 
-  async function handleRevokeAccess (e: any) {
+  async function revokeAccess (e: any) {
     e.preventDefault();
-    await revokeAccess(props.id, { active: false });
+    await updatePermissions(props.id, { active: false });
+    props.reolad();
+  }
+
+  async function makeAdmin (e:any) {
+    e.preventDefault();
+    await updatePermissions(props.id, { isAdmin: true });
     props.reolad();
   }
 
@@ -217,7 +223,8 @@ export default function MedicsDetail(props: any): JSX.Element {
         </div>
       </form>
       <div className={style.endBtn}>
-        <button onClick={handleRevokeAccess} className={style.btnEdit}> Revoke Access</button>
+        <button onClick={revokeAccess} className={style.btnEdit}>Revoke Access</button>
+        <button onClick={makeAdmin} className={style.btnEdit}>Make Admin</button>
         <button onClick={acceptChanges} className={style.btnEdit}>
           Accept changes
         </button>

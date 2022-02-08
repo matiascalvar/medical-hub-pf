@@ -18,7 +18,7 @@ router.post('/', authenticateToken, async (req: any, res) => {
     }
 })
 
-router.post('/revokeAccess/:id', async (req: any, res) => {
+router.post('/permissions/:id', async (req: any, res) => {
     try {
         let patient: any = await Patient.findOne({ where: {id: req.params.id}})
         console.log(patient)
