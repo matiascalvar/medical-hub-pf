@@ -35,9 +35,14 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
     specialitie: ""
   });
   const [loading, setLoading] = useState<any>({
-    loading: false,
-    specialityError : false
+    loading: false
   })
+  const [errors, setErrors] = useState<any> ({
+    firstName: false,
+    lastName: false,
+    dni: false,
+    specialitie: false
+})
   const response = useSelector((state: any) => state.updateResponse);
   const specialitie = useSelector((state: any) => state.specialities);
   const dispatch = useDispatch();
@@ -56,28 +61,76 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
   }, [response, specialitie]);
 
   function handleOnChangeInfo(e: any) {
-    setMyInfo((data: any) => {
+    setMyInfo((data : any) =>{
       const newState = {
-        ...data,
-        [e.target.name]: e.target.value
-      }
-      if(newState.specialitie.length > 0){
-        setLoading((data: any) => {
-          return {
-            ...data,
-            specialityError: false
-          }
-        })
-      }
+           ...data,
+           [e.target.name] : e.target.value
+       }
+       validate(newState, e);
 
-      return newState
-    })
-   
+       return newState
+   })
   }
+
+  function validate(state: any, e : any){
+
+    const name: any = e.target.name
+    if(state.specialitie.length > 0){
+      setLoading((data: any) => {
+        return {
+          ...data,
+          specialityError: false
+        }
+      })
+    }
+    if(state[name].length === 0){
+        setErrors((data : any) =>{
+            return{
+                ...data,
+                [name]:true
+            }
+        })
+    }else{
+        setErrors((data : any) =>{
+            return{
+                ...data,
+                [name]:false
+            }
+        })
+    }
+    if(!/^([0-9])*$/.test(state.dni)){
+        setErrors((data : any) =>{
+            return{
+                ...data,
+                dni:true
+            }
+        })
+    }
+    if(!/^[A-Z]+$/i.test(state.firstName)){
+        setErrors((data : any) =>{
+            return{
+                ...data,
+                firstName:true
+            }
+        })
+    }
+    if(!/^[A-Z]+$/i.test(state.lastName)){
+        setErrors((data : any) =>{
+            return{
+                ...data,
+                lastName:true
+            }
+        })
+    }
+}
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    if (!loading.loading && myInfo.specialitie.length > 0) {
+    if (!loading.loading &&
+      !errors.firstName && 
+      !errors.lastName &&
+      !errors.dni &&
+      myInfo.specialitie.length > 0) {
       dispatch(updateMedicInfo(activeUser, myInfo, id));
       setLoading((data: any) => {
         return {
@@ -85,11 +138,11 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
           loading: true
         }
       })
-    }else{
-      setLoading((data: any) => {
+    }else if(myInfo.specialitie.length === 0){
+      setErrors((data: any) => {
         return {
           ...data,
-          specialityError: true
+          specialitie: true
         }
       })
     }
@@ -102,10 +155,20 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
         <div className={s.inputContainer}>
           <label className={s.label}>FirstName:</label>
           <input className={s.input} name="firstName" type="text" onChange={handleOnChangeInfo} value={myInfo.firstName} />
+          {
+            errors.firstName ? 
+            <span className={s.inputError}>* (this field is required only letters)</span> 
+            : ""
+          }
         </div>
         <div className={s.inputContainer}>
           <label className={s.label}>LastName</label>
           <input className={s.input} name="lastName" type="text" onChange={handleOnChangeInfo} value={myInfo.lastName} />
+          {
+            errors.lastName ? 
+            <span className={s.inputError}>* (this field is required only letters)</span> 
+            : ""
+          }
         </div>
         <div className={s.inputContainer}>
           <label className={s.label}>Email</label>
@@ -117,13 +180,18 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
         <div className={s.inputContainer}>
           <label className={s.label}>Dni</label>
           <input className={s.input} name="dni" type="text" onChange={handleOnChangeInfo} value={myInfo.dni} />
+          {
+            errors.dni ? 
+            <span className={s.inputError}>* (this field is required only numbers)</span> 
+            : ""
+          }
         </div>
         <div className={s.inputContainer}>
           <label className={s.label}>Specialitie</label>
           <input className={s.input} name="specialitie" type="text" list='specialities'onChange={handleOnChangeInfo} value={myInfo.specialitie} />
           {
-            loading.specialityError ? 
-            <span className={s.error}>Este campo es obligatorio</span>
+            errors.specialitie ? 
+            <span className={s.inputError}>* This field is required</span>
             : ""
           }
           <datalist id="specialities">
