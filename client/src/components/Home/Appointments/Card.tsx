@@ -60,7 +60,7 @@ export const Card = ({ date, hours, medicInfo }: CardProps): JSX.Element => {
           })}
       </div>
       {selected.hour ? (
-        <div>
+        <div className={style.appConfirm}>
           <h3>
             Confirm appointment with Dr. {medicInfo.medic} at {selected.hour}hs.
           </h3>

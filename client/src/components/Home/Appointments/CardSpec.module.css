@@ -28,6 +28,37 @@
   width: 100%;
 }
 
+.appConfirmBack{
+position: absolute;  
+top:0px;
+left: -10%;
+width: 100%;
+height: 100%;
+background-color: black;
+opacity: 0.8;
+z-index: 3;
+}
+
+.appConfirm{
+  position: absolute;
+  width: 40%;
+  top:35%;
+  left: 30%;
+  background-color: #0eaaff;
+  border-radius: 20px;
+  padding: 15px 15px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.appConfirm:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.appConfirm button{
+  cursor: pointer;
+}
+
 .appConfirm h3{
   color: black !important;
 }

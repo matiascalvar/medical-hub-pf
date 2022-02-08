@@ -42,6 +42,7 @@ export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => 
   };
 
   return (
+    <>
     <div className={style.cardContainer}>
       <label>
         <input
@@ -50,8 +51,9 @@ export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => 
           value={`Dr. ${medicInfo.medic}`}
         />
       </label>
+      </div>
       {selected.hour ? (
-        <div className={style.appConfirm}>
+          <div className={style.appConfirm}>
           <h3>
             Confirm appointment with Dr. {medicInfo.medic} at {hours}hs.
           </h3>
@@ -64,9 +66,9 @@ export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => 
           >
             Cancel
           </button>
-        </div>
+          </div>
       ) : null}
-    </div>
+    </>
   );
 };
 
