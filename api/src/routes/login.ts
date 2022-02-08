@@ -1,6 +1,7 @@
-import { Response, Request, Router } from 'express';
+import { Router } from 'express';
 import  { User } from '../models/User'
 import  { RefreshToken } from '../models/RefreshToken'
+import { Patient } from '../models/Patient';
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const router = Router();
@@ -20,7 +21,11 @@ router.post('/', async (req, res) => {
             if (!user.active) return res.status(401).send({"error": "Access revoked"})
             if (await bcrypt.compare(req.body.password, user.hashedPass)) {
                 if (req.body.role === "medic") {
-                    if (!user.isStaff) return res.status(401).send({"error": "You don't have medical access"})
+                    if (!user.isStaff) return res.status(401).send({"error": "Not a medic."})
+                }
+                if (req.body.role === "patient") {
+                    let patient = await Patient.findOne({where: {UserId: user.id}})
+                    if (!patient) return res.status(401).send({"error": "Not a patient."})
                 }
                 const userData = {
                     email: user.email,
