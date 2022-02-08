@@ -82,6 +82,9 @@
   font-size: 1rem;
   cursor: pointer;
   transition: .4s;
+  display: grid;
+  align-items: center;
+  text-decoration: none;
 }
 
 .patHst__top--btn:hover{
