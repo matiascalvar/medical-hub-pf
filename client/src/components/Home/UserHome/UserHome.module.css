@@ -122,6 +122,18 @@
     color: #0eaaff;
 }
 
+.link{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    height: 1.7rem;
+    font-size: 1.9rem;
+    color: #939eb0;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+}
+
 .active{
     color: rgb(96, 226, 96);
     font-weight: 500;

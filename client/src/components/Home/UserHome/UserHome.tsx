@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointments, getHistory } from "../../../actions/index";
 import Header from "./Header/Header";
+import {Link} from "react-router-dom";
 
 
 interface UserHomeProps {
@@ -88,13 +89,15 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
                           <span className={stateColor(data.state)}>
                             {data.state.toLowerCase()}
                           </span>
+                          <Link className={s.link} to="/home/appointments">
                           <button className={s.appointmentButton} type="button">
                             <icons.BiChevronRight />
                           </button>
+                          </Link>
                         </div>
                       </div>
                     ))
-                  : "There are no appoiments"}
+                  : "There are no appointments"}
               </div>
             </div>
             <div className={s.historyCard}>

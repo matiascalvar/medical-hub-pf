@@ -57,6 +57,15 @@
     color: black;
 }
 
+.inputError{
+    color: red;
+    font-size: .8rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: .3rem;
+}
+
 .saveButton{
     border: none;
     background-color: #00d9ff;
