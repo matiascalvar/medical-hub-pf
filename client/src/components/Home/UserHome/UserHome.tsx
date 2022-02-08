@@ -54,7 +54,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
             <div className={s.shiftCard}>
               <span className={s.cardTitle}>
                 <iconsb.MdComputer className={s.icon} />
-                Appointments
+                Next appointments
               </span>
               <div className={s.subtitlesContainer}>
                 <span className={s.appointmentBox}>Time</span>
@@ -97,7 +97,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
                         </div>
                       </div>
                     ))
-                  : "There are no appointments"}
+                  : "No appointments available"}
               </div>
             </div>
             <div className={s.historyCard}>

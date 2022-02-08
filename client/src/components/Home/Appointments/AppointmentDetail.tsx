@@ -1,52 +1,49 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import style from "./MedicAppointmentDetail.module.css";
+import style from "./AppointmentDetail.module.css";
 import { Link, useParams } from "react-router-dom";
 import {
-  getPreferenceId,
-  getAppointmentsPatients,
+  getAppointments,
 } from "../../../actions/index";
-import Nav from "../MedicHome/Nav/Nav";
-import Header from "../../Home/UserHome/Header/Header";
-import NewStudie from "./NewStudie";
+import Nav from "../Nav/Nav";
+import Header from "../UserHome/Header/Header";
 import { idText } from "typescript";
+import Loading from "../../../assets/img/loading.gif"
 
 export interface IUserPublicProfileRouteParams {
-  id: string;
+  id: any;
   name: string;
 }
 
-const MedicAppointmentDetail: FunctionComponent = () => {
+const AppointmentDetail: FunctionComponent = () => {
   let dispatch = useDispatch();
-  const medicInfo = useSelector((state: any) => state.medicInfo);
+  const patient = useSelector((state: any) => state.patientInfo);
   const appointments: any[] = useSelector(
-    (state: any) => state.appointmentsPatients
+    (state: any) => state.appointments
   );
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
-  const [appointmentDetail, setAppointmentDetail] = useState<any>("");
-  const [studyModal, setStudyModal] = useState<any>(false);
+  const [appointmentDetail, setAppointmentDetail] = useState<any>(false);
+  const [input, setInput] = useState<any>("");
 
-  const planChange = (number: number) => {
-    if (number === 0) return "Particular"
-    if (number === 1) return "Silver"
-    if (number === 2) return "Gold"
-    if (number === 3) return "Platinium"
-  }
-
-  const closeStudyModal = () => {
-    return setStudyModal(false);
+  const  getPatientInfo = async (idPatient:any) =>  {
+    const response = await axios.get(
+      `http://localhost:3001/appointments/${idPatient}`
+    );
+    const app = response.data.find((a: any) => {
+      return a.id == id;
+    })
+    console.log(app);
+    setAppointmentDetail(app);
+    return response.data;
   }
 
   useEffect(() => {
-    if (!appointments.length) dispatch(getAppointmentsPatients(medicInfo.id));
-    setAppointmentDetail(
-      appointments.find((a) => {
-        return a.id == id;
-      })
-    );
-    console.log("APPOINTMENTS", appointmentDetail);
-  }, [appointments]);
+    getAppointments(id);
+    getPatientInfo(patient.id);
+    console.log("Patient", patient);
+  }, []);
+
 
   return (
     <div className={style.bigContainer}>
@@ -55,7 +52,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
       </div>
       <div className={style.aside}>
         <div>
-          <Header userName={medicInfo.firstName} title="Appointment Detail" />
+          <Header userName={patient.firstName} title="Appointment Detail" />
         </div>
         {appointmentDetail ? (
           <div className={style.detailContainer}>
@@ -63,23 +60,19 @@ const MedicAppointmentDetail: FunctionComponent = () => {
               <div className={style.shiftCard}>
                 <h3>Information</h3>
                 <p>
-                  Name:{" "}
+                  Doctor Name:{" "}
                   <span className={style.pBlack}>
                     {appointmentDetail &&
-                      appointmentDetail.Patient.firstName +
+                      appointmentDetail.MedicalStaff.firstName +
                         " " +
-                        appointmentDetail.Patient.lastName}
+                        appointmentDetail.MedicalStaff.lastName}
                   </span>
                 </p>
                 <p>
-                  Plan:{" "}
-                  {appointmentDetail && appointmentDetail.Patient.PlanId ? (
-                    <span className={style.pBlack}>
-                      {planChange(appointmentDetail.Patient.PlanId)}
-                    </span>
-                  ) : (
-                    <span className={style.pBlack}>Normal</span>
-                  )}
+                  Speciality:{" "}
+                  
+                    <span className={style.pBlack}>{appointmentDetail.MedicalStaff.Specialitie.name}</span>
+                  
                 </p>
                 <p>
                   Date:{" "}
@@ -94,9 +87,9 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                   </span>
                 </p>
                 <p>
-                  Phone:
+                  Status:
                   <span className={style.pBlack}>
-                    {appointmentDetail && appointmentDetail.Patient.phone}
+                    {appointmentDetail && appointmentDetail.state.toLowerCase()}
                   </span>
                 </p>
               </div>
@@ -108,9 +101,6 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                   <div className={style.reviewP}>
                     <p>
                       No review avaialable.
-                      <Link to={`/home/medic/appointments/review/${id}`}>
-                        Add review
-                      </Link>
                     </p>
                   </div>
                 )}
@@ -119,9 +109,6 @@ const MedicAppointmentDetail: FunctionComponent = () => {
             <div className={style.studiesContainer}>
               <div className={style.headerStudies}>
                 <h3>Studies</h3>
-                <p onClick={() => setStudyModal(true)} className={style.studyNewText}>
-                  New Study
-                </p>
               </div>
               <div className={style.dataContainer}>
                 <div className={style.titles}>
@@ -142,14 +129,13 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                 )}
               </div>
             </div>
-            {studyModal && <NewStudie closeStudyModal={closeStudyModal} />}
           </div>
         ) : (
-          <h1>Loading</h1>
+          <p></p>
         )}
       </div>
     </div>
   );
 };
 
-export default MedicAppointmentDetail;
+export default AppointmentDetail;

@@ -51,7 +51,7 @@ export default function ({ userName, id }: UserHomeProps): JSX.Element {
           <div className={s.shiftCard}>
             <span className={s.cardTitle}>
               <iconsb.MdComputer className={s.icon} />
-              Appointments
+              Next Appointments
             </span>
             <div className={s.subtitlesContainer}>
               <span className={s.appointmentBox}>Time</span>

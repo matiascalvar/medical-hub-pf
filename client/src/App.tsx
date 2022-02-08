@@ -9,6 +9,7 @@ import { logUser } from "./actions";
 import { PatientRoute, MedicRoute, AdminRoute } from "./protectedRoutes";
 import Appointments from "./components/Home/Appointments/Appointments";
 import NewAppointment from "./components/Home/Appointments/NewAppointment";
+import AppointmentDetail from "./components/Home/Appointments/AppointmentDetail";
 import Landing from "./components/Landing/Landing";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
@@ -59,6 +60,7 @@ function App() {
           <PatientRoute exact path="/home" component={Home} />
           <PatientRoute exact path="/home/appointments" component={Appointments} />
           <PatientRoute exact path="/home/appointments/new" component={NewAppointment} />
+          <PatientRoute exact path="/home/appointments/:id" component={AppointmentDetail} />
           <PatientRoute exact path="/home/userProfile" component={UserProfile} />
           <PatientRoute exact path="/home/history" component={History} />
           <PatientRoute exact path="/mercadopago" component={MercadoPago} />
