@@ -21,7 +21,6 @@ const NewStudie: FunctionComponent = () => {
   const medicInfo = useSelector((state: any) => state.medicInfo);
   const study = useSelector((state: any) => state.postStudy);
   const types = useSelector((state: any) => state.studyTypes);
-  const [idPatient, setIdPatient] = useState<any>(1);
 
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
 
@@ -31,7 +30,7 @@ const NewStudie: FunctionComponent = () => {
     studyTypeId: "",
     MedicalStaffId: medicInfo.id,
     appointmentId: id,
-    PatientId: idPatient,
+    PatientId: 1,
   });
 
   const getIDPatient = async (id: any) => {
@@ -40,16 +39,19 @@ const NewStudie: FunctionComponent = () => {
         `http://localhost:3001/appointments/details/${id}`
       );
       const data = response.data.Patient.id;
+      setInput({
+        ...input,
+        PatientId: response.data.Patient.id
+      })
       return data;
     } catch (error) {
       console.log(error);
     }
-  }; // No anda bien ver
+  };
 
   useEffect(() => {
     dispatch(getStudyTypes());
-    setIdPatient(getIDPatient(id));
-    console.log("id", idPatient);
+    getIDPatient(id);
   }, []);
 
   useEffect(() => {}, []);
