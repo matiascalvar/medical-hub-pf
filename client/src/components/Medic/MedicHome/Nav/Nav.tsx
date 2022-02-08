@@ -21,7 +21,7 @@ export default function Nav(): JSX.Element {
       <img className={s.logo} src={Logo} alt="" />
       <div className={s.buttonsContainer}>
         <div className={s.navButton}>
-          <Link className={s.link} to="/home">
+          <Link className={s.link} to="/home/medic">
             <icons.BiHome className={s.icon} />
           </Link>
           <div className={s.tooltip}>Home</div>
