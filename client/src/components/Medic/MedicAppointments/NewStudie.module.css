@@ -29,9 +29,9 @@
   border-radius: 0.7rem;
   background-color: #fff;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .studyContainer textarea {
@@ -84,4 +84,8 @@
 .formBtn button:hover {
   cursor: pointer;
   background-color: #00d9ff;
+}
+
+.studyContainer p {
+  color: greenyellow;
 }

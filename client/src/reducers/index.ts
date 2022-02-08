@@ -20,6 +20,7 @@ const initialState: any = {
   plans: [],
   postReview: false,
   postStudy: false,
+  studyTypes: [],
 };
 
 export default function reducer(state = initialState, action: actionI) {
@@ -139,8 +140,16 @@ export default function reducer(state = initialState, action: actionI) {
       } else {
         return {
           ...state,
+          postStudy: false,
         };
       }
+
+    case ActionTypes.studyTypes:
+      return {
+        ...state,
+        studyTypes: action.payload,
+      };
+
     default:
       return state;
   }

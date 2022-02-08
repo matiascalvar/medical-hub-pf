@@ -4,12 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import style from "./NewStudie.module.css";
 import { Link, useParams } from "react-router-dom";
 import {
-  getPreferenceId,
-  getAppointmentsPatients,
-  addReview,
+  getStudyTypes,
   addStudy,
+  clearSubmitForm,
 } from "../../../actions/index";
-import Nav from "../../Home/Nav/Nav";
+import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
 
 export interface IUserPublicProfileRouteParams {
@@ -21,21 +20,39 @@ const NewStudie: FunctionComponent = () => {
   let dispatch = useDispatch();
   const medicInfo = useSelector((state: any) => state.medicInfo);
   const study = useSelector((state: any) => state.postStudy);
-  const studiesTypes = ["Probando", "Asd"];
+  const types = useSelector((state: any) => state.studyTypes);
+  const [idPatient, setIdPatient] = useState<any>(1);
 
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
+
   const [input, setInput] = useState<any>({
     diagnosis: "",
     studyPDF: "",
     studyTypeId: "",
-    MedicalStaffId: 48,
+    MedicalStaffId: medicInfo.id,
     appointmentId: id,
-    PatientId: 1,
+    PatientId: idPatient,
   });
 
+  const getIDPatient = async (id: any) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/appointments/details/${id}`
+      );
+      const data = response.data.Patient.id;
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }; // No anda bien ver
+
   useEffect(() => {
-    console.log(medicInfo);
+    dispatch(getStudyTypes());
+    setIdPatient(getIDPatient(id));
+    console.log("id", idPatient);
   }, []);
+
+  useEffect(() => {}, []);
 
   const handleChange = (e: any) => {
     if (e.target.value === "studyType") return;
@@ -50,6 +67,17 @@ const NewStudie: FunctionComponent = () => {
     e.preventDefault();
     if (!input.diagnosis) return;
     dispatch(addStudy(input));
+    setInput({
+      diagnosis: "",
+      studyPDF: "",
+      studyTypeId: "",
+      MedicalStaffId: medicInfo.id,
+      appointmentId: id,
+      PatientId: 1,
+    });
+    setTimeout(() => {
+      dispatch(clearSubmitForm());
+    }, 5000);
   };
 
   return (
@@ -59,17 +87,17 @@ const NewStudie: FunctionComponent = () => {
       </div>
       <div className={style.aside}>
         <div>
-          <Header userName="Asd" title="Add Study" />
+          <Header userName={medicInfo.firstName} title="Add Study" />
         </div>
         <div className={style.studyContainer}>
           <form onSubmit={handleSubmit}>
             <select id="type" name="studyTypeId" onChange={handleChange}>
               <option value="studyType">Select a study type</option>
-              {studiesTypes &&
-                studiesTypes.map((t: any, i: number) => {
+              {types &&
+                types.map((t: any, i: number) => {
                   return (
-                    <option value={i} key={i}>
-                      Test
+                    <option value={t.id} key={t.id}>
+                      {t.name}
                     </option>
                   );
                 })}
@@ -85,7 +113,7 @@ const NewStudie: FunctionComponent = () => {
               <button type="submit">Submit </button>
             </div>
           </form>
-          {study && <p>Your study was send</p>}
+          {study && <p className={style.textSubmit}>Your study was send</p>}
         </div>
       </div>
     </div>

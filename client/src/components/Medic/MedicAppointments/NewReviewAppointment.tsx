@@ -18,7 +18,7 @@ export interface IUserPublicProfileRouteParams {
 
 const NewReviewAppointment: FunctionComponent = () => {
   let dispatch = useDispatch();
-  const userActive = useSelector((state: any) => state.userInfo);
+  const medicInfo = useSelector((state: any) => state.medicInfo);
   const review = useSelector((state: any) => state.postReview);
 
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
@@ -47,7 +47,7 @@ const NewReviewAppointment: FunctionComponent = () => {
       </div>
       <div className={style.aside}>
         <div>
-          <Header userName="Asd" title="Add Review" />
+          <Header userName={medicInfo.firstName} title="Add Review" />
         </div>
         <div className={style.reviewContainer}>
           <form onSubmit={handleSubmit}>
