@@ -3,7 +3,7 @@ import s from "./MedicProfile.module.css";
 import userPhoto from "../../Home/userLogo.png";
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import {getPatientInfo} from "../../../actions/index";
+import {getSpecialities} from "../../../actions/index";
 import DataProfile from "./DataProfile/DataProfile";
 import EditDataProfile from "./EditDataProfile/EditDataPofile";
 
@@ -12,7 +12,8 @@ interface Info{
     lastName: any;
     id : any,
     idNumber: any,
-    availability: any
+    availability: any,
+    speciality: any
 }
 interface EditState{
     edit : any
@@ -22,28 +23,44 @@ export default function MedicProfile () : JSX.Element {
 
     const activeUser = useSelector((state: any) => state.user);
     const response = useSelector((state: any) => state.medicInfo);
+    const specialities = useSelector((state: any) => state.specialities);
     const dispatch = useDispatch();
     const [ myInfo, setMyInfo ] = useState<Info> ({
         firstName: "",
         lastName: "",
         id: "",
         idNumber: "",
-        availability: ""
+        availability: "",
+        speciality: ""
     });
     const [editState , setEditState] = useState<EditState>({
         edit: false
     })
+    
     console.log(response);
     useEffect ( () => {
         if (response) {
-            setMyInfo({
-                firstName: response.firstName,
+            setMyInfo((data : any) =>{
+                return {
+                    ...data,
+                    firstName: response.firstName,
                     lastName: response.lastName,
                     id: response.id,
                     idNumber: response.idNumber,
                     availability: response.availability
+                }
                 })
-            }    
+            }  
+        if(specialities && specialities.length === 0){
+            dispatch(getSpecialities());
+        }else{
+            setMyInfo((data : any) =>{
+                return{
+                    ...data,
+                    speciality: specialities.filter((sp: any) => sp.id === response.SpecialitieId)
+                }
+                })
+        }
     }, [response, activeUser]);
 
     function editOn(){
@@ -77,6 +94,7 @@ export default function MedicProfile () : JSX.Element {
                     id={myInfo.id}
                     email={activeUser.email}
                     availability={myInfo.availability}
+                    speciality={myInfo.speciality[0].name}
                     /> : 
                     <EditDataProfile 
                     firstName={myInfo.firstName} 
@@ -85,6 +103,7 @@ export default function MedicProfile () : JSX.Element {
                     id={myInfo.id}
                     email={activeUser.email}
                     activeUser = {activeUser}
+                    speciality={myInfo.speciality[0].name}
                     />
                 
                    }

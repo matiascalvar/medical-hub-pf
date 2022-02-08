@@ -10,7 +10,8 @@ interface EditDataProfileProps {
   id: any,
   dni: any,
   email: any,
-  activeUser: any
+  activeUser: any,
+  speciality: any
 }
 
 interface Info {
@@ -23,7 +24,7 @@ interface Info {
   specialitie : any
 }
 
-export default function EditDataProfile({ firstName, lastName, id, dni, email, activeUser }: EditDataProfileProps): JSX.Element {
+export default function EditDataProfile({ firstName, lastName, id, dni, email, activeUser, speciality}: EditDataProfileProps): JSX.Element {
 
   const [myInfo, setMyInfo] = useState<Info>({
     firstName: firstName,
@@ -32,7 +33,7 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
     dni: dni,
     email: email,
     password: "",
-    specialitie: ""
+    specialitie: speciality
   });
   const [loading, setLoading] = useState<any>({
     loading: false
@@ -125,7 +126,6 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
 }
 
   function handleSubmit(e: any) {
-    e.preventDefault();
     if (!loading.loading &&
       !errors.firstName && 
       !errors.lastName &&
