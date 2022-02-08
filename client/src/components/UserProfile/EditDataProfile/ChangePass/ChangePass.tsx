@@ -36,10 +36,28 @@ export default function ChangePass({ activeUser }: ChangePassProps): JSX.Element
 
   function handleOnChangePass(e: any) {
     setChangePass((data: any) => {
-      return {
+      const newState = {
         ...data,
         [e.target.name]: e.target.value
       }
+
+      if(newState.password.length >= 8){
+        setTooltip((data: any) => {
+          return {
+            ...data,
+            error: false
+          }
+        })
+      }else{
+        setTooltip((data: any) => {
+          return {
+            ...data,
+            error: true
+          }
+        })
+      }
+      return newState;
+
     })
   }
 
@@ -63,7 +81,7 @@ export default function ChangePass({ activeUser }: ChangePassProps): JSX.Element
   }
 
   function sendNewPassword() {
-    if(!tooltipState.loading && changePass.password.length > 0){
+    if(!tooltipState.loading && changePass.password.length >= 8){
       dispatch(changePassword(activeUser, changePass));
       setTooltip((data: any) => {
         return {
@@ -86,7 +104,7 @@ export default function ChangePass({ activeUser }: ChangePassProps): JSX.Element
   return (
     <div className={s.inputContainer}>
       <label className={s.label}>Password</label>
-      <input onFocus={tooltip} className={s.input} name="password" type="text" placeholder='********' onChange={handleOnChangePass} value={changePass.password} />
+      <input onFocus={tooltip} className={s.input} name="password" type="password" placeholder='********' onChange={handleOnChangePass} value={changePass.password} />
       {
         tooltipState.loading ?
         <div className={s.buttonsContainer}>
@@ -96,7 +114,7 @@ export default function ChangePass({ activeUser }: ChangePassProps): JSX.Element
         </div>
         :
         <div className={s.dataContainer}>
-          <span className={tooltipState.error ? s.errorText : s.none}>* This field is required</span>
+          <span className={tooltipState.error ? s.errorText : s.none}>* This field is required(8 characters minimum)</span>
           <div className={s.buttonsContainer}>
             <button type="button" onClick={sendNewPassword} className={tooltipState.tooltip ? s.saveButton : s.none}>Save Password</button>
             <button type="button" name="cancel" onClick={tooltip} className={tooltipState.tooltip ? s.cancelButton : s.none}>Cancel</button>

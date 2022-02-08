@@ -13,10 +13,9 @@
 .card {
   background-color: #f1f1f1;
   max-width: 40rem;
-  width: 25vw;
+  width: 25rem;
   /* height: 22rem; */
   border-radius: 0.7rem;
-  padding: 20px;
   /* padding-top: 50px; */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   position: fixed;
@@ -24,9 +23,14 @@
   left: 50%;
   transform: translate(-50%,-50%);
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 .title {
-  color: #000;
+  color: rgb(43, 43, 43);
+  font-size: 1rem;
+  font-weight: 700;
 }
 .card p {
   font-size: 1.2rem;
@@ -37,26 +41,73 @@
   padding-bottom: 50px;
 }
 .btn {
-  border-radius: 10px;
-  padding: 20px 50px;
+  padding: 0 1rem .5rem 1rem;
+  margin: 0 0 1rem 0;
   font-size: 1.2rem;
+  font-weight: 550;
   border: none;
-  background-color: #0eaaff;
+  border-bottom: 2px solid #0eaaff;
+  background-color:transparent;
+  cursor: pointer;
+  transition: 200ms;
 }
 .btn:hover {
-  background-color: #49baf7;
+  padding: 0 2rem .5rem 2rem;
 }
 .btnText {
-  font-family: "Monserrat", sans-serif;
+  
 }
 
 .btnClose {
   border-radius: 10px;
   border: none;
-  background-color: rgb(255, 145, 0);
   padding: 5px 20px;
+  width: 2rem;
+  font-size: 1.3rem;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: transparent;
 }
 .btnClose:hover {
-  background-color: red;
   color: white;
+}
+
+.logo{
+  width: 8rem;
+  margin: 0 0 0 0;
+}
+
+.logoContainer{
+  background-color: #0eaaff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 13rem;
+}
+
+.subtitle{
+  color: rgb(43, 43, 43);
+  font-size: 1rem;
+  font-weight: 700;
+  width: 100%;
+  margin: 1rem 0 .5rem 0;
+}
+
+.name{
+  color: rgb(43, 43, 43);
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 100%;
+}
+
+.price{
+  color: rgb(43, 43, 43);
+  font-size: 2.7rem;
+  font-weight: 700;
+  width: 100%;
+  margin: 2rem 0 2rem 0;
 }

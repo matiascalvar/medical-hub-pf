@@ -1,13 +1,12 @@
-import userLogo from "../userLogo.png";
 import s from "./UserHome.module.css";
 import * as iconsb from "react-icons/md";
 import * as icons from "react-icons/bi";
-import { payments, history } from "./data";
+import { payments} from "./data";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointments, getHistory } from "../../../actions/index";
 import Header from "./Header/Header";
-import Nav from "../Nav/Nav";
+
 
 interface UserHomeProps {
   userName: string;
@@ -45,7 +44,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
 
   return (
     <div className={s.mainContainer}>
-      <div>
+      <div className={s.section}>
         <div className={s.header}>
           <Header userName={userName} title="Home" />
         </div>
