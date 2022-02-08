@@ -4,6 +4,7 @@ import { ActionTypes } from "../actions/types";
 const initialState: any = {
   user: {},
   patientInfo: {},
+  patientById: {},
   medicInfo: {},
   appointments: [],
   specialities: [],
@@ -37,6 +38,11 @@ export default function reducer(state = initialState, action: actionI) {
         ...state,
         patientInfo: action.payload,
       };
+    case ActionTypes.getPatientById:
+      return {
+        ...state,
+        patientById: action.payload
+      }
     case ActionTypes.getMedicInfo:
       return {
         ...state,
