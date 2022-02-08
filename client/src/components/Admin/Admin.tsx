@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import style from "./Admin.module.css";
 import AddMedic from "./Medics/AddMedic";
 import Medics from "./Medics/Medics";
@@ -7,9 +9,18 @@ import Patients from "./Patients/Patients";
 import AddAppointment from "./Appointments/AddAppointment";
 import Appointments from "./Appointments/Appointments";
 import Logo from "./../../assets/img/logo.svg";
+import { logout } from "../../actions";
 
 export default function Admin(): JSX.Element {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const [component, setComponent]: any = useState("");
+
+  const handleLogout = function () {
+    dispatch(logout());
+    history.push("/");
+  };
 
   return (
     <div className={style.bigContainer}>
@@ -55,6 +66,12 @@ export default function Admin(): JSX.Element {
           className={component === "Appointments" ? style.btnActive : style.btn}
         >
           Appointment list
+        </button>
+        <button
+          onClick={() => handleLogout()}
+          className={component === "Appointments" ? style.btnActive : style.btn}
+        >
+          Logout
         </button>
       </div>
       <>{component === "AddMedic" ? <AddMedic /> : null}</>
