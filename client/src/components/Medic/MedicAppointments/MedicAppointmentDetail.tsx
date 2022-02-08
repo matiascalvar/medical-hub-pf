@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./MedicAppointmentDetail.module.css";
 import { Link, useParams } from "react-router-dom";
+import { BiDownload } from "react-icons/bi";
 import {
   getPreferenceId,
   getAppointmentsPatients,
@@ -10,6 +11,7 @@ import {
 import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
 import { idText } from "typescript";
+import NewStudieModal from "./NewStudieModal";
 
 export interface IUserPublicProfileRouteParams {
   id: string;
@@ -37,6 +39,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
 
   return (
     <div className={style.bigContainer}>
+      
       <div className={style.navContainer}>
         <Nav />
       </div>
@@ -46,6 +49,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
         </div>
         {appointmentDetail ? (
           <div className={style.detailContainer}>
+            <div className={style.modalNewStudie}><NewStudieModal /></div>
             <div className={style.detailRow}>
               <div className={style.shiftCard}>
                 <h3>Patient Information</h3>
@@ -106,9 +110,10 @@ const MedicAppointmentDetail: FunctionComponent = () => {
             <div className={style.studiesContainer}>
               <div className={style.headerStudies}>
                 <h3>Studies</h3>
-                <Link to={`/home/medic/appointments/studies/${id}`}>
+                {/* <Link to={`/home/medic/appointments/studies/${id}`}>
                   New Study
-                </Link>
+                </Link> */}
+                <a onClick={() => alert('Hola')}>New Study</a>
               </div>
               <div className={style.dataContainer}>
                 <div className={style.titles}>
@@ -117,12 +122,27 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                 </div>
                 {appointmentDetail.Studies.length ? (
                   appointmentDetail.Studies.map((s: any, i: any) => {
-                    return (
-                      <div className={style.history} key={i}>
-                        <span className={s.hBox}>{s.StudyType.name}</span>
-                        <span className={s.hBox}>Download</span>
+                    if(s.state === 'COMPLETED'){
+                      return (
+                        <div className={style.history} key={i}>
+                          <span className={s.hBox}>{s.StudyType.name}</span>
+                          <span className={s.hBox}><a title='Download Study'
+                              href={`/storage/${s.studyPDF}`} 
+                              target="_blank"
+                            ><BiDownload /></a></span>
+                          
+                        </div>
+                      );
+                    }else if(s.state === 'ACTIVE'){
+                      return (
+                        <div className={style.history} key={i}>
+                          <span className={s.hBox}>{s.StudyType.name}</span>
+                      <span className={s.hBox}>Study not available yet.</span>
                       </div>
-                    );
+                      )
+                      
+                    }
+                    
                   })
                 ) : (
                   <p>No studies were found</p>
@@ -134,6 +154,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
           <h1>Loading</h1>
         )}
       </div>
+      
     </div>
   );
 };
