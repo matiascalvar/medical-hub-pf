@@ -76,7 +76,6 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
     function validate(state: any, e : any){
 
         const name: any = e.target.name
-        const exp : any =/^\d+$/;
         if(state[name].length === 0){
             setErrors((data : any) =>{
                 return{
