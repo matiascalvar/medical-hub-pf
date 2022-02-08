@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {updatePatientInfo} from "../../../actions/index";
 import ChangePass from "./ChangePass/ChangePass";
 
+
 interface EditDataProfileProps{
     firstName: any;
     lastName: any;
@@ -126,7 +127,6 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
     }
 
     function handleSubmit(e : any){
-        e.preventDefault();
         if(!loading.loading && 
             !errors.firstName && 
             !errors.lastName &&
@@ -138,7 +138,9 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
                     ...data,
                     loading:true
                 }
-            })
+            });
+           
+            
         }
     }
 
