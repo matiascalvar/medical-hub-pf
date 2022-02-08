@@ -191,7 +191,7 @@ export const changePassword =
 export const getMedicAvailableTime = (id: number) => async (dispatch: any) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/appointments/avb/${id}`
+      `http://localhost:3001/appointmentsAvb?idMedicalStaff=${id}&weekDays=7`
     );
     dispatch({
       type: ActionTypes.medicAppointments,
