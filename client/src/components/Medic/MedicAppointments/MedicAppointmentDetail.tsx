@@ -11,6 +11,7 @@ import {
 import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
 import { idText } from "typescript";
+import NewStudieModal from "./NewStudieModal";
 
 export interface IUserPublicProfileRouteParams {
   id: string;
@@ -48,6 +49,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
         </div>
         {appointmentDetail ? (
           <div className={style.detailContainer}>
+            <div className={style.modalNewStudie}><NewStudieModal /></div>
             <div className={style.detailRow}>
               <div className={style.shiftCard}>
                 <h3>Patient Information</h3>
@@ -108,9 +110,10 @@ const MedicAppointmentDetail: FunctionComponent = () => {
             <div className={style.studiesContainer}>
               <div className={style.headerStudies}>
                 <h3>Studies</h3>
-                <Link to={`/home/medic/appointments/studies/${id}`}>
+                {/* <Link to={`/home/medic/appointments/studies/${id}`}>
                   New Study
-                </Link>
+                </Link> */}
+                <a onClick={() => alert('Hola')}>New Study</a>
               </div>
               <div className={style.dataContainer}>
                 <div className={style.titles}>
