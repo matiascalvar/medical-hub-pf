@@ -1,8 +1,7 @@
 import s from "./UserHome.module.css";
 import * as iconsb from "react-icons/md";
 import * as icons from "react-icons/bi";
-import { payments} from "./data";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointments, getHistory } from "../../../actions/index";
 import Header from "./Header/Header";

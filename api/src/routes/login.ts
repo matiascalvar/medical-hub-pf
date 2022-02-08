@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
             if (!user.active) return res.status(401).send({"error": "Access revoked"})
             if (await bcrypt.compare(req.body.password, user.hashedPass)) {
                 if (req.body.role === "medic") {
-                    if (!user.isStaff) return res.status(401).send({"error": "No tiene permisos de medico"})
+                    if (!user.isStaff) return res.status(401).send({"error": "You don't have medical access"})
                 }
                 const userData = {
                     email: user.email,
