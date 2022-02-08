@@ -34,7 +34,6 @@ const MedicAppointmentDetail: FunctionComponent = () => {
     );
     console.log("APPOINTMENTS", appointments);
   }, [appointments]);
-
   return (
     <div className={style.bigContainer}>
       <div className={style.navContainer}>
@@ -86,6 +85,9 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                     {appointmentDetail && appointmentDetail.Patient.phone}
                   </span>
                 </p>
+                <Link
+                  to={`/home/medic/patientHistory/${appointments[0].Patient.id}`}
+                >View History</Link>
               </div>
               <div className={style.reviewContainer}>
                 <h3>Review</h3>
