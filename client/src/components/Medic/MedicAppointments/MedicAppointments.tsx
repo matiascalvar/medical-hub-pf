@@ -8,20 +8,19 @@ import {
   getPatientInfo,
   getAppointmentsPatients,
 } from "../../../actions/index";
-import Nav from "../../Home/Nav/Nav";
+import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
 
 const MedicAppointments: FunctionComponent = () => {
   let dispatch = useDispatch();
-  const userActive = useSelector((state: any) => state.userInfo);
-  const activeUser = useSelector((state: any) => state.user);
+  const medicInfo = useSelector((state: any) => state.medicInfo);
   const appointments: any[] = useSelector(
     (state: any) => state.appointmentsPatients
   );
 
   useEffect(() => {
-    dispatch(getAppointmentsPatients(48)); // Cambiar por ID de medico
-    console.log(appointments);
+    dispatch(getAppointmentsPatients(medicInfo.id));
+    console.log("Medic Info", medicInfo);
   }, []);
 
   function stateColor(state: string): any {
@@ -37,7 +36,7 @@ const MedicAppointments: FunctionComponent = () => {
       </div>
       <div className={style.aside}>
         <div>
-          <Header userName="Asd" title="Appointments" />
+          <Header userName={medicInfo.firstName} title="Appointments" />
         </div>
         <div>
           <div className={style.shiftCard}>

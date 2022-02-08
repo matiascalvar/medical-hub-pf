@@ -7,7 +7,7 @@ import {
   getPreferenceId,
   getAppointmentsPatients,
 } from "../../../actions/index";
-import Nav from "../../Home/Nav/Nav";
+import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
 import { idText } from "typescript";
 
@@ -18,8 +18,7 @@ export interface IUserPublicProfileRouteParams {
 
 const MedicAppointmentDetail: FunctionComponent = () => {
   let dispatch = useDispatch();
-  const userActive = useSelector((state: any) => state.userInfo);
-  const activeUser = useSelector((state: any) => state.user);
+  const medicInfo = useSelector((state: any) => state.medicInfo);
   const appointments: any[] = useSelector(
     (state: any) => state.appointmentsPatients
   );
@@ -27,14 +26,13 @@ const MedicAppointmentDetail: FunctionComponent = () => {
   const [appointmentDetail, setAppointmentDetail] = useState<any>("");
 
   useEffect(() => {
-    if (!appointments.length) dispatch(getAppointmentsPatients(48)); // Cambiar ID sin hardcodear cuando podamos sacar la ID de la info del medico
+    if (!appointments.length) dispatch(getAppointmentsPatients(medicInfo.id));
     setAppointmentDetail(
       appointments.find((a) => {
         return a.id == id;
       })
     );
-    console.log(appointments);
-    console.log("app", appointmentDetail);
+    console.log("APPOINTMENTS", appointments);
   }, [appointments]);
 
   return (
@@ -44,7 +42,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
       </div>
       <div className={style.aside}>
         <div>
-          <Header userName="Asd" title="Appointment Detail" />
+          <Header userName={medicInfo.firstName} title="Appointment Detail" />
         </div>
         {appointmentDetail ? (
           <div className={style.detailContainer}>
@@ -106,19 +104,30 @@ const MedicAppointmentDetail: FunctionComponent = () => {
               </div>
             </div>
             <div className={style.studiesContainer}>
-              <h3>Studies</h3>
-              <div className={style.text}>
+              <div className={style.headerStudies}>
+                <h3>Studies</h3>
+                <Link to={`/home/medic/appointments/studies/${id}`}>
+                  New Study
+                </Link>
+              </div>
+              <div className={style.dataContainer}>
+                <div className={style.titles}>
+                  <p>Name</p>
+                  <p>PDF</p>
+                </div>
                 {appointmentDetail.Studies.length ? (
                   appointmentDetail.Studies.map((s: any, i: any) => {
-                    return <p>Studie {i}</p>;
+                    return (
+                      <div className={style.history} key={i}>
+                        <span className={s.hBox}>{s.StudyType.name}</span>
+                        <span className={s.hBox}>Download</span>
+                      </div>
+                    );
                   })
                 ) : (
                   <p>No studies were found</p>
                 )}
               </div>
-              <Link to={`/home/medic/appointments/studies/${id}`}>
-                Add Studie
-              </Link>
             </div>
           </div>
         ) : (

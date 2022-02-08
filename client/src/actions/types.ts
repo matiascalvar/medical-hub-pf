@@ -21,4 +21,5 @@ export enum ActionTypes {
   getPlans,
   addReview,
   addStudy,
+  studyTypes,
 }

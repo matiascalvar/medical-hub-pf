@@ -335,3 +335,23 @@ export const addStudy = (payload: any) => async (dispatch: any) => {
     });
   }
 };
+
+export const getStudyTypes = () => async (dispatch: any) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/studies/types`);
+    dispatch({
+      type: ActionTypes.studyTypes,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const clearSubmitForm = () => {
+  console.log("Entra");
+  return {
+    type: ActionTypes.addStudy,
+    payload: false,
+  };
+};
