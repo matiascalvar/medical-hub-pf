@@ -4,10 +4,16 @@ import Nav from '../MedicHome/Nav/Nav';
 import userLogo from '../../Home/userLogo.png';
 import "../../../styles/Medic/MedicPatientHistory/MedicPatientHistory.css";
 import {getAppointments, getPatientById} from '../../../actions';
+import { Link, useParams } from 'react-router-dom';
+
+interface MedicPatientHistoryParams {
+  id:any;
+}
 
 const MedicPatientHistory:FunctionComponent = () => {
 
   const dispatch = useDispatch();
+  const {id} = useParams<MedicPatientHistoryParams>();
 
   const [pageInfo, setPageInfo] = React.useState({
     patientFirst: "",
@@ -18,8 +24,8 @@ const MedicPatientHistory:FunctionComponent = () => {
   })
 
   useEffect(() => {
-    dispatch(getPatientById(5))
-    dispatch(getAppointments(5))
+    dispatch(getPatientById(Number(id)))
+    dispatch(getAppointments(Number(id)))
     if(medic){
       setPageInfo({
         patientFirst: patient.firstName,
@@ -51,7 +57,7 @@ const MedicPatientHistory:FunctionComponent = () => {
         </div>
         <div className="patHst__top">
           <h3 className="patHst__top--title">Patient History</h3>
-          <button className="patHst__top--btn">RETURN</button>
+          <Link className="patHst__top--btn" to={`/home/medic/appointments/${medic.id}`}>RETURN</Link>
         </div>
         <div className="patHst__section">
           <div className="patHst__section--patient">
