@@ -6,6 +6,7 @@ import * as icons from "react-icons/bi";
 import {useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointmentsPatients } from "../../../actions/index";
+import { Link } from "react-router-dom";
 
 interface UserHomeProps {
   userName: string;
@@ -58,7 +59,7 @@ export default function ({ userName, id }: UserHomeProps): JSX.Element {
               <span className={s.appointmentBox}>Date</span>
               <span className={s.appointmentBox}>Patient</span>
               <span className={s.appointmentBox}>Pay</span>
-              <span className={s.appointmentBox}>State</span>
+              <span className={s.appointmentBox}>Details</span>
             </div>
             <div className={s.dataContainer}>
             { appoinments && appoinments.length > 0
@@ -74,11 +75,13 @@ export default function ({ userName, id }: UserHomeProps): JSX.Element {
                       <div className={s.appointmentBox}>
                        <span className={payState(data.pay).style}>{payState(data.pay).text}</span> 
                       </div>
-                      <div className={s.appointmentBox}>
-                        <span className={stateColor(data.state)}>{data.state.toLowerCase()}</span>
-                        <button className={s.appointmentButton} type="button">
-                          <icons.BiChevronRight />
-                        </button>
+                      <div className={s.appointmentBoxe}>
+                        <Link 
+                          to={`/home/medic/appointments/${data.id}`}
+                          className={s.LinkBtn}
+                        >
+                          <span className={s.btnRedirect} >View more</span>
+                        </Link>
                       </div>
                     </div>
                   ))
