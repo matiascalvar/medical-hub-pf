@@ -250,3 +250,8 @@
 .iconH:hover{
     color: #0eaaff;
 }
+
+.historyIconLink{
+    color: gray;
+    text-decoration: none;
+}
