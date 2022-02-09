@@ -25,6 +25,10 @@ const MedicPatientHistory: FunctionComponent = () => {
     medicSecond: "",
   });
 
+  const medic = useSelector((state: any) => state.medicInfo);
+  const patient = useSelector((state: any) => state.patientById);
+  const appointments = useSelector((state: any) => state.appointments);
+
   useEffect(() => {
     dispatch(getPatientById(Number(id)));
     dispatch(getAppointments(Number(id)));
@@ -39,9 +43,6 @@ const MedicPatientHistory: FunctionComponent = () => {
     }
   }, []);
 
-  const medic = useSelector((state: any) => state.medicInfo);
-  const patient = useSelector((state: any) => state.patientById);
-  const appointments = useSelector((state: any) => state.appointments);
 
   return (
     <div className={style.bigContainer}>
@@ -65,11 +66,11 @@ const MedicPatientHistory: FunctionComponent = () => {
               <p>
                 Name:{" "}
                 <span className={style.pBlack}>
-                  {pageInfo.patientFirst + " " + pageInfo.patientSecond}
+                  {`${patient.firstName ? patient.firstName : pageInfo.patientFirst} ${patient.lastName ? patient.lastName : pageInfo.patientSecond}`}
                 </span>
               </p>
               <p>
-                DNI: <span className={style.pBlack}>{pageInfo.patientDNI}</span>
+                DNI: <span className={style.pBlack}>{patient.dni ? patient.dni : pageInfo.patientDNI}</span>
               </p>
             </div>
             <div className={style.appContainer}>
