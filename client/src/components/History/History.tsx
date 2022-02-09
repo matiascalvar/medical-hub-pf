@@ -92,7 +92,7 @@ const History: FunctionComponent = () => {
                         </label>
                         <input type="hidden" name="id" value={s.id} />
                         <button type="submit" className={style.uploadFiles}>
-                          Upload
+                          Submit
                         </button>
                       </form>
                     </span>

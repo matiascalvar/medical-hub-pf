@@ -93,7 +93,7 @@ const AppointmentDetail: FunctionComponent = () => {
                   <p>{appointmentDetail.AppointmentDetail.details} </p>
                 ) : (
                   <div className={style.reviewP}>
-                    <p>No review avaialable.</p>
+                    <p>No review avaialable</p>
                   </div>
                 )}
               </div>
