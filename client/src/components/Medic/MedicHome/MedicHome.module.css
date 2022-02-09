@@ -17,7 +17,7 @@
     background-color: #fff;
     border-radius: .7rem;
     overflow:auto;
-    margin-left: 2rem;
+    margin: auto;
     position: relative;
     transition: 200ms;
     z-index: 300;

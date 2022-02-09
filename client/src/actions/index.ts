@@ -3,6 +3,8 @@ import { Dispatch } from "react";
 import { User } from "./interfaces";
 import { ActionTypes } from "./types";
 
+export const URL_DEPLOY = "http://localhost:3001"; // https://medicalhubpf.herokuapp.com
+
 function createHeaders(token: string) {
   return {
     headers: {
@@ -18,7 +20,7 @@ export const logUser = (activeUser: User) => async (dispatch: any) => {
   const authAxios = axios.create(headers);
   if (activeUser.role === "patient") {
     try {
-      const response = await authAxios.get("http://localhost:3001/users");
+      const response = await authAxios.get(`${URL_DEPLOY}/users`);
       if (response) {
         dispatch({
           type: ActionTypes.getPatientInfo,
@@ -30,7 +32,7 @@ export const logUser = (activeUser: User) => async (dispatch: any) => {
     }
   } else if (activeUser.role === "medic") {
     try {
-      const response = await authAxios.get("http://localhost:3001/users/medic");
+      const response = await authAxios.get(`${URL_DEPLOY}/users/medic`);
       if (response) {
         dispatch({
           type: ActionTypes.getMedicInfo,
@@ -45,7 +47,7 @@ export const logUser = (activeUser: User) => async (dispatch: any) => {
 
 export const logout = () => async (dispatch: any) => {
   try {
-    const response = await axios.delete("http://localhost:3001/login/remove");
+    const response = await axios.delete(`${URL_DEPLOY}/login/remove`); 
   } catch (error) {
     console.log(error);
   }
@@ -56,7 +58,7 @@ export const getPatientInfo = (activeUser: any) => async (dispatch: any) => {
   const headers = createHeaders(activeUser.token);
   const authAxios = axios.create(headers);
   try {
-    const response = await authAxios.get("http://localhost:3001/users");
+    const response = await authAxios.get(`${URL_DEPLOY}/users`);
     if (response) {
       dispatch({
         type: ActionTypes.getPatientInfo,
@@ -70,7 +72,7 @@ export const getPatientInfo = (activeUser: any) => async (dispatch: any) => {
 
 export const getPatientById = (id:any) => async(dispatch:any) => {
   try {
-    const response = await axios.get(`http://localhost:3001/patients/${id}`);
+    const response = await axios.get(`${URL_DEPLOY}/patients/${id}`);
     if(response){
       dispatch({
         type: ActionTypes.getPatientById,
@@ -84,9 +86,7 @@ export const getPatientById = (id:any) => async(dispatch:any) => {
 
 export const getAppointments = (id: any) => async (dispatch: any) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3001/appointments/${id}`
-    );
+    const response = await axios.get(`${URL_DEPLOY}/appointments/${id}`);
     if (response) {
       dispatch({
         type: ActionTypes.getAppointments,
@@ -100,7 +100,7 @@ export const getAppointments = (id: any) => async (dispatch: any) => {
 
 export const getSpecialities = () => async (dispatch: any) => {
   try {
-    const response = await axios.get(`http://localhost:3001/specialities`);
+    const response = await axios.get(`${URL_DEPLOY}/specialities`);
     dispatch({
       type: ActionTypes.getSpecialities,
       payload: response.data,
@@ -113,9 +113,7 @@ export const getSpecialities = () => async (dispatch: any) => {
 
 export const getMedicSpeciality = (id: any) => async (dispatch: any) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3001/specialities/${id}`
-    );
+    const response = await axios.get(`${URL_DEPLOY}/specialities/${id}`);
     dispatch({
       type: ActionTypes.getMedicSpeciality,
       payload: response.data,
@@ -128,9 +126,7 @@ export const getMedicSpeciality = (id: any) => async (dispatch: any) => {
 
 export const getAppointmentsAvailable = (id: any) => async (dispatch: any) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3001/appointments/avb/${id}`
-    );
+    const response = await axios.get(`${URL_DEPLOY}/appointments/avb/${id}`);
     dispatch({
       type: ActionTypes.getMedicSpeciality,
       payload: response.data,
@@ -143,7 +139,7 @@ export const getAppointmentsAvailable = (id: any) => async (dispatch: any) => {
 
 export const getHistory = (id: number) => async (dispatch: any) => {
   try {
-    const response = await axios.get(`http://localhost:3001/studies/${id}`);
+    const response = await axios.get(`${URL_DEPLOY}/studies/${id}`);
     if (response) {
       dispatch({
         type: ActionTypes.getHistory,
@@ -160,15 +156,12 @@ export const updatePatientInfo =
     const headers = createHeaders(activeUser.token);
     const authAxios = axios.create(headers);
     try {
-      const response = await authAxios.post(
-        "http://localhost:3001/updateUser",
-        {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          phone: data.phone,
-          dni: data.dni,
-        }
-      );
+      const response = await authAxios.post(`${URL_DEPLOY}/updateUser`, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+        dni: data.dni,
+      });
       if (response) {
         dispatch({
           type: ActionTypes.updatePatientInfo,
@@ -186,7 +179,7 @@ export const changePassword =
     const authAxios = axios.create(headers);
     try {
       const response = await authAxios.post(
-        "http://localhost:3001/register/password",
+        `${URL_DEPLOY}/password`,
         {
           password: data.password,
         }
@@ -205,7 +198,7 @@ export const changePassword =
 export const getMedicAvailableTime = (id: number) => async (dispatch: any) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/appointmentsAvb?idMedicalStaff=${id}&weekDays=7`
+      `${URL_DEPLOY}/appointmentsAvb?idMedicalStaff=${id}&weekDays=7`
     );
     dispatch({
       type: ActionTypes.medicAppointments,
@@ -219,7 +212,7 @@ export const getMedicAvailableTime = (id: number) => async (dispatch: any) => {
 export const getSpecAvailableTime = (id: number) => async (dispatch: any) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/appointments/avbspeciality/${id}`
+      `${URL_DEPLOY}/appointments/avbspeciality/${id}`
     );
     dispatch({
       type: ActionTypes.specAppointments,
@@ -236,7 +229,7 @@ export const getPreferenceId =
     let medic = `Dr. ${data.MedicalStaff.firstName} ${data.MedicalStaff.lastName}`;
     try {
       const response = await axios.get(
-        `http://localhost:3001/mercadopago?appointmentId=${data.id}&unit_price=${unit_price}&title=${medic}`
+        `${URL_DEPLOY}/mercadopago?appointmentId=${data.id}&unit_price=${unit_price}&title=${medic}`
       );
       if (response) {
         dispatch({
@@ -265,7 +258,7 @@ export const getAppointmentsPatients =
   (id: number) => async (dispatch: any) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/appointments/medic/${id}`
+        `${URL_DEPLOY}/appointments/medic/${id}`
       );
 
       dispatch({
@@ -280,16 +273,13 @@ export const getAppointmentsPatients =
 export const updateMedicInfo =
   (activeUser: any, data: any, id: any) => async (dispatch: any) => {
     try {
-      const response = await axios.post(
-        `http://localhost:3001/updateMedic/${id}`,
-        {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          idNumber: data.dni,
-          availability: data.availability,
-          speciality: data.specialitie,
-        }
-      );
+      const response = await axios.post(`${URL_DEPLOY}/updateMedic/${id}`, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        idNumber: data.dni,
+        availability: data.availability,
+        speciality: data.specialitie,
+      });
       if (response) {
         dispatch({
           type: ActionTypes.updateMedicInfo,
@@ -303,7 +293,7 @@ export const updateMedicInfo =
 
 export const getPlans = () => async (dispatch: any) => {
   try {
-    const response = await axios.get(`http://localhost:3001/plans`);
+    const response = await axios.get(`${URL_DEPLOY}/plans`);
 
     dispatch({
       type: ActionTypes.getPlans,
@@ -317,7 +307,7 @@ export const getPlans = () => async (dispatch: any) => {
 export const addReview = (id: any, payload: any) => async (dispatch: any) => {
   try {
     const response = await axios.post(
-      `http://localhost:3001/appointmentsDetails/${id}`,
+      `${URL_DEPLOY}/appointmentsDetails/${id}`,
       payload
     );
     dispatch({
@@ -335,7 +325,7 @@ export const addReview = (id: any, payload: any) => async (dispatch: any) => {
 
 export const addStudy = (payload: any) => async (dispatch: any) => {
   try {
-    const response = await axios.post("http://localhost:3001/studies", payload);
+    const response = await axios.post(`${URL_DEPLOY}/studies`, payload);
     dispatch({
       type: ActionTypes.addStudy,
       payload: true,
@@ -351,7 +341,7 @@ export const addStudy = (payload: any) => async (dispatch: any) => {
 
 export const getStudyTypes = () => async (dispatch: any) => {
   try {
-    const response = await axios.get(`http://localhost:3001/studies/types`);
+    const response = await axios.get(`${URL_DEPLOY}/studies/types`);
     dispatch({
       type: ActionTypes.studyTypes,
       payload: response.data,

@@ -8,6 +8,7 @@ import {
   addStudy,
   clearSubmitForm,
   getAppointmentsPatients,
+  URL_DEPLOY,
 } from "../../../actions/index";
 
 
@@ -36,7 +37,7 @@ const NewStudie: FunctionComponent<{closeStudyModal: any, update: any}> = ({clos
   const getIDPatient = async (id: any) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/appointments/details/${id}`
+        `${URL_DEPLOY}/appointments/details/${id}`
       );
       const data = response.data.Patient.id;
       setInput({
