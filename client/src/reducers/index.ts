@@ -10,7 +10,6 @@ const initialState: any = {
   specialities: [],
   medicSpeciality: [],
   history: [],
-  filterHistory: [],
   updateResponse: {},
   changePassResponse: {},
   medicAppointments: [],
@@ -72,7 +71,6 @@ export default function reducer(state = initialState, action: actionI) {
       return {
         ...state,
         history: action.payload,
-        filterHistory: action.payload,
       };
     case ActionTypes.updatePatientInfo:
       return {

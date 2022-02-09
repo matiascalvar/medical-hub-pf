@@ -7,6 +7,7 @@ import {useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointmentsPatients } from "../../../actions/index";
 import { Link } from "react-router-dom";
+import addDays from "../../../assets/addDays";
 
 interface UserHomeProps {
   userName: string;
@@ -43,6 +44,12 @@ export default function ({ userName, id }: UserHomeProps): JSX.Element {
     return color;
   }
 
+  let nextAppointments: any[] = [];
+  let today = new Date();
+  if(appoinments?.length){
+    nextAppointments = appoinments.filter(a => a.date >= addDays(today,0))
+  } 
+
   return (
     <div className={s.mainContainer}>
      
@@ -52,7 +59,7 @@ export default function ({ userName, id }: UserHomeProps): JSX.Element {
           <div className={s.shiftCard}>
             <span className={s.cardTitle}>
               <iconsb.MdComputer className={s.icon} />
-              Appointments
+              Next Appointments
             </span>
             <div className={s.subtitlesContainer}>
               <span className={s.appointmentBox}>Time</span>
@@ -63,7 +70,7 @@ export default function ({ userName, id }: UserHomeProps): JSX.Element {
             </div>
             <div className={s.dataContainer}>
             { appoinments && appoinments.length > 0
-                ? appoinments.map((data) => (
+                ? nextAppointments.map((data) => (
                     <div className={s.appointment} key={data.id}>
                       <span className={s.appointmentBox}>{data.time}</span>
                       <span className={s.appointmentBox}>{data.date}</span>
