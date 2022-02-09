@@ -16,12 +16,6 @@
   width: 4rem;
 }
 
-.studyModalContainer {
-  position: absolute;
-  transform: translateX(50%);
-  z-index: 99;
-}
-
 .aside {
   width: 100%;
   justify-content: center;
@@ -122,15 +116,6 @@
 
 .reviewContainer a:hover {
   cursor: pointer;
-  text-decoration: underline;
-}
-
-.studyNewText {
-  padding-left: 0.5rem;
-  color: #0eaaff;
-}
-
-.studyNewText p:hover {
   text-decoration: underline;
 }
 
