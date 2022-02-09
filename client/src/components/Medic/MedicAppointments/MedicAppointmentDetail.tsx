@@ -11,6 +11,7 @@ import {
 import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
 import { idText } from "typescript";
+import NewStudie from "./NewStudie";
 
 export interface IUserPublicProfileRouteParams {
   id: string;
@@ -18,6 +19,11 @@ export interface IUserPublicProfileRouteParams {
 }
 
 const MedicAppointmentDetail: FunctionComponent = () => {
+
+  const [studyModal, setStudyModal] = useState<any>(false);
+  const closeStudyModal = () => {
+    return setStudyModal(false);
+  }
 
   const planChange = (number: number) => {
     if (number === 0) return "Particular"
@@ -28,21 +34,23 @@ const MedicAppointmentDetail: FunctionComponent = () => {
 
   let dispatch = useDispatch();
   const medicInfo = useSelector((state: any) => state.medicInfo);
-  const appointments: any[] = useSelector(
-    (state: any) => state.appointmentsPatients
-  );
+  const appointments: any[] = useSelector((state: any) => state.appointmentsPatients);
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
   const [appointmentDetail, setAppointmentDetail] = useState<any>("");
 
-  useEffect(() => {
-    if (!appointments.length) dispatch(getAppointmentsPatients(medicInfo.id));
+  const updateAppointments = () => {
+    dispatch(getAppointmentsPatients(medicInfo.id));
     setAppointmentDetail(
       appointments.find((a) => {
         return a.id == id;
       })
-    );
-    console.log("APPOINTMENTS", appointments);
+    )
+  }
+
+  useEffect(() => {
+    updateAppointments()
   }, [appointments]);
+
   return (
     <div className={style.bigContainer}>
       <div className={style.navContainer}>
@@ -110,9 +118,9 @@ const MedicAppointmentDetail: FunctionComponent = () => {
               <div className={style.studiesContainer}>
               <div className={style.headerStudies}>
                 <h3>Studies</h3>
-                <Link className={style.link} to={`/home/medic/appointments/studies/${id}`}>
+                <p onClick={() => setStudyModal(true)} className={style.studyNewText}>
                   New Study
-                </Link>
+                </p>
               </div>
               <div className={style.dataContainer}>
                 <div className={style.titles}>
@@ -139,9 +147,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                       <span className={style.hBox}>Study not available yet.</span>
                       </div>
                       )
-                      
                     }
-                    
                   })
                 ) : (
                   <p>No studies were found</p>
@@ -149,7 +155,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
               </div>
             </div>
             </div>
-            
+            {studyModal && <NewStudie update={() => updateAppointments()} closeStudyModal={closeStudyModal} />}
           </div>
         ) : (
           <h1>Loading</h1>
