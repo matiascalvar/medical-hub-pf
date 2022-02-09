@@ -141,6 +141,8 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
             });
            
             
+        }else{
+            e.preventDefault();
         }
     }
 
