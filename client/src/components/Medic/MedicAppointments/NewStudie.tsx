@@ -7,6 +7,7 @@ import {
   getStudyTypes,
   addStudy,
   clearSubmitForm,
+  getAppointmentsPatients
 } from "../../../actions/index";
 import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
@@ -16,7 +17,7 @@ export interface IUserPublicProfileRouteParams {
   name: string;
 }
 
-const NewStudie: FunctionComponent = () => {
+const NewStudie: FunctionComponent<{closeStudyModal: any}> = ({closeStudyModal}) => {
   let dispatch = useDispatch();
   const medicInfo = useSelector((state: any) => state.medicInfo);
   const study = useSelector((state: any) => state.postStudy);
@@ -67,8 +68,8 @@ const NewStudie: FunctionComponent = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (!input.diagnosis) return;
     dispatch(addStudy(input));
+    dispatch(getAppointmentsPatients(medicInfo.id))
     setInput({
       diagnosis: "",
       studyPDF: "",
@@ -79,18 +80,13 @@ const NewStudie: FunctionComponent = () => {
     });
     setTimeout(() => {
       dispatch(clearSubmitForm());
-    }, 5000);
+    }, 1000);
+
+    closeStudyModal()
   };
 
   return (
     <div className={style.bigContainer}>
-      <div className={style.navContainer}>
-        <Nav />
-      </div>
-      <div className={style.aside}>
-        <div>
-          <Header userName={medicInfo.firstName} title="Add Study" />
-        </div>
         <div className={style.studyContainer}>
           <form onSubmit={handleSubmit}>
             <select id="type" name="studyTypeId" onChange={handleChange}>
@@ -104,21 +100,14 @@ const NewStudie: FunctionComponent = () => {
                   );
                 })}
             </select>
-            <textarea
-              name="diagnosis"
-              value={input.email}
-              autoComplete="off"
-              placeholder="Write here the diagnosis of the patient..."
-              onChange={handleChange}
-            />
             <div className={style.formBtn}>
               <button type="submit">Submit </button>
             </div>
           </form>
+          <button onClick={closeStudyModal}>Close</button>
           {study && <p className={style.textSubmit}>Your study was send</p>}
         </div>
-      </div>
-    </div>
+        </div>
   );
 };
 

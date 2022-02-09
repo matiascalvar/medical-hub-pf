@@ -2,13 +2,13 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./NewReviewAppointment.module.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import {
   getPreferenceId,
   getAppointmentsPatients,
   addReview,
 } from "../../../actions/index";
-import Nav from "../../Home/Nav/Nav";
+import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
 
 export interface IUserPublicProfileRouteParams {
@@ -18,6 +18,7 @@ export interface IUserPublicProfileRouteParams {
 
 const NewReviewAppointment: FunctionComponent = () => {
   let dispatch = useDispatch();
+  const history = useHistory();
   const medicInfo = useSelector((state: any) => state.medicInfo);
   const review = useSelector((state: any) => state.postReview);
 
@@ -49,6 +50,9 @@ const NewReviewAppointment: FunctionComponent = () => {
         <div>
           <Header userName={medicInfo.firstName} title="Add Review" />
         </div>
+        <div className={style.goBackContainer}>
+          <button onClick={history.goBack}>Go back</button>
+          </div>
         <div className={style.reviewContainer}>
           <form onSubmit={handleSubmit}>
             <input

@@ -10,6 +10,7 @@ import {
 } from "../../../actions/index";
 import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
+import NewStudie from "./NewStudie";
 import { idText } from "typescript";
 
 export interface IUserPublicProfileRouteParams {
@@ -25,6 +26,18 @@ const MedicAppointmentDetail: FunctionComponent = () => {
   );
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
   const [appointmentDetail, setAppointmentDetail] = useState<any>("");
+  const [studyModal, setStudyModal] = useState<any>(false);
+
+  const planChange = (number: number) => {
+    if (number === 0) return "Particular"
+    if (number === 1) return "Silver"
+    if (number === 2) return "Gold"
+    if (number === 3) return "Platinium"
+  }
+
+  const closeStudyModal = () => {
+    return setStudyModal(false);
+  }
 
   useEffect(() => {
     if (!appointments.length) dispatch(getAppointmentsPatients(medicInfo.id));
@@ -33,7 +46,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
         return a.id == id;
       })
     );
-    console.log("APPOINTMENTS", appointments);
+    console.log("APPOINTMENTS", appointmentDetail);
   }, [appointments]);
   return (
     <div className={style.bigContainer}>
@@ -48,7 +61,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
           <div className={style.detailContainer}>
             <div className={style.detailRow}>
               <div className={style.shiftCard}>
-                <h3>Patient Information</h3>
+                <h3>Information</h3>
                 <p>
                   Name:{" "}
                   <span className={style.pBlack}>
@@ -62,7 +75,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                   Plan:{" "}
                   {appointmentDetail && appointmentDetail.Patient.PlanId ? (
                     <span className={style.pBlack}>
-                      appointmentDetail.Patient.PlanId
+                      {planChange(appointmentDetail.Patient.PlanId)}
                     </span>
                   ) : (
                     <span className={style.pBlack}>Normal</span>
@@ -109,9 +122,9 @@ const MedicAppointmentDetail: FunctionComponent = () => {
             <div className={style.studiesContainer}>
               <div className={style.headerStudies}>
                 <h3>Studies</h3>
-                <Link to={`/home/medic/appointments/studies/${id}`}>
+                <p onClick={() => setStudyModal(true)} className={style.studyNewText}>
                   New Study
-                </Link>
+                </p>
               </div>
               <div className={style.dataContainer}>
                 <div className={style.titles}>
@@ -147,6 +160,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                 )}
               </div>
             </div>
+            {studyModal && <NewStudie closeStudyModal={closeStudyModal} />}
           </div>
         ) : (
           <h1>Loading</h1>

@@ -82,7 +82,7 @@ export const getPatientById = (id:any) => async(dispatch:any) => {
   }
 }
 
-export const getAppointments = (id: number) => async (dispatch: any) => {
+export const getAppointments = (id: any) => async (dispatch: any) => {
   try {
     const response = await axios.get(
       `http://localhost:3001/appointments/${id}`

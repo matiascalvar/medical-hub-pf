@@ -98,7 +98,7 @@ const Appointments: FunctionComponent = () => {
               <span>Speciality</span>
               <span>Status</span>
               <span>Pay</span>
-              <span>Delete</span>
+              <span>Details</span>
             </div>
             <div className={style.dataContainer}>
               {appoinments.length > 0 ? (
@@ -136,14 +136,17 @@ const Appointments: FunctionComponent = () => {
                       // </Link>
                       <span className={style.paidOut}>Payout</span>
                     )}
-                    <span className={style.box}>
+                    <Link to={`/home/appointments/${data.id}`}>
+                      <span>View more details</span>
+                    </Link>
+                    {data.state.toLowerCase() === "completed" ? null : <span className={style.box}>
                       <button
                         className={style.btnDelete}
                         onClick={() => deleteAppointment(data.id)}
                       >
                         <BsTrash />
                       </button>
-                    </span>
+                    </span>}
                   </div>
                 ))
               ) : (

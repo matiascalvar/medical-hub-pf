@@ -103,7 +103,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
                         </div>
                       </div>
                     ))
-                  : "There are no appointments"}
+                  : "No appointments available"}
               </div>
             </div>
             <div className={s.historyCard}>
