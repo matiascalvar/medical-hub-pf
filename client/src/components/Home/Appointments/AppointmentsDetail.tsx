@@ -1,15 +1,14 @@
-
 import React, { FunctionComponent, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./AppointmentsDetail.module.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { BiDownload } from "react-icons/bi";
 import { getAppointments, URL_DEPLOY } from "../../../actions/index";
 import Nav from "../Nav/Nav";
 import Header from "../UserHome/Header/Header";
 import { idText } from "typescript";
-import Loading from "../../../assets/img/loading.gif"
+import Loading from "../../../assets/img/loading.gif";
 
 export interface IUserPublicProfileRouteParams {
   id: any;
@@ -18,32 +17,28 @@ export interface IUserPublicProfileRouteParams {
 
 const AppointmentDetail: FunctionComponent = () => {
   let dispatch = useDispatch();
+  const history = useHistory();
   const patient = useSelector((state: any) => state.patientInfo);
-  const appointments: any[] = useSelector(
-    (state: any) => state.appointments
-  );
+  const appointments: any[] = useSelector((state: any) => state.appointments);
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
   const [appointmentDetail, setAppointmentDetail] = useState<any>(false);
   const [input, setInput] = useState<any>("");
 
-  const  getPatientInfo = async (idPatient:any) =>  {
+  const getPatientInfo = async (idPatient: any) => {
     const response = await axios.get(
       `${URL_DEPLOY}/appointments/${idPatient}`
     );
     const app = response.data.find((a: any) => {
       return a.id == id;
-    })
-    console.log(app);
+    });
     setAppointmentDetail(app);
     return response.data;
-  }
+  };
 
   useEffect(() => {
     getAppointments(id);
     getPatientInfo(patient.id);
-    console.log("Patient", patient);
   }, []);
-
 
   return (
     <div className={style.bigContainer}>
@@ -53,6 +48,11 @@ const AppointmentDetail: FunctionComponent = () => {
       <div className={style.aside}>
         <div>
           <Header userName={patient.firstName} title="Appointment Detail" />
+          <div className={style.btnContainer}>
+            <p className={style.btnReturn} onClick={() => history.goBack()}>
+              Return
+            </p>
+          </div>
         </div>
         {appointmentDetail ? (
           <div className={style.detailContainer}>
@@ -70,9 +70,9 @@ const AppointmentDetail: FunctionComponent = () => {
                 </p>
                 <p>
                   Speciality:{" "}
-
-                    <span className={style.pBlack}>{appointmentDetail.MedicalStaff.Specialitie.name}</span>
-
+                  <span className={style.pBlack}>
+                    {appointmentDetail.MedicalStaff.Specialitie.name}
+                  </span>
                 </p>
                 <p>
                   Date:{" "}
@@ -86,12 +86,6 @@ const AppointmentDetail: FunctionComponent = () => {
                     {appointmentDetail && appointmentDetail.time.slice(0, -3)}
                   </span>
                 </p>
-                <p>
-                  Status:
-                  <span className={style.pBlack}>
-                    {appointmentDetail && appointmentDetail.state.toLowerCase()}
-                  </span>
-                </p>
               </div>
               <div className={style.reviewContainer}>
                 <h3>Review</h3>
@@ -99,19 +93,13 @@ const AppointmentDetail: FunctionComponent = () => {
                   <p>{appointmentDetail.AppointmentDetail.details} </p>
                 ) : (
                   <div className={style.reviewP}>
-                    <p>
-                      No review avaialable.
-                    </p>
+                    <p>No review avaialable</p>
                   </div>
                 )}
               </div>
-            </div>
-            <div className={style.studiesContainer}>
+              <div className={style.studiesContainer}>
                 <div className={style.headerStudies}>
                   <h3>Studies</h3>
-                  <Link className={style.link} to={`/home/medic/appointments/studies/${id}`}>
-                    New Study
-                  </Link>
                 </div>
                 <div className={style.dataContainer}>
                   <div className={style.titles}>
@@ -120,32 +108,42 @@ const AppointmentDetail: FunctionComponent = () => {
                   </div>
                   {appointmentDetail.Studies.length ? (
                     appointmentDetail.Studies.map((s: any, i: any) => {
-                      if(s.state === 'COMPLETED'){
+                      if (s.state === "COMPLETED") {
                         return (
                           <div className={style.history} key={i}>
-                            <span className={style.hBox}>{s.StudyType.name}</span>
-                            <span className={style.hBox}><a title='Download Study'
-                                href={`/storage/${s.studyPDF}`} 
+                            <span className={style.hBox}>
+                              {s.StudyType.name}
+                            </span>
+                            <span className={style.hBox}>
+                              <a
+                                title="Download Study"
+                                href={`/storage/${s.studyPDF}`}
                                 target="_blank"
-                              ><BiDownload/></a></span>
+                              >
+                                <BiDownload />
+                              </a>
+                            </span>
                           </div>
                         );
-                      }else if(s.state === 'ACTIVE'){
+                      } else if (s.state === "ACTIVE") {
                         return (
                           <div className={style.history} key={i}>
-                            <span className={style.hBox}>{s.StudyType.name}</span>
-                        <span className={style.hBox}>Study not available yet.</span>
-                        </div>
-                        )
-                        
+                            <span className={style.hBox}>
+                              {s.StudyType.name}
+                            </span>
+                            <span className={style.hBox}>
+                              Study not available yet.
+                            </span>
+                          </div>
+                        );
                       }
-                      
                     })
                   ) : (
                     <p>No studies were found</p>
                   )}
                 </div>
               </div>
+            </div>
           </div>
         ) : (
           <p></p>

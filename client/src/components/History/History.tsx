@@ -20,16 +20,16 @@ const History: FunctionComponent = () => {
   const studies: any = useSelector((state: any) => state.history);
   const patient = useSelector((state: any) => state.patientInfo);
 
-  const [file, setFile] = React.useState<any>()
+  const [file, setFile] = React.useState<any>();
 
-  const uploadFiles = (e:any) => {
-    e.preventDefault()
+  const uploadFiles = (e: any) => {
+    e.preventDefault();
     setFile(e.target.files[0]);
-  }
+  };
 
-  const insertFiles = async(e:any) => {
-    e.preventDefault()
-    let id = e.target[1].value
+  const insertFiles = async (e: any) => {
+    e.preventDefault();
+    let id = e.target[1].value;
     const f = new FormData();
     if (file) {
       f.append("studyPDF", file);
@@ -40,12 +40,12 @@ const History: FunctionComponent = () => {
         console.log("Todo ok")
         dispatch(getHistory(patient.id))
       } else {
-        console.log("No se puedo agregar archivo")
+        console.log("No se puedo agregar archivo");
       }
     } else {
-      console.log("Seleccionar arcivho")
+      console.log("Seleccionar arcivho");
     }
-  }
+  };
 
   useEffect(() => {
     if (patient.id) {
@@ -59,54 +59,62 @@ const History: FunctionComponent = () => {
         <Nav />
       </div>
       <div className={style.aside}>
-      <div>
+        <div>
           <Header userName={patient.firstName} title="Studies" />
         </div>
-          <div className={style.shiftCard}>
-            <div className={style.subtitlesContainer}>
-              <span>Type</span>
-              <span>Diagnosis</span>
-              <span>State</span>
-              <span>Medic</span>
-              <span>Results</span>
-            </div>
-            <div className={style.dataContainer}>
-              {studies.length > 0 ? (
-                studies.map((s: any) => (
-                  <div className={style.appointment} key={s.id}>
-                    <span className={style.box}>{s.StudyType.name}</span>
-                    <span className={style.box}>{s.diagnosis}</span>
-                    <span className={style.box}>{s.state}</span>
-                    <span className={style.box}>Dr. {s.MedicalStaff.lastName}, {s.MedicalStaff.firstName}</span>
-                    {s.state !== "COMPLETED"? 
-                      <span>
-                        <form onSubmit={insertFiles}>
-                          <input type="file" name="studyPDF" onChange={uploadFiles} />
-                          <input type="hidden" name="id" value={s.id}/>
-                          <button type="submit" >Insert</button>
-                        </form>
-                      </span> : 
-                      <span>
-                        <a 
-                        href={`/storage/${s.studyPDF}`} 
-                        target="_blank"
-                      ><BiDownload />Download</a>
-                      </span> }
-                  </div>
-                ))
-              ) : (
-                <div className={style.noAppointments}>
-                  <BsCalendarFill />
-                  <p>No studies available</p>
+        <div className={style.shiftCard}>
+          <div className={style.subtitlesContainer}>
+            <span>Type</span>
+            <span>Status</span>
+            <span>Medic</span>
+            <span>Results</span>
+          </div>
+          <div className={style.dataContainer}>
+            {studies.length > 0 ? (
+              studies.map((s: any) => (
+                <div className={style.appointment} key={s.id}>
+                  <span className={style.box}>{s.StudyType.name}</span>
+                  <span className={style.box}>{s.state.toLowerCase()}</span>
+                  <span className={style.box}>
+                    Dr. {s.MedicalStaff.lastName}, {s.MedicalStaff.firstName}
+                  </span>
+                  {s.state !== "COMPLETED" ? (
+                    <span>
+                      <form onSubmit={insertFiles}>
+                        <label className={style.uploadFiles}>
+                          <input
+                            type="file"
+                            name="studyPDF"
+                            onChange={uploadFiles}
+                          />
+                          Upload file
+                        </label>
+                        <input type="hidden" name="id" value={s.id} />
+                        <button type="submit" className={style.uploadFiles}>
+                          Submit
+                        </button>
+                      </form>
+                    </span>
+                  ) : (
+                    <span className={style.downloadFiles}>
+                      <a href={`/storage/${s.studyPDF}`} target="_blank">
+                        Download
+                      </a>
+                    </span>
+                  )}
                 </div>
-              )}
-            </div>
+              ))
+            ) : (
+              <div className={style.noAppointments}>
+                <BsCalendarFill />
+                <p>No studies available</p>
+              </div>
+            )}
           </div>
         </div>
+      </div>
     </div>
   );
 };
 
 export default History;
-
-

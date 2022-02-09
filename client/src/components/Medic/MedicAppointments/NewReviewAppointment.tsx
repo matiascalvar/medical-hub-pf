@@ -7,10 +7,10 @@ import {
   getPreferenceId,
   getAppointmentsPatients,
   addReview,
+  clearSubmitForm,
 } from "../../../actions/index";
 import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
-
 
 export interface IUserPublicProfileRouteParams {
   id: string;
@@ -40,6 +40,9 @@ const NewReviewAppointment: FunctionComponent = () => {
     e.preventDefault();
     if (!input.details) return;
     dispatch(addReview(id, input));
+    setTimeout(() => {
+      dispatch(clearSubmitForm());
+    }, 2000);
   };
 
   return (
@@ -49,11 +52,13 @@ const NewReviewAppointment: FunctionComponent = () => {
       </div>
       <div className={style.aside}>
         <div className={style.header}>
-          <Header userName={medicInfo.firstName} title="Add Review"/>
-          </div>
-          <div className={style.btnContainer}>
-          <p className={style.btnReturn} onClick={() => history.goBack()}>Return</p>
-          </div>
+          <Header userName={medicInfo.firstName} title="Add Review" />
+        </div>
+        <div className={style.btnContainer}>
+          <p className={style.btnReturn} onClick={() => history.goBack()}>
+            Return
+          </p>
+        </div>
         <div className={style.reviewContainer}>
           <form onSubmit={handleSubmit}>
             <input
