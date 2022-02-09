@@ -139,9 +139,11 @@ const Appointments: FunctionComponent = () => {
                       <span className={style.paidOut}>Payout</span>
                     )}
                     <span className={style.box}>
-                      <Link to={`/home/appointments/${data.id}`}>
+                    <Link to={`/home/appointments/${data.id}`}>
                         <span>Details</span>
                       </Link>
+                    </span>
+                    <span className={style.box}>
                       <button
                         className={style.btnDelete}
                         onClick={() => deleteAppointment(data.id)}
