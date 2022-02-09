@@ -25,6 +25,7 @@ import MedicPatientHistory from "./components/Medic/MedicPatientHistory/MedicPat
 import NewStudie from "./components/Medic/MedicAppointments/NewStudie";
 import MedicProfile from "./components/Medic/MedicProfile/MedicProfile";
 import AppointmentsDetail from "./components/Home/Appointments/AppointmentsDetail";
+import {URL_DEPLOY} from "./actions/index"
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +35,9 @@ function App() {
   React.useEffect(() => {
     const refreshToken = async function () {
       try {
-        const response = await axios.post("http://localhost:3001/login/token");
+        const response = await axios.post(
+          `${URL_DEPLOY}/login/token`
+        );
         const user = {
           email: response.data.email,
           role: response.data.role,

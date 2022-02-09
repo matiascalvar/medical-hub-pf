@@ -12,6 +12,7 @@ import {
 } from "../../../actions/index";
 import Header from "../UserHome/Header/Header";
 import MercadoPago from "../../MercadoPago/MercadoPago";
+import { URL_DEPLOY } from "../../../actions/index";
 
 const Appointments: FunctionComponent = () => {
   const patient = useSelector((state: any) => state.patientInfo);
@@ -22,7 +23,7 @@ const Appointments: FunctionComponent = () => {
   async function deleteAppointment(id: any) {
     try {
       let response = await axios.delete(
-        `http://localhost:3001/appointments/${id}`
+        `${URL_DEPLOY}/appointments/${id}`
       );
       dispatch(getAppointments(patient.id));
     } catch (error) {

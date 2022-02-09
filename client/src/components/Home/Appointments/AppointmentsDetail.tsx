@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import style from "./AppointmentsDetail.module.css";
 import { Link, useParams } from "react-router-dom";
 import { BiDownload } from "react-icons/bi";
-import { getAppointments } from "../../../actions/index";
+import { getAppointments, URL_DEPLOY } from "../../../actions/index";
 import Nav from "../Nav/Nav";
 import Header from "../UserHome/Header/Header";
 import { idText } from "typescript";
@@ -28,7 +28,7 @@ const AppointmentDetail: FunctionComponent = () => {
 
   const  getPatientInfo = async (idPatient:any) =>  {
     const response = await axios.get(
-      `http://localhost:3001/appointments/${idPatient}`
+      `${URL_DEPLOY}/appointments/${idPatient}`
     );
     const app = response.data.find((a: any) => {
       return a.id == id;

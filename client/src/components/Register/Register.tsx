@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { getPlans } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
+import { URL_DEPLOY } from "../../actions/index";
 
 const CreatePage: FunctionComponent = () => {
   const history = useHistory();
@@ -21,10 +22,10 @@ const CreatePage: FunctionComponent = () => {
   const plans = useSelector((state: any) => state.plans);
   const [errorRegister, setErrorRegister] = React.useState(''); 
 
-
+  
   const registerUser = async function (user: any) {
     try {
-      const response = await axios.post("http://localhost:3001/register", user);
+      const response = await axios.post(`${URL_DEPLOY}/register`, user);
       setErrors(emptyInput);
       return response;
     } catch (error:any) {
