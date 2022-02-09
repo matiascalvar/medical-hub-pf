@@ -2,14 +2,15 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./NewReviewAppointment.module.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import {
   getPreferenceId,
   getAppointmentsPatients,
   addReview,
 } from "../../../actions/index";
-import Nav from "../../Home/Nav/Nav";
+import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
+
 
 export interface IUserPublicProfileRouteParams {
   id: string;
@@ -17,6 +18,7 @@ export interface IUserPublicProfileRouteParams {
 }
 
 const NewReviewAppointment: FunctionComponent = () => {
+  const history = useHistory();
   let dispatch = useDispatch();
   const medicInfo = useSelector((state: any) => state.medicInfo);
   const review = useSelector((state: any) => state.postReview);
@@ -46,9 +48,12 @@ const NewReviewAppointment: FunctionComponent = () => {
         <Nav />
       </div>
       <div className={style.aside}>
-        <div>
-          <Header userName={medicInfo.firstName} title="Add Review" />
-        </div>
+        <div className={style.header}>
+          <Header userName={medicInfo.firstName} title="Add Review"/>
+          </div>
+          <div className={style.btnContainer}>
+          <p className={style.btnReturn} onClick={() => history.goBack()}>Return</p>
+          </div>
         <div className={style.reviewContainer}>
           <form onSubmit={handleSubmit}>
             <input
