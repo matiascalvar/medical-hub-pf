@@ -49,6 +49,7 @@
 
 .shiftCard {
   min-width: 25rem;
+  min-height: 30rem;
   width: 20%;
   height: auto;
   padding: 1rem 0;
@@ -59,7 +60,7 @@
   position: relative;
   transition: 200ms;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   z-index: 300;
@@ -82,12 +83,13 @@
 
 .reviewContainer {
   min-width: 25rem;
-  width: 25%;
-  height: 27.5rem;
-  padding: 1rem 1rem 0 1rem;
+  min-height: 30rem;
+  width: 20%;
+  height: auto;
+  padding: 1rem 0;
   background-color: #fff;
   border-radius: 0.7rem;
-  overflow: hidden;
+  overflow: auto;
   margin-left: 2rem;
   position: relative;
   transition: 200ms;
@@ -120,26 +122,31 @@
   all: unset;
   padding-left: 0.5rem;
   color: #0eaaff;
+  cursor: pointer;
 }
 
-.reviewContainer a:hover {
-  cursor: pointer;
-  text-decoration: underline;
+.reviewContainer a:hover{
+  opacity: .7;
 }
 
 .studiesContainer {
-  margin-left: 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 25%;
   min-width: 25rem;
-  height: 28rem;
+  min-height: 30rem;
+  width: 20%;
+  height: auto;
+  padding: 1rem 0;
   background-color: #fff;
   border-radius: 0.7rem;
-  overflow: hidden;
+  overflow: auto;
+  margin-left: 2rem;
+  position: relative;
+  transition: 200ms;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  z-index: 300;
+  margin-bottom: 2rem;;
 }
 
 .studiesContainer h3 {
@@ -173,11 +180,13 @@
 
 .studyNewText {
   color: #0eaaff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .studyNewText:hover {
-  cursor: pointer;
-  text-decoration: underline;
+  opacity: .7;
 }
 
 .btnHistory {
@@ -191,7 +200,7 @@
 
 .btnHistory:hover {
   cursor: pointer;
-  background-color: #00d9ff;
+  opacity: .7;
 }
 
 .btnHistory a {
@@ -206,7 +215,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   margin-top: 0;
-  width: 100%;
+  width: 92%;
 }
 
 .hBox {
@@ -228,11 +237,6 @@
   cursor: pointer;
 }
 
-.reviewContainer a:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
 .dataContainer {
   width: 100%;
 }
@@ -248,4 +252,48 @@
   font-size: 1rem;
   font-weight: 600;
   padding: 1rem 0 1rem 0;
+}
+
+.noStudies{
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-block;
+  color: rgb(187, 187, 187);
+}
+
+.goBackContainer{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.goBackContainer a{
+  text-decoration: none;
+}
+
+.goBackButton{
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: transparent;
+  color: rgb(136, 136, 136);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 200ms;
+  border: none;
+  margin: 0 3rem .5rem 0;
+}
+
+.iconBack{
+  height: 1rem;
+  width: 1rem;
+  margin: 0 .3rem .1rem 0;
+  padding: 0;
+}
+
+.goBackButton:hover{
+  color: #0eaaff;
 }
