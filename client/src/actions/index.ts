@@ -326,7 +326,6 @@ export const addReview = (id: any, payload: any) => async (dispatch: any) => {
 export const addStudy = (payload: any) => async (dispatch: any) => {
   try {
     const response = await axios.post(`${URL_DEPLOY}/studies`, payload);
-    console.log(response);
     dispatch({
       type: ActionTypes.addStudy,
       payload: true,
@@ -353,7 +352,6 @@ export const getStudyTypes = () => async (dispatch: any) => {
 };
 
 export const clearSubmitForm = () => {
-  console.log("Entra");
   return {
     type: ActionTypes.addStudy,
     payload: false,

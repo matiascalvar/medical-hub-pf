@@ -12,6 +12,8 @@ const config = {
   port: process.env.API_PORT || "3001",
   host: process.env.API_host || "localhost",
   cors: process.env.CORS || "http://localhost:3000",
+  mailerUser: process.env.MAILER_USER || 'medical.hub.pf@gmail.com',
+  mailerPass: process.env.MAILER_PASS || "hocdytchxmwrrsnq"
 };
 // LOCAL || DEPLOY
 

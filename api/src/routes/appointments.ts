@@ -7,6 +7,8 @@ import addDays from '../assets/addDays'
 import { Patient } from '../models/Patient';
 import { Studie } from '../models/Studie';
 import { StudyType } from '../models/StudyType';
+import { transporter } from '../../lib/mailer';
+import { User } from '../models/User';
 const { Op } = require("sequelize");
 const router = Router();
 
@@ -81,6 +83,7 @@ router.get('/details/:idAppointment', async (req, res) => {
 router.get('/medic/:idMedic', async (req, res) => {
     try {
         const { idMedic } = req.params;
+        const today = new Date();
         const appointments = await Appointment.findAll({
             include: [{
                 model: Patient,
@@ -102,7 +105,7 @@ router.get('/medic/:idMedic', async (req, res) => {
             }
         ],
             where: {
-                MedicalStaffId: idMedic
+                MedicalStaffId: idMedic                    
             },
             attributes: {include:  ['id','date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']},
             order: [
@@ -123,6 +126,7 @@ router.get('/medic/:idMedic', async (req, res) => {
 router.get('/:idPatient', async (req, res) => {
     try {
         const { idPatient } = req.params;
+        const today = new Date();
         const appointments = await Appointment.findAll({
             include: [{
                 model: MedicalStaff,
@@ -147,7 +151,9 @@ router.get('/:idPatient', async (req, res) => {
                 ]
             }
         ],
-            where: {PatientId: idPatient},
+            where: {
+                PatientId: idPatient,                    
+            },
             attributes: {include:  ['date', 'time', 'state'], exclude: ['PatientId', 'MedicalStaffId', 'createdAt','updatedAt']},
             order: [
                 ['date', 'ASC'],
@@ -175,6 +181,47 @@ router.post('/', async (req, res) => {
         }
         //console.log(newAppointment)
         const appointment = await Appointment.create(newAppointment)
+
+        const user = await Patient.findOne({
+            include:[{
+                model: User
+            }],
+            where:{
+            id: appointment.toJSON().PatientId            
+            } 
+        })
+
+        const medic = await MedicalStaff.findOne({
+            include:[{
+                model: Specialitie
+            }],
+            where:{
+            id: appointment.toJSON().MedicalStaffId
+        }})
+
+        console.log(user?.toJSON().User.email)
+
+        let info = await transporter.sendMail({
+            from: '"MEDICAL-HUB" <medical.hub.pf@gmail.com>', // sender address
+            to: user?.toJSON().User.email, // list of receivers
+            subject: "New Appointment ✔", // Subject line
+            //text: "Hello world?", // plain text body
+            html: `<div style='display: flex; padding: 10px 10px; background: #e6e6e6;'>
+            <div><img width='250px' height='auto' src='https://iili.io/0RQ0LG.md.png'></div>
+            <div style=" margin-left: auto; order: 2;">¡Hola ${user?.firstName} ${user?.lastName}!</div>            
+            </div>
+            <div style='background:#c7deeb; padding:20px 30px 50px 20px; text-align:center; '>
+                <h2>New Appointment</h2>
+                <b>Date: </b> ${appointment.date} <br/>
+                <b>Time: </b> ${appointment.time}    <br/>
+                <b>Dr.: </b> ${medic?.firstName} ${medic?.lastName}    <br/> 
+                <b>Speciality: </b> ${medic?.toJSON().Specialitie.name}    <br/> 
+            </div>
+            <div style='background:black; position: fixed; padding:5px 10px; left: 0; bottom: 0; text-align: center;text-align:center; color:white'>
+            All Rights Reserved  | MedicalHUB ♡ Watch your Health ♡
+            </div>
+            `, // html body
+          });
 
         return res.status(201).send(appointment) 
     } catch(e) {
