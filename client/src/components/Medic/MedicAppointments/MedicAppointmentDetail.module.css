@@ -75,6 +75,27 @@
   color: #000;
 }
 
+.btnHistory{
+  display: grid;
+  padding: 1rem 4.5rem;
+  height: 100%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #0eaaff;
+  color: #ffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: .4s;
+  display: grid;
+  align-items: center;
+  text-decoration: none;
+}
+
+.btnHistory:hover{
+  cursor: pointer;
+  background-color: #00d9ff;
+}
+
 .reviewContainer {
   min-width: 20vw;
   width: 80%;

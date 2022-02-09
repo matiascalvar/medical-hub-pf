@@ -57,7 +57,7 @@ const MedicPatientHistory:FunctionComponent = () => {
         </div>
         <div className="patHst__top">
           <h3 className="patHst__top--title">Patient History</h3>
-          <Link className="patHst__top--btn" to={`/home/medic/appointments/${medic.id}`}>RETURN</Link>
+          <Link className="patHst__top--btn" to={`/home/medic`}>RETURN</Link>
         </div>
         <div className="patHst__section">
           <div className="patHst__section--patient">

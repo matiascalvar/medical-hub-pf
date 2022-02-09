@@ -59,26 +59,14 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                   </span>
                 </p>
                 <p>
-                  Plan:{" "}
-                  {appointmentDetail && appointmentDetail.Patient.PlanId ? (
+                  DNI:{" "}
+                  {appointmentDetail && appointmentDetail.Patient.dni ? (
                     <span className={style.pBlack}>
-                      appointmentDetail.Patient.PlanId
+                      {appointmentDetail && appointmentDetail.Patient.dni}
                     </span>
                   ) : (
                     <span className={style.pBlack}>Normal</span>
                   )}
-                </p>
-                <p>
-                  Date:{" "}
-                  <span className={style.pBlack}>
-                    {appointmentDetail && appointmentDetail.date}
-                  </span>
-                </p>
-                <p>
-                  Time:
-                  <span className={style.pBlack}>
-                    {appointmentDetail && appointmentDetail.time.slice(0, -3)}
-                  </span>
                 </p>
                 <p>
                   Phone:
@@ -88,6 +76,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                 </p>
                 <Link
                   to={`/home/medic/patientHistory/${appointments[0].Patient.id}`}
+                  className={style.btnHistory}
                 >View History</Link>
               </div>
               <div className={style.reviewContainer}>

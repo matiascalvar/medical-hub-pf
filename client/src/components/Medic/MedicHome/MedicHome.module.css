@@ -116,3 +116,31 @@
 .pending{
     color: rgb(252, 181, 74);
 }
+
+.appointmentBoxe{
+    display: grid;
+    padding-right: 1.5rem;
+}
+
+.LinkBtn{
+    text-decoration: none;
+    border: none;
+}
+
+.btnRedirect{
+    text-transform: none;
+    text-decoration: none;
+    border: none;
+    color: #0eaaff;
+    display: grid;
+    height: 100%;
+    font-size: 1.1rem;
+    align-items: center;
+    transition: 1s;
+}
+
+.btnRedirect:hover{
+    transition: .5s;
+    font-size: 1.2rem;
+    text-decoration: underline;
+}
