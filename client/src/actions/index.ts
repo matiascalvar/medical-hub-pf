@@ -3,7 +3,7 @@ import { Dispatch } from "react";
 import { User } from "./interfaces";
 import { ActionTypes } from "./types";
 
-export const URL_DEPLOY = "https://medicalhubpf.herokuapp.com";
+export const URL_DEPLOY = "http://localhost:3001"; // https://medicalhubpf.herokuapp.com
 
 function createHeaders(token: string) {
   return {
