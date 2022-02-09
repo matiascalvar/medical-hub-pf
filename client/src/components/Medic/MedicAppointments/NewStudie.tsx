@@ -76,8 +76,8 @@ const NewStudie: FunctionComponent<{closeStudyModal: any, update: any}> = ({clos
     setTimeout(() => {
       dispatch(clearSubmitForm());
     }, 1000);
-    update()
     closeStudyModal()
+    update()
   };
 
   return (
