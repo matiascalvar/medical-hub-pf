@@ -112,3 +112,19 @@
     justify-content: center;
     border-radius: .3rem;
 }
+
+.backButton{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: .8rem;
+    font-weight: 600;
+    padding: 0 .4rem 0 .4rem;
+    border-bottom: 3px solid #0eaaff;
+    margin: 1rem 0 .5rem 0;
+    transition: 300ms;
+}
+
+.backButton:hover{
+    padding: 0 1rem 0 1rem;
+}

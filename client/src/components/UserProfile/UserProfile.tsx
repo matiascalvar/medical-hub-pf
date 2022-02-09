@@ -91,6 +91,7 @@ export default function UserProfile() : JSX.Element{
                     id={myInfo.id}
                     email={activeUser.email}
                     activeUser = {activeUser}
+                    editState = {setEditState}
                     />
                 
                    }

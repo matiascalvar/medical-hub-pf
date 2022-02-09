@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import s from "./EditDataProfile.module.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateMedicInfo, getSpecialities } from "../../../../actions/index";
+import { updateMedicInfo, getSpecialities, clearResponse, getMedicInfo } from "../../../../actions/index";
 import ChangePass from "./ChangePass/ChangePass";
 
 interface EditDataProfileProps {
@@ -11,7 +11,8 @@ interface EditDataProfileProps {
   dni: any,
   email: any,
   activeUser: any,
-  speciality: any
+  speciality: any,
+  editState: any
 }
 
 interface Info {
@@ -24,7 +25,7 @@ interface Info {
   specialitie : any
 }
 
-export default function EditDataProfile({ firstName, lastName, id, dni, email, activeUser, speciality}: EditDataProfileProps): JSX.Element {
+export default function EditDataProfile({ firstName, lastName, id, dni, email, activeUser, speciality, editState}: EditDataProfileProps): JSX.Element {
 
   const [myInfo, setMyInfo] = useState<Info>({
     firstName: firstName,
@@ -125,7 +126,18 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
     }
 }
 
+function back(){
+
+  dispatch(clearResponse());
+  dispatch(getMedicInfo(activeUser));
+  editState({
+      edit : false
+  });
+
+}
+
   function handleSubmit(e: any) {
+    e.preventDefault();
     if (!loading.loading &&
       !errors.firstName && 
       !errors.lastName &&
@@ -146,10 +158,7 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
           }
         })
       }
-    }else{
-      e.preventDefault()
     }
-
   }
 
   return (
@@ -209,6 +218,7 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
           response.message ? <div className={s.alert}>Datos actualizados</div> : ""
         }
         <button type='submit' className={s.saveButton}>{loading.loading ? <div className={s.loading}></div> : "Save Changes"}</button>
+        <button type='button' className={s.backButton} onClick={back}>Back</button>
       </form>
     </div>
   )
