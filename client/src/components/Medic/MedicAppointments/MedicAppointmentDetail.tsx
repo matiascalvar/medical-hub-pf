@@ -18,6 +18,14 @@ export interface IUserPublicProfileRouteParams {
 }
 
 const MedicAppointmentDetail: FunctionComponent = () => {
+
+  const planChange = (number: number) => {
+    if (number === 0) return "Particular"
+    if (number === 1) return "Silver"
+    if (number === 2) return "Gold"
+    if (number === 3) return "Platinium"
+  }
+
   let dispatch = useDispatch();
   const medicInfo = useSelector((state: any) => state.medicInfo);
   const appointments: any[] = useSelector(
@@ -48,7 +56,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
           <div className={style.detailContainer}>
             <div className={style.detailRow}>
               <div className={style.shiftCard}>
-                <h3>Patient Information</h3>
+                <h3>Information</h3>
                 <p>
                   Name:{" "}
                   <span className={style.pBlack}>
@@ -59,24 +67,29 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                   </span>
                 </p>
                 <p>
-                  DNI:{" "}
-                  {appointmentDetail && appointmentDetail.Patient.dni ? (
+                  Plan:{" "}
+                  {appointmentDetail && appointmentDetail.Patient.PlanId ? (
                     <span className={style.pBlack}>
-                      {appointmentDetail && appointmentDetail.Patient.dni}
+                      {planChange(appointmentDetail.Patient.PlanId)}
                     </span>
                   ) : (
                     <span className={style.pBlack}>Normal</span>
                   )}
                 </p>
                 <p>
-                  Phone:
+                  Date:{" "}
                   <span className={style.pBlack}>
-                    {appointmentDetail && appointmentDetail.Patient.phone}
+                    {appointmentDetail && appointmentDetail.date}
+                  </span>
+                </p>
+                <p>
+                  Time:
+                  <span className={style.pBlack}>
+                    {appointmentDetail && appointmentDetail.time.slice(0, -3)}
                   </span>
                 </p>
                 <Link
                   to={`/home/medic/patientHistory/${appointments[0].Patient.id}`}
-                  className={style.btnHistory}
                 >View History</Link>
               </div>
               <div className={style.reviewContainer}>
@@ -94,37 +107,36 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                   </div>
                 )}
               </div>
-            </div>
-            <div className={style.studiesContainer}>
+              <div className={style.studiesContainer}>
               <div className={style.headerStudies}>
                 <h3>Studies</h3>
-                <Link to={`/home/medic/appointments/studies/${id}`}>
+                <Link className={style.link} to={`/home/medic/appointments/studies/${id}`}>
                   New Study
                 </Link>
               </div>
               <div className={style.dataContainer}>
                 <div className={style.titles}>
-                  <p>Name</p>
-                  <p>PDF</p>
+                  <span className={style.titleBox}>Name</span>
+                  <span className={style.titleBox}>PDF</span>
                 </div>
                 {appointmentDetail.Studies.length ? (
                   appointmentDetail.Studies.map((s: any, i: any) => {
                     if(s.state === 'COMPLETED'){
                       return (
                         <div className={style.history} key={i}>
-                          <span className={s.hBox}>{s.StudyType.name}</span>
-                          <span className={s.hBox}><a title='Download Study'
+                          <span className={style.hBox}>{s.StudyType.name}</span>
+                          <span className={style.hBox}><a title='Download Study'
                               href={`/storage/${s.studyPDF}`} 
                               target="_blank"
-                            ><BiDownload /></a></span>
+                            ><BiDownload/></a></span>
                           
                         </div>
                       );
                     }else if(s.state === 'ACTIVE'){
                       return (
                         <div className={style.history} key={i}>
-                          <span className={s.hBox}>{s.StudyType.name}</span>
-                      <span className={s.hBox}>Study not available yet.</span>
+                          <span className={style.hBox}>{s.StudyType.name}</span>
+                      <span className={style.hBox}>Study not available yet.</span>
                       </div>
                       )
                       
@@ -136,6 +148,8 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                 )}
               </div>
             </div>
+            </div>
+            
           </div>
         ) : (
           <h1>Loading</h1>
