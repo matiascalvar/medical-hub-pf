@@ -33,23 +33,31 @@ const MedicAppointmentDetail: FunctionComponent = () => {
   }
 
   let dispatch = useDispatch();
+  const postStudy = useSelector((state: any) => state.postStudy);
   const medicInfo = useSelector((state: any) => state.medicInfo);
-  const appointments: any[] = useSelector((state: any) => state.appointmentsPatients);
+  const appointments = useSelector((state: any) => state.appointmentsPatients);
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
   const [appointmentDetail, setAppointmentDetail] = useState<any>("");
 
-  const updateAppointments = () => {
-    dispatch(getAppointmentsPatients(medicInfo.id));
-    setAppointmentDetail(
-      appointments.find((a) => {
-        return a.id == id;
-      })
-    )
-  }
+ 
+  const getStudyData = async () =>  {
+    try {
+      const response = await axios.get(`http://localhost:3001/appointments/medic/${medicInfo.id}`);
+      console.log(response.data)
+      setAppointmentDetail(
+        response.data.find((a: any) => {
+          return a.id == id;
+        })
+      )
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    updateAppointments()
-  }, [appointments]);
+    dispatch(getAppointmentsPatients(medicInfo.id))
+    getStudyData();
+  }, [postStudy]);
 
   return (
     <div className={style.bigContainer}>
@@ -158,13 +166,12 @@ const MedicAppointmentDetail: FunctionComponent = () => {
               </div>
             </div>
             </div>
-            {studyModal && <NewStudie update={() => updateAppointments()} closeStudyModal={closeStudyModal} />}
+            {studyModal && <NewStudie update={() => getStudyData()} closeStudyModal={closeStudyModal} />}
           </div>
         ) : (
           <h1>Loading</h1>
         )}
       </div>
-      
     </div>
   );
 };
