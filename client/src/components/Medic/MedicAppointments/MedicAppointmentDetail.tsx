@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import style from "./MedicAppointmentDetail.module.css";
 import { Link, useParams } from "react-router-dom";
 import { BiDownload } from "react-icons/bi";
+import {FaArrowLeft} from "react-icons/fa";
 import {
   getPreferenceId,
   getAppointmentsPatients,
@@ -26,10 +27,10 @@ const MedicAppointmentDetail: FunctionComponent = () => {
   }
 
   const planChange = (number: number) => {
-    if (number === 0) return "Particular"
-    if (number === 1) return "Silver"
-    if (number === 2) return "Gold"
-    if (number === 3) return "Platinium"
+    if (number === 1) return "Particular"
+    if (number === 2) return "Silver"
+    if (number === 3) return "Gold"
+    if (number === 4) return "Platinium"
   }
 
   let dispatch = useDispatch();
@@ -39,7 +40,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
   const [appointmentDetail, setAppointmentDetail] = useState<any>("");
 
- 
+  console.log("ApointmentDetail",appointmentDetail);
   const getStudyData = async () =>  {
     try {
       const response = await axios.get(`http://localhost:3001/appointments/medic/${medicInfo.id}`);
@@ -64,9 +65,17 @@ const MedicAppointmentDetail: FunctionComponent = () => {
       <div className={style.navContainer}>
         <Nav />
       </div>
+      {studyModal && <NewStudie update={() => getStudyData()} closeStudyModal={closeStudyModal} />}
       <div className={style.aside}>
         <div>
           <Header userName={medicInfo.firstName} title="Appointment Detail" />
+        </div>
+        <div className={style.goBackContainer}>
+          
+          <Link to="/home/medic/appointments" className={style.goBackButton} type="button">
+          <FaArrowLeft className={style.iconBack} />
+            <span className={style.goBackText}>Go back</span> 
+            </Link>
         </div>
         {appointmentDetail ? (
           <div className={style.detailContainer}>
@@ -117,21 +126,21 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                   <p>{appointmentDetail.AppointmentDetail.details} </p>
                 ) : (
                   <div className={style.reviewP}>
-                    <p>
+                    <span className={style.noStudies}>
                       No review avaialable.
                       <Link to={`/home/medic/appointments/review/${id}`}>
-                        Add review
+                       <span className={style.link}>Add review</span> 
                       </Link>
-                    </p>
+                    </span>
                   </div>
                 )}
               </div>
               <div className={style.studiesContainer}>
               <div className={style.headerStudies}>
                 <h3>Studies</h3>
-                <p onClick={() => setStudyModal(true)} className={style.studyNewText}>
+                <span onClick={() => setStudyModal(true)} className={style.studyNewText}>
                   New Study
-                </p>
+                </span>
               </div>
               <div className={style.dataContainer}>
                 <div className={style.titles}>
@@ -161,12 +170,11 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                     }
                   })
                 ) : (
-                  <p>No studies were found</p>
+                  <span className={style.noStudies}>No studies were found</span>
                 )}
               </div>
             </div>
             </div>
-            {studyModal && <NewStudie update={() => getStudyData()} closeStudyModal={closeStudyModal} />}
           </div>
         ) : (
           <h1>Loading</h1>
