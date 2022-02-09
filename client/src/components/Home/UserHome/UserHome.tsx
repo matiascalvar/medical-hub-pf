@@ -132,7 +132,12 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
                         </span>
                         <div className={s.hBox}>
                           <span className={s.historyIcon}>
-                            <icons.BiHistory className={s.iconH} />
+                            <Link 
+                              to={'/home/history'}
+                              className={s.historyIconLink}
+                            >
+                              <icons.BiHistory className={s.iconH} />
+                            </Link>
                           </span>
                         </div>
                       </div>
