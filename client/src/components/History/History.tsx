@@ -87,44 +87,7 @@ const History: FunctionComponent = () => {
             <h3 className="sectionFilter__title">
               Lorem ipsum dolor sit amet consectetur adipisicing.
             </h3>
-            <div className="sectionFilter__buttom">
-              <button
-                className="buttom__history"
-                onClick={() => {
-                  setIsOpen(!isOpen);
-                }}
-              >
-                Filters
-              </button>
-              <BiFilter className="buttom__iconHistory" />
-            </div>
-          </div>
-          {isOpen && (
-            <div className="filterButtom">
-              <div className="filterButtom__top">
-                <h3 className="filterButtom__top--item">Estado:</h3>
-                <h3 className="filterButtom__top--item">Tipo de estudio:</h3>
-              </div>
-              <div className="filterButtom__center">
-                <select
-                  className="center__izq"
-                  onChange={(e) => getFilterStatus(e)}
-                >
-                  <option value="ALL">All</option>
-                  <option value="PENDING">Pending</option>
-                  <option value="COMPLETE">Complete</option>
-                  <option value="ACTIVE">Active</option>
-                </select>
-                <select className="center__der">
-                  <option value="LAB">Laboratorio</option>
-                  <option value="IMAGE">Imagenes</option>
-                  <option value="WELL">Welltest</option>
-                </select>
-              </div>
-            </div>
-          )}
-          <div className="sectionTitle__name">
-            To: <strong>{`${patient.firstName}, ${patient.lastName}`}</strong>
+            
           </div>
         </div>
         <div className="contenedor__sectionCards">
