@@ -12,8 +12,8 @@
 }
 
 .logo {
-  width: 6rem;
-  margin: 2rem 0 0 0.8rem;
+  max-width: 11rem;
+  margin: 2rem 0 0 0rem;
 }
 
 .buttonsContainer {
@@ -85,16 +85,15 @@
   color: #0eaaff;
 }
 
-.link{
-    text-decoration: none;
-    color: #939eb0;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.link {
+  text-decoration: none;
+  color: #939eb0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.link:hover{
-    color: black;
+.link:hover {
+  color: black;
 }
-

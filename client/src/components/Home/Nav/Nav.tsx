@@ -2,7 +2,7 @@ import { logout } from "../../../actions";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import s from "./Nav.module.css";
-import Logo from "../../../assets/img/minimalLogo.png";
+import Logo from "../../../assets/img/minimalLogo.svg";
 import * as icons from "react-icons/bi";
 import * as iconsb from "react-icons/md";
 import { TiTick } from "react-icons/ti";
@@ -17,8 +17,8 @@ export default function Nav(): JSX.Element {
   // state para abrir el modal
   const [isOpen, setIsOpen] = useState(false);
   const handleBtn = () => {
-    setIsOpen(true)
-  }
+    setIsOpen(true);
+  };
 
   const handleClick = function (e: any) {
     dispatch(logout());
