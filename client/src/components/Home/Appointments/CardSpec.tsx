@@ -6,12 +6,14 @@ import { useHistory } from "react-router-dom";
 import { getAppointments, URL_DEPLOY } from "../../../actions/index";
 
 interface CardProps {
+  mailSent: any,
+  setMailSent: any,
   date: any;
   hours: any;
   medicInfo: any;
 }
 
-export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => {
+export const CardSpec = ({mailSent, setMailSent, date, hours, medicInfo }: CardProps): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userActive = useSelector((state: any) => state.patientInfo);
@@ -27,6 +29,7 @@ export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => 
 
   const handleSubmit = async function (e: any) {
     e.preventDefault();
+    setMailSent(true)
     try {
       const response = await axios.post(`${URL_DEPLOY}/appointments`, {
         date: date,
@@ -35,6 +38,7 @@ export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => 
         MedicalStaffId: medicInfo.MedicalStaffId,
       });
       dispatch(getAppointments(userActive.id));
+      setMailSent(false)
       history.push("/home/appointments");
     } catch (error) {
       console.log(error);
@@ -52,7 +56,7 @@ export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => 
         />
       </label>
       </div>
-      {selected.hour ? (
+      {(selected.hour && mailSent === false) ? (
           <div className={style.appConfirm}>
           <h3>
             Confirm appointment with Dr. {medicInfo.medic} at {hours}hs.

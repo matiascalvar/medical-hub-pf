@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
 import style from "./NewAppointment.module.css";
 import addDays from '../../../assets/addDays'
+import loader from '../../../assets/img/loading.gif' 
 
 import {
   getSpecialities,
@@ -27,6 +28,7 @@ const NewAppointment: FunctionComponent = () => {
     const specAvb = useSelector((state: any) => state.specAppointments);
     const [ specId, setSpecId ] = useState(0);
     const [ pagination, setPagination ] = useState({offset:0, pag:1})
+    const [ mailSent, setMailSent ] = useState(false)
 
     const handleChange = (e: any) => {
         if (e.target.value == "selectSpeciality") return;
@@ -89,6 +91,7 @@ const NewAppointment: FunctionComponent = () => {
                 </select>
               </form>
             </div>
+            {mailSent === true && <div className={style.loading}><img width='80%' src={loader} /></div>}
             <div className={style.cardBigContainer}>
               {medics.message && <h2>{medics.message}</h2>}
 
@@ -97,7 +100,7 @@ const NewAppointment: FunctionComponent = () => {
                 {(medicInfo.data && !medics.message && !specAvb.length) ?
                   medicInfo.data.map((day: any) => {
                     //console.log(medicInfo)
-                    return <Card date={day.fecha} hours={day.avb} medicInfo={medicInfo} />;
+                    return <Card mailSent={mailSent} setMailSent={setMailSent} date={day.fecha} hours={day.avb} medicInfo={medicInfo} />;
                   }) : 
                   
                   <div>
@@ -108,6 +111,8 @@ const NewAppointment: FunctionComponent = () => {
                     let totalPages = specAvb.length;  
                     
                     return (
+                      <>
+                      {mailSent === true && <div className={style.loading}><img width='80%' src={loader} /></div>}
                       <div>
                       <div className={style.paginationBtns}>
                    {(pagination.offset !== 0) && <button title={addDays(day.fecha, 0)} onClick={() => setPagination({offset:pagination.offset-1, pag:pagination.pag-1})}> {'<<'} </button>}
@@ -139,7 +144,7 @@ const NewAppointment: FunctionComponent = () => {
                               </div>
                               <div className={style.cardSpecContainer}>
                                {day.avb[hour].map((m:any) => {
-                                 return  <CardSpec date={day.fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
+                                 return  <CardSpec mailSent={mailSent} setMailSent={setMailSent} date={day.fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
                                })}
                              </div>
                              
@@ -160,7 +165,7 @@ const NewAppointment: FunctionComponent = () => {
                              </label>
                              <div className={style.cardSpecContainer}>
                                {day.avb[hour].map((m:any) => {
-                                 return  <CardSpec date={day.fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
+                                 return  <CardSpec mailSent={mailSent} setMailSent={setMailSent} date={day.fecha} hours={hour.toString()} medicInfo={{medic: m.firstName + ' ' + m.lastName, MedicalStaffId: m.id}} />;
                                })}
                              </div>  
  
@@ -181,6 +186,7 @@ const NewAppointment: FunctionComponent = () => {
                     }
                   
                     </div>
+                    </>
                   )
 
                   }) : null
@@ -194,7 +200,8 @@ const NewAppointment: FunctionComponent = () => {
             </div> 
           </div>
         </div> :
-      <h4>Loading....</h4>}
+      <h4>Loading....</h4>
+    }
     </>
   );
 };

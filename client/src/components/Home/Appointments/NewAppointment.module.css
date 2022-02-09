@@ -89,12 +89,13 @@
   border: none;
   border-radius: 4px;
   font-weight: bold;
+  color:white;
   cursor: pointer;
 }
 
 .paginationBtns button:hover{
   background-color: white;
-  color:#0eaaff;
+  color:#00d9ff;
 }
 
 .cardsContainer {
@@ -132,4 +133,11 @@
 .cardSpecContainer{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.loading{
+  position: absolute;
+  top: 35%;
+  left:47%; 
 }

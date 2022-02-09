@@ -6,7 +6,9 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    let specialities = await Specialitie.findAll();
+    let specialities = await Specialitie.findAll({
+      order:[['name', 'ASC']]
+    });
     res.status(200).send(specialities);
   } catch (error) {
     console.log(error);
@@ -33,7 +35,7 @@ router.get("/:id", async (req, res) => {
           "updatedAt",
         ],
       },
-      order: [["lastName", "ASC"]],
+      order: [["firstName", "ASC"]],
     });
 
     medicalStaff.length > 0

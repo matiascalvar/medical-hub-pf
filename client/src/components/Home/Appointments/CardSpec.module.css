@@ -44,11 +44,20 @@ z-index: 3;
   width: 40%;
   top:35%;
   left: 30%;
-  background-color: #0eaaff;
+  background-color: white;/*#0eaaff*/
   border-radius: 20px;
   padding: 15px 15px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
+}
+
+.appConfirm h3{
+  all: unset;
+  width: 100%;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700 !important;
+  color: black !important;
 }
 
 .appConfirm:hover{
@@ -56,11 +65,9 @@ z-index: 3;
 }
 
 .appConfirm button{
+  background-color: #0eaaff;
+  color: white;
   cursor: pointer;
-}
-
-.appConfirm h3{
-  color: black !important;
 }
 
 .hoursContainer {
