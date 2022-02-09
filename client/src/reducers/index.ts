@@ -40,8 +40,8 @@ export default function reducer(state = initialState, action: actionI) {
     case ActionTypes.getPatientById:
       return {
         ...state,
-        patientById: action.payload
-      }
+        patientById: action.payload,
+      };
     case ActionTypes.getMedicInfo:
       return {
         ...state,
@@ -128,6 +128,7 @@ export default function reducer(state = initialState, action: actionI) {
       } else {
         return {
           ...state,
+          postReview: false,
         };
       }
     case ActionTypes.updateMedicInfo:
@@ -145,6 +146,7 @@ export default function reducer(state = initialState, action: actionI) {
         return {
           ...state,
           postStudy: false,
+          postReview: false,
         };
       }
 
