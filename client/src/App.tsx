@@ -68,7 +68,7 @@ function App() {
           <MedicRoute exact path="/home/medic/appointments" component={MedicAppointments} />
           <MedicRoute exact path="/home/medic/appointments/:id" component={MedicAppointmentDetail} />
           <MedicRoute exact path="/home/medic/appointments/review/:id" component={NewReviewAppointment} />
-          <MedicRoute exact path="/home/medic/patientHistory" component={MedicPatientHistory} />
+          <MedicRoute exact path="/home/medic/patientHistory:id" component={MedicPatientHistory} />
           <MedicRoute exact path="/home/medic/profile" component={MedicProfile} />
           <MedicRoute exact path="/home/medic/appointments/studies/:id" component={NewStudie} />
           <AdminRoute exact path="/admin" component={Admin} />

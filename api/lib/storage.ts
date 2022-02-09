@@ -10,11 +10,14 @@ const storage = multer.diskStorage({
       const type = file.mimetype.split('/');
       var fileType: string;
       switch(type[1].toString()){
-          case 'jpg':
+          case 'jpeg':
           fileType = '.jpg';
           break;
           case 'png':
           fileType = '.png';
+          break;
+          case 'pdf':
+          fileType = '.pdf';
           break;    
           default:
           fileType = '.pdf';

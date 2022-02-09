@@ -52,7 +52,7 @@ export default function Home(): JSX.Element {
     );
   } else {
     return (
-      <h4>Algo salio mal :( </h4>
+      <h4>Something went wrong </h4>
     )
   }
 }

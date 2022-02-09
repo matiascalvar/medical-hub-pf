@@ -1,8 +1,7 @@
 import s from "./UserHome.module.css";
 import * as iconsb from "react-icons/md";
 import * as icons from "react-icons/bi";
-import { payments} from "./data";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAppointments, getHistory } from "../../../actions/index";
 import Header from "./Header/Header";
@@ -60,7 +59,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
                 <span className={s.appointmentBox}>Time</span>
                 <span className={s.appointmentBox}>Date</span>
                 <span className={s.appointmentBox}>Medic</span>
-                <span className={s.appointmentBox}>Specialitie</span>
+                <span className={s.appointmentBox}>Speciality</span>
                 <span className={s.appointmentBox}>Pay</span>
                 <span className={s.appointmentBox}>State</span>
               </div>
@@ -135,7 +134,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
               </div>
             </div>
           </div>
-          <div className={s.paymentsCard}>
+          {/* <div className={s.paymentsCard}>
             <span className={s.cardTitle}>
               <icons.BiMoney className={s.icon} />
               Payments
@@ -168,7 +167,7 @@ export default function UserHome({ userName, id }: UserHomeProps): JSX.Element {
                   </div>
                 ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
