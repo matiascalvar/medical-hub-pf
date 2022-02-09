@@ -7,7 +7,8 @@ const router = Router();
 
 router.get('/', async (req, res) => {   
     try {
-        const { idMedicalStaff, weekDays } = req.query;
+        const { weekDays } = req.query;
+        const idMedicalStaff = req.query.idMedicalStaff as string;
 
         const medic = await MedicalStaff.findOne({
             where: {

@@ -36,15 +36,8 @@ router.use("/mercadopago", mercadopago)
 router.use('/updateMedic', updateMedic)
 
 router.get("/", (req: Request, res: Response) => {
-  res.send("soy la ruta home get! Probá /test");
-});
-
-router.get("/test", (req: Request, res: Response) => {
-  res.send("soy la ruta test get!");
-});
-
-router.post("/", (req: Request, res: Response) => {
-  res.send("soy la ruta test post!");
+  res.send("<div><style>div{text-align: center}</style><h1>Medical Hub</h1></div>"
+  );
 });
 
 export default router;
