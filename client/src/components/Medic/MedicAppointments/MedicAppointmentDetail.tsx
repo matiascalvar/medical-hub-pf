@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./MedicAppointmentDetail.module.css";
 import { Link, useParams } from "react-router-dom";
+import { BiDownload } from "react-icons/bi";
 import {
   getPreferenceId,
   getAppointmentsPatients,
@@ -132,12 +133,27 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                 </div>
                 {appointmentDetail.Studies.length ? (
                   appointmentDetail.Studies.map((s: any, i: any) => {
-                    return (
-                      <div className={style.history} key={i}>
-                        <span className={s.hBox}>{s.StudyType.name}</span>
-                        <span className={s.hBox}>Download</span>
+                    if(s.state === 'COMPLETED'){
+                      return (
+                        <div className={style.history} key={i}>
+                          <span className={s.hBox}>{s.StudyType.name}</span>
+                          <span className={s.hBox}><a title='Download Study'
+                              href={`/storage/${s.studyPDF}`} 
+                              target="_blank"
+                            ><BiDownload /></a></span>
+                          
+                        </div>
+                      );
+                    }else if(s.state === 'ACTIVE'){
+                      return (
+                        <div className={style.history} key={i}>
+                          <span className={s.hBox}>{s.StudyType.name}</span>
+                      <span className={s.hBox}>Study not available yet.</span>
                       </div>
-                    );
+                      )
+                      
+                    }
+                    
                   })
                 ) : (
                   <p>No studies were found</p>
@@ -150,6 +166,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
           <h1>Loading</h1>
         )}
       </div>
+      
     </div>
   );
 };
