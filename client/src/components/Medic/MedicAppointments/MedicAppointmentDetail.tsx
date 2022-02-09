@@ -105,37 +105,36 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                   </div>
                 )}
               </div>
-            </div>
-            <div className={style.studiesContainer}>
+              <div className={style.studiesContainer}>
               <div className={style.headerStudies}>
                 <h3>Studies</h3>
-                <Link to={`/home/medic/appointments/studies/${id}`}>
+                <Link className={style.link} to={`/home/medic/appointments/studies/${id}`}>
                   New Study
                 </Link>
               </div>
               <div className={style.dataContainer}>
                 <div className={style.titles}>
-                  <p>Name</p>
-                  <p>PDF</p>
+                  <span className={style.titleBox}>Name</span>
+                  <span className={style.titleBox}>PDF</span>
                 </div>
                 {appointmentDetail.Studies.length ? (
                   appointmentDetail.Studies.map((s: any, i: any) => {
                     if(s.state === 'COMPLETED'){
                       return (
                         <div className={style.history} key={i}>
-                          <span className={s.hBox}>{s.StudyType.name}</span>
-                          <span className={s.hBox}><a title='Download Study'
+                          <span className={style.hBox}>{s.StudyType.name}</span>
+                          <span className={style.hBox}><a title='Download Study'
                               href={`/storage/${s.studyPDF}`} 
                               target="_blank"
-                            ><BiDownload /></a></span>
+                            ><BiDownload/></a></span>
                           
                         </div>
                       );
                     }else if(s.state === 'ACTIVE'){
                       return (
                         <div className={style.history} key={i}>
-                          <span className={s.hBox}>{s.StudyType.name}</span>
-                      <span className={s.hBox}>Study not available yet.</span>
+                          <span className={style.hBox}>{s.StudyType.name}</span>
+                      <span className={style.hBox}>Study not available yet.</span>
                       </div>
                       )
                       
@@ -147,6 +146,8 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                 )}
               </div>
             </div>
+            </div>
+            
           </div>
         ) : (
           <h1>Loading</h1>
