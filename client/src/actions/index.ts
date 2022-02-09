@@ -369,3 +369,27 @@ export const clearSubmitForm = () => {
     payload: false,
   };
 };
+
+
+export const clearResponse = () => {
+  return {
+    type: ActionTypes.updatePatientInfo,
+    payload: [],
+  };
+};
+
+export const getMedicInfo = (activeUser: any) => async (dispatch: any) => {
+  const headers = createHeaders(activeUser.token);
+  const authAxios = axios.create(headers);
+  try {
+    const response = await authAxios.get("http://localhost:3001/users/medic");
+    if (response) {
+      dispatch({
+        type: ActionTypes.getMedicInfo,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

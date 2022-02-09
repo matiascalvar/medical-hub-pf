@@ -104,6 +104,7 @@ export default function MedicProfile () : JSX.Element {
                     email={activeUser.email}
                     activeUser = {activeUser}
                     speciality={myInfo.speciality.length > 0 ? myInfo.speciality[0].name : ""}
+                    editState={setEditState}
                     />
                 
                    }

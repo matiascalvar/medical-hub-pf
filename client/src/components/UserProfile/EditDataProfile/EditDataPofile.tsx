@@ -1,7 +1,7 @@
 import { useState , useEffect } from 'react';
 import s from "./EditDataProfile.module.css";
 import { useSelector, useDispatch } from 'react-redux';
-import {updatePatientInfo} from "../../../actions/index";
+import {updatePatientInfo , clearResponse, getPatientInfo} from "../../../actions/index";
 import ChangePass from "./ChangePass/ChangePass";
 
 
@@ -13,7 +13,8 @@ interface EditDataProfileProps{
     phone: any,
     planId : any,
     email : any,
-    activeUser : any
+    activeUser : any,
+    editState : any
 }
 
 interface Info{
@@ -27,7 +28,7 @@ interface Info{
     password : any
 }
 
-export default function EditDataProfile ({firstName, lastName, id, dni, phone, planId, email, activeUser} : EditDataProfileProps) : JSX.Element {
+export default function EditDataProfile ({firstName, lastName, id, dni, phone, planId, email, activeUser, editState} : EditDataProfileProps) : JSX.Element {
 
     const [ myInfo, setMyInfo ] = useState<Info> ({
         firstName: firstName,
@@ -125,8 +126,18 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
             })
         }
     }
+    function back(){
+
+        dispatch(clearResponse());
+        dispatch(getPatientInfo(activeUser));
+        editState({
+            edit : false
+        });
+
+    }
 
     function handleSubmit(e : any){
+        e.preventDefault();
         if(!loading.loading && 
             !errors.firstName && 
             !errors.lastName &&
@@ -138,11 +149,7 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
                     ...data,
                     loading:true
                 }
-            });
-           
-            
-        }else{
-            e.preventDefault();
+            }); 
         }
     }
 
@@ -196,6 +203,7 @@ export default function EditDataProfile ({firstName, lastName, id, dni, phone, p
                     response.message ? <div className={s.alert}>Data updated</div> : ""
                 }
                 <button type='submit' className={s.saveButton}>{loading.loading ? <div className={s.loading}></div> : "Save Changes"}</button>
+                <button type='button' className={s.backButton} onClick={back}>Back</button>
             </form>
         </div>
     )
