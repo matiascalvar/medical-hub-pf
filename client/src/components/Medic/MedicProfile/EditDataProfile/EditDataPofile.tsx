@@ -138,13 +138,16 @@ export default function EditDataProfile({ firstName, lastName, id, dni, email, a
           loading: true
         }
       })
-    }else if(myInfo.specialitie.length === 0){
-      setErrors((data: any) => {
-        return {
-          ...data,
-          specialitie: true
-        }
-      })
+      if(myInfo.specialitie.length === 0){
+        setErrors((data: any) => {
+          return {
+            ...data,
+            specialitie: true
+          }
+        })
+      }
+    }else{
+      e.preventDefault()
     }
 
   }

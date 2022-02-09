@@ -2,184 +2,108 @@ import React, { FunctionComponent, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Home/Nav/Nav";
 import userLogo from "../Home/userLogo.png";
+import { BsCalendarFill, BsCashStack, BsTrash } from "react-icons/bs";
 import "../../styles/History/History.css";
 import { BiFilter, BiDownload } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
-import { filterHistoryStatus, getHistory, getPatientInfo } from "../../actions";
+import { getHistory } from "../../actions";
 import axios from "axios";
+import style from "./History.module.css";
+import Header from "../Home/UserHome/Header/Header";
 
 const History: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const urlHome = useHistory();
+  const history = useHistory();
+
   const activeUser = useSelector((state: any) => state.user);
-  const user = useSelector((state: any) => state.userInfo);
-  const userHistory: any | any[] = useSelector(
-    (state: any) => state.filterHistory
-  );
+  const studies: any = useSelector((state: any) => state.history);
   const patient = useSelector((state: any) => state.patientInfo);
+
+  const [file, setFile] = React.useState<any>()
+
+  const uploadFiles = (e:any) => {
+    e.preventDefault()
+    setFile(e.target.files[0]);
+  }
+
+  const insertFiles = async(e:any) => {
+    e.preventDefault()
+    let id = e.target[1].value
+    const f = new FormData();
+    if (file) {
+      f.append("studyPDF", file);
+      const response = await axios.post(`http://localhost:3001/studies/${id}`, f, {headers:{'Content-Type':"multipart/form-data"}})
+      if(response.status === 200) {
+        console.log("Todo ok")
+        dispatch(getHistory(patient.id))
+      } else {
+        console.log("No se puedo agregar archivo")
+      }
+    } else {
+      console.log("Seleccionar arcivho")
+    }
+  }
 
   useEffect(() => {
     if (patient.id) {
       dispatch(getHistory(patient.id));
     }
-  }, []);
-
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [info, setInfo] = React.useState({
-    firstName: "",
-    lastName: "",
-  });
-  const [file, setFile] = React.useState<any>(null)
-
-  useEffect(() => {
-    if (user) {
-      setInfo({
-        firstName: user.firstName,
-        lastName: user.lastName,
-      });
-    }
-    if (activeUser.email && !info.firstName) {
-      dispatch(getPatientInfo(activeUser));
-    }
-  }, [user, dispatch, userHistory]);
-
-  const getFilterStatus = (e: any) => {
-    dispatch(filterHistoryStatus(e.target.value));
-    if (e.target.value === "ALL") {
-      dispatch(getHistory(user.id));
-    }
-  };
-
-  const uploadFiles = (e:any) => {
-    setFile(e[0]);
-  }
-
-  const insertFiles = async(e:any, historyId:any) => {
-    e.preventDefault();
-    const f = new FormData();
-    f.append("studyPDF", file);
-    await axios.post(`http://localhost:3001/studies/${historyId}`, f, {headers:{'Content-Type':"multipart/form-data"}})
-    .then(response => {
-      if(response.status === 200){
-        urlHome.push('/home');
-      }
-    })
-    .catch(error => console.log(error))
-  }
+  }, [patient]);
 
   return (
-    <div className="containerHistory">
-      <div className="containerHistory__nav">
+    <div className={style.bigContainer}>
+      <div className={style.navContainer}>
         <Nav />
       </div>
-      <div className="containerHistory__contenedor">
-        <div className="contenedor__header">
-          <h3 className="contenedor__header--name">{patient.firstName}</h3>
-          <img
-            src={userLogo}
-            alt="user_logo"
-            className="contenedor__header--logo"
-          />
+      <div className={style.aside}>
+      <div>
+          <Header userName={patient.firstName} title="Studies" />
         </div>
-        <div className="contenedor__sectionTitle">
-          <h3 className="sectionTitle__title">Study History</h3>
-          <div className="sectionTitle__sectionFilter">
-            <h3 className="sectionFilter__title">
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-            </h3>
-            <div className="sectionFilter__buttom">
-              <button
-                className="buttom__history"
-                onClick={() => {
-                  setIsOpen(!isOpen);
-                }}
-              >
-                Filters
-              </button>
-              <BiFilter className="buttom__iconHistory" />
+          <div className={style.shiftCard}>
+            <div className={style.subtitlesContainer}>
+              <span>Type</span>
+              <span>Diagnosis</span>
+              <span>State</span>
+              <span>Medic</span>
+              <span>Results</span>
             </div>
-          </div>
-          {isOpen && (
-            <div className="filterButtom">
-              <div className="filterButtom__top">
-                <h3 className="filterButtom__top--item">Estado:</h3>
-                <h3 className="filterButtom__top--item">Tipo de estudio:</h3>
-              </div>
-              <div className="filterButtom__center">
-                <select
-                  className="center__izq"
-                  onChange={(e) => getFilterStatus(e)}
-                >
-                  <option value="ALL">All</option>
-                  <option value="PENDING">Pending</option>
-                  <option value="COMPLETE">Complete</option>
-                  <option value="ACTIVE">Active</option>
-                </select>
-                <select className="center__der">
-                  <option value="LAB">Laboratorio</option>
-                  <option value="IMAGE">Imagenes</option>
-                  <option value="WELL">Welltest</option>
-                </select>
-              </div>
-            </div>
-          )}
-          <div className="sectionTitle__name">
-            To: <strong>{`${patient.firstName}, ${patient.lastName}`}</strong>
-          </div>
-        </div>
-        <div className="contenedor__sectionCards">
-          {userHistory && userHistory.length > 0 ? (
-            userHistory.map((history: any) => (
-              <div className="cardHistory__container">
-                <div className="cardHistory__top">
-                  <h4 className="cardHistory__top--date">
-                    {history.Appointment.date}
-                  </h4>
-                  <h4 className="cardHistory__top--numberApp">{`N° ${history.Appointment.id}`}</h4>
-                </div>
-                <div className="cardHistory__center">
-                  <h4 className="cardHistory__center--studie">
-                    {history.StudyType.name}
-                  </h4>
-                  <h4 className="cardHistory__center--doc">{`${history.MedicalStaff.firstName} ${history.MedicalStaff.lastName}`}</h4>
-                </div>
-                <div className="cardHistory__bottom">
-                  <h4 className="cardHistory__bottom--state">
-                    {history.state}
-                  </h4>
-                  {
-                    history.state === 'COMPLETED' 
-                    ? <a 
-                        href={`/storage/${history.studyPDF}`} 
+            <div className={style.dataContainer}>
+              {studies.length > 0 ? (
+                studies.map((s: any) => (
+                  <div className={style.appointment} key={s.id}>
+                    <span className={style.box}>{s.StudyType.name}</span>
+                    <span className={style.box}>{s.diagnosis}</span>
+                    <span className={style.box}>{s.state}</span>
+                    <span className={style.box}>Dr. {s.MedicalStaff.lastName}, {s.MedicalStaff.firstName}</span>
+                    {s.state !== "COMPLETED"? 
+                      <span>
+                        <form onSubmit={insertFiles}>
+                          <input type="file" name="studyPDF" onChange={uploadFiles} />
+                          <input type="hidden" name="id" value={s.id}/>
+                          <button type="submit" >Insert</button>
+                        </form>
+                      </span> : 
+                      <span>
+                        <a 
+                        href={`/storage/${s.studyPDF}`} 
                         target="_blank"
-                        className="cardHistory__bottom--down"
-                      ><BiDownload /></a>
-                    : <form 
-                        onSubmit={(e) => insertFiles(e, history.id)}
-                        className="cardHistory__bottom--up"
-                      >
-                        <input 
-                          type="file" 
-                          name="studyPDF" 
-                          onChange={(e) => uploadFiles(e.target.files)}
-                          className="bottom__up--input"
-                        />
-                        <button 
-                          type="submit"
-                          className="bottom__up--button"
-                        >Insert</button>
-                      </form>
-                  }
-                </div> 
-              </div>
-            ))
-          ) : (
-            <h3 className="cardHistory__message">{userHistory.message}</h3>
-          )}
+                      ><BiDownload />Download</a>
+                      </span> }
+                  </div>
+                ))
+              ) : (
+                <div className={style.noAppointments}>
+                  <BsCalendarFill />
+                  <p>No studies available</p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
     </div>
   );
 };
 
 export default History;
+
+
