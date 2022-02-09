@@ -7,6 +7,7 @@ import { BiFilter, BiDownload } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 import { filterHistoryStatus, getHistory, getPatientInfo } from "../../actions";
 import axios from "axios";
+import Header from "../Home/UserHome/Header/Header";
 
 const History: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -74,21 +75,7 @@ const History: FunctionComponent = () => {
       </div>
       <div className="containerHistory__contenedor">
         <div className="contenedor__header">
-          <h3 className="contenedor__header--name">{patient.firstName}</h3>
-          <img
-            src={userLogo}
-            alt="user_logo"
-            className="contenedor__header--logo"
-          />
-        </div>
-        <div className="contenedor__sectionTitle">
-          <h3 className="sectionTitle__title">Study History</h3>
-          <div className="sectionTitle__sectionFilter">
-            <h3 className="sectionFilter__title">
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-            </h3>
-            
-          </div>
+          <Header title="Study History" userName={patient.firstName}/>
         </div>
         <div className="contenedor__sectionCards">
           {userHistory && userHistory.length > 0 ? (

@@ -77,7 +77,7 @@ const Appointments: FunctionComponent = () => {
         open={isOpen}
       ></MercadoPago>
       <div className={style.navContainer}>
-        <Nav />
+        <Nav/>
       </div>
       <div className={style.aside}>
         <div>
