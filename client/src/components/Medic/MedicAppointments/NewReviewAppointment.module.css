@@ -22,11 +22,6 @@
   margin-left: 2rem;
 }
 
-.goBackContainer {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .reviewContainer {
   padding: 0.5rem;
   margin-left: 2rem;
@@ -88,25 +83,4 @@
 
 .errorBtn:hover {
   background-color: red !important;
-}
-
-.goBackContainer {
-  width: 80%;
-}
-
-.goBackContainer button {
-  background-color: #0eaaff;
-  border: none;
-  padding: 0.8rem;
-  color: #fff;
-  min-width: 1rem;
-  min-height: 1rem;
-  border-radius: 0.7rem;
-  margin-bottom: 2rem;
-}
-
-.goBackContainer button:hover {
-  cursor: pointer;
-  background-color: #00d9ff;
-
 }
