@@ -96,9 +96,12 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                     {appointmentDetail && appointmentDetail.time.slice(0, -3)}
                   </span>
                 </p>
-                <Link
+               <button className={style.btnHistory}> 
+               <Link
                   to={`/home/medic/patientHistory/${appointments[0].Patient.id}`}
                 >View History</Link>
+                  </button>
+                  
               </div>
               <div className={style.reviewContainer}>
                 <h3>Review</h3>
