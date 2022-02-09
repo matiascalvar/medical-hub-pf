@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 const router = Router();
 
 function generateAccessToken(user: any) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '10m'})
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '60m'})
 }
 
 function generateRefreshToken(user: any) {

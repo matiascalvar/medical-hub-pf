@@ -13,5 +13,6 @@ const config = {
   host: process.env.API_host || "localhost",
   cors: process.env.CORS || "http://localhost:3000",
 };
+// LOCAL || DEPLOY
 
 export default config;
