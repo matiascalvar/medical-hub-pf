@@ -98,6 +98,7 @@ const Appointments: FunctionComponent = () => {
               <span>Speciality</span>
               <span>Status</span>
               <span>Pay</span>
+              <span>Delete</span>
             </div>
             <div className={style.dataContainer}>
               {appoinments.length > 0 ? (
