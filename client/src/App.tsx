@@ -24,6 +24,7 @@ import NewReviewAppointment from "./components/Medic/MedicAppointments/NewReview
 import MedicPatientHistory from "./components/Medic/MedicPatientHistory/MedicPatientHistory";
 import NewStudie from "./components/Medic/MedicAppointments/NewStudie";
 import MedicProfile from "./components/Medic/MedicProfile/MedicProfile";
+import AppointmentsDetail from "./components/Home/Appointments/AppointmentsDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ function App() {
           <PatientRoute exact path="/home" component={Home} />
           <PatientRoute exact path="/home/appointments" component={Appointments} />
           <PatientRoute exact path="/home/appointments/new" component={NewAppointment} />
+          <PatientRoute exact path="/home/appointments/:id" component={AppointmentsDetail} />
           <PatientRoute exact path="/home/userProfile" component={UserProfile} />
           <PatientRoute exact path="/home/history" component={History} />
           <PatientRoute exact path="/mercadopago" component={MercadoPago} />

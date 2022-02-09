@@ -98,6 +98,7 @@ const Appointments: FunctionComponent = () => {
               <span>Speciality</span>
               <span>Status</span>
               <span>Pay</span>
+              <span>Details</span>
               <span>Delete</span>
             </div>
             <div className={style.dataContainer}>
@@ -137,6 +138,9 @@ const Appointments: FunctionComponent = () => {
                       <span className={style.paidOut}>Payout</span>
                     )}
                     <span className={style.box}>
+                      <Link to={`/home/appointments/${data.id}`}>
+                        <span>Details</span>
+                      </Link>
                       <button
                         className={style.btnDelete}
                         onClick={() => deleteAppointment(data.id)}
