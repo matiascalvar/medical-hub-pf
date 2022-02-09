@@ -10,6 +10,7 @@ import { getHistory } from "../../actions";
 import axios from "axios";
 import style from "./History.module.css";
 import Header from "../Home/UserHome/Header/Header";
+import { URL_DEPLOY } from "../../actions/index";
 
 const History: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,9 @@ const History: FunctionComponent = () => {
     const f = new FormData();
     if (file) {
       f.append("studyPDF", file);
-      const response = await axios.post(`http://localhost:3001/studies/${id}`, f, {headers:{'Content-Type':"multipart/form-data"}})
+      const response = await axios.post(`${URL_DEPLOY}/studies/${id}`, f, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       if(response.status === 200) {
         console.log("Todo ok")
         dispatch(getHistory(patient.id))

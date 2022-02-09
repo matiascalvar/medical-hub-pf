@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:3001"
+const URL = "https://medicalhubpf.herokuapp.com";
 
 // --------------------------------------------- MEDICS ---------------------------------------------
 

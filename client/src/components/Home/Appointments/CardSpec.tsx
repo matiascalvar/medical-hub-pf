@@ -3,7 +3,7 @@ import React, { FunctionComponent, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./CardSpec.module.css";
 import { useHistory } from "react-router-dom";
-import { getAppointments } from "../../../actions/index";
+import { getAppointments, URL_DEPLOY } from "../../../actions/index";
 
 interface CardProps {
   date: any;
@@ -28,7 +28,7 @@ export const CardSpec = ({ date, hours, medicInfo }: CardProps): JSX.Element => 
   const handleSubmit = async function (e: any) {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/appointments", {
+      const response = await axios.post(`${URL_DEPLOY}/appointments`, {
         date: date,
         time: selected.hour,
         PatientId: userActive.id,

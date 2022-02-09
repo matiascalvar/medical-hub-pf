@@ -8,6 +8,7 @@ import axios from "axios";
 import BackImg from "../../assets/img/back_login.jpeg";
 import Logo from "../../assets/img/logo.svg";
 import "../../styles/LoginPage/Login.css";
+import { URL_DEPLOY } from "../../actions/index"
 
 axios.defaults.withCredentials = true;
 
@@ -23,7 +24,7 @@ const LoginPage: FunctionComponent = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3001/login",
+        `${URL_DEPLOY}/login`,
         `email=${newUser.email}&password=${newUser.password}&role=${role}`,
         options
       );
