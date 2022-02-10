@@ -13,9 +13,46 @@ export default function AddMedic(): JSX.Element {
     speciality: "",
   };
 
+
+  function validate(input: any) {
+    let errors: any = {};
+    if (!input.email) {
+      errors.email = 'empty';
+    } else if (!/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(input.email)) {
+      errors.email = 'error';
+    }
+    if (!input.firstName) {
+      errors.firstName = 'empty';
+    } else if (!/^[A-Za-z\s]+$/.test(input.firstName)) {
+      errors.firstName = 'error';
+    }
+    if (!input.lastName) {
+      errors.lastName = 'empty';
+    } else if (!/^[A-Za-z\s]+$/.test(input.lastName)) {
+      errors.lastName = 'error';
+    }
+    if (!input.avbFrom) {
+      errors.avbFrom = 'empty';
+    } else if (!/^(((([0-1][0-9])|(2[0-3])):?[0-5][0-9]:?[0-5][0-9]+$))/.test(input.avbFrom)) {
+      errors.avbFrom = 'error';
+    }
+    if (!input.avbTo) {
+      errors.avbTo = 'empty';
+    } else if (!/^(((([0-1][0-9])|(2[0-3])):?[0-5][0-9]:?[0-5][0-9]+$))/.test(input.avbTo)) {
+      errors.avbTo = 'error';
+    }
+    if (!input.idNumber) {
+      errors.idNumber = 'empty';
+    } else if (!(parseInt(input.idNumber) > 0)) {
+      errors.idNumber = 'error';
+    }
+    return errors;
+  };
+  
   const [specialities, setSpecialities] = useState<any>();
   const [input, setInput] = useState(emptyInput);
-  const [error, setError] = useState<string>();
+  const [newSpec, setNewSpec] = useState<string>();
+  const [ errors, setErrors ] = useState<any>();
 
   async function loadSpecialites() {
     const response: any = await getSpecialities();
@@ -32,16 +69,22 @@ export default function AddMedic(): JSX.Element {
 
   function verifySpeciality(input: string) {
     if (!specialities.find((s: any) => s.name === input) && input != "") {
-      setError("New Speciality");
+      setNewSpec("New Speciality");
     } else {
-      setError("");
+      setNewSpec("");
     }
   }
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    addMedic(input);
-    setInput(emptyInput);
+    let errors = validate(input)
+    if (Object.keys(errors).length > 0) {
+      console.log(errors)
+      setErrors(errors)
+    } else {
+      addMedic(input)
+      setInput(emptyInput)
+    }
   }
 
   useEffect(() => {
@@ -137,10 +180,11 @@ export default function AddMedic(): JSX.Element {
             )}
           </datalist>
         </div>
-        {error ? <h5>{error}</h5> : null}
+        {newSpec ? <h5>{newSpec}</h5> : null}
         <div className={style.formBtn}>
           <button type="submit">Submit </button>
         </div>
+        {errors? "Invalid input" : null}
       </form>
     </div>
   );

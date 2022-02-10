@@ -16,7 +16,6 @@ export default function MedicsDetail(props: any): JSX.Element {
         firstName: response.data.firstName,
         lastName: response.data.lastName,
         idNumber: response.data.idNumber,
-        availability: response.data.availability,
         avbFrom: response.data.avbFrom,
         avbTo: response.data.avbTo,
         createdAt: response.data.createdAt,
@@ -27,6 +26,7 @@ export default function MedicsDetail(props: any): JSX.Element {
     }
   };
 
+  const [ errors, setErrors ] = useState<any>();
   const [editable, setEditable] = useState("");
   const [error, setError] = useState<string>();
   const [specialities, setSpecialities] = useState<any>();
@@ -34,12 +34,41 @@ export default function MedicsDetail(props: any): JSX.Element {
     firstName: "",
     lastName: "",
     idNumber: "",
-    availability: "",
     avbFrom: "",
     avbTo: "",
     createdAt: "",
     speciality: "",
   });
+
+  function validate(input: any) {
+    let errors: any = {};
+    if (!input.firstName) {
+      errors.firstName = 'empty';
+    } else if (!/^[A-Za-z\s]+$/.test(input.firstName)) {
+      errors.firstName = 'error';
+    }
+    if (!input.lastName) {
+      errors.lastName = 'empty';
+    } else if (!/^[A-Za-z\s]+$/.test(input.lastName)) {
+      errors.lastName = 'error';
+    }
+    if (!input.avbFrom) {
+      errors.avbFrom = 'empty';
+    } else if (!/^(((([0-1][0-9])|(2[0-3])):?[0-5][0-9]:?[0-5][0-9]+$))/.test(input.avbFrom)) {
+      errors.avbFrom = 'error';
+    }
+    if (!input.avbTo) {
+      errors.avbTo = 'empty';
+    } else if (!/^(((([0-1][0-9])|(2[0-3])):?[0-5][0-9]:?[0-5][0-9]+$))/.test(input.avbTo)) {
+      errors.avbTo = 'error';
+    }
+    if (!input.idNumber) {
+      errors.idNumber = 'empty';
+    } else if (!(parseInt(input.idNumber) > 0)) {
+      errors.idNumber = 'error';
+    }
+    return errors;
+  };
 
   function handleInputChange(e: any) {
     setMedic({
@@ -63,8 +92,14 @@ export default function MedicsDetail(props: any): JSX.Element {
 
   async function AcceptChanges(e: any) {
     e.preventDefault();
-    await updateMedic(props.id, medic);
+    let errors = validate(medic)
+    if (Object.keys(errors).length > 0) {
+      console.log(errors)
+      setErrors(errors)
+    } else {
+      await updateMedic(props.id, medic);
     props.reolad();
+    }
   }
 
   useEffect(() => {
@@ -150,33 +185,6 @@ export default function MedicsDetail(props: any): JSX.Element {
               <span>{medic.idNumber}</span>
               <button
                 onClick={() => setEditable("idNumber")}
-                className={style.btnEdit}
-              >
-                <FiEdit />
-              </button>
-            </div>
-          )}
-        </div>
-        <div>
-          <label htmlFor="availability">Availability</label>
-          {editable === "availability" ? (
-            <>
-              <input
-                type="text"
-                name="availability"
-                value={medic.availability}
-                autoComplete="off"
-                onChange={handleInputChange}
-              />
-              <button onClick={() => setEditable("")} className={style.btnEdit}>
-                Accept
-              </button>
-            </>
-          ) : (
-            <div>
-              <span>{medic.availability}</span>
-              <button
-                onClick={() => setEditable("availability")}
                 className={style.btnEdit}
               >
                 <FiEdit />
@@ -287,6 +295,7 @@ export default function MedicsDetail(props: any): JSX.Element {
           Go back
         </button>
       </div>
+      {errors? "Invalid input" : null}
     </div>
   );
 }
