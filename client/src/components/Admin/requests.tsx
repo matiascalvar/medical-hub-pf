@@ -106,7 +106,7 @@ export const updatePermissions = async (id: number, data: any) => {
 
 export const resetPassword = async (id: number, data: any) => {
     try {
-        const response = await axios.post(URL + "/updateUser/resetpassword/" + id, data);
+        const response = await axios.post(URL_DEPLOY + "/updateUser/resetpassword/" + id, data);
         return response
       } catch (error) {
         console.log(error);
