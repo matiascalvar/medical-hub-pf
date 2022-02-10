@@ -155,7 +155,7 @@ export default function Appointments(): JSX.Element {
                     <td>{appointment.date}</td>
                     <td>{appointment.time}</td>
                     <td>{appointment.state.toLowerCase()}</td>
-                    <td>{appointment.pay}</td>
+                    <td>{appointment.pay? "True" : "False"}</td>
 
                     <td
                       onClick={() => setDetailed(appointment.id)}
