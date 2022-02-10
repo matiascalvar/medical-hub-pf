@@ -35,7 +35,7 @@ router.post('/resetpassword/:id', async (req: any, res) => {
     try {
         let patient: any = await Patient.findOne({ where: {id: req.params.id}})
         let user: any = await User.findOne({ where: { id: patient.UserId}});
-        const hashedPassword = await bcrypt.hash(user.dni, 10)
+        const hashedPassword = await bcrypt.hash(patient.dni, 10)
         const response = await user.update({
             resetPass: req.body.resetPass,
             hashedPass: hashedPassword,
