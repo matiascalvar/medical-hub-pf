@@ -178,7 +178,7 @@ export const changePassword =
     const headers = createHeaders(activeUser.token);
     const authAxios = axios.create(headers);
     try {
-      const response = await authAxios.post(`${URL_DEPLOY}/password`, {
+      const response = await authAxios.post(`${URL_DEPLOY}/register/password`, {
         password: data.password,
       });
       if (response) {
