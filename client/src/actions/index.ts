@@ -47,7 +47,7 @@ export const logUser = (activeUser: User) => async (dispatch: any) => {
 
 export const logout = () => async (dispatch: any) => {
   try {
-    const response = await axios.delete(`${URL_DEPLOY}/login/remove`); 
+    const response = await axios.delete(`${URL_DEPLOY}/login/remove`);
   } catch (error) {
     console.log(error);
   }
@@ -70,19 +70,19 @@ export const getPatientInfo = (activeUser: any) => async (dispatch: any) => {
   }
 };
 
-export const getPatientById = (id:any) => async(dispatch:any) => {
+export const getPatientById = (id: any) => async (dispatch: any) => {
   try {
     const response = await axios.get(`${URL_DEPLOY}/patients/${id}`);
-    if(response){
+    if (response) {
       dispatch({
         type: ActionTypes.getPatientById,
-        payload: response.data
-      })
+        payload: response.data,
+      });
     }
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const getAppointments = (id: any) => async (dispatch: any) => {
   try {
@@ -178,12 +178,9 @@ export const changePassword =
     const headers = createHeaders(activeUser.token);
     const authAxios = axios.create(headers);
     try {
-      const response = await authAxios.post(
-        `${URL_DEPLOY}/password`,
-        {
-          password: data.password,
-        }
-      );
+      const response = await authAxios.post(`${URL_DEPLOY}/password`, {
+        password: data.password,
+      });
       if (response) {
         dispatch({
           type: ActionTypes.changePassResponse,
@@ -358,7 +355,6 @@ export const clearSubmitForm = () => {
   };
 };
 
-
 export const clearResponse = () => {
   return {
     type: ActionTypes.updatePatientInfo,
@@ -370,7 +366,7 @@ export const getMedicInfo = (activeUser: any) => async (dispatch: any) => {
   const headers = createHeaders(activeUser.token);
   const authAxios = axios.create(headers);
   try {
-    const response = await authAxios.get("http://localhost:3001/users/medic");
+    const response = await authAxios.get(`${URL_DEPLOY}/users/medic`);
     if (response) {
       dispatch({
         type: ActionTypes.getMedicInfo,

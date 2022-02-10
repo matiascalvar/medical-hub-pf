@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import style from "./MedicAppointmentDetail.module.css";
 import { Link, useParams } from "react-router-dom";
 import { BiDownload } from "react-icons/bi";
-import {FaArrowLeft} from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import {
   getPreferenceId,
   getAppointmentsPatients,
@@ -20,18 +20,17 @@ export interface IUserPublicProfileRouteParams {
 }
 
 const MedicAppointmentDetail: FunctionComponent = () => {
-
   const [studyModal, setStudyModal] = useState<any>(false);
   const closeStudyModal = () => {
     return setStudyModal(false);
-  }
+  };
 
   const planChange = (number: number) => {
-    if (number === 1) return "Particular"
-    if (number === 2) return "Silver"
-    if (number === 3) return "Gold"
-    if (number === 4) return "Platinium"
-  }
+    if (number === 1) return "Particular";
+    if (number === 2) return "Silver";
+    if (number === 3) return "Gold";
+    if (number === 4) return "Platinium";
+  };
 
   let dispatch = useDispatch();
   const postStudy = useSelector((state: any) => state.postStudy);
@@ -40,23 +39,25 @@ const MedicAppointmentDetail: FunctionComponent = () => {
   const { id, name } = useParams<IUserPublicProfileRouteParams>();
   const [appointmentDetail, setAppointmentDetail] = useState<any>("");
 
-  console.log("ApointmentDetail",appointmentDetail);
-  const getStudyData = async () =>  {
+  console.log("ApointmentDetail", appointmentDetail);
+  const getStudyData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/appointments/medic/${medicInfo.id}`);
-      console.log(response.data)
+      const response = await axios.get(
+        `http://localhost:3001/appointments/medic/${medicInfo.id}`
+      );
+      console.log(response.data);
       setAppointmentDetail(
         response.data.find((a: any) => {
           return a.id == id;
         })
-      )
+      );
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    dispatch(getAppointmentsPatients(medicInfo.id))
+    dispatch(getAppointmentsPatients(medicInfo.id));
     getStudyData();
   }, [postStudy]);
 
@@ -65,17 +66,25 @@ const MedicAppointmentDetail: FunctionComponent = () => {
       <div className={style.navContainer}>
         <Nav />
       </div>
-      {studyModal && <NewStudie update={() => getStudyData()} closeStudyModal={closeStudyModal} />}
+      {studyModal && (
+        <NewStudie
+          update={() => getStudyData()}
+          closeStudyModal={closeStudyModal}
+        />
+      )}
       <div className={style.aside}>
         <div>
           <Header userName={medicInfo.firstName} title="Appointment Detail" />
         </div>
         <div className={style.goBackContainer}>
-          
-          <Link to="/home/medic/appointments" className={style.goBackButton} type="button">
-          <FaArrowLeft className={style.iconBack} />
-            <span className={style.goBackText}>Go back</span> 
-            </Link>
+          <Link
+            to="/home/medic/appointments"
+            className={style.goBackButton}
+            type="button"
+          >
+            <FaArrowLeft className={style.iconBack} />
+            <span className={style.goBackText}>Go back</span>
+          </Link>
         </div>
         {appointmentDetail ? (
           <div className={style.detailContainer}>
@@ -113,12 +122,13 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                     {appointmentDetail && appointmentDetail.time.slice(0, -3)}
                   </span>
                 </p>
-               <button className={style.btnHistory}> 
-               <Link
-                  to={`/home/medic/patientHistory/${appointments[0].Patient.id}`}
-                >View History</Link>
-                  </button>
-                  
+                <button className={style.btnHistory}>
+                  <Link
+                    to={`/home/medic/patientHistory/${appointments[0].Patient.id}`}
+                  >
+                    View History
+                  </Link>
+                </button>
               </div>
               <div className={style.reviewContainer}>
                 <h3>Review</h3>
@@ -127,57 +137,72 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                 ) : (
                   <div className={style.reviewP}>
                     <span className={style.noStudies}>
-                      No review avaialable.
+                      No review available.
                       <Link to={`/home/medic/appointments/review/${id}`}>
-                       <span className={style.link}>Add review</span> 
+                        <span className={style.link}>Add review</span>
                       </Link>
                     </span>
                   </div>
                 )}
               </div>
               <div className={style.studiesContainer}>
-              <div className={style.headerStudies}>
-                <h3>Studies</h3>
-                <span onClick={() => setStudyModal(true)} className={style.studyNewText}>
-                  New Study
-                </span>
-              </div>
-              <div className={style.dataContainer}>
-                <div className={style.titles}>
-                  <span className={style.titleBox}>Name</span>
-                  <span className={style.titleBox}>PDF</span>
+                <div className={style.headerStudies}>
+                  <h3>Studies</h3>
+                  <span
+                    onClick={() => setStudyModal(true)}
+                    className={style.studyNewText}
+                  >
+                    New Study
+                  </span>
                 </div>
-                {appointmentDetail.Studies.length ? (
-                  appointmentDetail.Studies.map((s: any, i: any) => {
-                    if(s.state === 'COMPLETED'){
-                      return (
-                        <div className={style.history} key={i}>
-                          <span className={style.hBox}>{s.StudyType.name}</span>
-                          <span className={style.hBox}><a title='Download Study'
-                              href={`/storage/${s.studyPDF}`} 
-                              target="_blank"
-                            ><BiDownload/></a></span>
-                          
-                        </div>
-                      );
-                    }else if(s.state === 'ACTIVE'){
-                      return (
-                        <div className={style.history} key={i}>
-                          <span className={style.hBox}>{s.StudyType.name}</span>
-                      <span className={style.hBox}>Study not available yet.</span>
-                      </div>
-                      )
-                    }
-                  })
-                ) : (
-                  <span className={style.noStudies}>No studies were found</span>
-                )}
+                <div className={style.dataContainer}>
+                  <div className={style.titles}>
+                    <span className={style.titleBox}>Name</span>
+                    <span className={style.titleBox}>PDF</span>
+                  </div>
+                  {appointmentDetail.Studies.length ? (
+                    appointmentDetail.Studies.map((s: any, i: any) => {
+                      if (s.state === "COMPLETED") {
+                        return (
+                          <div className={style.history} key={i}>
+                            <span className={style.hBox}>
+                              {s.StudyType.name}
+                            </span>
+                            <span className={style.hBox}>
+                              <a
+                                title="Download Study"
+                                href={`/storage/${s.studyPDF}`}
+                                target="_blank"
+                              >
+                                <BiDownload />
+                              </a>
+                            </span>
+                          </div>
+                        );
+                      } else if (s.state === "ACTIVE") {
+                        return (
+                          <div className={style.history} key={i}>
+                            <span className={style.hBox}>
+                              {s.StudyType.name}
+                            </span>
+                            <span className={style.hBox}>
+                              Study not available yet.
+                            </span>
+                          </div>
+                        );
+                      }
+                    })
+                  ) : (
+                    <span className={style.noStudies}>
+                      No studies were found
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
             </div>
           </div>
         ) : (
-          <h1>Loading</h1>
+          <h1></h1>
         )}
       </div>
     </div>
