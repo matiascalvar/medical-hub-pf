@@ -3,7 +3,9 @@ import { Appointment } from '../models/Appointment';
 import { MedicalStaff } from '../models/MedicalStaff';
 import { Studie } from '../models/Studie';
 import { StudyType } from '../models/StudyType';
+import { generateUploadUrl } from '../../lib/s3'
 const upload = require('../../lib/storage')
+const uploadS3 = require('../../lib/storageS3')
 const router = Router();
 
 
@@ -79,8 +81,51 @@ router.get('/:id', async (req, res) => {
     
 });
 
-router.post('/:id', upload.single('studyPDF'), (req,res) => {
-    res.send({message: 'Study file updated successfuly!'})
+router.get('/s3/Url', async (req, res) => {
+    const url = await generateUploadUrl()
+    res.send(url)
 })
+
+// router.put('/', async (req,res) => { //upload.single('studyPDF'),
+//     const { url,id } = req.body;
+//     //console.log (res)
+
+//     const study = await Studie.update(
+//         {
+//               studyPDF: url,
+//               state: 'COMPLETED'
+//           },
+//           {where:{
+//               id: id
+//           }        
+//     })
+
+// study && res.send({message: 'Study file updated successfuly!'})
+  
+// })
+
+router.post('/:id', uploadS3.single('studyPDF'), async function(req:any, res:any, next:any) {
+    console.log(req.file)
+    try {
+        const { id } = req.params;
+        const { location } = req.file
+        //console.log (res)
+    
+        const study = await Studie.update(
+            {
+                  studyPDF: location,
+                  state: 'COMPLETED'
+              },
+              {where:{
+                  id: id
+              }        
+        })
+        study && res.send('Successfully uploaded file!')
+    } catch (error) {
+        res.send(error)
+    }
+  })
+   
+  
 
 export default router;

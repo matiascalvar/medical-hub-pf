@@ -430,7 +430,7 @@ router.get('/avbspeciality/:idSpeciality', async (req: Request, res: Response) =
 
             let avbDays: any;
 
-            if(dayOfWeek < 5){ // si today es lunes a viernes
+            if(dayOfWeek > 0 && dayOfWeek < 6){ // si today es lunes a viernes
                 avbDays = {
                     '09:00:00': [...result.filter(m => (m.avbFrom <= '09:00:00' && m.avbTo > '09:00:00'))],
                     '09:30:00': [...result.filter(m => (m.avbFrom <= '09:30:00' && m.avbTo > '09:30:00'))],
