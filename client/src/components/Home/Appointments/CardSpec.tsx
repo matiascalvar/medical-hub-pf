@@ -45,9 +45,13 @@ export const CardSpec = ({mailSent, setMailSent, date, hours, medicInfo }: CardP
     }
   };
 
+  function scroll(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   return (
     <>
-    <div className={style.cardContainer}>
+    <div onClick={scroll} className={style.cardContainer}>
       <label>
         <input
           onClick={handleSelect}
