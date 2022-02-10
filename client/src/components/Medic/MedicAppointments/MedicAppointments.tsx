@@ -62,7 +62,7 @@ const MedicAppointments: FunctionComponent = () => {
                       </span>
                     </div>
                     <Link to={`/home/medic/appointments/${data.id}`}>
-                      <span>View more details</span>
+                      <span>Details</span>
                     </Link>
                   </div>
                 ))
