@@ -8,6 +8,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import {
   getPreferenceId,
   getAppointmentsPatients,
+  URL_DEPLOY,
 } from "../../../actions/index";
 import Nav from "../MedicHome/Nav/Nav";
 import Header from "../../Home/UserHome/Header/Header";
@@ -43,7 +44,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
   const getStudyData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/appointments/medic/${medicInfo.id}`
+        `${URL_DEPLOY}/appointments/medic/${medicInfo.id}`
       );
       console.log(response.data);
       setAppointmentDetail(
