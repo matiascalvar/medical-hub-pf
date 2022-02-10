@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Home/Nav/Nav";
 import userLogo from "../Home/userLogo.png";
@@ -32,6 +32,25 @@ const History: FunctionComponent = () => {
     let id = e.target[1].value;
     const f = new FormData();
     if (file) {
+      //console.log(file)
+      //prueba(file)
+      const { data } = await axios.get('http://localhost:3001/studies/s3/Url')
+    console.log(data)
+
+    const uploadStudy = await fetch(data,{
+      method:'PUT',
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      body: file
+    })
+
+    // if(uploadStudy){
+    //     const imageUrl = data.split('?')[0]
+    //     console.log(data)      
+
+    //     await axios.put(`http://localhost:3001/studies/`,{url:imageUrl, id})
+    // }
       f.append("studyPDF", file);
       const response = await axios.post(`${URL_DEPLOY}/studies/${id}`, f, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -53,7 +72,22 @@ const History: FunctionComponent = () => {
     }
   }, [patient]);
 
+  function handleShowImg(e){
+    alert(imgNotShow)
+   e.preventDefault()
+   imgNotShow === 'style.notShow' ? setImgNotShow ('style.show') : setImgNotShow ('style.notShow');
+  }
+
+  const [imgNotShow, setImgNotShow] = useState('style.notShow');
+
+  
   return (
+  //   <> <div className={style.modal}> Hola
+  //   <div className={style.modalContent}>
+  //     Modal Content
+  //       <iframe className={style.iframe} src={`/storage/studyPDF-1644451589616-766027643.png`}></iframe> 
+  //   </div>
+  // </div>
     <div className={style.bigContainer}>
       <div className={style.navContainer}>
         <Nav />
@@ -71,7 +105,7 @@ const History: FunctionComponent = () => {
           </div>
           <div className={style.dataContainer}>
             {studies.length > 0 ? (
-              studies.map((s: any) => (
+              studies.map((s: any, i:any) => (
                 <div className={style.appointment} key={s.id}>
                   <span className={style.box}>{s.StudyType.name}</span>
                   <span className={style.box}>{s.state.toLowerCase()}</span>
@@ -97,9 +131,10 @@ const History: FunctionComponent = () => {
                     </span>
                   ) : (
                     <span className={style.downloadFiles}>
-                      <a href={`/storage/${s.studyPDF}`} target="_blank">
-                        Download
-                      </a>
+                      {/* <img width='350px' height='auto' src={`${s.studyPDF}`}> Download</img> */}
+                      <input type='button' value={i} onClick={(e) => handleShowImg(e)} />                      
+                        Download                       
+                      <img id={i} className={imgNotShow} src={`${s.studyPDF}`} />
                     </span>
                   )}
                 </div>

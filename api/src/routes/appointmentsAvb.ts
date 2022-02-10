@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
             let newDate = new Date();
             let now = newDate.getHours() + ':' + newDate.getMinutes() + ':00'
             
-            if(today === addDays(date,0) && dayOfWeek < 5){
+            if(today === addDays(date,0) && (dayOfWeek > 0 && dayOfWeek < 6)){
                 avbHours.map(hs => {
                     if(JSON.stringify(hs) > JSON.stringify(now) === true && (JSON.stringify(hs) >= JSON.stringify(medic?.avbFrom) === true && JSON.stringify(hs) < JSON.stringify(medic?.avbTo) === true)){
                         h.push(hs)
@@ -65,7 +65,7 @@ router.get('/', async (req, res) => {
                         h.push(hs)
                     }
                 })
-            }else if(dayOfWeek > 4){
+            }else if(dayOfWeek === 0 || dayOfWeek === 6){
                 
             }            
 
