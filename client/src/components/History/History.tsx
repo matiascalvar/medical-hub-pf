@@ -11,6 +11,7 @@ import axios from "axios";
 import style from "./History.module.css";
 import Header from "../Home/UserHome/Header/Header";
 import { URL_DEPLOY } from "../../actions/index";
+import loader from '../../../src/assets/img/loading.gif'
 
 const History: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const History: FunctionComponent = () => {
   const patient = useSelector((state: any) => state.patientInfo);
 
   const [file, setFile] = React.useState<any>();
+  const [uploadingFile, setUploadingFile] = React.useState(false)
 
   const uploadFiles = (e: any) => {
     e.preventDefault();
@@ -28,29 +30,11 @@ const History: FunctionComponent = () => {
   };
 
   const insertFiles = async (e: any) => {
+    setUploadingFile(true)
     e.preventDefault();
     let id = e.target[1].value;
     const f = new FormData();
     if (file) {
-      //console.log(file)
-      //prueba(file)
-      const { data } = await axios.get('http://localhost:3001/studies/s3/Url')
-    console.log(data)
-
-    const uploadStudy = await fetch(data,{
-      method:'PUT',
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
-      body: file
-    })
-
-    // if(uploadStudy){
-    //     const imageUrl = data.split('?')[0]
-    //     console.log(data)      
-
-    //     await axios.put(`http://localhost:3001/studies/`,{url:imageUrl, id})
-    // }
       f.append("studyPDF", file);
       const response = await axios.post(`${URL_DEPLOY}/studies/${id}`, f, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -58,6 +42,7 @@ const History: FunctionComponent = () => {
       if(response.status === 200) {
         console.log("Todo ok")
         dispatch(getHistory(patient.id))
+        setUploadingFile(false)
       } else {
         console.log("No se puedo agregar archivo");
       }
@@ -72,22 +57,7 @@ const History: FunctionComponent = () => {
     }
   }, [patient]);
 
-  function handleShowImg(e){
-    alert(imgNotShow)
-   e.preventDefault()
-   imgNotShow === 'style.notShow' ? setImgNotShow ('style.show') : setImgNotShow ('style.notShow');
-  }
-
-  const [imgNotShow, setImgNotShow] = useState('style.notShow');
-
-  
   return (
-  //   <> <div className={style.modal}> Hola
-  //   <div className={style.modalContent}>
-  //     Modal Content
-  //       <iframe className={style.iframe} src={`/storage/studyPDF-1644451589616-766027643.png`}></iframe> 
-  //   </div>
-  // </div>
     <div className={style.bigContainer}>
       <div className={style.navContainer}>
         <Nav />
@@ -112,7 +82,8 @@ const History: FunctionComponent = () => {
                   <span className={style.box}>
                     Dr. {s.MedicalStaff.lastName}, {s.MedicalStaff.firstName}
                   </span>
-                  {s.state !== "COMPLETED" ? (
+                  {s.state !== "COMPLETED" ? 
+                  (uploadingFile === true) ? <span><img src={loader} width='50px' height='auto'/></span> :
                     <span>
                       <form onSubmit={insertFiles}>
                         <label className={style.uploadFiles}>
@@ -129,14 +100,13 @@ const History: FunctionComponent = () => {
                         </button>
                       </form>
                     </span>
-                  ) : (
+                    : 
                     <span className={style.downloadFiles}>
-                      {/* <img width='350px' height='auto' src={`${s.studyPDF}`}> Download</img> */}
-                      <input type='button' value={i} onClick={(e) => handleShowImg(e)} />                      
+                      <a href={`${s.studyPDF}`} target='_blank'>
                         Download                       
-                      <img id={i} className={imgNotShow} src={`${s.studyPDF}`} />
+                        </a>  
                     </span>
-                  )}
+                  }
                 </div>
               ))
             ) : (
