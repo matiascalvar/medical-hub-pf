@@ -86,26 +86,8 @@ router.get('/s3/Url', async (req, res) => {
     res.send(url)
 })
 
-// router.put('/', async (req,res) => { //upload.single('studyPDF'),
-//     const { url,id } = req.body;
-//     //console.log (res)
-
-//     const study = await Studie.update(
-//         {
-//               studyPDF: url,
-//               state: 'COMPLETED'
-//           },
-//           {where:{
-//               id: id
-//           }        
-//     })
-
-// study && res.send({message: 'Study file updated successfuly!'})
-  
-// })
-
 router.post('/:id', uploadS3.single('studyPDF'), async function(req:any, res:any, next:any) {
-    console.log(req.file)
+    //console.log(req.file)
     try {
         const { id } = req.params;
         const { location } = req.file
@@ -120,6 +102,7 @@ router.post('/:id', uploadS3.single('studyPDF'), async function(req:any, res:any
                   id: id
               }        
         })
+        //console.log(location)
         study && res.send('Successfully uploaded file!')
     } catch (error) {
         res.send(error)

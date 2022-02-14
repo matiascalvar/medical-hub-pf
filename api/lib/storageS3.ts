@@ -10,8 +10,8 @@ var app = express()
 
 const region = "us-east-1"
 const bucketName = "medical-hub"
-const accessKeyId = process.env.AWS_ACCESS_KEY_ID || "AKIA6P5PBQYSWIHH2CJL"
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY || "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"
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
 
 const s3 = new aws.S3({
     region,
@@ -24,7 +24,8 @@ var uploadS3 = multer({
   storage: multerS3({
     s3: s3,
     bucket: bucketName,
-    // acl: 'public-read',
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    acl: 'public-read',
     metadata: function (req:any, file:any, cb:any) {
       cb(null, {fieldName: file.fieldname});
     },
