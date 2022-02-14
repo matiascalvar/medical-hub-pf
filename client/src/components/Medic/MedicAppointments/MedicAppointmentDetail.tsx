@@ -172,7 +172,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                             <span className={style.hBox}>
                               <a
                                 title="Download Study"
-                                href={`/storage/${s.studyPDF}`}
+                                href={`${s.studyPDF}`}
                                 target="_blank"
                               >
                                 <BiDownload />
