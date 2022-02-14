@@ -145,7 +145,7 @@ const MedicAppointmentDetail: FunctionComponent = () => {
                         <div className={style.history} key={i}>
                           <span className={style.hBox}>{s.StudyType.name}</span>
                           <span className={style.hBox}><a title='Download Study'
-                              href={`/storage/${s.studyPDF}`} 
+                              href={`${s.studyPDF}`} 
                               target="_blank"
                             ><BiDownload/></a></span>
                           
