@@ -84,9 +84,14 @@ const NewStudie: FunctionComponent<{closeStudyModal: any, update: any}> = ({clos
   return (
     <div className={style.bigContainer}>
       <div className={style.studyContainer}>
-        <form onSubmit={handleSubmit}>
-          <select id="type" name="studyTypeId" onChange={handleChange}>
-            <option value="studyType">Select a study type</option>
+        <div className={style.header}>
+          <h1 className={style.title}>New Study</h1>
+          <button className={style.closeButton} onClick={closeStudyModal}>X</button>
+        </div>
+        <form className={style.form} onSubmit={handleSubmit}>
+          <label className={style.subtitle}>Selec a study type:</label>
+          <div className={style.selectContainer}>
+          <select className={style.select} id="type" name="studyTypeId"  onChange={handleChange}>
             {types &&
               types.map((t: any, i: number) => {
                 return (
@@ -99,8 +104,8 @@ const NewStudie: FunctionComponent<{closeStudyModal: any, update: any}> = ({clos
           <div className={style.formBtn}>
             <button type="submit">Submit </button>
           </div>
+          </div>
         </form>
-        <button onClick={closeStudyModal}>Close</button>
         {study && <p className={style.textSubmit}>Your study was send</p>}
       </div>
     </div>

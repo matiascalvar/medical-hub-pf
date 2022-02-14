@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from "react";
-import Home from "../../assets/img/screen_home.jpeg";
 import style from "./Main.module.css";
 
 const Main: FunctionComponent = () => {
-  
   return (
     <div className={style.container}>
       <div className={style.text}>
@@ -19,7 +17,7 @@ const Main: FunctionComponent = () => {
         </p>
       </div>
       <div className={style.homeImg}>
-        <img src={Home} alt="Home" />
+        <img src="https://i.imgur.com/7XYdKPb.png" alt="Home" />
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const Features: FunctionComponent = () => {
       <div className={style.text}>
         <div className={style.colLeft}>
           <div className={style.colImg}>
-            <img src="https://i.imgur.com/CoRV60O.png" alt="Payments" />
+            <img src="https://i.imgur.com/7Aveqv8.png" alt="Personal Account" />
           </div>
           <div className={style.colText}>
             <span className={style.icons}>
@@ -35,7 +35,7 @@ const Features: FunctionComponent = () => {
         </div>
         <div className={style.colRight}>
           <div className={style.colImg}>
-            <img src="https://i.imgur.com/CoRV60O.png" alt="Payments" />
+            <img src="https://i.imgur.com/EWsLVMw.png" alt="Appointments" />
           </div>
           <div className={style.colText}>
             <span className={style.icons}>
@@ -55,7 +55,7 @@ const Features: FunctionComponent = () => {
         </div>
         <div className={style.colLeft}>
           <div className={style.colImg}>
-            <img src="https://i.imgur.com/CoRV60O.png" alt="Payments" />
+            <img src="https://i.imgur.com/yApR71T.png" alt="Studies" />
           </div>
           <div className={style.colText}>
             <span className={style.icons}>

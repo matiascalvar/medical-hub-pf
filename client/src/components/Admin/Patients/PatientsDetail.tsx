@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import style from "./PatientsDetail.module.css";
-import { getPatientDetails, updatePatient, getPlans, updatePermissions } from "../requests";
+import { getPatientDetails, updatePatient, getPlans, updatePermissions, resetPassword } from "../requests";
 import { FiEdit } from "react-icons/fi";
 
 export default function MedicsDetail(props: any): JSX.Element {
@@ -25,7 +25,7 @@ export default function MedicsDetail(props: any): JSX.Element {
       console.log(error);
     }
   };
-
+  const [ errors, setErrors ] = useState<any>();
   const [ plans, setPlans] = useState<any[]>()
   const [ editable, setEditable] = useState("");
   const [ patient, setPatient] = useState({
@@ -37,6 +37,31 @@ export default function MedicsDetail(props: any): JSX.Element {
     PlanId: 1
   });
   const [ selectedPlan, setSelectedPlan ] = useState("")
+
+  function validate(input: any) {
+    let errors: any = {};
+    if (!input.firstName) {
+      errors.firstName = 'empty';
+    } else if (!/^[A-Za-z\s]+$/.test(input.firstName)) {
+      errors.firstName = 'error';
+    }
+    if (!input.lastName) {
+      errors.lastName = 'empty';
+    } else if (!/^[A-Za-z\s]+$/.test(input.lastName)) {
+      errors.lastName = 'error';
+    }
+    if (!input.phone) {
+      errors.phone = 'empty';
+    } else if (!(parseInt(input.phone) > 100000)) {
+      errors.phone = 'error';
+    }
+    if (!input.dni) {
+      errors.dni = 'empty';
+    } else if (!(parseInt(input.dni) > 1000000)) {
+      errors.dni = 'error';
+    }
+    return errors;
+  };
 
   function getSelectedPlan (id: number) {
     let plan = plans!.find((p: any) => p.id == id)
@@ -60,8 +85,14 @@ export default function MedicsDetail(props: any): JSX.Element {
 
   async function acceptChanges(e: any) {
     e.preventDefault();
-    await updatePatient(props.id, patient);
-    props.reolad();
+    let errors = validate(patient)
+    if (Object.keys(errors).length > 0) {
+      console.log(errors)
+      setErrors(errors)
+    } else {
+      await updatePatient(props.id, patient);
+      props.reolad();
+    }
   }
 
   async function revokeAccess (e: any) {
@@ -73,6 +104,12 @@ export default function MedicsDetail(props: any): JSX.Element {
   async function makeAdmin (e:any) {
     e.preventDefault();
     await updatePermissions(props.id, { isAdmin: true });
+    props.reolad();
+  }
+
+  async function forcePassword (e:any) {
+    e.preventDefault();
+    await resetPassword(props.id, { resetPass: true });
     props.reolad();
   }
 
@@ -223,6 +260,7 @@ export default function MedicsDetail(props: any): JSX.Element {
         </div>
       </form>
       <div className={style.endBtn}>
+        <button onClick={forcePassword} className={style.btnEdit}>Reset Password</button>
         <button onClick={revokeAccess} className={style.btnEdit}>Revoke Access</button>
         <button onClick={makeAdmin} className={style.btnEdit}>Make Admin</button>
         <button onClick={acceptChanges} className={style.btnEdit}>
@@ -232,6 +270,7 @@ export default function MedicsDetail(props: any): JSX.Element {
           Go back
         </button>
       </div>
+      {errors? "Invalid input" : null}
     </div>
   );
 }

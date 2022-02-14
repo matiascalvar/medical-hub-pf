@@ -43,6 +43,7 @@ function App() {
           role: response.data.role,
           token: `${response.data.token_type} ${response.data.access_token}`,
           resetPass: response.data.resetPass,
+          isAdmin: response.data.isAdmin,
         };
         dispatch(logUser(user));
       } catch (error) {

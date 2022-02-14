@@ -22,9 +22,7 @@ const Appointments: FunctionComponent = () => {
 
   async function deleteAppointment(id: any) {
     try {
-      let response = await axios.delete(
-        `${URL_DEPLOY}/appointments/${id}`
-      );
+      let response = await axios.delete(`${URL_DEPLOY}/appointments/${id}`);
       dispatch(getAppointments(patient.id));
     } catch (error) {
       console.log(error);
@@ -40,7 +38,7 @@ const Appointments: FunctionComponent = () => {
       state.toLowerCase() === "active" ? style.active : style.complete;
     return color;
   }
-  
+
   function percentage(unit_price: any, coveragePercentage: any) {
     return unit_price - (unit_price / 100) * coveragePercentage;
   }
@@ -51,10 +49,10 @@ const Appointments: FunctionComponent = () => {
   var coveragePercentage;
   plan
     ? ({ coveragePercentage } = plan)
-    : ({ coveragePercentage } = { coveragePercentage: 0});
-    
-  let finalPrice = percentage(unit_price, coveragePercentage); 
-    
+    : ({ coveragePercentage } = { coveragePercentage: 0 });
+
+  let finalPrice = percentage(unit_price, coveragePercentage);
+
   // Una funcion que use el boton, obtenga datos del appointment y redirija al pago
   function handleBtnPay(data: any) {
     // console.log("data", data);
@@ -100,7 +98,7 @@ const Appointments: FunctionComponent = () => {
               <span>Status</span>
               <span>Pay</span>
               <span>Details</span>
-              <span>Delete</span>
+              <span>Cancel</span>
             </div>
             <div className={style.dataContainer}>
               {appoinments.length > 0 ? (
@@ -139,7 +137,7 @@ const Appointments: FunctionComponent = () => {
                       <span className={style.paidOut}>Payout</span>
                     )}
                     <span className={style.box}>
-                    <Link to={`/home/appointments/${data.id}`}>
+                      <Link to={`/home/appointments/${data.id}`}>
                         <span>Details</span>
                       </Link>
                     </span>

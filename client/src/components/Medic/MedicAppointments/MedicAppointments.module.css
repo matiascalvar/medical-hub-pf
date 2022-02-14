@@ -185,10 +185,25 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  font-size: 1.1rem;
+  font-size: 1rem !important;
+  text-transform: capitalize;
 }
 
-.linkBox {
+.dataContainer a {
+  text-decoration: none;
+  color: #0eaaff;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dataContainer a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.box .linkBox {
   margin: 0;
   height: 2.5rem;
   display: flex;

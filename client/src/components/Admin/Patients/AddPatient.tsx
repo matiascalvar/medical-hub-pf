@@ -10,13 +10,43 @@ export default function AddPatient(): JSX.Element {
     lastName: "",
     phone: "",
     dni: "",
-    planId: "",
+    planId: "1",
     resetPass: true
   };
 
   const [ plans, setPlans] = React.useState<any[]>()
   const [ input, setInput] = React.useState(emptyInput);
+  const [ errors, setErrors ] = React.useState<any>();
 
+  function validate(input: any) {
+    let errors: any = {};
+    if (!input.email) {
+      errors.email = 'empty';
+    } else if (!/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(input.email)) {
+      errors.email = 'error';
+    }
+    if (!input.firstName) {
+      errors.firstName = 'empty';
+    } else if (!/^[A-Za-z\s]+$/.test(input.firstName)) {
+      errors.firstName = 'error';
+    }
+    if (!input.lastName) {
+      errors.lastName = 'empty';
+    } else if (!/^[A-Za-z\s]+$/.test(input.lastName)) {
+      errors.lastName = 'error';
+    }
+    if (!input.phone) {
+      errors.phone = 'empty';
+    } else if (!(parseInt(input.phone) > 100000)) {
+      errors.phone = 'error';
+    }
+    if (!input.dni) {
+      errors.dni = 'empty';
+    } else if (!(parseInt(input.dni) > 1000000)) {
+      errors.dni = 'error';
+    }
+    return errors;
+  };
 
   async function loadPlans() {
     const response = await getPlans()
@@ -34,8 +64,14 @@ export default function AddPatient(): JSX.Element {
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    addPatient(input);
-    setInput(emptyInput);
+    let errors = validate(input)
+    if (Object.keys(errors).length > 0) {
+      console.log(errors)
+      setErrors(errors)
+    } else {
+      addPatient(input)
+      setInput(emptyInput)
+    }
   }
 
   React.useEffect(()=> {
@@ -113,6 +149,7 @@ export default function AddPatient(): JSX.Element {
         <div className={style.formBtn}>
           <button type="submit">Submit </button>
         </div>
+        {errors? "Invalid input" : null}
       </form>
     </div>
   );
